@@ -60,6 +60,7 @@ module.exports = {
         'float': 'float 3s ease-in-out infinite',
         'glow': 'glow 2s ease-in-out infinite alternate',
         'parallax': 'parallax 20s linear infinite',
+        'bounce-subtle': 'bounce-subtle 3s ease-in-out infinite',
       },
       keyframes: {
         magnetic: {
@@ -124,6 +125,10 @@ module.exports = {
           '0%': { transform: 'translateY(0px)' },
           '100%': { transform: 'translateY(-100px)' },
         },
+        'bounce-subtle': {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-8px)' },
+        }
       },
       backdropBlur: {
         xs: '2px',

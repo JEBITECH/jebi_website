@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { 
+import {
   UserGroupIcon,
   BuildingOfficeIcon,
   ShieldCheckIcon,
@@ -18,36 +18,48 @@ import AnimatedSection from '@/components/AnimatedSection'
 import ParallaxSection from '@/components/ParallaxSection'
 import StaggeredList from '@/components/StaggeredList'
 import FloatingElements from '@/components/FloatingElements'
+import jayimage from '../assets/jayimage.jpg';
+import pradeepimage from '../assets/pradeepimage.jpg';
+import emmanuelimage from '../assets/emmanuelimage.jpg'
+import Image from "next/image";
 
 const leadership = [
   {
-    name: "Sarah Johnson",
+    name: "Jay Bhavsar",
     role: "Chief Executive Officer",
-    bio: "15+ years in hospitality technology. Former VP at Marriott International, led digital transformation initiatives across 500+ properties.",
-    image: "/team/ceo.jpg",
-    linkedin: "#"
+    bio: "Dynamic business professional in the field of technology services with relentless focus on customer value and an entrepreneurial passion. In the 14 years of my work experience. I have had a rapidly progressing career from a QA analyst to a Director and co-founder of Maxxton India. Got a great opportunity to form the organization from scratch and learned a lot with it. Major of the experience in Managed Services, IT operations, prior to which had rich experience of Black box and automation testing. Expert in Hospitality domain.",
+    image: jayimage,
+    linkedin: "https://in.linkedin.com/in/jay-bhavsar-0194615"
   },
   {
-    name: "Michael Chen",
-    role: "Chief Technology Officer",
-    bio: "Former Principal Engineer at Airbnb. Expert in scalable systems and microservices architecture for hospitality platforms.",
-    image: "/team/cto.jpg",
-    linkedin: "#"
-  },
-  {
-    name: "Emma Rodriguez",
+    name: "Emmanuel Swami",
     role: "Chief Operating Officer",
-    bio: "20+ years in hotel operations. Former Regional Director at Hilton, deep understanding of property management challenges.",
-    image: "/team/coo.jpg",
-    linkedin: "#"
+    bio: "With over 22 years of experience in the information technology sector, I am currently the Service Delivery Head at Jebitech, where I lead the delivery and execution of IT services and product-based solutions across multiple industries. In this role, I oversee end-to-end project and service management, ensuring seamless execution, consistent client satisfaction, and measurable business outcomes.",
+    image: emmanuelimage,
+    linkedin: "https://www.linkedin.com/in/emmanuel-swami-a78ab039/"
   },
   {
-    name: "David Kim",
-    role: "Chief Product Officer",
-    bio: "Product leader with 12+ years building B2B SaaS platforms. Former Head of Product at Oracle Hospitality.",
-    image: "/team/cpo.jpg",
-    linkedin: "#"
-  }
+    name: "Pradeep Tiwari",
+    role: "Chief Technology Officer",
+    bio: "As a seasoned professional at the forefront of R&D in artificial intelligence & Software Development, specializing in Object Detection, OCR, AI Chatbots (LLM), Agentic AI and Predictive Maintenance. With a Ph.D. from SVNIT in AIML, Speech, and Image processing, my academic background is deeply rooted in the very fabric of AI and machine learning.",
+    image: pradeepimage,
+    linkedin: "https://in.linkedin.com/in/dr-pradeep-tiwari-b63981b8"
+  },
+
+  // {
+  //   name: "Emma Rodriguez",
+  //   role: "Chief Operating Officer",
+  //   bio: "20+ years in hotel operations. Former Regional Director at Hilton, deep understanding of property management challenges.",
+  //   image: "/team/coo.jpg",
+  //   linkedin: "#"
+  // },
+  // {
+  //   name: "David Kim",
+  //   role: "Chief Product Officer",
+  //   bio: "Product leader with 12+ years building B2B SaaS platforms. Former Head of Product at Oracle Hospitality.",
+  //   image: "/team/cpo.jpg",
+  //   linkedin: "#"
+  // }
 ]
 
 const advisors = [
@@ -77,12 +89,12 @@ const team = [
   { name: "Maria Santos", role: "DevOps Engineer", department: "Engineering", image: "/team/eng2.jpg", linkedin: "#" },
   { name: "John Park", role: "Frontend Engineer", department: "Engineering", image: "/team/eng3.jpg", linkedin: "#" },
   { name: "Sophie Brown", role: "Backend Engineer", department: "Engineering", image: "/team/eng4.jpg", linkedin: "#" },
-  
+
   // Product Team
   { name: "Rachel Green", role: "Senior Product Manager", department: "Product", image: "/team/pm1.jpg", linkedin: "#" },
   { name: "Tom Anderson", role: "UX/UI Designer", department: "Product", image: "/team/design1.jpg", linkedin: "#" },
   { name: "Nina Patel", role: "Product Analyst", department: "Product", image: "/team/analyst1.jpg", linkedin: "#" },
-  
+
   // QA Team
   { name: "Carlos Mendez", role: "QA Lead", department: "QA", image: "/team/qa1.jpg", linkedin: "#" },
   { name: "Amy Liu", role: "Automation Engineer", department: "QA", image: "/team/qa2.jpg", linkedin: "#" }
@@ -90,23 +102,23 @@ const team = [
 
 const values = [
   {
-    title: "Ownership",
-    description: "We take full responsibility for our work and its impact on our clients' success.",
+    title: "Customer-Centricity",
+    description: "Our commitment to clients drives solutions that create meaningful value, enhance ROI, and foster enduring trust and relationship",
     icon: CheckBadgeIcon
   },
   {
-    title: "Reliability",
-    description: "Our systems and team deliver consistent, dependable results that clients can count on.",
+    title: "People-Centric Culture",
+    description: "We invest in our people, nurture talent, and foster continuous growth & development, celebrate diversity, creating an environment where everyone can grow, excel, and succeed.",
     icon: ShieldCheckIcon
   },
   {
-    title: "Craftsmanship",
-    description: "We build with attention to detail, quality, and long-term maintainability.",
+    title: "Integrity",
+    description: "We uphold ethics, honesty, and transparency, building trust in everything we do",
     icon: CogIcon
   },
   {
-    title: "Domain-First Thinking",
-    description: "Deep hospitality expertise drives every product decision and technical choice.",
+    title: "Operational Efficiency",
+    description: "Simplifying operations to drive reliable, high-impact results based on client needs & oprational flow",
     icon: BuildingOfficeIcon
   }
 ]
@@ -170,11 +182,11 @@ export default function About() {
       {/* 1. Hero Section */}
       <div className="relative isolate px-6 pt-14 lg:px-8 min-h-screen flex items-center">
         <FloatingElements />
-        
+
         <div className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80">
           <div className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] animated-gradient opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]" />
         </div>
-        
+
         <div className="mx-auto max-w-4xl py-32 sm:py-48 lg:py-56">
           <AnimatedSection direction="up" delay={0.2}>
             <div className="text-center">
@@ -183,7 +195,7 @@ export default function About() {
               </h1>
               <AnimatedSection direction="up" delay={0.4}>
                 <p className="mt-6 text-xl leading-8 text-gray-600 max-w-3xl mx-auto">
-                  Built by hospitality and technology experts to solve real operational challenges 
+                  Built by hospitality and technology experts to solve real operational challenges
                   and empower the future of hospitality.
                 </p>
               </AnimatedSection>
@@ -204,24 +216,24 @@ export default function About() {
                   </h2>
                   <div className="space-y-6 text-lg text-gray-600">
                     <p>
-                      JebiTech was born from a simple observation: hospitality businesses were drowning in 
-                      manual processes, disconnected systems, and technology that didn't understand their 
+                      JebiTech was born from a simple observation: hospitality businesses were drowning in
+                      manual processes, disconnected systems, and technology that didn't understand their
                       unique operational challenges.
                     </p>
                     <p>
-                      Founded by former hospitality operators and technology leaders, we've experienced 
-                      firsthand the frustration of systems that promise everything but deliver complexity. 
+                      Founded by former hospitality operators and technology leaders, we've experienced
+                      firsthand the frustration of systems that promise everything but deliver complexity.
                       We built JebiTech to bridge this gap.
                     </p>
                     <p>
-                      Today, we're a team of hospitality domain experts and world-class engineers, 
-                      building the technology platform that we wished existed when we were running 
+                      Today, we're a team of hospitality domain experts and world-class engineers,
+                      building the technology platform that we wished existed when we were running
                       hotels, vacation rentals, and hospitality operations.
                     </p>
                   </div>
                 </div>
               </AnimatedSection>
-              
+
               <AnimatedSection direction="right" delay={0.3}>
                 <div className="bg-white rounded-2xl p-8 shadow-lg glass-morphism">
                   <div className="grid grid-cols-2 gap-6">
@@ -267,23 +279,24 @@ export default function About() {
             {/* Vision & Mission */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
               <AnimatedSection direction="left">
-                <div className="bg-gradient-primary rounded-2xl p-8 text-white">
-                  <h3 className="text-2xl font-bold mb-4">Our Vision</h3>
+                {/* <div className="bg-gradient-primary rounded-2xl p-8 text-white"> */}
+                <div className="bg-secondary-gray rounded-2xl p-8">
+                  <h3 className="text-2xl font-bold mb-4 text-gray-900">Our Vision</h3>
                   <p className="text-lg opacity-90">
-                    To transform hospitality operations worldwide through intelligent, 
-                    domain-specific technology that empowers businesses to deliver 
-                    exceptional guest experiences while achieving operational excellence.
+                    To be the trusted technology partner Globally for the hospitality industry,
+                    helping organisations into technology or hospitality business and end-users,
+                    through innovative, seamless, and customized solutions and Services delivered by top domain and technology experts.
                   </p>
                 </div>
               </AnimatedSection>
-              
+
               <AnimatedSection direction="right">
                 <div className="bg-secondary-gray rounded-2xl p-8">
                   <h3 className="text-2xl font-bold mb-4 text-gray-900">Our Mission</h3>
                   <p className="text-lg text-gray-600">
-                    We build scalable, secure, and intuitive technology solutions that 
-                    solve real hospitality challenges, enabling our clients to focus on 
-                    what they do best: creating memorable experiences for their guests.
+                    At Jebitech, we partner with hospitality technology companies,
+                    combining technology, data, expertise, and service excellence
+                    to drive client success, innovation, and sustainable growth.
                   </p>
                 </div>
               </AnimatedSection>
@@ -324,8 +337,8 @@ export default function About() {
                 </p>
               </div>
             </AnimatedSection>
-            
-            <StaggeredList className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+
+            {/* <StaggeredList className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               {leadership.map((leader) => (
                 <div key={leader.name} className="bg-white rounded-xl shadow-sm p-6 card-hover hover-glow">
                   <div className="w-24 h-24 bg-gradient-primary rounded-full mx-auto mb-4 flex items-center justify-center">
@@ -344,6 +357,62 @@ export default function About() {
                   </div>
                 </div>
               ))}
+            </StaggeredList> */}
+            <StaggeredList className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {leadership.map((leader) => {
+                const initials = leader.name
+                  .split(" ")
+                  .map((n) => n[0])
+                  .join("");
+
+                return (
+                  <div
+                    key={leader.name}
+                    className="bg-white rounded-xl shadow-sm p-6 card-hover hover-glow"
+                  >
+                    {/* 🔹 PROFILE IMAGE */}
+                    <div className="w-24 h-24 rounded-full mx-auto mb-4 overflow-hidden bg-gradient-primary flex items-center justify-center">
+                      {leader.image ? (
+                        <Image
+                          src={leader.image}
+                          alt={leader.name}
+                          width={96}
+                          height={96}
+                          className="object-cover w-full h-full"
+                        />
+                      ) : (
+                        <span className="text-white font-bold text-xl">
+                          {initials}
+                        </span>
+                      )}
+                    </div>
+
+                    <h3 className="text-lg font-bold text-gray-900 text-center mb-2">
+                      {leader.name}
+                    </h3>
+
+                    <p className="text-primary-orange text-sm text-center mb-4 font-medium">
+                      {leader.role}
+                    </p>
+
+                    <p className="text-gray-600 text-sm text-center mb-4">
+                      {leader.bio}
+                    </p>
+
+                    <div className="text-center">
+                      <Link
+                        href={leader.linkedin}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-primary-purple hover:text-primary-orange transition-colors"
+                      >
+                        <span className="sr-only">LinkedIn</span>
+                        LinkedIn →
+                      </Link>
+                    </div>
+                  </div>
+                );
+              })}
             </StaggeredList>
           </div>
         </div>
@@ -362,7 +431,7 @@ export default function About() {
               </p>
             </div>
           </AnimatedSection>
-          
+
           <StaggeredList className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {advisors.map((advisor) => (
               <div key={advisor.name} className="text-center card-hover">
@@ -394,7 +463,7 @@ export default function About() {
                 </p>
               </div>
             </AnimatedSection>
-            
+
             <StaggeredList className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
               {team.map((member) => (
                 <div key={member.name} className="bg-white rounded-lg p-4 card-hover glass-morphism">
@@ -431,7 +500,7 @@ export default function About() {
               </p>
             </div>
           </AnimatedSection>
-          
+
           <StaggeredList className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {workingPrinciples.map((principle, index) => (
               <div key={principle.title} className="card-hover glass-morphism p-6 rounded-xl">
@@ -462,7 +531,7 @@ export default function About() {
               </p>
             </div>
           </AnimatedSection>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <AnimatedSection direction="up" delay={0.2}>
               <div className="text-center">
@@ -471,7 +540,7 @@ export default function About() {
                 <div className="text-gray-300 text-sm">Combined team experience in hotel operations, vacation rentals, and property management</div>
               </div>
             </AnimatedSection>
-            
+
             <AnimatedSection direction="up" delay={0.4}>
               <div className="text-center">
                 <div className="text-4xl font-bold text-primary-orange mb-4">10K+</div>
@@ -479,7 +548,7 @@ export default function About() {
                 <div className="text-gray-300 text-sm">From boutique hotels to large resort chains, vacation rentals to serviced apartments</div>
               </div>
             </AnimatedSection>
-            
+
             <AnimatedSection direction="up" delay={0.6}>
               <div className="text-center">
                 <div className="text-4xl font-bold text-primary-orange mb-4">100+</div>
@@ -505,7 +574,7 @@ export default function About() {
                 </p>
               </div>
             </AnimatedSection>
-            
+
             <StaggeredList className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               {cultureHighlights.map((highlight) => (
                 <div key={highlight.title} className="bg-white rounded-xl p-6 card-hover hover-glow">
@@ -530,7 +599,7 @@ export default function About() {
                 Build the Future of Hospitality Tech
               </h2>
               <p className="mx-auto mt-6 max-w-xl text-lg leading-8 text-gray-200">
-                Join our team of passionate engineers, designers, and hospitality experts who are 
+                Join our team of passionate engineers, designers, and hospitality experts who are
                 transforming how the industry operates.
               </p>
               <div className="mt-10">
@@ -556,7 +625,7 @@ export default function About() {
               </p>
             </div>
           </AnimatedSection>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <AnimatedSection direction="up" delay={0.1}>
               <div className="text-center card-hover">
@@ -565,7 +634,7 @@ export default function About() {
                 <p className="text-gray-600 text-sm">Security controls and processes designed for SOC 2 compliance</p>
               </div>
             </AnimatedSection>
-            
+
             <AnimatedSection direction="up" delay={0.2}>
               <div className="text-center card-hover">
                 <GlobeAltIcon className="h-12 w-12 text-primary-orange mx-auto mb-4" />
@@ -573,7 +642,7 @@ export default function About() {
                 <p className="text-gray-600 text-sm">Data protection practices that meet European privacy standards</p>
               </div>
             </AnimatedSection>
-            
+
             <AnimatedSection direction="up" delay={0.3}>
               <div className="text-center card-hover">
                 <CheckBadgeIcon className="h-12 w-12 text-primary-orange mx-auto mb-4" />
@@ -581,7 +650,7 @@ export default function About() {
                 <p className="text-gray-600 text-sm">Comprehensive confidentiality agreements with all team members</p>
               </div>
             </AnimatedSection>
-            
+
             <AnimatedSection direction="up" delay={0.4}>
               <div className="text-center card-hover">
                 <CogIcon className="h-12 w-12 text-primary-orange mx-auto mb-4" />
@@ -607,7 +676,7 @@ export default function About() {
                 </p>
               </div>
             </AnimatedSection>
-            
+
             <StaggeredList className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
               {impactMetrics.map((item, index) => (
                 <div key={index} className="card-hover">
@@ -616,12 +685,12 @@ export default function About() {
                 </div>
               ))}
             </StaggeredList>
-            
+
             <AnimatedSection direction="up" delay={0.6}>
               <div className="mt-16 bg-white rounded-2xl p-8 shadow-lg">
                 <blockquote className="text-center">
                   <p className="text-lg text-gray-700 italic mb-6">
-                    "JebiTech doesn't just provide software—they understand our business. Their team has 
+                    "JebiTech doesn't just provide software—they understand our business. Their team has
                     walked in our shoes, and it shows in every feature they build."
                   </p>
                   <footer>
@@ -649,7 +718,7 @@ export default function About() {
               </p>
             </div>
           </AnimatedSection>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
             <AnimatedSection direction="up" delay={0.2}>
               <div>
@@ -658,7 +727,7 @@ export default function About() {
                 <div className="text-gray-300">Headquarters in San Francisco, distributed team across US & Canada</div>
               </div>
             </AnimatedSection>
-            
+
             <AnimatedSection direction="up" delay={0.4}>
               <div>
                 <GlobeAltIcon className="h-12 w-12 text-primary-orange mx-auto mb-4" />
@@ -666,7 +735,7 @@ export default function About() {
                 <div className="text-gray-300">Development centers in London, Berlin, and Singapore</div>
               </div>
             </AnimatedSection>
-            
+
             <AnimatedSection direction="up" delay={0.6}>
               <div>
                 <UsersIcon className="h-12 w-12 text-primary-orange mx-auto mb-4" />
@@ -687,7 +756,7 @@ export default function About() {
                 Ready to Work Together?
               </h2>
               <p className="mx-auto mt-6 max-w-xl text-lg leading-8 text-gray-600">
-                Whether you're looking to transform your operations, partner with us, or join our team, 
+                Whether you're looking to transform your operations, partner with us, or join our team,
                 we'd love to hear from you.
               </p>
               <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">

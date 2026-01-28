@@ -9,7 +9,9 @@ import RollingOptions from '@/components/RollingOptions'
 import OfferingDelivering from '@/components/OfferingDelivering'
 import HeroMotionGraphic from '@/components/HeroMotionGraphic'
 import WhyJebiTechAnimated from '@/components/WhyJebiTechAnimated'
-import { 
+import { motion, useInView } from 'framer-motion';
+import { useRef } from 'react';
+import {
   PropertyIcon,
   BookingIcon,
   InspectionIcon,
@@ -21,6 +23,37 @@ import {
   IntegrationIcon,
   GrowthIcon
 } from '@/components/CustomIcons'
+import AnimatedHeroHeadline from '@/components/AnimatedHeroHeadline'
+import TechnologyTeamSection from '@/components/TechnologyTeamSection'
+
+
+const steps = [
+  {
+    id: "01",
+    text: "Team with 20 years of Experience in developing technology for hospitality industry",
+    color: "bg-purple-100 text-purple-700",
+  },
+  {
+    id: "02",
+    text: "Worked with Clients with Complex business operations and solved it using Technology",
+    color: "bg-indigo-100 text-indigo-700",
+  },
+  {
+    id: "03",
+    text: "Working Experience of Clients from Australia, Europe, UK and USA, giving us knowledge of different working, functions and rules of different locations.",
+    color: "bg-blue-100 text-blue-700",
+  },
+  {
+    id: "04",
+    text: "Experience of using Wide range of technology and hands on with latest technical knowledge",
+    color: "bg-orange-100 text-orange-700",
+  },
+  {
+    id: "05",
+    text: "Experience Tech team with great domain knowledge",
+    color: "bg-green-100 text-green-700",
+  },
+];
 
 // Rolling Options Data
 const rollingOptions = [
@@ -167,38 +200,41 @@ const socialProof = {
 }
 
 export default function Home() {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: '-100px' });
   return (
     <div className="bg-white overflow-hidden">
       {/* 1. Hero Section - Guesty Style */}
-      <div className="relative isolate px-6 pt-14 lg:px-8 min-h-screen flex items-center">
+      <div className="relative isolate lg:px-8 min-h-screen flex items-center">
         <FloatingElements />
-        
+
         <div className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80">
           <div className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-primary-orange/20 opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]" />
         </div>
-        
-        <div className="container-custom py-16 lg:py-24 w-full">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center min-h-[600px]">
+
+        <div className="container-custom w-full">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center min-h-[300px]">
             {/* Left Content */}
             <div className="flex flex-col justify-center space-y-8">
               <AnimatedSection direction="up" delay={0.2}>
-                <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl lg:text-6xl xl:text-7xl font-heading leading-tight">
+                <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-3xl lg:text-3xl xl:text-3xl font-heading leading-tight">
                   Empowering the <span className="text-primary-orange">Hospitality Tech</span> Ecosystem
                 </h1>
               </AnimatedSection>
-              
-              <AnimatedSection direction="up" delay={0.4}>
+
+              {/* <AnimatedSection direction="up" delay={0.4}>
                 <p className="text-xl leading-8 text-gray-600 max-w-2xl lg:text-2xl">
                   Through in-house products, custom solutions, and dedicated development teams for existing hospitality tech platforms.
                 </p>
-              </AnimatedSection>
-              
-              <AnimatedSection direction="up" delay={0.6}>
+              </AnimatedSection> */}
+              <AnimatedHeroHeadline />
+
+              {/* <AnimatedSection direction="up" delay={0.6}>
                 <p className="text-lg leading-7 text-gray-500 max-w-2xl">
                   A strategic growth partner, offering centralized, end-to-end management for property managers and hospitality tech companies.
                 </p>
-              </AnimatedSection>
-              
+              </AnimatedSection> */}
+
               {/* CTA Buttons */}
               <AnimatedSection direction="up" delay={0.8}>
                 <div className="flex flex-col sm:flex-row gap-4">
@@ -210,7 +246,7 @@ export default function Home() {
                   </MagneticButton>
                 </div>
               </AnimatedSection>
-              
+
               {/* Trust Indicators */}
               <AnimatedSection direction="up" delay={1.0}>
                 <div className="flex flex-wrap items-center gap-6 text-sm text-gray-500">
@@ -229,14 +265,14 @@ export default function Home() {
                 </div>
               </AnimatedSection>
             </div>
-            
+
             {/* Right Motion Graphic */}
-            <div className="flex justify-center">
-              <AnimatedSection direction="right" delay={0.5}>
-                <div className="w-full max-w-lg lg:max-w-xl">
-                  <HeroMotionGraphic />
-                </div>
-              </AnimatedSection>
+            <div className="flex justify-top">
+              {/* <AnimatedSection direction="right" delay={0.5}> */}
+              <div className="w-full max-w-lg lg:max-w-xl">
+                <HeroMotionGraphic />
+              </div>
+              {/* </AnimatedSection> */}
             </div>
           </div>
         </div>
@@ -256,7 +292,7 @@ export default function Home() {
                 </p>
               </div>
             </AnimatedSection>
-            
+
             <OfferingDelivering />
           </div>
         </div>
@@ -275,15 +311,16 @@ export default function Home() {
               </p>
             </div>
           </AnimatedSection>
-          
+
           <AnimatedSection direction="up" delay={0.3}>
-            <RollingOptions options={rollingOptions} className="max-w-4xl mx-auto" />
+            {/* <RollingOptions options={rollingOptions} className="max-w-11xl mx-auto" /> */}
+            <RollingOptions options={rollingOptions} className="w-full px-4 sm:px-6 lg:px-8" />
           </AnimatedSection>
         </div>
       </div>
 
       {/* 4. What We Do - Services */}
-      <ParallaxSection speed={0.2}>
+      {/* <ParallaxSection speed={0.2}>
         <div className="bg-secondary-gray section-padding">
           <div className="container-custom">
             <AnimatedSection direction="up">
@@ -296,7 +333,7 @@ export default function Home() {
                 </p>
               </div>
             </AnimatedSection>
-            
+
             <StaggeredList className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {services.map((service) => (
                 <div key={service.name} className="bg-white rounded-xl shadow-sm p-8 text-center card-hover hover-glow">
@@ -311,7 +348,7 @@ export default function Home() {
             </StaggeredList>
           </div>
         </div>
-      </ParallaxSection>
+      </ParallaxSection> */}
 
       {/* 5. In-House Products */}
       <div className="bg-white section-padding">
@@ -326,7 +363,7 @@ export default function Home() {
               </p>
             </div>
           </AnimatedSection>
-          
+
           <StaggeredList className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {products.map((product) => (
               <div key={product.name} className="bg-secondary-gray rounded-xl p-6 card-hover glass-morphism">
@@ -369,10 +406,12 @@ export default function Home() {
                 </p>
               </div>
             </AnimatedSection>
-            
-            <WhyJebiTechAnimated />
+
+            {/* <WhyJebiTechAnimated /> */}
+            <TechnologyTeamSection />
           </div>
         </div>
+
       </ParallaxSection>
 
       {/* 7. Experience Boxes */}
@@ -388,7 +427,7 @@ export default function Home() {
               </p>
             </div>
           </AnimatedSection>
-          
+
           <StaggeredList className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {experienceData.map((experience) => (
               <div key={experience.category} className="bg-secondary-gray rounded-xl p-8 text-center card-hover hover-glow">
@@ -421,7 +460,7 @@ export default function Home() {
                 </p>
               </div>
             </AnimatedSection>
-            
+
             <StaggeredList className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {testimonials.map((testimonial, index) => (
                 <div key={index} className="bg-white rounded-xl p-8 card-hover hover-glow">
@@ -465,7 +504,7 @@ export default function Home() {
               </p>
             </div>
           </AnimatedSection>
-          
+
           <StaggeredList className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             {[
               { number: socialProof.clients, label: 'Happy Clients' },
@@ -479,7 +518,7 @@ export default function Home() {
               </div>
             ))}
           </StaggeredList>
-          
+
           {/* Client Logos */}
           <AnimatedSection direction="up" delay={0.4}>
             <div className="mt-16">
@@ -487,7 +526,7 @@ export default function Home() {
               <div className="grid grid-cols-2 md:grid-cols-6 gap-8 items-center opacity-60">
                 {[
                   'Hotel Chain',
-                  'Resort Group', 
+                  'Resort Group',
                   'Property Mgmt',
                   'Vacation Rentals',
                   'Boutique Hotels',

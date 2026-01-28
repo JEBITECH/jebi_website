@@ -17,10 +17,10 @@ interface RollingOptionsProps {
   className?: string
 }
 
-export default function RollingOptions({ 
-  options, 
-  interval = 3000, 
-  className = '' 
+export default function RollingOptions({
+  options,
+  interval = 3000,
+  className = ''
 }: RollingOptionsProps) {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isAutoPlaying, setIsAutoPlaying] = useState(true)
@@ -50,11 +50,10 @@ export default function RollingOptions({
           <button
             key={option.id}
             onClick={() => handleOptionClick(index)}
-            className={`flex-1 px-3 sm:px-4 py-3 text-sm font-medium transition-all duration-300 min-w-0 ${
-              currentIndex === index
+            className={`flex-1 px-3 sm:px-4 py-3 text-sm font-medium transition-all duration-300 min-w-0 ${currentIndex === index
                 ? 'bg-primary-orange text-white shadow-sm'
                 : 'text-gray-600 hover:text-primary-orange hover:bg-gray-50'
-            }`}
+              }`}
           >
             <div className="flex items-center justify-center gap-1 sm:gap-2">
               <span className="text-base sm:text-lg">{option.icon}</span>
@@ -94,13 +93,12 @@ export default function RollingOptions({
             <button
               key={index}
               onClick={() => handleOptionClick(index)}
-              className={`h-2 rounded-full transition-all duration-300 ${
-                currentIndex === index ? 'bg-primary-orange w-8' : 'bg-gray-300 w-2'
-              }`}
+              className={`h-2 rounded-full transition-all duration-300 ${currentIndex === index ? 'bg-primary-orange w-8' : 'bg-gray-300 w-2'
+                }`}
             />
           ))}
         </div>
-        
+
         {/* Auto-play indicator */}
         {isAutoPlaying && (
           <div className="absolute top-4 right-4">

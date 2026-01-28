@@ -8,12 +8,17 @@
   html {
     scroll-behavior: smooth;
   }
-  
+
   body {
     font-family: 'Inter', system-ui, sans-serif;
   }
-  
-  h1, h2, h3, h4, h5, h6 {
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-family: 'Poppins', system-ui, sans-serif;
   }
 
@@ -27,15 +32,15 @@
   .btn-primary {
     @apply bg-primary-orange text-white px-6 py-3 rounded-lg font-medium hover:bg-primary-orange-dark hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 hover:scale-105 active:scale-95;
   }
-  
+
   .btn-secondary {
     @apply border-2 border-primary-purple text-primary-purple px-6 py-3 rounded-lg font-medium hover:bg-primary-purple hover:text-white transition-all duration-300 hover:shadow-lg transform hover:-translate-y-1;
   }
-  
+
   .section-padding {
     @apply py-16 px-4 sm:px-6 lg:px-8;
   }
-  
+
   .container-custom {
     @apply max-w-7xl mx-auto;
   }
@@ -75,16 +80,39 @@
   }
 
   /* Staggered animations */
-  .stagger-children > * {
+  .stagger-children>* {
     @apply opacity-0 translate-y-4 transition-all duration-500 ease-out;
   }
 
-  .stagger-children.animate > *:nth-child(1) { animation-delay: 0.1s; @apply opacity-100 translate-y-0; }
-  .stagger-children.animate > *:nth-child(2) { animation-delay: 0.2s; @apply opacity-100 translate-y-0; }
-  .stagger-children.animate > *:nth-child(3) { animation-delay: 0.3s; @apply opacity-100 translate-y-0; }
-  .stagger-children.animate > *:nth-child(4) { animation-delay: 0.4s; @apply opacity-100 translate-y-0; }
-  .stagger-children.animate > *:nth-child(5) { animation-delay: 0.5s; @apply opacity-100 translate-y-0; }
-  .stagger-children.animate > *:nth-child(6) { animation-delay: 0.6s; @apply opacity-100 translate-y-0; }
+  .stagger-children.animate>*:nth-child(1) {
+    animation-delay: 0.1s;
+    @apply opacity-100 translate-y-0;
+  }
+
+  .stagger-children.animate>*:nth-child(2) {
+    animation-delay: 0.2s;
+    @apply opacity-100 translate-y-0;
+  }
+
+  .stagger-children.animate>*:nth-child(3) {
+    animation-delay: 0.3s;
+    @apply opacity-100 translate-y-0;
+  }
+
+  .stagger-children.animate>*:nth-child(4) {
+    animation-delay: 0.4s;
+    @apply opacity-100 translate-y-0;
+  }
+
+  .stagger-children.animate>*:nth-child(5) {
+    animation-delay: 0.5s;
+    @apply opacity-100 translate-y-0;
+  }
+
+  .stagger-children.animate>*:nth-child(6) {
+    animation-delay: 0.6s;
+    @apply opacity-100 translate-y-0;
+  }
 
   /* Text reveal animation */
   .text-reveal {
@@ -210,6 +238,7 @@
 }
 
 @layer utilities {
+
   /* Custom animations */
   .animate-fade-in-up {
     animation: fadeInUp 0.6s ease-out;
@@ -246,17 +275,26 @@
 
 /* Custom keyframes */
 @keyframes magneticPull {
-  0% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(var(--mouse-x, 0), var(--mouse-y, 0)) scale(1.05); }
-  100% { transform: translate(0, 0) scale(1); }
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate(var(--mouse-x, 0), var(--mouse-y, 0)) scale(1.05);
+  }
+
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
 }
 
 @keyframes textReveal {
-  0% { 
+  0% {
     transform: translateY(100%);
     opacity: 0;
   }
-  100% { 
+
+  100% {
     transform: translateY(0);
     opacity: 1;
   }
@@ -267,6 +305,7 @@
     transform: translateY(60px);
     opacity: 0;
   }
+
   100% {
     transform: translateY(0);
     opacity: 1;
@@ -277,9 +316,11 @@
   0% {
     transform: scale(0);
   }
+
   50% {
     transform: scale(1.1);
   }
+
   100% {
     transform: scale(1);
   }
@@ -290,6 +331,7 @@
     transform: rotate(-10deg) scale(0.8);
     opacity: 0;
   }
+
   100% {
     transform: rotate(0deg) scale(1);
     opacity: 1;
@@ -297,25 +339,67 @@
 }
 
 @keyframes smoothFloat {
-  0%, 100% { 
+
+  0%,
+  100% {
     transform: translateY(0px) rotate(0deg);
   }
-  33% { 
+
+  33% {
     transform: translateY(-10px) rotate(1deg);
   }
-  66% { 
+
+  66% {
     transform: translateY(5px) rotate(-1deg);
   }
 }
 
 @keyframes pulseScale {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: scale(1);
   }
+
   50% {
     transform: scale(1.05);
   }
 }
+
+/* mine */
+/* @keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.animate-slideUp {
+  animation: slideUp 0.3s ease-out;
+} */
+@layer utilities {
+  @keyframes bounce-subtle {
+
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  .animate-bounce-subtle {
+    animation: bounce-subtle 3s ease-in-out infinite;
+  }
+}
+
 
 /* Smooth performance optimizations */
 * {

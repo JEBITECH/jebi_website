@@ -22,12 +22,14 @@ import jayimage from '../assets/jayimage.jpg';
 import pradeepimage from '../assets/pradeepimage.jpg';
 import emmanuelimage from '../assets/emmanuelimage.jpg'
 import Image from "next/image";
+import { TeamCarousel } from '@/components/TeamCrousel'
+
 
 const leadership = [
   {
     name: "Jay Bhavsar",
     role: "Chief Executive Officer",
-    bio: "Dynamic business professional in the field of technology services with relentless focus on customer value and an entrepreneurial passion. In the 14 years of my work experience. I have had a rapidly progressing career from a QA analyst to a Director and co-founder of Maxxton India. Got a great opportunity to form the organization from scratch and learned a lot with it. Major of the experience in Managed Services, IT operations, prior to which had rich experience of Black box and automation testing. Expert in Hospitality domain.",
+    bio: "Dynamic business professional in the field of technology services with relentless focus on customer value and an entrepreneurial passion. In the 14 years of my work experience. I have had a rapidly progressing career from a QA analyst to a Director and co-founder of Maxxton India. Got a great opportunity to form the organization from scratch and learned a lot with it.",
     image: jayimage,
     linkedin: "https://in.linkedin.com/in/jay-bhavsar-0194615"
   },
@@ -419,7 +421,7 @@ export default function About() {
       </ParallaxSection>
 
       {/* 5. Advisory Board */}
-      <div className="bg-white section-padding">
+      {/* <div className="bg-white section-padding">
         <div className="container-custom">
           <AnimatedSection direction="up">
             <div className="mx-auto max-w-2xl text-center mb-16">
@@ -447,24 +449,25 @@ export default function About() {
             ))}
           </StaggeredList>
         </div>
-      </div>
+      </div> */}
 
       {/* 6. Our Team */}
-      <ParallaxSection speed={0.4}>
-        <div className="bg-secondary-gray section-padding">
+      <ParallaxSection speed={0.2}>
+        <div className="bg-secondary-gray section">
           <div className="container-custom">
             <AnimatedSection direction="up">
-              <div className="mx-auto max-w-2xl text-center mb-16">
+              <div className="mx-auto max-w-2xl text-center">
                 <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl font-heading">
                   Our Team
                 </h2>
                 <p className="mt-6 text-lg leading-8 text-gray-600">
                   World-class engineers, designers, and product experts building the future of hospitality tech
                 </p>
+
               </div>
             </AnimatedSection>
 
-            <StaggeredList className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            {/* <StaggeredList className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
               {team.map((member) => (
                 <div key={member.name} className="bg-white rounded-lg p-4 card-hover glass-morphism">
                   <div className="w-16 h-16 bg-gradient-primary rounded-full mx-auto mb-3 flex items-center justify-center">
@@ -482,10 +485,16 @@ export default function About() {
                   </div>
                 </div>
               ))}
-            </StaggeredList>
+            </StaggeredList> */}
+            {/* <TeamCarousel /> */}
+
           </div>
         </div>
       </ParallaxSection>
+      <ParallaxSection speed={0.2}>
+        <div><TeamCarousel /></div>
+      </ParallaxSection>
+
 
       {/* 7. How We Work */}
       <div className="bg-white section-padding">
@@ -561,7 +570,7 @@ export default function About() {
       </div>
 
       {/* 9. Culture & Life at JebiTech */}
-      <ParallaxSection speed={0.3}>
+      {/* <ParallaxSection speed={0.3}>
         <div className="bg-secondary-gray section-padding">
           <div className="container-custom">
             <AnimatedSection direction="up">
@@ -588,7 +597,7 @@ export default function About() {
             </StaggeredList>
           </div>
         </div>
-      </ParallaxSection>
+      </ParallaxSection> */}
 
       {/* 10. Careers CTA */}
       <div className="bg-gradient-primary section-padding">
@@ -613,7 +622,7 @@ export default function About() {
       </div>
 
       {/* 11. Trust & Compliance */}
-      <div className="bg-white section-padding">
+      {/* <div className="bg-white section-padding">
         <div className="container-custom">
           <AnimatedSection direction="up">
             <div className="mx-auto max-w-2xl text-center mb-16">
@@ -660,7 +669,7 @@ export default function About() {
             </AnimatedSection>
           </div>
         </div>
-      </div>
+      </div> */}
 
       {/* 12. Client Impact & Proof */}
       <ParallaxSection speed={0.2}>

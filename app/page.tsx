@@ -1,5 +1,5 @@
 'use client'
-
+import { useRouter } from "next/navigation";
 import AnimatedSection from '@/components/AnimatedSection'
 import ParallaxSection from '@/components/ParallaxSection'
 import StaggeredList from '@/components/StaggeredList'
@@ -10,7 +10,9 @@ import OfferingDelivering from '@/components/OfferingDelivering'
 import HeroMotionGraphic from '@/components/HeroMotionGraphic'
 import WhyJebiTechAnimated from '@/components/WhyJebiTechAnimated'
 import { motion, useInView } from 'framer-motion';
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import Image from "next/image";
+import { stages } from './products/page'
 import {
   PropertyIcon,
   BookingIcon,
@@ -25,6 +27,7 @@ import {
 } from '@/components/CustomIcons'
 import AnimatedHeroHeadline from '@/components/AnimatedHeroHeadline'
 import TechnologyTeamSection from '@/components/TechnologyTeamSection'
+import { products } from '../app/products/page';
 
 
 const steps = [
@@ -110,38 +113,38 @@ const services = [
 ]
 
 // In-House Products Data
-const products = [
-  {
-    name: 'Booking Engine',
-    description: 'Direct booking platform with real-time availability',
-    icon: BookingIcon,
-    features: ['Real-time booking', 'Payment processing', 'Multi-language support']
-  },
-  {
-    name: 'Virtue Inspect',
-    description: 'AI-powered property inspection and maintenance',
-    icon: InspectionIcon,
-    features: ['AI inspection', 'Maintenance tracking', 'Quality assurance']
-  },
-  {
-    name: 'Virtue Connect',
-    description: 'Integrated communication and management platform',
-    icon: ConnectIcon,
-    features: ['Team communication', 'Task management', 'Real-time updates']
-  },
-  {
-    name: 'Guest Handbook',
-    description: 'Digital guest experience and information system',
-    icon: HandbookIcon,
-    features: ['Digital guidebook', 'Guest services', 'Local recommendations']
-  },
-  {
-    name: 'Data Audit & Logs',
-    description: 'Comprehensive analytics and reporting platform',
-    icon: AuditIcon,
-    features: ['Performance analytics', 'Audit trails', 'Custom reports']
-  }
-]
+// const products = [
+//   {
+//     name: 'Booking Engine',
+//     description: 'Direct booking platform with real-time availability',
+//     icon: BookingIcon,
+//     features: ['Real-time booking', 'Payment processing', 'Multi-language support']
+//   },
+//   {
+//     name: 'Virtue Inspect',
+//     description: 'AI-powered property inspection and maintenance',
+//     icon: InspectionIcon,
+//     features: ['AI inspection', 'Maintenance tracking', 'Quality assurance']
+//   },
+//   {
+//     name: 'Virtue Connect',
+//     description: 'Integrated communication and management platform',
+//     icon: ConnectIcon,
+//     features: ['Team communication', 'Task management', 'Real-time updates']
+//   },
+//   {
+//     name: 'Guest Handbook',
+//     description: 'Digital guest experience and information system',
+//     icon: HandbookIcon,
+//     features: ['Digital guidebook', 'Guest services', 'Local recommendations']
+//   },
+//   {
+//     name: 'Data Audit & Logs',
+//     description: 'Comprehensive analytics and reporting platform',
+//     icon: AuditIcon,
+//     features: ['Performance analytics', 'Audit trails', 'Custom reports']
+//   }
+// ]
 
 // Experience Data
 const experienceData = [
@@ -200,8 +203,28 @@ const socialProof = {
 }
 
 export default function Home() {
+  const router = useRouter();
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
+  const [selectedProduct, setSelectedProduct] = useState(products[0])
+  const [activeIndex, setActiveIndex] = useState(0);
+  const activeStage = stages[activeIndex];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % stages.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const handleScroll = () => {
+    {
+      setSelectedProduct(products[activeIndex]);
+      document
+        .getElementById("product-detail-section")
+        ?.scrollIntoView({ behavior: "smooth" });
+    }
+  };
   return (
     <div className="bg-white overflow-hidden">
       {/* 1. Hero Section - Guesty Style */}
@@ -351,7 +374,7 @@ export default function Home() {
       </ParallaxSection> */}
 
       {/* 5. In-House Products */}
-      <div className="bg-white section-padding">
+      {/* <div className="bg-white section-padding">
         <div className="container-custom">
           <AnimatedSection direction="up">
             <div className="mx-auto max-w-2xl text-center mb-16">
@@ -390,7 +413,141 @@ export default function Home() {
             ))}
           </StaggeredList>
         </div>
-      </div>
+      </div> */}
+      <AnimatedSection direction="up">
+        {/* <div className="w-full bg-slate-10 py-5"> */}
+        <div className="w-full px-4 sm:px-6 lg:px-8">
+          {/* Header */}
+          <div className="text-center mb-10">
+            <h2 className="text-3xl font-bold">Unified Hospitality Operations Platform</h2>
+            {/* <p className="text-gray-600 mt-2">
+                  Modular products that work together seamlessly to transform your hospitality operations
+                  From booking to scale, we solve real operational challenges
+                </p> */}
+          </div>
+          <div className="relative min-h-[65vh] w-full overflow-hidden rounded-xl">
+            {/* <div className="relative h-screen w-full overflow-hidden rounded-xl"> */}
+            {/* <div className="relative min-h-[65vh] w-full max-w-6xl mx-auto overflow-hidden rounded-xl"> */}
+            {/* Background Image */}
+            <Image
+              src={activeStage.image}
+              alt={activeStage.title}
+              fill
+              priority
+              className="object-fit: contain"
+            />
+
+            {/* Overlay */}
+            <div className="absolute inset-0 bg-black/40" />
+
+            {/* Content */}
+            {/* Overlay */}
+            <div className="absolute inset-0 bg-black/40" />
+
+            {/* Content Wrapper */}
+            <div className="relative z-10 h-full max-w-7xl mx-auto px-8">
+              <div className="grid h-full grid-cols-1 lg:grid-cols-2 gap-16 text-white">
+
+                {/* 🔹 PAIN — TOP LEFT */}
+                <div className="flex flex-col items-start justify-start pt-16">
+                  <h1 className="text-xl font-semibold mb-3">
+                    {activeStage.painTitle}
+                  </h1>
+                  <p className="text text-white/90 max-w-xl">
+                    {activeStage.painDescription}
+                  </p>
+                </div>
+
+                {/* 🔹 SOLUTION — BOTTOM RIGHT */}
+
+                <div className="flex flex-col justify-end items-end pt-16">
+                  {/* Width constraint applied HERE */}
+                  <div className="flex flex-col items-start text-left max-w-xl">
+                    <h2 className="text-xl font-semibold mb-3">
+                      {activeStage.solutionTitle}
+                    </h2>
+
+                    <p className="text-white/90 mb-8">
+                      {activeStage.solution}
+                    </p>
+
+                    {/* <button
+                      onClick={() => {
+                        const product = products[activeIndex];
+                        router.push(`/products?product=${product.id}`);
+                      }}
+                      className="
+        w-fit
+        px-8 py-4
+        rounded-full
+        bg-emerald-200
+        text-gray-900
+        font-medium
+        hover:bg-emerald-300
+        transition
+      "
+                    >
+                      {activeStage.ctaLabel}
+                    </button> */}
+                  </div>
+                  <button
+                    onClick={() => {
+                      const product = products[activeIndex];
+                      router.push(`/products?product=${product.id}`);
+                    }}
+                    className="
+        w-fit
+        px-8 py-4
+        rounded-full
+        bg-emerald-200
+        text-gray-900
+        font-medium
+        hover:bg-emerald-300
+        transition
+      "
+                  >
+                    {activeStage.ctaLabel}
+                  </button>
+                </div>
+
+
+              </div>
+            </div>
+
+
+          </div>
+
+          {/* PAIN / SOLUTION */}
+          {/* <PainSolution stage={activeStage} /> */}
+
+          {/* BOTTOM STEPS */}
+          <div className="flex justify-center gap-4 p-4">
+            {stages.map((stage, index) => {
+              const Icon = stage.icon;
+              const active = index === activeIndex;
+
+              return (
+                <div onClick={() => setActiveIndex(index)}
+                  key={stage.id}
+                  className={`w-32 h-20 rounded-xl flex flex-col items-center justify-center shadow-sm transition-all duration-300
+                    ${active
+                      ? "bg-gradient-to-br from-blue-500 to-purple-500 text-white scale-105"
+                      : "bg-white text-gray-700"
+                    }`}
+                >
+                  <Icon size={20} />
+                  <div className="text-xs font-semibold mt-1">
+                    {stage.title}
+                  </div>
+                  <div className="text-xs opacity-70">
+                    {stage.id}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </AnimatedSection>
 
       {/* 6. Why JebiTech - Animated */}
       <ParallaxSection speed={0.1}>

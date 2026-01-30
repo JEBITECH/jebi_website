@@ -1,6 +1,7 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react';
+import { useSearchParams } from "next/navigation";
 import Link from 'next/link'
 import {
   CloudIcon,
@@ -26,6 +27,7 @@ import ParallaxSection from '@/components/ParallaxSection'
 import StaggeredList from '@/components/StaggeredList'
 import FloatingElements from '@/components/FloatingElements'
 import { useRef } from "react";
+import Image from "next/image";
 
 
 const platformCapabilities = [
@@ -196,7 +198,7 @@ const platformCapabilities = [
 //   }
 // ]
 
-const products = [
+export const products = [
   {
     id: 'booking-engine',
     name: 'Booking Engine CMS',
@@ -445,77 +447,106 @@ import BookingEngine from '../assets/BookingEngine.png';
 import GuestHandbook from '../assets/GuestHandbook.png';
 import VirturConnectER3 from '../assets/VirtueConnectER3.png';
 import accounting5 from '../assets/accounting5.png';
+import GuestHandbook1 from '../assets/GuestHandbook1.png';
+import ChannelManager from '../assets/ChannelManager.png';
+
+
+
 
 import { StaticImageData } from 'next/image'
+
 export interface Stage {
   id: number;
   title: string;
   icon: LucideIcon;
-  pain: string;
+  painTitle: string;
+  painDescription: string;
   solutionTitle: string;
   solution: string;
   image: StaticImageData;
+  ctaLabel: string;
+  scrollToId: string;
 }
+
 
 export const stages: Stage[] = [
   {
     id: 1,
     title: "Booking",
     icon: Calendar,
-    image: BookingEngine,
-    pain: "Lost revenue to OTA commissions, no direct booking channel",
+    image: ChannelManager,
+    painTitle: "Get started with ease",
+    painDescription: "Lost revenue to OTA commissions, no direct booking channel",
     solutionTitle: "Booking Engine",
     solution:
-      "Direct reservations with real-time availability, dynamic pricing, and zero commission fees",
+      "Direct reservations with real-time availability, dynamic pricing, zero commission fees",
+    ctaLabel: "Discover Booking Engine",
+    scrollToId: "booking-details",
   },
   {
     id: 2,
     title: "Pre-Stay",
     icon: ClipboardList,
-    image: GuestHandbook,
-    pain: "Manual guest communication and check-in coordination",
+    image: GuestHandbook1,
+    painTitle: "Get started with ease",
+    painDescription: "Manual guest communication and check-in coordination",
     solutionTitle: "Pre-Stay Automation",
     solution:
       "Automated guest messages, digital check-in, and arrival instructions",
+    ctaLabel: "Discover Guest Handbook",
+    scrollToId: "Pre-Stay-details",
   },
   {
     id: 3,
     title: "Stay",
     icon: Home,
     image: virturInspect,
-    pain: "On-site issues with no centralized control",
+    painTitle: "Get started with ease",
+    painDescription: "On-site issues with no centralized control",
     solutionTitle: "Guest Stay Tools",
     solution:
       "Live issue tracking, guest support, and service coordination",
+    ctaLabel: "Discover Virtual Inspect",
+    scrollToId: "Stay-details",
   },
   {
     id: 4,
     title: "Operations",
     icon: Settings,
     image: accounting5,
-    pain: "Disconnected operations and manual processes",
+    painTitle: "Get started with ease",
+    painDescription: "Disconnected operations and manual processes",
     solutionTitle: "Operations Suite",
     solution:
       "Unified operations, housekeeping, and maintenance workflows",
+    ctaLabel: "Discover Operations",
+    scrollToId: "Operations-details",
   },
   {
     id: 5,
     title: "Scale",
     icon: Rocket,
     image: VirturConnectER3,
-    pain: "Hard to scale without operational visibility",
+    painTitle: "Get started with ease",
+    painDescription: "Hard to scale without operational visibility",
     solutionTitle: "Scale Platform",
     solution:
       "Insights, automation, and performance analytics for growth",
+    ctaLabel: "Discover Virtual Connect ERP",
+    scrollToId: "Scale-details",
   },
 ];
 
 
 export default function Products() {
+  const searchParams = useSearchParams();
+  const productId = searchParams.get("product");
   const [selectedProduct, setSelectedProduct] = useState(products[0])
   const [activeTab, setActiveTab] = useState('features')
   const [activeIndex, setActiveIndex] = useState(0);
   const activeStage = stages[activeIndex];
+
+
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -524,64 +555,159 @@ export default function Products() {
     return () => clearInterval(interval);
   }, []);
 
+  const handleScroll = () => {
+    {
+      setSelectedProduct(products[activeIndex]);
+      document
+        .getElementById("product-detail-section")
+        ?.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+  useEffect(() => {
+    if (!productId) return;
+
+    const matchedProduct = products.find(
+      (p) => p.id === (productId)
+    );
+
+    if (matchedProduct) {
+      setSelectedProduct(matchedProduct);
+
+      setTimeout(() => {
+        document
+          .getElementById("product-detail-section")
+          ?.scrollIntoView({ behavior: "smooth" });
+      }, 100);
+    }
+  }, [productId]);
+
   return (
     <div className="bg-white overflow-hidden">
       {/* 1. Platform Overview */}
       {/* <div className="relative isolate px-6 pt-14 lg:px-8 min-h-screen flex items-center"> */}
       <FloatingElements />
-      {/* new code */}
-      <div className="w-full bg-slate-10 py-5">
-        {/* Header */}
-        <div className="text-center mb-10">
-          <h2 className="text-3xl font-bold">Unified Hospitality Operations Platform</h2>
-          <p className="text-gray-600 mt-2">
+      {/* new code  product hero section*/}
+      <AnimatedSection>
+        <div className="w-full bg-slate-10 py-5">
+          {/* Header */}
+          <div className="text-center mb-10">
+            <h2 className="text-3xl font-bold">Unified Hospitality Operations Platform</h2>
+            {/* <p className="text-gray-600 mt-2">
             Modular products that work together seamlessly to transform your hospitality operations
             From booking to scale, we solve real operational challenges
-          </p>
-        </div>
+          </p> */}
+          </div>
+          <div className="relative min-h-[65vh] w-full overflow-hidden rounded-xl">
+            {/* Background Image */}
+            <Image
+              src={activeStage.image}
+              alt={activeStage.title}
+              fill
+              priority
+              className="object-fit: contain"
+            />
 
-        {/* MAIN CARD */}
-        <MainStageCard stage={activeStage} onClick={() => {
-          {
-            setSelectedProduct(products[activeIndex]);
-            document
-              .getElementById("product-detail-section")
-              ?.scrollIntoView({ behavior: "smooth" });
-          }
-        }
-        }
-        />
+            {/* Overlay */}
+            <div className="absolute inset-0 bg-black/40" />
 
-        {/* PAIN / SOLUTION */}
-        <PainSolution stage={activeStage} />
+            {/* Content */}
+            {/* Overlay */}
+            <div className="absolute inset-0 bg-black/40" />
 
-        {/* BOTTOM STEPS */}
-        <div className="flex justify-center gap-4">
-          {stages.map((stage, index) => {
-            const Icon = stage.icon;
-            const active = index === activeIndex;
+            {/* Content Wrapper */}
+            <div className="relative z-10 h-full max-w-7xl mx-auto px-8">
+              <div className="grid h-full grid-cols-1 lg:grid-cols-2 gap-16 text-white">
 
-            return (
-              <div
-                key={stage.id}
-                className={`w-32 h-20 rounded-xl flex flex-col items-center justify-center shadow-sm transition-all duration-300
-              ${active
-                    ? "bg-gradient-to-br from-blue-500 to-purple-500 text-white scale-105"
-                    : "bg-white text-gray-700"
-                  }`}
-              >
-                <Icon size={20} />
-                <div className="text-xs font-semibold mt-1">
-                  {stage.title}
+                {/* 🔹 PAIN — TOP LEFT */}
+                <div className="flex flex-col items-start justify-start pt-16">
+                  <h1 className="text-xl font-semibold mb-3">
+                    {activeStage.painTitle}
+                  </h1>
+                  <p className="text-lg text-white/90 max-w-xl">
+                    {activeStage.painDescription}
+                  </p>
                 </div>
-                <div className="text-xs opacity-70">
-                  {stage.id}
+
+                {/* 🔹 SOLUTION — LEFT CENTER */}
+                <div className="flex flex-col justify-end items-end pt-16">
+                  {/* Width constraint applied HERE */}
+                  <div className="flex flex-col items-start text-left max-w-xl">
+                    <h2 className="text-xl font-semibold mb-3">
+                      {activeStage.solutionTitle}
+                    </h2>
+
+                    <p className="text-white/90 mb-8">
+                      {activeStage.solution}
+                    </p>
+
+                    {/* <button
+                  onClick={handleScroll}
+                  className="
+                  w-fit
+                  px-8 py-4
+                  rounded-full
+                  bg-emerald-200
+                  text-gray-900
+                  font-medium
+                  hover:bg-emerald-300
+                  transition
+                "
+                >
+                  {activeStage.ctaLabel}
+                </button> */}
+                  </div>
+                  <button
+                    onClick={handleScroll}
+                    className="
+                  w-fit
+                  px-8 py-4
+                  rounded-full
+                  bg-emerald-200
+                  text-gray-900
+                  font-medium
+                  hover:bg-emerald-300
+                  transition
+                "
+                  >
+                    {activeStage.ctaLabel}
+                  </button>
                 </div>
               </div>
-            );
-          })}
+            </div>
+
+          </div>
+
+          {/* PAIN / SOLUTION */}
+          {/* <PainSolution stage={activeStage} /> */}
+
+          {/* BOTTOM STEPS */}
+          <div className="flex justify-center gap-4 p-4">
+            {stages.map((stage, index) => {
+              const Icon = stage.icon;
+              const active = index === activeIndex;
+
+              return (
+                <div onClick={() => setActiveIndex(index)}
+                  key={stage.id}
+                  className={`w-32 h-20 rounded-xl flex flex-col items-center justify-center shadow-sm transition-all duration-300
+              ${active
+                      ? "bg-gradient-to-br from-blue-500 to-purple-500 text-white scale-105"
+                      : "bg-white text-gray-700"
+                    }`}
+                >
+                  <Icon size={20} />
+                  <div className="text-xs font-semibold mt-1">
+                    {stage.title}
+                  </div>
+                  <div className="text-xs opacity-70">
+                    {stage.id}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
         </div>
-      </div>
+      </AnimatedSection>
 
 
       {/* new code ends */}

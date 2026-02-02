@@ -90,8 +90,7 @@ const ChatWidget = () => {
             {/* STAGE 1: Intro Card (from first_chatbot_UI.png) */}
             {view === 'intro' && (
                 <div
-                    onClick={openChat}
-                    className="mb-4 w-[350px] bg-white rounded-2xl shadow-2xl border border-gray-100 p-5 cursor-pointer hover:shadow-cyan-100/50 transition-all animate-bounce-subtle"
+                    className="mb-4 w-[350px] bg-white rounded-2xl shadow-2xl border border-gray-100 p-5 animate-bounce-subtle"
                 >
                     <div className="flex items-center gap-3 mb-3">
                         <img
@@ -99,31 +98,40 @@ const ChatWidget = () => {
                             className="w-10 h-10 rounded-full object-cover"
                             alt="Sophia"
                         />
-                        <div>
+                        <div className="flex-1">
                             <h3 className="font-bold text-gray-800 text-sm">Sophia</h3>
                             <p className="text-[10px] text-gray-500 uppercase tracking-wider">AI Hospitality Agent</p>
                         </div>
+                        <button
+                            onClick={closeAll}
+                            className="text-gray-400 hover:text-gray-600 hover:bg-gray-100 p-1.5 rounded-full transition-colors"
+                            aria-label="Minimize chat"
+                        >
+                            <ChevronDown size={20} />
+                        </button>
                     </div>
 
-                    <p className="text-[13px] text-gray-700 leading-relaxed mb-4">
-                        {currentData.message}
-                    </p>
+                    <div onClick={openChat} className="cursor-pointer">
+                        <p className="text-[13px] text-gray-700 leading-relaxed mb-4">
+                            {currentData.message}
+                        </p>
 
-                    <div className="flex gap-2 mb-4">
-                        {currentData.buttons.map(btn => (
-                            <button key={btn} className="px-3 py-1.5 border border-[#00a699] text-[#00a699] rounded-full text-[11px] font-bold hover:bg-[#00a699] hover:text-white transition-colors">
-                                {btn}
-                            </button>
-                        ))}
-                    </div>
+                        <div className="flex gap-2 mb-4">
+                            {currentData.buttons.map(btn => (
+                                <button key={btn} className="px-3 py-1.5 border border-[#00a699] text-[#00a699] rounded-full text-[11px] font-bold hover:bg-[#00a699] hover:text-white transition-colors">
+                                    {btn}
+                                </button>
+                            ))}
+                        </div>
 
-                    <div className="relative flex items-center">
-                        <input
-                            readOnly
-                            placeholder="Ask a question"
-                            className="w-full pl-4 pr-10 py-2.5 bg-white border border-gray-200 rounded-xl text-sm cursor-pointer"
-                        />
-                        <Send size={18} className="absolute right-3 text-[#00a699]" />
+                        <div className="relative flex items-center">
+                            <input
+                                readOnly
+                                placeholder="Ask a question"
+                                className="w-full pl-4 pr-10 py-2.5 bg-white border border-gray-200 rounded-xl text-sm cursor-pointer"
+                            />
+                            <Send size={18} className="absolute right-3 text-[#00a699]" />
+                        </div>
                     </div>
 
                     <div className="mt-4 pt-3 border-t border-gray-100 text-center">

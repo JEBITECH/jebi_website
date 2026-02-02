@@ -207,7 +207,7 @@ export default function Contact() {
   return (
     <div className="bg-white overflow-hidden">
       {/* 1. Hero Section */}
-      <div className="relative isolate px-6 pt-26 pb-8 md:pt-28 md:pb-12 lg:px-8 flex items-center">
+      <div className="relative isolate px-6 pt-28 pb-8 md:pt-32 md:pb-12 lg:px-8 flex items-center">
         <FloatingElements />
         
         <div className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80">

@@ -43,8 +43,8 @@ export default function ProductShowcase({ showHeader = true, autoRotate = true, 
           {/* Main Content Card */}
           <div className="relative w-full overflow-hidden rounded-3xl shadow-2xl bg-gradient-to-br from-gray-50 to-white">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
-              {/* LEFT SIDE - Pain & Solution Cards */}
-              <div className="p-8 sm:p-12 lg:p-16 flex items-center bg-white">
+              {/* LEFT SIDE - Pain & Solution Cards + CTA Button */}
+              <div className="p-8 sm:p-12 lg:p-16 flex flex-col justify-between bg-white">
                 <div className="w-full space-y-8">
                   {/* PAIN Card */}
                   <div className="relative">
@@ -103,50 +103,32 @@ export default function ProductShowcase({ showHeader = true, autoRotate = true, 
                     </div>
                   </div>
                 </div>
+
+                {/* CTA Button */}
+                <div className="mt-8">
+                  <button
+                    onClick={() => {
+                      router.push(`/products?product=${activeStage.scrollToId}`);
+                    }}
+                    className="w-full group relative px-8 py-4 bg-gradient-to-r from-primary-purple to-purple-700 hover:from-primary-purple hover:to-purple-800 text-white text-lg font-bold rounded-full transition-all duration-300 transform hover:scale-105 shadow-xl flex items-center justify-center gap-3"
+                  >
+                    <span>{activeStage.ctaLabel}</span>
+                    <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                  </button>
+                </div>
               </div>
 
-              {/* RIGHT SIDE - Visual & CTA */}
-              <div className="relative overflow-hidden">
-                {/* Background Image - Full Coverage */}
-                <Image src={activeStage.image} alt={activeStage.title} fill priority className="object-cover" />
-
-                {/* Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-br from-primary-purple/80 via-purple-900/70 to-black/80"></div>
-
-                {/* Content */}
-                <div className="relative h-full flex flex-col items-center justify-center p-8 sm:p-12 lg:p-16 min-h-[600px]">
-                  {/* CTA Section */}
-                  <div className="text-center space-y-6 w-full max-w-md">
-                    {/* CTA Button */}
-                    <button
-                      onClick={() => {
-                        router.push(`/products?product=${activeStage.scrollToId}`);
-                      }}
-                      className="w-full group relative px-8 py-4 bg-white hover:bg-gray-50 text-primary-purple text-lg font-bold rounded-full transition-all duration-300 transform hover:scale-105 shadow-2xl flex items-center justify-center gap-3"
-                    >
-                      <span>{activeStage.ctaLabel}</span>
-                      <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                      </svg>
-                    </button>
-
-                    {/* Benefits */}
-                    <div className="space-y-2 pt-4">
-                      {["Quick Setup", "Expert Support", "Proven Results"].map((benefit, idx) => (
-                        <div key={idx} className="flex items-center justify-center gap-2 text-white/90 text-sm">
-                          <svg className="w-4 h-4 text-primary-orange" fill="currentColor" viewBox="0 0 20 20">
-                            <path
-                              fillRule="evenodd"
-                              d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                              clipRule="evenodd"
-                            />
-                          </svg>
-                          <span>{benefit}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
+              {/* RIGHT SIDE - Product Image */}
+              <div className="relative overflow-hidden min-h-[600px] flex items-center justify-center bg-gray-50">
+                <Image 
+                  src={activeStage.image} 
+                  alt={activeStage.title} 
+                  fill
+                  priority 
+                  className="object-fill"
+                />
               </div>
             </div>
           </div>

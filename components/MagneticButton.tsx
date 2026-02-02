@@ -13,7 +13,7 @@ interface MagneticButtonProps {
 export default function MagneticButton({ 
   children, 
   className = '', 
-  intensity = 0.3,
+  intensity = 0.1,
   onClick,
   href
 }: MagneticButtonProps) {

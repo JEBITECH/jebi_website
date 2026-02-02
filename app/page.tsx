@@ -143,10 +143,10 @@ export default function Home() {
               {/* CTA Buttons */}
               <AnimatedSection direction="up" delay={0.8}>
                 <div className="flex flex-col sm:flex-row gap-4">
-                  <MagneticButton href="/contact" intensity={0.15} className="btn-primary text-lg px-8 py-4">
+                  <MagneticButton href="/contact" intensity={0.1} className="btn-primary text-lg px-8 py-4">
                     Request Demo
                   </MagneticButton>
-                  <MagneticButton href="/products" intensity={0.15} className="btn-secondary text-lg px-8 py-4">
+                  <MagneticButton href="/products" intensity={0.1} className="btn-secondary text-lg px-8 py-4">
                     Explore Products
                   </MagneticButton>
                 </div>

@@ -182,21 +182,21 @@ export default function About() {
   return (
     <div className="bg-white overflow-hidden">
       {/* 1. Hero Section */}
-      <div className="relative isolate px-6 py-8 md:py-12 lg:px-8 flex items-center">
+      <div className="relative isolate px-6 pt-24 pb-12 md:pt-28 md:pb-16 lg:px-8">
         <FloatingElements />
 
         <div className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80">
-          <div className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] animated-gradient opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]" />
+          <div className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-r from-primary-orange/20 to-primary-purple/20 opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]" />
         </div>
 
-        <div className="mx-auto max-w-4xl py-32 sm:py-48 lg:py-56">
+        <div className="container-custom">
           <AnimatedSection direction="up" delay={0.2}>
-            <div className="text-center">
-              <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl font-heading">
-                About <span className="text-primary-orange">JebiTech</span>
+            <div className="text-center max-w-4xl mx-auto">
+              <h1 className="text-5xl font-bold tracking-tight text-gray-900 sm:text-6xl lg:text-7xl font-heading mb-6">
+                About <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-orange to-orange-600">JebiTech</span>
               </h1>
               <AnimatedSection direction="up" delay={0.4}>
-                <p className="mt-6 text-xl leading-8 text-gray-600 max-w-3xl mx-auto">
+                <p className="text-xl leading-relaxed text-gray-600 max-w-3xl mx-auto">
                   Built by hospitality and technology experts to solve real operational challenges
                   and empower the future of hospitality.
                 </p>
@@ -237,23 +237,23 @@ export default function About() {
               </AnimatedSection>
 
               <AnimatedSection direction="right" delay={0.3}>
-                <div className="bg-white rounded-2xl p-8 shadow-lg glass-morphism">
+                <div className="bg-gradient-to-br from-primary-purple to-purple-700 rounded-2xl p-8 shadow-xl">
                   <div className="grid grid-cols-2 gap-6">
                     <div className="text-center">
-                      <div className="text-3xl font-bold text-primary-orange mb-2">2019</div>
-                      <div className="text-sm text-gray-600">Founded</div>
+                      <div className="text-4xl font-bold text-white mb-2">2019</div>
+                      <div className="text-sm text-white/80">Founded</div>
                     </div>
                     <div className="text-center">
-                      <div className="text-3xl font-bold text-primary-orange mb-2">50+</div>
-                      <div className="text-sm text-gray-600">Team Members</div>
+                      <div className="text-4xl font-bold text-primary-orange mb-2">50+</div>
+                      <div className="text-sm text-white/80">Team Members</div>
                     </div>
                     <div className="text-center">
-                      <div className="text-3xl font-bold text-primary-orange mb-2">500+</div>
-                      <div className="text-sm text-gray-600">Properties</div>
+                      <div className="text-4xl font-bold text-white mb-2">500+</div>
+                      <div className="text-sm text-white/80">Properties</div>
                     </div>
                     <div className="text-center">
-                      <div className="text-3xl font-bold text-primary-orange mb-2">25+</div>
-                      <div className="text-sm text-gray-600">Countries</div>
+                      <div className="text-4xl font-bold text-primary-orange mb-2">25+</div>
+                      <div className="text-sm text-white/80">Countries</div>
                     </div>
                   </div>
                 </div>
@@ -279,12 +279,16 @@ export default function About() {
 
           <div className="space-y-16">
             {/* Vision & Mission */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               <AnimatedSection direction="left">
-                {/* <div className="bg-gradient-primary rounded-2xl p-8 text-white"> */}
-                <div className="bg-secondary-gray rounded-2xl p-8">
-                  <h3 className="text-2xl font-bold mb-4 text-gray-900">Our Vision</h3>
-                  <p className="text-lg opacity-90">
+                <div className="bg-gradient-to-br from-primary-purple to-purple-700 rounded-2xl p-8 text-white shadow-xl h-full">
+                  <div className="flex items-start gap-4 mb-4">
+                    <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center flex-shrink-0">
+                      <StarIcon className="w-6 h-6 text-white" />
+                    </div>
+                    <h3 className="text-2xl font-bold">Our Vision</h3>
+                  </div>
+                  <p className="text-lg text-white/90 leading-relaxed">
                     To be the trusted technology partner Globally for the hospitality industry,
                     helping organisations into technology or hospitality business and end-users,
                     through innovative, seamless, and customized solutions and Services delivered by top domain and technology experts.
@@ -293,9 +297,14 @@ export default function About() {
               </AnimatedSection>
 
               <AnimatedSection direction="right">
-                <div className="bg-secondary-gray rounded-2xl p-8">
-                  <h3 className="text-2xl font-bold mb-4 text-gray-900">Our Mission</h3>
-                  <p className="text-lg text-gray-600">
+                <div className="bg-gradient-to-br from-primary-orange to-orange-600 rounded-2xl p-8 text-white shadow-xl h-full">
+                  <div className="flex items-start gap-4 mb-4">
+                    <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center flex-shrink-0">
+                      <ChartBarIcon className="w-6 h-6 text-white" />
+                    </div>
+                    <h3 className="text-2xl font-bold">Our Mission</h3>
+                  </div>
+                  <p className="text-lg text-white/90 leading-relaxed">
                     At Jebitech, we partner with hospitality technology companies,
                     combining technology, data, expertise, and service excellence
                     to drive client success, innovation, and sustainable growth.
@@ -600,19 +609,19 @@ export default function About() {
       </ParallaxSection> */}
 
       {/* 10. Careers CTA */}
-      <div className="bg-gradient-primary section-padding">
+      <div className="bg-gradient-to-br from-primary-purple to-purple-800 section-padding">
         <div className="container-custom">
           <AnimatedSection direction="up">
             <div className="mx-auto max-w-2xl text-center">
               <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl font-heading">
                 Build the Future of Hospitality Tech
               </h2>
-              <p className="mx-auto mt-6 max-w-xl text-lg leading-8 text-gray-200">
+              <p className="mx-auto mt-6 max-w-xl text-lg leading-8 text-white/90">
                 Join our team of passionate engineers, designers, and hospitality experts who are
                 transforming how the industry operates.
               </p>
               <div className="mt-10">
-                <Link href="/careers" className="bg-white text-primary-purple px-8 py-4 rounded-lg font-medium hover:bg-gray-100 transition-colors text-lg">
+                <Link href="/careers" className="bg-white text-primary-purple px-8 py-4 rounded-lg font-medium hover:bg-gray-100 transition-colors text-lg inline-block">
                   View Open Positions
                 </Link>
               </div>

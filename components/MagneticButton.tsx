@@ -31,7 +31,7 @@ export default function MagneticButton({
       const moveX = x * intensity
       const moveY = y * intensity
       
-      button.style.transform = `translate(${moveX}px, ${moveY}px) scale(1.05)`
+      button.style.transform = `translate(${moveX}px, ${moveY}px) scale(1.02)`
     }
 
     const handleMouseLeave = () => {

@@ -18,7 +18,7 @@ const TechnologyTeamSection = () => {
     const arcRadius = 240; // The radius of the blue line
 
     return (
-        <section className="relative w-full min-h-screen bg-white flex items-center justify-center p-4">
+        <section className="relative w-full bg-white flex items-center justify-center p-4">
             {/* Wrapper to hold everything in place */}
             <div className="relative w-full max-w-6xl h-[700px]">
 

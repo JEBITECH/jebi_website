@@ -32,12 +32,24 @@ const ChatWidget = () => {
     const [inputValue, setInputValue] = useState("");
     const [messages, setMessages] = useState<Message[]>([]);
     const scrollRef = useRef<HTMLDivElement>(null);
+    const [isInitialized, setIsInitialized] = useState(false);
+
+    // Load saved state from localStorage on mount
+    useEffect(() => {
+        const savedView = localStorage.getItem('chatWidgetView');
+        if (savedView && (savedView === 'hidden' || savedView === 'intro' || savedView === 'chat')) {
+            setView(savedView as 'hidden' | 'intro' | 'chat');
+        } else {
+            // First time visitor - show intro after delay
+            const timer = setTimeout(() => setView('intro'), 1000);
+            return () => clearTimeout(timer);
+        }
+        setIsInitialized(true);
+    }, []);
 
     useEffect(() => {
         const content = pageContent[pathname] || pageContent["/"];
         setCurrentData(content);
-        console.log('pathname 3333: ', pathname);
-        console.log('content: ', content);
 
         // Initialize the conversation with the page-specific greeting
         setMessages([{
@@ -47,14 +59,30 @@ const ChatWidget = () => {
             time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
         }]);
 
-        // Reset to hidden then show Intro Card after 1s on every page change
-        setView('hidden');
-        const timer = setTimeout(() => setView('intro'), 1000);
-        return () => clearTimeout(timer);
-    }, [pathname]);
+        // Don't auto-show intro on page change if user has minimized it
+        if (isInitialized) {
+            const savedView = localStorage.getItem('chatWidgetView');
+            if (savedView === 'hidden') {
+                // Keep it hidden if user minimized it
+                setView('hidden');
+            }
+        }
+    }, [pathname, isInitialized]);
 
-    const openChat = () => setView('chat');
-    const closeAll = () => setView('hidden');
+    const openChat = () => {
+        setView('chat');
+        localStorage.setItem('chatWidgetView', 'chat');
+    };
+    
+    const closeAll = () => {
+        setView('hidden');
+        localStorage.setItem('chatWidgetView', 'hidden');
+    };
+
+    const showIntro = () => {
+        setView('intro');
+        localStorage.setItem('chatWidgetView', 'intro');
+    };
 
     const handleSendMessage = (e?: React.FormEvent) => {
         e?.preventDefault();
@@ -236,7 +264,7 @@ const ChatWidget = () => {
 
             {/* Launcher Button (Circular Avatar) */}
             <button
-                onClick={() => view === 'chat' ? closeAll() : openChat()}
+                onClick={() => view === 'chat' ? closeAll() : view === 'hidden' ? showIntro() : openChat()}
                 className="w-16 h-16 rounded-full overflow-hidden shadow-xl border-4 border-blue-600 hover:scale-105 transition-transform"
             >
                 <img

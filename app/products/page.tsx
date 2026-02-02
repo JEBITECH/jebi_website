@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams } from "next/navigation";
 import Link from 'next/link'
+import ProductShowcase from '@/components/ProductShowcase'
 import {
   CloudIcon,
   CogIcon,
@@ -474,7 +475,7 @@ export const stages: Stage[] = [
     id: 1,
     title: "Booking",
     icon: Calendar,
-    image: ChannelManager,
+    image: BookingEngine,
     painTitle: "Get started with ease",
     painDescription: "Lost revenue to OTA commissions, no direct booking channel",
     solutionTitle: "Booking Engine",
@@ -543,26 +544,7 @@ export default function Products() {
   const productId = searchParams.get("product");
   const [selectedProduct, setSelectedProduct] = useState(products[0])
   const [activeTab, setActiveTab] = useState('features')
-  const [activeIndex, setActiveIndex] = useState(0);
-  const activeStage = stages[activeIndex];
 
-
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % stages.length);
-    }, 4000);
-    return () => clearInterval(interval);
-  }, []);
-
-  const handleScroll = () => {
-    {
-      setSelectedProduct(products[activeIndex]);
-      document
-        .getElementById("product-detail-section")
-        ?.scrollIntoView({ behavior: "smooth" });
-    }
-  };
   useEffect(() => {
     if (!productId) return;
 
@@ -583,134 +565,14 @@ export default function Products() {
 
   return (
     <div className="bg-white overflow-hidden">
-      {/* 1. Platform Overview */}
-      {/* <div className="relative isolate px-6 pt-14 lg:px-8 min-h-screen flex items-center"> */}
       <FloatingElements />
-      {/* new code  product hero section*/}
-      <AnimatedSection>
-        <div className="w-full bg-slate-10 py-5">
-          {/* Header */}
-          <div className="text-center mb-10">
-            <h2 className="text-3xl font-bold">Unified Hospitality Operations Platform</h2>
-            {/* <p className="text-gray-600 mt-2">
-            Modular products that work together seamlessly to transform your hospitality operations
-            From booking to scale, we solve real operational challenges
-          </p> */}
-          </div>
-          <div className="relative min-h-[65vh] w-full overflow-hidden rounded-xl">
-            {/* Background Image */}
-            <Image
-              src={activeStage.image}
-              alt={activeStage.title}
-              fill
-              priority
-              className="object-fit: contain"
-            />
-
-            {/* Overlay */}
-            <div className="absolute inset-0 bg-black/40" />
-
-            {/* Content */}
-            {/* Overlay */}
-            <div className="absolute inset-0 bg-black/40" />
-
-            {/* Content Wrapper */}
-            <div className="relative z-10 h-full max-w-7xl mx-auto px-8">
-              <div className="grid h-full grid-cols-1 lg:grid-cols-2 gap-16 text-white">
-
-                {/* 🔹 PAIN — TOP LEFT */}
-                <div className="flex flex-col items-start justify-start pt-16">
-                  <h1 className="text-xl font-semibold mb-3">
-                    {activeStage.painTitle}
-                  </h1>
-                  <p className="text-lg text-white/90 max-w-xl">
-                    {activeStage.painDescription}
-                  </p>
-                </div>
-
-                {/* 🔹 SOLUTION — LEFT CENTER */}
-                <div className="flex flex-col justify-end items-end pt-16">
-                  {/* Width constraint applied HERE */}
-                  <div className="flex flex-col items-start text-left max-w-xl">
-                    <h2 className="text-xl font-semibold mb-3">
-                      {activeStage.solutionTitle}
-                    </h2>
-
-                    <p className="text-white/90 mb-8">
-                      {activeStage.solution}
-                    </p>
-
-                    {/* <button
-                  onClick={handleScroll}
-                  className="
-                  w-fit
-                  px-8 py-4
-                  rounded-full
-                  bg-emerald-200
-                  text-gray-900
-                  font-medium
-                  hover:bg-emerald-300
-                  transition
-                "
-                >
-                  {activeStage.ctaLabel}
-                </button> */}
-                  </div>
-                  <button
-                    onClick={handleScroll}
-                    className="
-                  w-fit
-                  px-8 py-4
-                  rounded-full
-                  bg-emerald-200
-                  text-gray-900
-                  font-medium
-                  hover:bg-emerald-300
-                  transition
-                "
-                  >
-                    {activeStage.ctaLabel}
-                  </button>
-                </div>
-              </div>
-            </div>
-
-          </div>
-
-          {/* PAIN / SOLUTION */}
-          {/* <PainSolution stage={activeStage} /> */}
-
-          {/* BOTTOM STEPS */}
-          <div className="flex justify-center gap-4 p-4">
-            {stages.map((stage, index) => {
-              const Icon = stage.icon;
-              const active = index === activeIndex;
-
-              return (
-                <div onClick={() => setActiveIndex(index)}
-                  key={stage.id}
-                  className={`w-32 h-20 rounded-xl flex flex-col items-center justify-center shadow-sm transition-all duration-300
-              ${active
-                      ? "bg-gradient-to-br from-blue-500 to-purple-500 text-white scale-105"
-                      : "bg-white text-gray-700"
-                    }`}
-                >
-                  <Icon size={20} />
-                  <div className="text-xs font-semibold mt-1">
-                    {stage.title}
-                  </div>
-                  <div className="text-xs opacity-70">
-                    {stage.id}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </AnimatedSection>
-
-
-      {/* new code ends */}
+      
+      {/* Product Showcase - Reusable Component */}
+      <ProductShowcase 
+        showHeader={true}
+        autoRotate={true}
+        rotationInterval={8000}
+      />
 
       {/* <div className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80">
           <div className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] animated-gradient opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]" />
@@ -764,7 +626,7 @@ export default function Products() {
       {/* </div> */}
 
       {/* 2. Platform Capabilities */}
-      <ParallaxSection speed={0.3}>
+      {/* <ParallaxSection speed={0.3}>
         <div className="bg-secondary-gray section-padding">
           <div className="container-custom">
             <AnimatedSection direction="up">
@@ -795,7 +657,7 @@ export default function Products() {
             </StaggeredList>
           </div>
         </div>
-      </ParallaxSection>
+      </ParallaxSection> */}
 
       {/* 3. In-House Products */}
       {/* <div className="bg-white section-padding">

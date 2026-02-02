@@ -20,7 +20,9 @@ import {
   CheckCircleIcon,
   PlayIcon,
   PlusIcon,
-  ArrowRightIcon
+  ArrowRightIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon
 } from '@heroicons/react/24/outline'
 
 import AnimatedSection from '@/components/AnimatedSection'
@@ -544,6 +546,7 @@ export default function Products() {
   const productId = searchParams.get("product");
   const [selectedProduct, setSelectedProduct] = useState(products[0])
   const [activeTab, setActiveTab] = useState('features')
+  const [slideDirection, setSlideDirection] = useState<'left' | 'right' | null>(null)
 
   useEffect(() => {
     if (!productId) return;
@@ -562,6 +565,42 @@ export default function Products() {
       }, 100);
     }
   }, [productId]);
+
+  // Keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowLeft') {
+        handlePreviousProduct();
+      } else if (e.key === 'ArrowRight') {
+        handleNextProduct();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [selectedProduct]);
+
+  const handlePreviousProduct = () => {
+    setSlideDirection('right');
+    setTimeout(() => {
+      const currentIndex = products.findIndex(p => p.id === selectedProduct.id);
+      const previousIndex = currentIndex === 0 ? products.length - 1 : currentIndex - 1;
+      setSelectedProduct(products[previousIndex]);
+      setActiveTab('features');
+      setTimeout(() => setSlideDirection(null), 50);
+    }, 300);
+  };
+
+  const handleNextProduct = () => {
+    setSlideDirection('left');
+    setTimeout(() => {
+      const currentIndex = products.findIndex(p => p.id === selectedProduct.id);
+      const nextIndex = currentIndex === products.length - 1 ? 0 : currentIndex + 1;
+      setSelectedProduct(products[nextIndex]);
+      setActiveTab('features');
+      setTimeout(() => setSlideDirection(null), 50);
+    }, 300);
+  };
 
   return (
     <div className="bg-white overflow-hidden">
@@ -707,17 +746,73 @@ export default function Products() {
         <div className="bg-primary-purple section-padding" id="product-detail-section">
           <div className="container-custom">
             <AnimatedSection direction="up">
-              <div className="mx-auto max-w-2xl text-center mb-16">
+              <div className="mx-auto max-w-2xl text-center mb-16 relative">
+                {/* Navigation Arrows */}
+                <button
+                  onClick={handlePreviousProduct}
+                  className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-12 lg:-translate-x-16 bg-white/10 hover:bg-white/20 text-white p-3 rounded-full transition-all duration-300 hover:scale-110 backdrop-blur-sm"
+                  aria-label="Previous product"
+                >
+                  <ChevronLeftIcon className="h-6 w-6" />
+                </button>
+                
                 <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl font-heading">
                   {selectedProduct.name}
                 </h2>
                 <p className="mt-6 text-lg leading-8 text-gray-300">
                   {selectedProduct.description}
                 </p>
+                
+                {/* Product Counter */}
+                <div className="mt-4 text-sm text-gray-300">
+                  {products.findIndex(p => p.id === selectedProduct.id) + 1} / {products.length}
+                </div>
+
+                <button
+                  onClick={handleNextProduct}
+                  className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-12 lg:translate-x-16 bg-white/10 hover:bg-white/20 text-white p-3 rounded-full transition-all duration-300 hover:scale-110 backdrop-blur-sm"
+                  aria-label="Next product"
+                >
+                  <ChevronRightIcon className="h-6 w-6" />
+                </button>
               </div>
             </AnimatedSection>
 
-            <div className="bg-white rounded-2xl p-8 shadow-xl">
+            <div className={`bg-white rounded-2xl p-8 shadow-xl transition-all duration-300 ease-out ${
+              slideDirection === 'left' 
+                ? 'translate-x-[-100%] opacity-0' 
+                : slideDirection === 'right' 
+                ? 'translate-x-[100%] opacity-0' 
+                : 'translate-x-0 opacity-100'
+            }`}>
+              {/* Product Indicators */}
+              <div className="flex justify-center gap-2 mb-6">
+                {products.map((product, index) => (
+                  <button
+                    key={product.id}
+                    onClick={() => {
+                      const currentIndex = products.findIndex(p => p.id === selectedProduct.id);
+                      const targetIndex = index;
+                      
+                      if (targetIndex !== currentIndex) {
+                        setSlideDirection(targetIndex > currentIndex ? 'left' : 'right');
+                        setTimeout(() => {
+                          setSelectedProduct(product);
+                          setActiveTab('features');
+                          setTimeout(() => setSlideDirection(null), 50);
+                        }, 300);
+                      }
+                    }}
+                    className={`transition-all duration-300 rounded-full ${
+                      selectedProduct.id === product.id
+                        ? 'w-8 h-2 bg-primary-orange'
+                        : 'w-2 h-2 bg-gray-300 hover:bg-gray-400'
+                    }`}
+                    aria-label={`Go to ${product.name}`}
+                  />
+                ))}
+              </div>
+
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
                 <div>
                   {/* Tab Navigation */}

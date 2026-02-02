@@ -45,7 +45,7 @@ export function TeamCarousel() {
     }, []);
 
     return (
-        <div className="relativew-full h-[420px] md:h-[550px] lg:h-[620px] max-w-5xl xl:max-w-6xl mx-auto overflow-hidden rounded-3xl shadow-2xl">
+        <div className="relative w-full h-[420px] md:h-[550px] lg:h-[620px] max-w-5xl xl:max-w-6xl mx-auto overflow-hidden rounded-3xl shadow-2xl">
 
             {teamSlides.map((slide, index) => (
                 <div

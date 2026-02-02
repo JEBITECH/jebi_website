@@ -36,24 +36,40 @@ const navigation = {
 
 export default function Footer() {
   return (
-    <footer className="bg-primary-purple">
-      <div className="container-custom section-padding">
-        <div className="xl:grid xl:grid-cols-3 xl:gap-8">
-          <div className="space-y-8 xl:col-span-1">
+    <footer className="relative bg-primary-purple overflow-hidden">
+      {/* Background Pattern */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute inset-0" style={{
+          backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)',
+          backgroundSize: '32px 32px'
+        }}></div>
+      </div>
+
+      {/* Decorative Elements */}
+      <div className="absolute top-0 right-0 w-96 h-96 bg-primary-orange/10 rounded-full blur-3xl"></div>
+      <div className="absolute bottom-0 left-0 w-96 h-96 bg-purple-700/20 rounded-full blur-3xl"></div>
+
+      <div className="container-custom section-padding relative z-10">
+        <div className="xl:grid xl:grid-cols-3 xl:gap-12">
+          <div className="space-y-6 xl:col-span-1">
             <div>
-              <span className="text-3xl font-heading font-bold">
+              <span className="text-4xl font-heading font-bold">
                 <span className="text-white">JEBI</span>
                 <span className="text-primary-orange">TECH</span>
               </span>
             </div>
-            <p className="text-sm leading-6 text-gray-300">
+            <p className="text-base leading-7 text-white/80">
               Empowering Hospitality Technology with innovative solutions that drive growth and enhance guest experiences.
             </p>
-            <div className="flex space-x-6">
+            <div className="flex space-x-4">
               {navigation.social.map((item) => (
-                <a key={item.name} href={item.href} className="text-gray-400 hover:text-primary-orange">
+                <a 
+                  key={item.name} 
+                  href={item.href} 
+                  className="w-10 h-10 bg-white/10 backdrop-blur-sm rounded-lg flex items-center justify-center text-white hover:bg-primary-orange hover:scale-110 transition-all duration-300"
+                >
                   <span className="sr-only">{item.name}</span>
-                  <item.icon className="h-6 w-6" aria-hidden="true" />
+                  <item.icon className="h-5 w-5" aria-hidden="true" />
                 </a>
               ))}
             </div>
@@ -61,11 +77,15 @@ export default function Footer() {
           <div className="mt-16 grid grid-cols-2 gap-8 xl:col-span-2 xl:mt-0">
             <div className="md:grid md:grid-cols-2 md:gap-8">
               <div>
-                <h3 className="text-sm font-semibold leading-6 text-white">Quick Links</h3>
-                <ul role="list" className="mt-6 space-y-4">
+                <h3 className="text-base font-bold leading-6 text-white mb-6">Quick Links</h3>
+                <ul role="list" className="space-y-3">
                   {navigation.main.map((item) => (
                     <li key={item.name}>
-                      <Link href={item.href} className="text-sm leading-6 text-gray-300 hover:text-primary-orange">
+                      <Link 
+                        href={item.href} 
+                        className="text-sm leading-6 text-white/80 hover:text-primary-orange transition-colors flex items-center gap-2 group"
+                      >
+                        <span className="w-1.5 h-1.5 bg-primary-orange rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></span>
                         {item.name}
                       </Link>
                     </li>
@@ -75,20 +95,36 @@ export default function Footer() {
             </div>
             <div className="md:grid md:grid-cols-1 md:gap-8">
               <div>
-                <h3 className="text-sm font-semibold leading-6 text-white">Contact Info</h3>
-                <div className="mt-6 space-y-4 text-sm text-gray-300">
-                  <p>Email: info@jebitech.com</p>
-                  <p>Phone: +1 (555) 123-4567</p>
-                  <p>Address: 123 Tech Street, Innovation City, IC 12345</p>
+                <h3 className="text-base font-bold leading-6 text-white mb-6">Contact Info</h3>
+                <div className="space-y-3 text-sm text-white/80">
+                  <p className="flex items-center gap-2">
+                    <span className="text-primary-orange">✉</span> info@jebitech.com
+                  </p>
+                  <p className="flex items-center gap-2">
+                    <span className="text-primary-orange">📞</span> +1 (555) 123-4567
+                  </p>
+                  <p className="flex items-center gap-2">
+                    <span className="text-primary-orange">📍</span> 123 Tech Street, Innovation City
+                  </p>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div className="mt-16 border-t border-gray-600 pt-8 sm:mt-20 lg:mt-24">
-          <p className="text-xs leading-5 text-gray-400 text-center">
-            &copy; {new Date().getFullYear()} JebiTech. All rights reserved.
-          </p>
+        <div className="mt-12 pt-8 border-t border-white/10">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+            <p className="text-sm text-white/60">
+              &copy; {new Date().getFullYear()} JebiTech. All rights reserved.
+            </p>
+            <div className="flex gap-6 text-sm text-white/60">
+              <Link href="/privacy" className="hover:text-primary-orange transition-colors">
+                Privacy Policy
+              </Link>
+              <Link href="/terms" className="hover:text-primary-orange transition-colors">
+                Terms of Service
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
     </footer>

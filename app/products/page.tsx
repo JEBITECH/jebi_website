@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams } from "next/navigation";
 import Link from 'next/link'
+import ProductShowcase from '@/components/ProductShowcase'
 import {
   CloudIcon,
   CogIcon,
@@ -19,7 +20,9 @@ import {
   CheckCircleIcon,
   PlayIcon,
   PlusIcon,
-  ArrowRightIcon
+  ArrowRightIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon
 } from '@heroicons/react/24/outline'
 
 import AnimatedSection from '@/components/AnimatedSection'
@@ -422,15 +425,28 @@ const architectureFeatures = [
   { name: 'Real-time', description: 'Live updates and notifications' }
 ]
 
+import Guesty from '../assets/Guesty.png';
+import Hostaway from '../assets/hostaway.jpeg';
+import BookingCom from '../assets/booking-com.jpeg';
+import Expedia from '../assets/expedia.jpeg';
+import Airbnb from '../assets/airbnb.svg';
+import Stripe from '../assets/stripe.svg';
+import PayPal from '../assets/paypal.jpg';
+import Salesforce from '../assets/salesforce.png';
+import Slack from '../assets/slack.png';
+import Zapier from '../assets/zapier.png';
+
 const integrations = [
-  { name: 'Opera PMS', category: 'PMS', logo: '/integrations/opera.png' },
-  { name: 'Booking.com', category: 'Channel Manager', logo: '/integrations/booking.png' },
-  { name: 'Expedia', category: 'Channel Manager', logo: '/integrations/expedia.png' },
-  { name: 'Stripe', category: 'Payments', logo: '/integrations/stripe.png' },
-  { name: 'PayPal', category: 'Payments', logo: '/integrations/paypal.png' },
-  { name: 'Salesforce', category: 'CRM', logo: '/integrations/salesforce.png' },
-  { name: 'Slack', category: 'Communication', logo: '/integrations/slack.png' },
-  { name: 'Zapier', category: 'Automation', logo: '/integrations/zapier.png' }
+  { name: 'Guesty', category: 'PMS', logo: Guesty },
+  { name: 'Hostaway', category: 'PMS', logo: Hostaway },
+  { name: 'Booking.com', category: 'Channel Manager', logo: BookingCom },
+  { name: 'Expedia', category: 'Channel Manager', logo: Expedia },
+  { name: 'Airbnb', category: 'Channel Manager', logo: Airbnb },
+  { name: 'Stripe', category: 'Payments', logo: Stripe },
+  { name: 'PayPal', category: 'Payments', logo: PayPal },
+  { name: 'Salesforce', category: 'CRM', logo: Salesforce },
+  { name: 'Slack', category: 'Communication', logo: Slack },
+  { name: 'Zapier', category: 'Automation', logo: Zapier }
 ]
 import {
   Calendar,
@@ -474,7 +490,7 @@ export const stages: Stage[] = [
     id: 1,
     title: "Booking",
     icon: Calendar,
-    image: ChannelManager,
+    image: BookingEngine,
     painTitle: "Get started with ease",
     painDescription: "Lost revenue to OTA commissions, no direct booking channel",
     solutionTitle: "Booking Engine",
@@ -543,26 +559,8 @@ export default function Products() {
   const productId = searchParams.get("product");
   const [selectedProduct, setSelectedProduct] = useState(products[0])
   const [activeTab, setActiveTab] = useState('features')
-  const [activeIndex, setActiveIndex] = useState(0);
-  const activeStage = stages[activeIndex];
+  const [slideDirection, setSlideDirection] = useState<'left' | 'right' | null>(null)
 
-
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % stages.length);
-    }, 4000);
-    return () => clearInterval(interval);
-  }, []);
-
-  const handleScroll = () => {
-    {
-      setSelectedProduct(products[activeIndex]);
-      document
-        .getElementById("product-detail-section")
-        ?.scrollIntoView({ behavior: "smooth" });
-    }
-  };
   useEffect(() => {
     if (!productId) return;
 
@@ -581,136 +579,52 @@ export default function Products() {
     }
   }, [productId]);
 
+  // Keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowLeft') {
+        handlePreviousProduct();
+      } else if (e.key === 'ArrowRight') {
+        handleNextProduct();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [selectedProduct]);
+
+  const handlePreviousProduct = () => {
+    setSlideDirection('right');
+    setTimeout(() => {
+      const currentIndex = products.findIndex(p => p.id === selectedProduct.id);
+      const previousIndex = currentIndex === 0 ? products.length - 1 : currentIndex - 1;
+      setSelectedProduct(products[previousIndex]);
+      setActiveTab('features');
+      setTimeout(() => setSlideDirection(null), 50);
+    }, 300);
+  };
+
+  const handleNextProduct = () => {
+    setSlideDirection('left');
+    setTimeout(() => {
+      const currentIndex = products.findIndex(p => p.id === selectedProduct.id);
+      const nextIndex = currentIndex === products.length - 1 ? 0 : currentIndex + 1;
+      setSelectedProduct(products[nextIndex]);
+      setActiveTab('features');
+      setTimeout(() => setSlideDirection(null), 50);
+    }, 300);
+  };
+
   return (
-    <div className="bg-white overflow-hidden">
-      {/* 1. Platform Overview */}
-      {/* <div className="relative isolate px-6 pt-14 lg:px-8 min-h-screen flex items-center"> */}
+    <div className="bg-white overflow-hidden pt-8 md:pt-12">
       <FloatingElements />
-      {/* new code  product hero section*/}
-      <AnimatedSection>
-        <div className="w-full bg-slate-10 py-5">
-          {/* Header */}
-          <div className="text-center mb-10">
-            <h2 className="text-3xl font-bold">Unified Hospitality Operations Platform</h2>
-            {/* <p className="text-gray-600 mt-2">
-            Modular products that work together seamlessly to transform your hospitality operations
-            From booking to scale, we solve real operational challenges
-          </p> */}
-          </div>
-          <div className="relative min-h-[65vh] w-full overflow-hidden rounded-xl">
-            {/* Background Image */}
-            <Image
-              src={activeStage.image}
-              alt={activeStage.title}
-              fill
-              priority
-              className="object-fit: contain"
-            />
-
-            {/* Overlay */}
-            <div className="absolute inset-0 bg-black/40" />
-
-            {/* Content */}
-            {/* Overlay */}
-            <div className="absolute inset-0 bg-black/40" />
-
-            {/* Content Wrapper */}
-            <div className="relative z-10 h-full max-w-7xl mx-auto px-8">
-              <div className="grid h-full grid-cols-1 lg:grid-cols-2 gap-16 text-white">
-
-                {/* 🔹 PAIN — TOP LEFT */}
-                <div className="flex flex-col items-start justify-start pt-16">
-                  <h1 className="text-xl font-semibold mb-3">
-                    {activeStage.painTitle}
-                  </h1>
-                  <p className="text-lg text-white/90 max-w-xl">
-                    {activeStage.painDescription}
-                  </p>
-                </div>
-
-                {/* 🔹 SOLUTION — LEFT CENTER */}
-                <div className="flex flex-col justify-end items-end pt-16">
-                  {/* Width constraint applied HERE */}
-                  <div className="flex flex-col items-start text-left max-w-xl">
-                    <h2 className="text-xl font-semibold mb-3">
-                      {activeStage.solutionTitle}
-                    </h2>
-
-                    <p className="text-white/90 mb-8">
-                      {activeStage.solution}
-                    </p>
-
-                    {/* <button
-                  onClick={handleScroll}
-                  className="
-                  w-fit
-                  px-8 py-4
-                  rounded-full
-                  bg-emerald-200
-                  text-gray-900
-                  font-medium
-                  hover:bg-emerald-300
-                  transition
-                "
-                >
-                  {activeStage.ctaLabel}
-                </button> */}
-                  </div>
-                  <button
-                    onClick={handleScroll}
-                    className="
-                  w-fit
-                  px-8 py-4
-                  rounded-full
-                  bg-emerald-200
-                  text-gray-900
-                  font-medium
-                  hover:bg-emerald-300
-                  transition
-                "
-                  >
-                    {activeStage.ctaLabel}
-                  </button>
-                </div>
-              </div>
-            </div>
-
-          </div>
-
-          {/* PAIN / SOLUTION */}
-          {/* <PainSolution stage={activeStage} /> */}
-
-          {/* BOTTOM STEPS */}
-          <div className="flex justify-center gap-4 p-4">
-            {stages.map((stage, index) => {
-              const Icon = stage.icon;
-              const active = index === activeIndex;
-
-              return (
-                <div onClick={() => setActiveIndex(index)}
-                  key={stage.id}
-                  className={`w-32 h-20 rounded-xl flex flex-col items-center justify-center shadow-sm transition-all duration-300
-              ${active
-                      ? "bg-gradient-to-br from-blue-500 to-purple-500 text-white scale-105"
-                      : "bg-white text-gray-700"
-                    }`}
-                >
-                  <Icon size={20} />
-                  <div className="text-xs font-semibold mt-1">
-                    {stage.title}
-                  </div>
-                  <div className="text-xs opacity-70">
-                    {stage.id}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </AnimatedSection>
-
-
-      {/* new code ends */}
+      
+      {/* Product Showcase - Reusable Component */}
+      <ProductShowcase 
+        showHeader={true}
+        autoRotate={true}
+        rotationInterval={8000}
+      />
 
       {/* <div className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80">
           <div className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] animated-gradient opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]" />
@@ -764,7 +678,7 @@ export default function Products() {
       {/* </div> */}
 
       {/* 2. Platform Capabilities */}
-      <ParallaxSection speed={0.3}>
+      {/* <ParallaxSection speed={0.3}>
         <div className="bg-secondary-gray section-padding">
           <div className="container-custom">
             <AnimatedSection direction="up">
@@ -795,7 +709,7 @@ export default function Products() {
             </StaggeredList>
           </div>
         </div>
-      </ParallaxSection>
+      </ParallaxSection> */}
 
       {/* 3. In-House Products */}
       {/* <div className="bg-white section-padding">
@@ -845,17 +759,73 @@ export default function Products() {
         <div className="bg-primary-purple section-padding" id="product-detail-section">
           <div className="container-custom">
             <AnimatedSection direction="up">
-              <div className="mx-auto max-w-2xl text-center mb-16">
+              <div className="mx-auto max-w-2xl text-center mb-16 relative">
+                {/* Navigation Arrows */}
+                <button
+                  onClick={handlePreviousProduct}
+                  className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-12 lg:-translate-x-16 bg-white/10 hover:bg-white/20 text-white p-3 rounded-full transition-all duration-300 hover:scale-110 backdrop-blur-sm"
+                  aria-label="Previous product"
+                >
+                  <ChevronLeftIcon className="h-6 w-6" />
+                </button>
+                
                 <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl font-heading">
                   {selectedProduct.name}
                 </h2>
                 <p className="mt-6 text-lg leading-8 text-gray-300">
                   {selectedProduct.description}
                 </p>
+                
+                {/* Product Counter */}
+                <div className="mt-4 text-sm text-gray-300">
+                  {products.findIndex(p => p.id === selectedProduct.id) + 1} / {products.length}
+                </div>
+
+                <button
+                  onClick={handleNextProduct}
+                  className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-12 lg:translate-x-16 bg-white/10 hover:bg-white/20 text-white p-3 rounded-full transition-all duration-300 hover:scale-110 backdrop-blur-sm"
+                  aria-label="Next product"
+                >
+                  <ChevronRightIcon className="h-6 w-6" />
+                </button>
               </div>
             </AnimatedSection>
 
-            <div className="bg-white rounded-2xl p-8 shadow-xl">
+            <div className={`bg-white rounded-2xl p-8 shadow-xl transition-all duration-300 ease-out ${
+              slideDirection === 'left' 
+                ? 'translate-x-[-100%] opacity-0' 
+                : slideDirection === 'right' 
+                ? 'translate-x-[100%] opacity-0' 
+                : 'translate-x-0 opacity-100'
+            }`}>
+              {/* Product Indicators */}
+              <div className="flex justify-center gap-2 mb-6">
+                {products.map((product, index) => (
+                  <button
+                    key={product.id}
+                    onClick={() => {
+                      const currentIndex = products.findIndex(p => p.id === selectedProduct.id);
+                      const targetIndex = index;
+                      
+                      if (targetIndex !== currentIndex) {
+                        setSlideDirection(targetIndex > currentIndex ? 'left' : 'right');
+                        setTimeout(() => {
+                          setSelectedProduct(product);
+                          setActiveTab('features');
+                          setTimeout(() => setSlideDirection(null), 50);
+                        }, 300);
+                      }
+                    }}
+                    className={`transition-all duration-300 rounded-full ${
+                      selectedProduct.id === product.id
+                        ? 'w-8 h-2 bg-primary-orange'
+                        : 'w-2 h-2 bg-gray-300 hover:bg-gray-400'
+                    }`}
+                    aria-label={`Go to ${product.name}`}
+                  />
+                ))}
+              </div>
+
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
                 <div>
                   {/* Tab Navigation */}
@@ -946,71 +916,126 @@ export default function Products() {
       </ParallaxSection>
 
       {/* 5. Architecture & Scalability */}
-      <div className="bg-secondary-gray section-padding">
-        <div className="container-custom">
+      <div className="relative bg-gradient-to-br from-gray-50 via-white to-gray-50 section-padding overflow-hidden">
+        {/* Background Elements */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute inset-0" style={{
+            backgroundImage: 'radial-gradient(circle at 2px 2px, #4A1A5C 1px, transparent 0)',
+            backgroundSize: '48px 48px'
+          }}></div>
+        </div>
+        <div className="absolute top-20 right-0 w-96 h-96 bg-primary-purple/5 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-20 left-0 w-96 h-96 bg-primary-orange/5 rounded-full blur-3xl"></div>
+
+        <div className="container-custom relative z-10">
           <AnimatedSection direction="up">
-            <div className="mx-auto max-w-2xl text-center mb-16">
-              <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl font-heading">
-                Built for Scale & Reliability
+            <div className="mx-auto max-w-3xl text-center mb-16">
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-primary-purple/10 to-primary-orange/10 rounded-full border border-primary-purple/20 mb-6">
+                <ShieldCheckIcon className="w-5 h-5 text-primary-purple" />
+                <span className="text-primary-purple text-sm font-semibold">Enterprise-Grade Infrastructure</span>
+              </div>
+              <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-5xl font-heading mb-6">
+                Built for <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-purple to-primary-orange">Scale & Reliability</span>
               </h2>
-              <p className="mt-6 text-lg leading-8 text-gray-600">
-                Modern architecture principles ensure your platform grows with your business
+              <p className="text-xl leading-8 text-gray-600">
+                Modern architecture principles and cutting-edge technology ensure your platform grows seamlessly with your business
               </p>
             </div>
           </AnimatedSection>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <AnimatedSection direction="left">
-              <div className="space-y-8">
-                <StaggeredList className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {architectureFeatures.map((feature) => (
-                    <div key={feature.name} className="bg-white rounded-lg p-4 card-hover">
-                      <div className="bg-gradient-primary text-white text-xs px-3 py-1 rounded-full inline-block mb-3">
-                        {feature.name}
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 mb-12 lg:items-stretch">
+            {/* Architecture Features - Takes 3 columns */}
+            <AnimatedSection direction="left" className="lg:col-span-3 flex">
+              <div className="flex flex-col w-full bg-white rounded-2xl p-8 shadow-lg border border-gray-100">
+                <div className="flex items-center gap-3 mb-8">
+                  <div className="w-12 h-12 bg-gradient-to-br from-primary-purple to-purple-700 rounded-xl flex items-center justify-center shadow-lg">
+                    <CubeTransparentIcon className="w-7 h-7 text-white" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-gray-900">Architecture Features</h3>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 flex-1">
+                  {architectureFeatures.map((feature, index) => (
+                    <div key={feature.name} className="group bg-gradient-to-br from-gray-50 to-white rounded-xl p-5 shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-primary-orange/50 hover:-translate-y-1">
+                      <div className="flex items-start gap-3">
+                        <div className="w-10 h-10 bg-gradient-to-br from-primary-orange to-orange-600 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300 shadow-md">
+                          <CheckCircleIcon className="w-6 h-6 text-white" />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <div className="text-base font-bold text-gray-900 mb-2 group-hover:text-primary-purple transition-colors">{feature.name}</div>
+                          <p className="text-gray-600 text-sm leading-relaxed">{feature.description}</p>
+                        </div>
                       </div>
-                      <p className="text-gray-600 text-sm">{feature.description}</p>
                     </div>
                   ))}
-                </StaggeredList>
+                </div>
               </div>
             </AnimatedSection>
 
-            <AnimatedSection direction="right" delay={0.3}>
-              <div className="bg-white rounded-2xl p-8 shadow-lg">
-                <h3 className="text-xl font-bold text-gray-900 mb-6">Technical Architecture</h3>
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                    <span className="text-gray-700">Frontend</span>
-                    <span className="text-primary-orange font-medium">React/Next.js</span>
+            {/* Technical Stack - Takes 2 columns */}
+            <AnimatedSection direction="right" delay={0.2} className="lg:col-span-2 flex">
+              <div className="flex flex-col w-full bg-gradient-to-br from-primary-purple via-purple-700 to-purple-800 rounded-2xl p-8 shadow-2xl relative overflow-hidden">
+                {/* Decorative Elements */}
+                <div className="absolute top-0 right-0 w-40 h-40 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+                <div className="absolute bottom-0 left-0 w-32 h-32 bg-primary-orange/10 rounded-full translate-y-1/2 -translate-x-1/2"></div>
+                
+                <div className="relative z-10 flex flex-col h-full">
+                  <div className="flex items-center gap-3 mb-8">
+                    <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center shadow-lg">
+                      <CpuChipIcon className="w-7 h-7 text-white" />
+                    </div>
+                    <h3 className="text-2xl font-bold text-white">Tech Stack</h3>
                   </div>
-                  <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                    <span className="text-gray-700">Backend</span>
-                    <span className="text-primary-orange font-medium">Node.js/Python</span>
-                  </div>
-                  <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                    <span className="text-gray-700">Database</span>
-                    <span className="text-primary-orange font-medium">PostgreSQL/Redis</span>
-                  </div>
-                  <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                    <span className="text-gray-700">Infrastructure</span>
-                    <span className="text-primary-orange font-medium">AWS/Docker/K8s</span>
-                  </div>
-                  <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                    <span className="text-gray-700">Monitoring</span>
-                    <span className="text-primary-orange font-medium">DataDog/Sentry</span>
+                  <div className="space-y-3 flex-1 flex flex-col justify-center">
+                    {[
+                      { label: 'Frontend', value: 'React/Next.js', icon: '⚛️' },
+                      { label: 'Backend', value: 'Node.js/Python', icon: '🚀' },
+                      { label: 'Database', value: 'PostgreSQL/Redis', icon: '💾' },
+                      { label: 'Infrastructure', value: 'AWS/Docker/K8s', icon: '☁️' },
+                      { label: 'Monitoring', value: 'DataDog/Sentry', icon: '📊' }
+                    ].map((tech, index) => (
+                      <div key={tech.label} className="group flex items-center justify-between p-4 bg-white/10 backdrop-blur-sm rounded-xl border border-white/20 hover:bg-white/15 hover:border-white/30 transition-all duration-300">
+                        <div className="flex items-center gap-3">
+                          <span className="text-2xl group-hover:scale-110 transition-transform duration-300">{tech.icon}</span>
+                          <span className="text-white font-medium">{tech.label}</span>
+                        </div>
+                        <span className="text-primary-orange font-bold text-sm">{tech.value}</span>
+                      </div>
+                    ))}
                   </div>
                 </div>
               </div>
             </AnimatedSection>
           </div>
+
+          {/* Performance Metrics */}
+          <AnimatedSection direction="up" delay={0.4}>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+              {[
+                { metric: '99.9%', label: 'Uptime SLA', icon: ShieldCheckIcon },
+                { metric: '<100ms', label: 'API Response', icon: ArrowPathIcon },
+                { metric: '10M+', label: 'Requests/Day', icon: ChartBarIcon },
+                { metric: '24/7', label: 'Support', icon: CogIcon }
+              ].map((stat, index) => (
+                <div key={stat.label} className="bg-white rounded-xl p-6 shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-primary-purple/30 text-center group">
+                  <div className="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-br from-primary-purple to-purple-700 rounded-xl mb-4 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                    <stat.icon className="w-6 h-6 text-white" />
+                  </div>
+                  <div className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary-purple to-primary-orange mb-2">
+                    {stat.metric}
+                  </div>
+                  <div className="text-sm text-gray-600 font-medium">{stat.label}</div>
+                </div>
+              ))}
+            </div>
+          </AnimatedSection>
         </div>
       </div>
 
       {/* 6. Integrations */}
-      <div className="bg-white section-padding">
+      <div className="bg-gradient-to-br from-gray-50 to-white section-padding">
         <div className="container-custom">
           <AnimatedSection direction="up">
-            <div className="mx-auto max-w-2xl text-center mb-16">
+            <div className="mx-auto max-w-3xl text-center mb-16">
               <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl font-heading">
                 Seamless Integrations
               </h2>
@@ -1020,33 +1045,85 @@ export default function Products() {
             </div>
           </AnimatedSection>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-8 items-center">
+          {/* Integration Categories Grid */}
+          <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6 mb-12">
             {integrations.map((integration, index) => (
-              <AnimatedSection key={integration.name} direction="up" delay={index * 0.1}>
-                <div className="text-center card-hover">
-                  <div className="w-16 h-16 bg-gray-100 rounded-lg flex items-center justify-center mx-auto mb-3">
-                    <span className="text-xs font-medium text-gray-600">{integration.name}</span>
+              <AnimatedSection key={integration.name} direction="up" delay={index * 0.05}>
+                <div className="group bg-white rounded-lg p-4 shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 hover:border-primary-orange/30 h-full">
+                  <div className="flex flex-col items-center justify-center text-center space-y-2 h-full">
+                    {/* Logo Container */}
+                    <div className="w-14 h-14 flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
+                      <Image 
+                        src={integration.logo} 
+                        alt={integration.name}
+                        width={56}
+                        height={56}
+                        className="max-w-full max-h-full object-contain"
+                      />
+                    </div>
+                    {/* Integration Name */}
+                    <div className="w-full">
+                      <div className="text-xs font-semibold text-gray-900 group-hover:text-primary-purple transition-colors line-clamp-1">
+                        {integration.name}
+                      </div>
+                      <div className="text-[10px] text-gray-500 mt-1">
+                        {integration.category}
+                      </div>
+                    </div>
                   </div>
-                  <div className="text-xs text-gray-500">{integration.category}</div>
                 </div>
               </AnimatedSection>
             ))}
           </div>
 
-          <AnimatedSection direction="up" delay={0.8}>
-            <div className="text-center mt-12">
-              <div className="bg-gradient-to-r from-primary-purple/10 to-primary-orange/10 rounded-lg p-6 inline-block">
-                <PlusIcon className="h-8 w-8 text-primary-orange mx-auto mb-2" />
-                <div className="text-sm font-semibold text-gray-900">Open API Platform</div>
-                <div className="text-xs text-gray-600 mt-1">Build custom integrations</div>
+          {/* Open API Platform Card */}
+          <AnimatedSection direction="up" delay={0.5}>
+            <div className="relative overflow-hidden bg-gradient-to-r from-primary-purple to-purple-700 rounded-2xl p-8 md:p-12 text-center shadow-2xl">
+              {/* Background Pattern */}
+              <div className="absolute inset-0 opacity-10">
+                <div className="absolute inset-0" style={{
+                  backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)',
+                  backgroundSize: '32px 32px'
+                }}></div>
+              </div>
+              
+              <div className="relative z-10">
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-white/20 backdrop-blur-sm rounded-2xl mb-6">
+                  <PlusIcon className="h-8 w-8 text-white" />
+                </div>
+                <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
+                  Open API Platform
+                </h3>
+                <p className="text-white/90 text-lg max-w-2xl mx-auto mb-6">
+                  Build custom integrations with our comprehensive REST and GraphQL APIs. Full documentation and developer support included.
+                </p>
+                <div className="flex flex-wrap justify-center gap-4 text-sm text-white/80">
+                  <div className="flex items-center gap-2">
+                    <CheckCircleIcon className="w-5 h-5 text-primary-orange" />
+                    <span>REST & GraphQL APIs</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircleIcon className="w-5 h-5 text-primary-orange" />
+                    <span>Webhooks Support</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircleIcon className="w-5 h-5 text-primary-orange" />
+                    <span>Developer Portal</span>
+                  </div>
+                </div>
               </div>
             </div>
           </AnimatedSection>
 
-          <AnimatedSection direction="up" delay={1.0}>
-            <div className="text-center mt-8">
-              <Link href="/integrations" className="text-primary-purple font-semibold hover:text-primary-orange transition-colors">
-                View All Supported Integrations →
+          {/* View All Link */}
+          <AnimatedSection direction="up" delay={0.7}>
+            <div className="text-center mt-12">
+              <Link 
+                href="/integrations" 
+                className="inline-flex items-center gap-2 text-primary-purple font-semibold hover:text-primary-orange transition-colors text-lg group"
+              >
+                <span>View All Supported Integrations</span>
+                <ArrowRightIcon className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>
           </AnimatedSection>
@@ -1054,24 +1131,69 @@ export default function Products() {
       </div>
 
       {/* 7. Primary CTA */}
-      <div className="bg-gradient-primary section-padding">
-        <div className="container-custom">
+      <div className="relative bg-gradient-to-br from-primary-purple via-purple-800 to-primary-purple section-padding overflow-hidden">
+        {/* Background Pattern */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute inset-0" style={{
+            backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)',
+            backgroundSize: '40px 40px'
+          }}></div>
+        </div>
+
+        {/* Floating Gradient Orbs */}
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary-orange/20 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl"></div>
+
+        <div className="container-custom relative z-10">
           <AnimatedSection direction="up">
-            <div className="mx-auto max-w-2xl text-center">
-              <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl font-heading">
-                See How Our Platform Works for Your Properties
+            <div className="mx-auto max-w-4xl text-center">
+              {/* Badge */}
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full border border-white/20 mb-6">
+                <span className="text-white text-sm font-semibold">🚀 Ready to Transform Your Operations?</span>
+              </div>
+
+              {/* Heading */}
+              <h2 className="text-4xl font-bold tracking-tight text-white sm:text-5xl font-heading mb-6">
+                Get a Personalized Demo Tailored to Your Business Needs
               </h2>
-              <p className="mx-auto mt-6 max-w-xl text-lg leading-8 text-gray-200">
-                Get a personalized demo tailored to your specific hospitality business needs and see
-                the impact our platform can have on your operations.
+              
+              {/* Description */}
+              <p className="mx-auto max-w-2xl text-xl leading-8 text-white/90 mb-10">
+                See the impact our platform can have on your hospitality operations. Book a demo and discover how we solve your specific challenges.
               </p>
-              <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-                <Link href="/contact" className="bg-white text-primary-purple px-8 py-4 rounded-lg font-medium hover:bg-gray-100 transition-colors text-lg">
-                  Request Demo
+
+              {/* CTA Buttons */}
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
+                <Link 
+                  href="/contact" 
+                  className="group relative px-10 py-5 bg-white text-primary-purple rounded-full font-bold text-lg hover:bg-gray-50 transition-all duration-300 transform hover:scale-105 shadow-2xl flex items-center gap-3"
+                >
+                  <span>Request Demo</span>
+                  <ArrowRightIcon className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </Link>
-                <Link href="/contact" className="text-white font-semibold hover:text-gray-200 transition-colors">
-                  Talk to Our Experts →
+                <Link 
+                  href="/contact" 
+                  className="group px-10 py-5 bg-white/10 backdrop-blur-sm text-white rounded-full font-bold text-lg hover:bg-white/20 transition-all duration-300 border-2 border-white/30 flex items-center gap-3"
+                >
+                  <span>Talk to Our Experts</span>
+                  <ArrowRightIcon className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </Link>
+              </div>
+
+              {/* Trust Indicators */}
+              <div className="flex flex-wrap items-center justify-center gap-8 text-white/80 text-sm">
+                <div className="flex items-center gap-2">
+                  <CheckCircleIcon className="w-5 h-5 text-primary-orange" />
+                  <span>No Credit Card Required</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircleIcon className="w-5 h-5 text-primary-orange" />
+                  <span>30-Minute Demo</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircleIcon className="w-5 h-5 text-primary-orange" />
+                  <span>Custom Solutions</span>
+                </div>
               </div>
             </div>
           </AnimatedSection>

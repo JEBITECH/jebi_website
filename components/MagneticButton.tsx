@@ -13,7 +13,7 @@ interface MagneticButtonProps {
 export default function MagneticButton({ 
   children, 
   className = '', 
-  intensity = 0.3,
+  intensity = 0.1,
   onClick,
   href
 }: MagneticButtonProps) {
@@ -31,7 +31,7 @@ export default function MagneticButton({
       const moveX = x * intensity
       const moveY = y * intensity
       
-      button.style.transform = `translate(${moveX}px, ${moveY}px) scale(1.05)`
+      button.style.transform = `translate(${moveX}px, ${moveY}px) scale(1.02)`
     }
 
     const handleMouseLeave = () => {

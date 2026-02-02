@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import { useSearchParams } from "next/navigation";
 import Link from 'next/link'
 import ProductShowcase from '@/components/ProductShowcase'
@@ -554,7 +554,7 @@ export const stages: Stage[] = [
 ];
 
 
-export default function Products() {
+function ProductsContent() {
   const searchParams = useSearchParams();
   const productId = searchParams.get("product");
   const [selectedProduct, setSelectedProduct] = useState(products[0])
@@ -1200,5 +1200,20 @@ export default function Products() {
         </div>
       </div>
     </div>
+  )
+}
+
+export default function Products() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-primary-purple"></div>
+          <p className="mt-4 text-gray-600">Loading products...</p>
+        </div>
+      </div>
+    }>
+      <ProductsContent />
+    </Suspense>
   )
 }

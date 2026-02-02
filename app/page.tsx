@@ -110,7 +110,7 @@ export default function Home() {
   return (
     <div className="bg-white overflow-hidden">
       {/* 1. Hero Section - Guesty Style */}
-      <div className="relative isolate lg:px-8 min-h-screen flex items-center">
+      <div className="relative isolate lg:px-8 min-h-screen flex items-center pt-20 md:pt-24">
         <FloatingElements />
 
         <div className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80">

@@ -603,7 +603,7 @@ export default function Products() {
   };
 
   return (
-    <div className="bg-white overflow-hidden">
+    <div className="bg-white overflow-hidden pt-20 md:pt-24">
       <FloatingElements />
       
       {/* Product Showcase - Reusable Component */}

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { JebiTechLogo } from './CustomIcons'
 import MagneticButton from './MagneticButton'
@@ -20,6 +21,36 @@ const navigation = [
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [isVisible, setIsVisible] = useState(true)
+  const [lastScrollY, setLastScrollY] = useState(0)
+  const pathname = usePathname()
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY
+
+      // Don't hide header if at the very top
+      if (currentScrollY < 10) {
+        setIsVisible(true)
+        setLastScrollY(currentScrollY)
+        return
+      }
+
+      // Hide header when scrolling down
+      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        setIsVisible(false)
+      }
+      // Show header when scrolling up
+      else if (currentScrollY < lastScrollY) {
+        setIsVisible(true)
+      }
+
+      setLastScrollY(currentScrollY)
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [lastScrollY])
 
   // return (
   //   <header className="bg-white shadow-sm sticky top-0 z-50">
@@ -115,7 +146,9 @@ export default function Header() {
   return (
     <>
       <header
-        className="bg-white shadow-sm sticky top-0 left-0 right-0 z-50"
+        className={`bg-white shadow-sm fixed top-0 left-0 right-0 z-50 transition-transform duration-300 ease-in-out ${
+          isVisible ? 'translate-y-0' : '-translate-y-full'
+        }`}
       >
         <nav
           className="container-custom flex items-center justify-between p-6 lg:px-8"
@@ -158,15 +191,26 @@ export default function Header() {
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex lg:gap-x-12">
-            {navigation.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className="text-sm font-semibold leading-6 text-gray-900 hover:text-primary-orange transition-colors"
-              >
-                {item.name}
-              </Link>
-            ))}
+            {navigation.map((item) => {
+              // Handle both exact match and with trailing slash
+              const isActive = pathname === item.href || pathname === `${item.href}/`
+              return (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className={`text-sm font-semibold leading-6 transition-colors relative ${
+                    isActive 
+                      ? 'text-primary-orange' 
+                      : 'text-gray-900 hover:text-primary-orange'
+                  }`}
+                >
+                  {item.name}
+                  {isActive && (
+                    <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-primary-orange rounded-full"></span>
+                  )}
+                </Link>
+              )
+            })}
           </div>
 
           {/* CTA */}
@@ -200,16 +244,24 @@ export default function Header() {
               <div className="mt-6 flow-root">
                 <div className="-my-6 divide-y divide-gray-500/10">
                   <div className="space-y-2 py-6">
-                    {navigation.map((item) => (
-                      <Link
-                        key={item.name}
-                        href={item.href}
-                        className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                        onClick={() => setMobileMenuOpen(false)}
-                      >
-                        {item.name}
-                      </Link>
-                    ))}
+                    {navigation.map((item) => {
+                      // Handle both exact match and with trailing slash
+                      const isActive = pathname === item.href || pathname === `${item.href}/`
+                      return (
+                        <Link
+                          key={item.name}
+                          href={item.href}
+                          className={`-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 transition-colors ${
+                            isActive
+                              ? 'text-primary-orange bg-orange-50'
+                              : 'text-gray-900 hover:bg-gray-50'
+                          }`}
+                          onClick={() => setMobileMenuOpen(false)}
+                        >
+                          {item.name}
+                        </Link>
+                      )
+                    })}
                   </div>
                   <div className="py-6">
                     <Link

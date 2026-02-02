@@ -136,6 +136,16 @@ export default function Contact() {
   const [formStatus, setFormStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle')
   const [errors, setErrors] = useState<Record<string, string>>({})
 
+  const scrollToForm = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault()
+    const formElement = document.getElementById('contact-form')
+    if (formElement) {
+      formElement.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      // Update URL hash without triggering navigation
+      window.history.pushState(null, '', '#contact-form')
+    }
+  }
+
   const validateForm = () => {
     const newErrors: Record<string, string> = {}
     
@@ -216,10 +226,10 @@ export default function Contact() {
                   consultation, or have questions, we're here to help transform your operations.
                 </p>
                 <div className="mt-10 flex items-center gap-x-6">
-                  <Link href="#contact-form" className="btn-primary text-lg px-8 py-4 hover-glow">
+                  <Link href="#contact-form" onClick={scrollToForm} className="btn-primary text-lg px-8 py-4 hover-glow">
                     Request Demo
                   </Link>
-                  <Link href="#contact-form" className="btn-secondary text-lg px-8 py-4">
+                  <Link href="#contact-form" onClick={scrollToForm} className="btn-secondary text-lg px-8 py-4">
                     Talk to Experts
                   </Link>
                 </div>
@@ -600,10 +610,10 @@ export default function Contact() {
                 </p>
               </div>
               <div className="flex gap-4 mt-6 sm:mt-0">
-                <Link href="#contact-form" className="bg-white text-primary-purple px-6 py-3 rounded-lg font-medium hover:bg-gray-100 transition-colors">
+                <Link href="#contact-form" onClick={scrollToForm} className="bg-white text-primary-purple px-6 py-3 rounded-lg font-medium hover:bg-gray-100 transition-colors">
                   Request Demo
                 </Link>
-                <Link href="#contact-form" className="border border-white text-white px-6 py-3 rounded-lg font-medium hover:bg-white/10 transition-colors">
+                <Link href="#contact-form" onClick={scrollToForm} className="border border-white text-white px-6 py-3 rounded-lg font-medium hover:bg-white/10 transition-colors">
                   Talk to Experts
                 </Link>
               </div>

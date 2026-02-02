@@ -916,63 +916,118 @@ export default function Products() {
       </ParallaxSection>
 
       {/* 5. Architecture & Scalability */}
-      <div className="bg-secondary-gray section-padding">
-        <div className="container-custom">
+      <div className="relative bg-gradient-to-br from-gray-50 via-white to-gray-50 section-padding overflow-hidden">
+        {/* Background Elements */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute inset-0" style={{
+            backgroundImage: 'radial-gradient(circle at 2px 2px, #4A1A5C 1px, transparent 0)',
+            backgroundSize: '48px 48px'
+          }}></div>
+        </div>
+        <div className="absolute top-20 right-0 w-96 h-96 bg-primary-purple/5 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-20 left-0 w-96 h-96 bg-primary-orange/5 rounded-full blur-3xl"></div>
+
+        <div className="container-custom relative z-10">
           <AnimatedSection direction="up">
-            <div className="mx-auto max-w-2xl text-center mb-16">
-              <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl font-heading">
-                Built for Scale & Reliability
+            <div className="mx-auto max-w-3xl text-center mb-16">
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-primary-purple/10 to-primary-orange/10 rounded-full border border-primary-purple/20 mb-6">
+                <ShieldCheckIcon className="w-5 h-5 text-primary-purple" />
+                <span className="text-primary-purple text-sm font-semibold">Enterprise-Grade Infrastructure</span>
+              </div>
+              <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-5xl font-heading mb-6">
+                Built for <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-purple to-primary-orange">Scale & Reliability</span>
               </h2>
-              <p className="mt-6 text-lg leading-8 text-gray-600">
-                Modern architecture principles ensure your platform grows with your business
+              <p className="text-xl leading-8 text-gray-600">
+                Modern architecture principles and cutting-edge technology ensure your platform grows seamlessly with your business
               </p>
             </div>
           </AnimatedSection>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <AnimatedSection direction="left">
-              <div className="space-y-8">
-                <StaggeredList className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {architectureFeatures.map((feature) => (
-                    <div key={feature.name} className="bg-white rounded-lg p-4 card-hover">
-                      <div className="bg-gradient-primary text-white text-xs px-3 py-1 rounded-full inline-block mb-3">
-                        {feature.name}
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 mb-12 lg:items-stretch">
+            {/* Architecture Features - Takes 3 columns */}
+            <AnimatedSection direction="left" className="lg:col-span-3 flex">
+              <div className="flex flex-col w-full bg-white rounded-2xl p-8 shadow-lg border border-gray-100">
+                <div className="flex items-center gap-3 mb-8">
+                  <div className="w-12 h-12 bg-gradient-to-br from-primary-purple to-purple-700 rounded-xl flex items-center justify-center shadow-lg">
+                    <CubeTransparentIcon className="w-7 h-7 text-white" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-gray-900">Architecture Features</h3>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 flex-1">
+                  {architectureFeatures.map((feature, index) => (
+                    <div key={feature.name} className="group bg-gradient-to-br from-gray-50 to-white rounded-xl p-5 shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-primary-orange/50 hover:-translate-y-1">
+                      <div className="flex items-start gap-3">
+                        <div className="w-10 h-10 bg-gradient-to-br from-primary-orange to-orange-600 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300 shadow-md">
+                          <CheckCircleIcon className="w-6 h-6 text-white" />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <div className="text-base font-bold text-gray-900 mb-2 group-hover:text-primary-purple transition-colors">{feature.name}</div>
+                          <p className="text-gray-600 text-sm leading-relaxed">{feature.description}</p>
+                        </div>
                       </div>
-                      <p className="text-gray-600 text-sm">{feature.description}</p>
                     </div>
                   ))}
-                </StaggeredList>
+                </div>
               </div>
             </AnimatedSection>
 
-            <AnimatedSection direction="right" delay={0.3}>
-              <div className="bg-white rounded-2xl p-8 shadow-lg">
-                <h3 className="text-xl font-bold text-gray-900 mb-6">Technical Architecture</h3>
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                    <span className="text-gray-700">Frontend</span>
-                    <span className="text-primary-orange font-medium">React/Next.js</span>
+            {/* Technical Stack - Takes 2 columns */}
+            <AnimatedSection direction="right" delay={0.2} className="lg:col-span-2 flex">
+              <div className="flex flex-col w-full bg-gradient-to-br from-primary-purple via-purple-700 to-purple-800 rounded-2xl p-8 shadow-2xl relative overflow-hidden">
+                {/* Decorative Elements */}
+                <div className="absolute top-0 right-0 w-40 h-40 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+                <div className="absolute bottom-0 left-0 w-32 h-32 bg-primary-orange/10 rounded-full translate-y-1/2 -translate-x-1/2"></div>
+                
+                <div className="relative z-10 flex flex-col h-full">
+                  <div className="flex items-center gap-3 mb-8">
+                    <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center shadow-lg">
+                      <CpuChipIcon className="w-7 h-7 text-white" />
+                    </div>
+                    <h3 className="text-2xl font-bold text-white">Tech Stack</h3>
                   </div>
-                  <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                    <span className="text-gray-700">Backend</span>
-                    <span className="text-primary-orange font-medium">Node.js/Python</span>
-                  </div>
-                  <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                    <span className="text-gray-700">Database</span>
-                    <span className="text-primary-orange font-medium">PostgreSQL/Redis</span>
-                  </div>
-                  <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                    <span className="text-gray-700">Infrastructure</span>
-                    <span className="text-primary-orange font-medium">AWS/Docker/K8s</span>
-                  </div>
-                  <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                    <span className="text-gray-700">Monitoring</span>
-                    <span className="text-primary-orange font-medium">DataDog/Sentry</span>
+                  <div className="space-y-3 flex-1 flex flex-col justify-center">
+                    {[
+                      { label: 'Frontend', value: 'React/Next.js', icon: '⚛️' },
+                      { label: 'Backend', value: 'Node.js/Python', icon: '🚀' },
+                      { label: 'Database', value: 'PostgreSQL/Redis', icon: '💾' },
+                      { label: 'Infrastructure', value: 'AWS/Docker/K8s', icon: '☁️' },
+                      { label: 'Monitoring', value: 'DataDog/Sentry', icon: '📊' }
+                    ].map((tech, index) => (
+                      <div key={tech.label} className="group flex items-center justify-between p-4 bg-white/10 backdrop-blur-sm rounded-xl border border-white/20 hover:bg-white/15 hover:border-white/30 transition-all duration-300">
+                        <div className="flex items-center gap-3">
+                          <span className="text-2xl group-hover:scale-110 transition-transform duration-300">{tech.icon}</span>
+                          <span className="text-white font-medium">{tech.label}</span>
+                        </div>
+                        <span className="text-primary-orange font-bold text-sm">{tech.value}</span>
+                      </div>
+                    ))}
                   </div>
                 </div>
               </div>
             </AnimatedSection>
           </div>
+
+          {/* Performance Metrics */}
+          <AnimatedSection direction="up" delay={0.4}>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+              {[
+                { metric: '99.9%', label: 'Uptime SLA', icon: ShieldCheckIcon },
+                { metric: '<100ms', label: 'API Response', icon: ArrowPathIcon },
+                { metric: '10M+', label: 'Requests/Day', icon: ChartBarIcon },
+                { metric: '24/7', label: 'Support', icon: CogIcon }
+              ].map((stat, index) => (
+                <div key={stat.label} className="bg-white rounded-xl p-6 shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-primary-purple/30 text-center group">
+                  <div className="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-br from-primary-purple to-purple-700 rounded-xl mb-4 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                    <stat.icon className="w-6 h-6 text-white" />
+                  </div>
+                  <div className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary-purple to-primary-orange mb-2">
+                    {stat.metric}
+                  </div>
+                  <div className="text-sm text-gray-600 font-medium">{stat.label}</div>
+                </div>
+              ))}
+            </div>
+          </AnimatedSection>
         </div>
       </div>
 

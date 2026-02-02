@@ -315,16 +315,42 @@ export default function About() {
 
             {/* Values */}
             <AnimatedSection direction="up">
-              <div>
-                <h3 className="text-2xl font-bold text-center mb-12 text-gray-900">Our Values</h3>
-                <StaggeredList className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                  {values.map((value) => (
-                    <div key={value.title} className="text-center card-hover glass-morphism p-6 rounded-xl">
-                      <div className="mx-auto w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center mb-6 floating">
-                        <value.icon className="h-8 w-8 text-white" />
+              <div className="relative">
+                {/* Section Header */}
+                <div className="text-center mb-16">
+                  <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-primary-purple/10 to-primary-orange/10 rounded-full border border-primary-purple/20 mb-4">
+                    <StarIcon className="w-5 h-5 text-primary-purple" />
+                    <span className="text-primary-purple text-sm font-semibold">What Drives Us</span>
+                  </div>
+                  <h3 className="text-3xl font-bold text-gray-900 mb-4">Our Core Values</h3>
+                  <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+                    The principles that guide every decision we make and every solution we build
+                  </p>
+                </div>
+
+                {/* Values Grid */}
+                <StaggeredList className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                  {values.map((value, index) => (
+                    <div 
+                      key={value.title} 
+                      className="flex flex-col bg-white rounded-2xl p-8 shadow-md border border-gray-100 h-full"
+                    >
+                      {/* Icon */}
+                      <div className="mb-6">
+                        <div className="w-16 h-16 bg-gradient-to-br from-primary-purple to-purple-700 rounded-2xl flex items-center justify-center shadow-lg">
+                          <value.icon className="h-8 w-8 text-white" />
+                        </div>
                       </div>
-                      <h4 className="text-lg font-bold text-gray-900 mb-3">{value.title}</h4>
-                      <p className="text-gray-600 text-sm">{value.description}</p>
+                      
+                      {/* Title */}
+                      <h4 className="text-xl font-bold text-gray-900 mb-4">
+                        {value.title}
+                      </h4>
+                      
+                      {/* Description */}
+                      <p className="text-gray-600 text-sm leading-relaxed flex-1">
+                        {value.description}
+                      </p>
                     </div>
                   ))}
                 </StaggeredList>
@@ -336,40 +362,34 @@ export default function About() {
 
       {/* 4. Leadership Team */}
       <ParallaxSection speed={0.2}>
-        <div className="bg-secondary-gray section-padding">
-          <div className="container-custom">
+        <div className="relative bg-gradient-to-br from-gray-50 via-white to-gray-50 section-padding overflow-hidden">
+          {/* Background Elements */}
+          <div className="absolute inset-0 opacity-5">
+            <div className="absolute inset-0" style={{
+              backgroundImage: 'radial-gradient(circle at 2px 2px, #4A1A5C 1px, transparent 0)',
+              backgroundSize: '48px 48px'
+            }}></div>
+          </div>
+          <div className="absolute top-20 left-0 w-96 h-96 bg-primary-purple/5 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-20 right-0 w-96 h-96 bg-primary-orange/5 rounded-full blur-3xl"></div>
+
+          <div className="container-custom relative z-10">
             <AnimatedSection direction="up">
-              <div className="mx-auto max-w-2xl text-center mb-16">
-                <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl font-heading">
-                  Leadership Team
+              <div className="mx-auto max-w-3xl text-center mb-16">
+                <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-primary-purple/10 to-primary-orange/10 rounded-full border border-primary-purple/20 mb-4">
+                  <UsersIcon className="w-5 h-5 text-primary-purple" />
+                  <span className="text-primary-purple text-sm font-semibold">Meet Our Leaders</span>
+                </div>
+                <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-5xl font-heading mb-6">
+                  Leadership <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-purple to-primary-orange">Team</span>
                 </h2>
-                <p className="mt-6 text-lg leading-8 text-gray-600">
-                  Experienced leaders with deep hospitality and technology expertise
+                <p className="text-xl leading-8 text-gray-600">
+                  Experienced leaders with deep hospitality and technology expertise driving innovation and excellence
                 </p>
               </div>
             </AnimatedSection>
 
-            {/* <StaggeredList className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {leadership.map((leader) => (
-                <div key={leader.name} className="bg-white rounded-xl shadow-sm p-6 card-hover hover-glow">
-                  <div className="w-24 h-24 bg-gradient-primary rounded-full mx-auto mb-4 flex items-center justify-center">
-                    <span className="text-white font-bold text-xl">
-                      {leader.name.split(' ').map(n => n[0]).join('')}
-                    </span>
-                  </div>
-                  <h3 className="text-lg font-bold text-gray-900 text-center mb-2">{leader.name}</h3>
-                  <p className="text-primary-orange text-sm text-center mb-4 font-medium">{leader.role}</p>
-                  <p className="text-gray-600 text-sm text-center mb-4">{leader.bio}</p>
-                  <div className="text-center">
-                    <Link href={leader.linkedin} className="text-primary-purple hover:text-primary-orange transition-colors">
-                      <span className="sr-only">LinkedIn</span>
-                      LinkedIn →
-                    </Link>
-                  </div>
-                </div>
-              ))}
-            </StaggeredList> */}
-            <StaggeredList className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <StaggeredList className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
               {leadership.map((leader) => {
                 const initials = leader.name
                   .split(" ")
@@ -379,47 +399,66 @@ export default function About() {
                 return (
                   <div
                     key={leader.name}
-                    className="bg-white rounded-xl shadow-sm p-6 card-hover hover-glow"
+                    className="flex flex-col bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden h-full"
                   >
-                    {/* 🔹 PROFILE IMAGE */}
-                    <div className="w-24 h-24 rounded-full mx-auto mb-4 overflow-hidden bg-gradient-primary flex items-center justify-center">
-                      {leader.image ? (
-                        <Image
-                          src={leader.image}
-                          alt={leader.name}
-                          width={96}
-                          height={96}
-                          className="object-cover w-full h-full"
-                        />
-                      ) : (
-                        <span className="text-white font-bold text-xl">
-                          {initials}
-                        </span>
-                      )}
+                    {/* Profile Image Section */}
+                    <div className="relative bg-gradient-to-br from-primary-purple to-purple-700 p-8 pb-16">
+                      <div className="absolute inset-0 opacity-10">
+                        <div className="absolute inset-0" style={{
+                          backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)',
+                          backgroundSize: '24px 24px'
+                        }}></div>
+                      </div>
+                      <div className="relative w-32 h-32 rounded-2xl mx-auto overflow-hidden bg-white shadow-2xl ring-4 ring-white/20">
+                        {leader.image ? (
+                          <Image
+                            src={leader.image}
+                            alt={leader.name}
+                            width={128}
+                            height={128}
+                            className="object-cover w-full h-full"
+                          />
+                        ) : (
+                          <div className="w-full h-full bg-gradient-to-br from-primary-orange to-orange-600 flex items-center justify-center">
+                            <span className="text-white font-bold text-3xl">
+                              {initials}
+                            </span>
+                          </div>
+                        )}
+                      </div>
                     </div>
 
-                    <h3 className="text-lg font-bold text-gray-900 text-center mb-2">
-                      {leader.name}
-                    </h3>
+                    {/* Content Section */}
+                    <div className="flex flex-col flex-1 p-6 -mt-8 relative z-10">
+                      {/* Name & Role Card */}
+                      <div className="bg-white rounded-xl shadow-md p-4 mb-4 border border-gray-100">
+                        <h3 className="text-xl font-bold text-gray-900 text-center mb-1">
+                          {leader.name}
+                        </h3>
+                        <p className="text-primary-orange text-sm text-center font-semibold">
+                          {leader.role}
+                        </p>
+                      </div>
 
-                    <p className="text-primary-orange text-sm text-center mb-4 font-medium">
-                      {leader.role}
-                    </p>
+                      {/* Bio */}
+                      <p className="text-gray-600 text-sm leading-relaxed mb-6 flex-1">
+                        {leader.bio}
+                      </p>
 
-                    <p className="text-gray-600 text-sm text-center mb-4">
-                      {leader.bio}
-                    </p>
-
-                    <div className="text-center">
-                      <Link
-                        href={leader.linkedin}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-primary-purple hover:text-primary-orange transition-colors"
-                      >
-                        <span className="sr-only">LinkedIn</span>
-                        LinkedIn →
-                      </Link>
+                      {/* LinkedIn Link */}
+                      <div className="pt-4 border-t border-gray-100">
+                        <Link
+                          href={leader.linkedin}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center justify-center gap-2 text-primary-purple font-semibold text-sm"
+                        >
+                          <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M16.338 16.338H13.67V12.16c0-.995-.017-2.277-1.387-2.277-1.39 0-1.601 1.086-1.601 2.207v4.248H8.014v-8.59h2.559v1.174h.037c.356-.675 1.227-1.387 2.526-1.387 2.703 0 3.203 1.778 3.203 4.092v4.711zM5.005 6.575a1.548 1.548 0 11-.003-3.096 1.548 1.548 0 01.003 3.096zm-1.337 9.763H6.34v-8.59H3.667v8.59zM17.668 1H2.328C1.595 1 1 1.581 1 2.298v15.403C1 18.418 1.595 19 2.328 19h15.34c.734 0 1.332-.582 1.332-1.299V2.298C19 1.581 18.402 1 17.668 1z" clipRule="evenodd" />
+                          </svg>
+                          <span>Connect on LinkedIn</span>
+                        </Link>
+                      </div>
                     </div>
                   </div>
                 );
@@ -428,7 +467,6 @@ export default function About() {
           </div>
         </div>
       </ParallaxSection>
-
       {/* 5. Advisory Board */}
       {/* <div className="bg-white section-padding">
         <div className="container-custom">

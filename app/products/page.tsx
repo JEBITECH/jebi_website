@@ -425,15 +425,28 @@ const architectureFeatures = [
   { name: 'Real-time', description: 'Live updates and notifications' }
 ]
 
+import Guesty from '../assets/Guesty.png';
+import Hostaway from '../assets/hostaway.jpeg';
+import BookingCom from '../assets/booking-com.jpeg';
+import Expedia from '../assets/expedia.jpeg';
+import Airbnb from '../assets/airbnb.svg';
+import Stripe from '../assets/stripe.svg';
+import PayPal from '../assets/paypal.jpg';
+import Salesforce from '../assets/salesforce.png';
+import Slack from '../assets/slack.png';
+import Zapier from '../assets/zapier.png';
+
 const integrations = [
-  { name: 'Opera PMS', category: 'PMS', logo: '/integrations/opera.png' },
-  { name: 'Booking.com', category: 'Channel Manager', logo: '/integrations/booking.png' },
-  { name: 'Expedia', category: 'Channel Manager', logo: '/integrations/expedia.png' },
-  { name: 'Stripe', category: 'Payments', logo: '/integrations/stripe.png' },
-  { name: 'PayPal', category: 'Payments', logo: '/integrations/paypal.png' },
-  { name: 'Salesforce', category: 'CRM', logo: '/integrations/salesforce.png' },
-  { name: 'Slack', category: 'Communication', logo: '/integrations/slack.png' },
-  { name: 'Zapier', category: 'Automation', logo: '/integrations/zapier.png' }
+  { name: 'Guesty', category: 'PMS', logo: Guesty },
+  { name: 'Hostaway', category: 'PMS', logo: Hostaway },
+  { name: 'Booking.com', category: 'Channel Manager', logo: BookingCom },
+  { name: 'Expedia', category: 'Channel Manager', logo: Expedia },
+  { name: 'Airbnb', category: 'Channel Manager', logo: Airbnb },
+  { name: 'Stripe', category: 'Payments', logo: Stripe },
+  { name: 'PayPal', category: 'Payments', logo: PayPal },
+  { name: 'Salesforce', category: 'CRM', logo: Salesforce },
+  { name: 'Slack', category: 'Communication', logo: Slack },
+  { name: 'Zapier', category: 'Automation', logo: Zapier }
 ]
 import {
   Calendar,
@@ -964,10 +977,10 @@ export default function Products() {
       </div>
 
       {/* 6. Integrations */}
-      <div className="bg-white section-padding">
+      <div className="bg-gradient-to-br from-gray-50 to-white section-padding">
         <div className="container-custom">
           <AnimatedSection direction="up">
-            <div className="mx-auto max-w-2xl text-center mb-16">
+            <div className="mx-auto max-w-3xl text-center mb-16">
               <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl font-heading">
                 Seamless Integrations
               </h2>
@@ -977,33 +990,85 @@ export default function Products() {
             </div>
           </AnimatedSection>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-8 items-center">
+          {/* Integration Categories Grid */}
+          <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6 mb-12">
             {integrations.map((integration, index) => (
-              <AnimatedSection key={integration.name} direction="up" delay={index * 0.1}>
-                <div className="text-center card-hover">
-                  <div className="w-16 h-16 bg-gray-100 rounded-lg flex items-center justify-center mx-auto mb-3">
-                    <span className="text-xs font-medium text-gray-600">{integration.name}</span>
+              <AnimatedSection key={integration.name} direction="up" delay={index * 0.05}>
+                <div className="group bg-white rounded-lg p-4 shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 hover:border-primary-orange/30 h-full">
+                  <div className="flex flex-col items-center justify-center text-center space-y-2 h-full">
+                    {/* Logo Container */}
+                    <div className="w-14 h-14 flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
+                      <Image 
+                        src={integration.logo} 
+                        alt={integration.name}
+                        width={56}
+                        height={56}
+                        className="max-w-full max-h-full object-contain"
+                      />
+                    </div>
+                    {/* Integration Name */}
+                    <div className="w-full">
+                      <div className="text-xs font-semibold text-gray-900 group-hover:text-primary-purple transition-colors line-clamp-1">
+                        {integration.name}
+                      </div>
+                      <div className="text-[10px] text-gray-500 mt-1">
+                        {integration.category}
+                      </div>
+                    </div>
                   </div>
-                  <div className="text-xs text-gray-500">{integration.category}</div>
                 </div>
               </AnimatedSection>
             ))}
           </div>
 
-          <AnimatedSection direction="up" delay={0.8}>
-            <div className="text-center mt-12">
-              <div className="bg-gradient-to-r from-primary-purple/10 to-primary-orange/10 rounded-lg p-6 inline-block">
-                <PlusIcon className="h-8 w-8 text-primary-orange mx-auto mb-2" />
-                <div className="text-sm font-semibold text-gray-900">Open API Platform</div>
-                <div className="text-xs text-gray-600 mt-1">Build custom integrations</div>
+          {/* Open API Platform Card */}
+          <AnimatedSection direction="up" delay={0.5}>
+            <div className="relative overflow-hidden bg-gradient-to-r from-primary-purple to-purple-700 rounded-2xl p-8 md:p-12 text-center shadow-2xl">
+              {/* Background Pattern */}
+              <div className="absolute inset-0 opacity-10">
+                <div className="absolute inset-0" style={{
+                  backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)',
+                  backgroundSize: '32px 32px'
+                }}></div>
+              </div>
+              
+              <div className="relative z-10">
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-white/20 backdrop-blur-sm rounded-2xl mb-6">
+                  <PlusIcon className="h-8 w-8 text-white" />
+                </div>
+                <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
+                  Open API Platform
+                </h3>
+                <p className="text-white/90 text-lg max-w-2xl mx-auto mb-6">
+                  Build custom integrations with our comprehensive REST and GraphQL APIs. Full documentation and developer support included.
+                </p>
+                <div className="flex flex-wrap justify-center gap-4 text-sm text-white/80">
+                  <div className="flex items-center gap-2">
+                    <CheckCircleIcon className="w-5 h-5 text-primary-orange" />
+                    <span>REST & GraphQL APIs</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircleIcon className="w-5 h-5 text-primary-orange" />
+                    <span>Webhooks Support</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircleIcon className="w-5 h-5 text-primary-orange" />
+                    <span>Developer Portal</span>
+                  </div>
+                </div>
               </div>
             </div>
           </AnimatedSection>
 
-          <AnimatedSection direction="up" delay={1.0}>
-            <div className="text-center mt-8">
-              <Link href="/integrations" className="text-primary-purple font-semibold hover:text-primary-orange transition-colors">
-                View All Supported Integrations →
+          {/* View All Link */}
+          <AnimatedSection direction="up" delay={0.7}>
+            <div className="text-center mt-12">
+              <Link 
+                href="/integrations" 
+                className="inline-flex items-center gap-2 text-primary-purple font-semibold hover:text-primary-orange transition-colors text-lg group"
+              >
+                <span>View All Supported Integrations</span>
+                <ArrowRightIcon className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>
           </AnimatedSection>
@@ -1011,24 +1076,69 @@ export default function Products() {
       </div>
 
       {/* 7. Primary CTA */}
-      <div className="bg-gradient-primary section-padding">
-        <div className="container-custom">
+      <div className="relative bg-gradient-to-br from-primary-purple via-purple-800 to-primary-purple section-padding overflow-hidden">
+        {/* Background Pattern */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute inset-0" style={{
+            backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)',
+            backgroundSize: '40px 40px'
+          }}></div>
+        </div>
+
+        {/* Floating Gradient Orbs */}
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary-orange/20 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl"></div>
+
+        <div className="container-custom relative z-10">
           <AnimatedSection direction="up">
-            <div className="mx-auto max-w-2xl text-center">
-              <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl font-heading">
-                See How Our Platform Works for Your Properties
+            <div className="mx-auto max-w-4xl text-center">
+              {/* Badge */}
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full border border-white/20 mb-6">
+                <span className="text-white text-sm font-semibold">🚀 Ready to Transform Your Operations?</span>
+              </div>
+
+              {/* Heading */}
+              <h2 className="text-4xl font-bold tracking-tight text-white sm:text-5xl font-heading mb-6">
+                Get a Personalized Demo Tailored to Your Business Needs
               </h2>
-              <p className="mx-auto mt-6 max-w-xl text-lg leading-8 text-gray-200">
-                Get a personalized demo tailored to your specific hospitality business needs and see
-                the impact our platform can have on your operations.
+              
+              {/* Description */}
+              <p className="mx-auto max-w-2xl text-xl leading-8 text-white/90 mb-10">
+                See the impact our platform can have on your hospitality operations. Book a demo and discover how we solve your specific challenges.
               </p>
-              <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-                <Link href="/contact" className="bg-white text-primary-purple px-8 py-4 rounded-lg font-medium hover:bg-gray-100 transition-colors text-lg">
-                  Request Demo
+
+              {/* CTA Buttons */}
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
+                <Link 
+                  href="/contact" 
+                  className="group relative px-10 py-5 bg-white text-primary-purple rounded-full font-bold text-lg hover:bg-gray-50 transition-all duration-300 transform hover:scale-105 shadow-2xl flex items-center gap-3"
+                >
+                  <span>Request Demo</span>
+                  <ArrowRightIcon className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </Link>
-                <Link href="/contact" className="text-white font-semibold hover:text-gray-200 transition-colors">
-                  Talk to Our Experts →
+                <Link 
+                  href="/contact" 
+                  className="group px-10 py-5 bg-white/10 backdrop-blur-sm text-white rounded-full font-bold text-lg hover:bg-white/20 transition-all duration-300 border-2 border-white/30 flex items-center gap-3"
+                >
+                  <span>Talk to Our Experts</span>
+                  <ArrowRightIcon className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </Link>
+              </div>
+
+              {/* Trust Indicators */}
+              <div className="flex flex-wrap items-center justify-center gap-8 text-white/80 text-sm">
+                <div className="flex items-center gap-2">
+                  <CheckCircleIcon className="w-5 h-5 text-primary-orange" />
+                  <span>No Credit Card Required</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircleIcon className="w-5 h-5 text-primary-orange" />
+                  <span>30-Minute Demo</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircleIcon className="w-5 h-5 text-primary-orange" />
+                  <span>Custom Solutions</span>
+                </div>
               </div>
             </div>
           </AnimatedSection>

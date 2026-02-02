@@ -13,6 +13,15 @@ interface ProductShowcaseProps {
   className?: string;
 }
 
+// Mapping stages to product IDs
+const stageToProductMap: { [key: number]: string } = {
+  1: 'booking-engine',
+  2: 'guest-handbook',
+  3: 'virtue-inspect',
+  4: 'accounting',
+  5: 'virtue-connect-erp'
+};
+
 export default function ProductShowcase({ showHeader = true, autoRotate = true, rotationInterval = 8000, className = "" }: ProductShowcaseProps) {
   const router = useRouter();
   const [activeIndex, setActiveIndex] = useState(0);
@@ -108,7 +117,8 @@ export default function ProductShowcase({ showHeader = true, autoRotate = true, 
                 <div className="mt-8">
                   <button
                     onClick={() => {
-                      router.push(`/products?product=${activeStage.scrollToId}`);
+                      const productId = stageToProductMap[activeStage.id];
+                      router.push(`/products?product=${productId}`);
                     }}
                     className="w-full group relative px-8 py-4 bg-gradient-to-r from-primary-purple to-purple-700 hover:from-primary-purple hover:to-purple-800 text-white text-lg font-bold rounded-full transition-all duration-300 transform hover:scale-105 shadow-xl flex items-center justify-center gap-3"
                   >

@@ -20,30 +20,6 @@ const navigation = [
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const [showHeader, setShowHeader] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
-  const [hovering, setHovering] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-
-      // Hide header when scrolling down
-      if (currentScrollY > lastScrollY && currentScrollY > 80) {
-        setShowHeader(false);
-      }
-
-      // Show header when scrolling up
-      if (currentScrollY < lastScrollY) {
-        setShowHeader(true);
-      }
-
-      setLastScrollY(currentScrollY);
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [lastScrollY]);
 
   // return (
   //   <header className="bg-white shadow-sm sticky top-0 z-50">
@@ -138,24 +114,8 @@ export default function Header() {
   // )
   return (
     <>
-      {/* Hover Trigger Area (Top 12px) */}
-      <div
-        className="fixed top-0 left-0 right-0 h-3 z-50"
-        onMouseEnter={() => setShowHeader(true)}
-      />
-
       <header
-        onMouseEnter={() => setHovering(true)}
-        onMouseLeave={() => {
-          setHovering(false);
-          setShowHeader(false);
-        }}
-        className={`
-          bg-white shadow-sm
-          fixed top-0 left-0 right-0 z-50
-          transition-transform duration-300 ease-in-out
-          ${showHeader || hovering ? "translate-y-0" : "-translate-y-full"}
-        `}
+        className="bg-white shadow-sm sticky top-0 left-0 right-0 z-50"
       >
         <nav
           className="container-custom flex items-center justify-between p-6 lg:px-8"

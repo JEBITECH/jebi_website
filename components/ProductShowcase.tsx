@@ -139,45 +139,154 @@ export default function ProductShowcase({ showHeader = true, autoRotate = true, 
               </div>
 
               {/* RIGHT SIDE - Product Image */}
-              <div className="relative overflow-hidden min-h-[300px] sm:min-h-[400px] md:min-h-[500px] lg:min-h-[600px] flex items-center justify-center bg-gray-50">
-                <Image 
-                  src={activeStage.image} 
-                  alt={activeStage.title} 
-                  fill
-                  priority 
-                  className="object-fill"
-                />
+              <div className="relative overflow-hidden min-h-[250px] sm:min-h-[350px] md:min-h-[450px] lg:min-h-[600px] flex items-center justify-center bg-gradient-to-br from-purple-50 to-blue-50">
+                <div className="absolute inset-0 bg-gradient-to-br from-purple-100/20 to-blue-100/20"></div>
+                <div className="relative w-full h-full">
+                  <Image 
+                    src={activeStage.image} 
+                    alt={activeStage.title} 
+                    fill
+                    priority 
+                    className="object-cover md:object-fill"
+                  />
+                </div>
               </div>
             </div>
           </div>
 
           {/* BOTTOM NAVIGATION STEPS */}
-          <div className="flex flex-wrap justify-center gap-2 sm:gap-3 mt-6 sm:mt-8 md:mt-12">
-            {stages.map((stage, index) => {
-              const Icon = stage.icon;
-              const active = index === activeIndex;
+          <div className="mt-6 sm:mt-8 md:mt-12">
+            {/* Mobile View - Slideshow Grid with Dots */}
+            <div className="block sm:hidden">
+              {/* Stage Grid - All stages visible */}
+              <div className="mb-4">
+                {/* First Row - 3 items */}
+                <div className="grid grid-cols-3 gap-3 mb-3">
+                  {stages.slice(0, 3).map((stage, index) => {
+                    const Icon = stage.icon;
+                    const active = index === activeIndex;
+                    return (
+                      <button
+                        key={stage.id}
+                        onClick={() => setActiveIndex(index)}
+                        className={`relative p-3 rounded-xl flex flex-col items-center transition-all duration-300 shadow-md ${
+                          active 
+                            ? 'bg-gradient-to-br from-primary-purple to-purple-700 text-white scale-105 shadow-xl' 
+                            : 'bg-white text-gray-700 border border-gray-200'
+                        }`}
+                      >
+                        {active && (
+                          <div className="absolute -top-2 -right-2 w-6 h-6 bg-primary-orange rounded-full flex items-center justify-center shadow-lg">
+                            <span className="text-white text-xs font-bold">{stage.id}</span>
+                          </div>
+                        )}
+                        <div className={`w-10 h-10 rounded-lg flex items-center justify-center mb-2 ${
+                          active ? 'bg-white/20' : 'bg-gray-100'
+                        }`}>
+                          <Icon size={18} className={active ? 'text-white' : 'text-gray-600'} />
+                        </div>
+                        <div className={`text-xs font-semibold text-center leading-tight ${
+                          active ? 'text-white' : 'text-gray-900'
+                        }`}>
+                          {stage.title}
+                        </div>
+                        <div className={`text-[10px] mt-1 ${
+                          active ? 'text-white/70' : 'text-gray-500'
+                        }`}>
+                          Stage {stage.id}
+                        </div>
+                      </button>
+                    );
+                  })}
+                </div>
+                
+                {/* Second Row - 2 items centered */}
+                <div className="flex justify-center gap-3">
+                  {stages.slice(3, 5).map((stage, index) => {
+                    const Icon = stage.icon;
+                    const actualIndex = index + 3;
+                    const active = actualIndex === activeIndex;
+                    return (
+                      <button
+                        key={stage.id}
+                        onClick={() => setActiveIndex(actualIndex)}
+                        className={`relative p-3 rounded-xl flex flex-col items-center transition-all duration-300 shadow-md w-[calc(33.333%-0.5rem)] ${
+                          active 
+                            ? 'bg-gradient-to-br from-primary-purple to-purple-700 text-white scale-105 shadow-xl' 
+                            : 'bg-white text-gray-700 border border-gray-200'
+                        }`}
+                      >
+                        {active && (
+                          <div className="absolute -top-2 -right-2 w-6 h-6 bg-primary-orange rounded-full flex items-center justify-center shadow-lg">
+                            <span className="text-white text-xs font-bold">{stage.id}</span>
+                          </div>
+                        )}
+                        <div className={`w-10 h-10 rounded-lg flex items-center justify-center mb-2 ${
+                          active ? 'bg-white/20' : 'bg-gray-100'
+                        }`}>
+                          <Icon size={18} className={active ? 'text-white' : 'text-gray-600'} />
+                        </div>
+                        <div className={`text-xs font-semibold text-center leading-tight ${
+                          active ? 'text-white' : 'text-gray-900'
+                        }`}>
+                          {stage.title}
+                        </div>
+                        <div className={`text-[10px] mt-1 ${
+                          active ? 'text-white/70' : 'text-gray-500'
+                        }`}>
+                          Stage {stage.id}
+                        </div>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
 
-              return (
-                <button
-                  onClick={() => setActiveIndex(index)}
-                  key={stage.id}
-                  className={`group relative px-3 sm:px-4 md:px-5 py-2 sm:py-3 rounded-xl sm:rounded-2xl flex flex-col items-center justify-center shadow-md transition-all duration-300 transform hover:scale-105 min-w-[90px] sm:min-w-[110px] md:min-w-[120px] ${
-                    active ? "bg-gradient-to-br from-primary-purple to-purple-700 text-white scale-105 shadow-xl" : "bg-white text-gray-700 hover:shadow-lg border border-gray-200"
-                  }`}
-                >
-                  {active && (
-                    <div className="absolute -top-1.5 sm:-top-2 -right-1.5 sm:-right-2 w-5 h-5 sm:w-6 sm:h-6 bg-primary-orange rounded-full flex items-center justify-center shadow-lg">
-                      <span className="text-white text-[10px] sm:text-xs font-bold">{stage.id}</span>
+              {/* Navigation Dots */}
+              <div className="flex justify-center gap-2">
+                {stages.map((stage, index) => (
+                  <button
+                    key={stage.id}
+                    onClick={() => setActiveIndex(index)}
+                    className={`transition-all duration-300 rounded-full ${
+                      index === activeIndex 
+                        ? 'w-8 h-2 bg-primary-purple' 
+                        : 'w-2 h-2 bg-gray-300 hover:bg-gray-400'
+                    }`}
+                    aria-label={`Go to ${stage.title}`}
+                  />
+                ))}
+              </div>
+            </div>
+
+            {/* Tablet & Desktop View - Wrapped Grid */}
+            <div className="hidden sm:flex flex-wrap justify-center gap-3">
+              {stages.map((stage, index) => {
+                const Icon = stage.icon;
+                const active = index === activeIndex;
+
+                return (
+                  <button
+                    onClick={() => setActiveIndex(index)}
+                    key={stage.id}
+                    className={`group relative px-4 md:px-5 py-3 rounded-xl md:rounded-2xl flex flex-col items-center justify-center shadow-md transition-all duration-300 transform hover:scale-105 min-w-[110px] md:min-w-[120px] ${
+                      active ? "bg-gradient-to-br from-primary-purple to-purple-700 text-white scale-105 shadow-xl" : "bg-white text-gray-700 hover:shadow-lg border border-gray-200"
+                    }`}
+                  >
+                    {active && (
+                      <div className="absolute -top-2 -right-2 w-6 h-6 bg-primary-orange rounded-full flex items-center justify-center shadow-lg">
+                        <span className="text-white text-xs font-bold">{stage.id}</span>
+                      </div>
+                    )}
+                    <div className={`w-9 h-9 md:w-10 md:h-10 rounded-lg md:rounded-xl flex items-center justify-center mb-2 ${active ? "bg-white/20" : "bg-gray-100 group-hover:bg-primary-orange/10"}`}>
+                      <Icon size={20} className={`${active ? "text-white" : "text-gray-600 group-hover:text-primary-orange"}`} />
                     </div>
-                  )}
-                  <div className={`w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 rounded-lg sm:rounded-xl flex items-center justify-center mb-1 sm:mb-2 ${active ? "bg-white/20" : "bg-gray-100 group-hover:bg-primary-orange/10"}`}>
-                    <Icon size={16} className={`sm:w-5 sm:h-5 ${active ? "text-white" : "text-gray-600 group-hover:text-primary-orange"}`} />
-                  </div>
-                  <div className={`text-[10px] sm:text-xs font-bold ${active ? "text-white" : "text-gray-900"}`}>{stage.title}</div>
-                  <div className={`text-[9px] sm:text-xs mt-0.5 sm:mt-1 ${active ? "text-white/70" : "text-gray-500"}`}>Stage {stage.id}</div>
-                </button>
-              );
-            })}
+                    <div className={`text-xs font-bold ${active ? "text-white" : "text-gray-900"}`}>{stage.title}</div>
+                    <div className={`text-xs mt-1 ${active ? "text-white/70" : "text-gray-500"}`}>Stage {stage.id}</div>
+                  </button>
+                );
+              })}
+            </div>
           </div>
         </div>
       </div>

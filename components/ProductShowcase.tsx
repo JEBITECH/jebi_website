@@ -39,35 +39,35 @@ export default function ProductShowcase({ showHeader = true, autoRotate = true, 
 
   return (
     <AnimatedSection direction="up">
-      <div className={`bg-white section-padding ${className}`}>
-        <div className="container-custom px-4 sm:px-6">
+      <div className={`bg-white ${className}`}>
+        <div className="container-custom px-4 sm:px-6 lg:min-h-screen lg:flex lg:flex-col lg:justify-center lg:py-12">
           {/* Header */}
           {showHeader && (
-            <div className="text-center mb-8 sm:mb-12 md:mb-16">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-3 sm:mb-4 px-2">
+            <div className="text-center mb-6 sm:mb-8 lg:mb-10">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-4xl xl:text-5xl font-bold text-gray-900 mb-2 sm:mb-3 lg:mb-4 px-2">
                 Unified Hospitality Operations Platform
               </h2>
-              <p className="text-gray-600 text-sm sm:text-base md:text-lg lg:text-xl max-w-3xl mx-auto px-4">
+              <p className="text-gray-600 text-sm sm:text-base md:text-lg lg:text-lg xl:text-xl max-w-3xl mx-auto px-4">
                 From booking to scale, we solve real operational challenges at every stage
               </p>
             </div>
           )}
 
           {/* Main Content Card */}
-          <div className="relative w-full overflow-hidden rounded-2xl sm:rounded-3xl shadow-lg sm:shadow-2xl bg-gradient-to-br from-gray-50 to-white">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
+          <div className="relative w-full overflow-hidden rounded-2xl sm:rounded-3xl shadow-lg sm:shadow-2xl bg-gradient-to-br from-gray-50 to-white lg:flex-1 lg:flex lg:flex-col lg:max-h-[calc(100vh-280px)]">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 lg:h-full">
               {/* LEFT SIDE - Pain & Solution Cards + CTA Button */}
-              <div className="p-4 sm:p-6 md:p-8 lg:p-12 xl:p-16 flex flex-col justify-between bg-white">
-                <div className="w-full space-y-4 sm:space-y-6 md:space-y-8">
+              <div className="p-4 sm:p-6 md:p-8 lg:p-10 xl:p-12 flex flex-col justify-between bg-white">
+                <div className="w-full space-y-4 sm:space-y-5 lg:space-y-6">
                   {/* PAIN Card */}
                   <div className="relative">
                     {/* Connecting Line - Hidden on mobile */}
                     <div className="hidden sm:block absolute left-6 top-16 bottom-0 w-0.5 bg-gradient-to-b from-red-400 to-primary-orange"></div>
 
-                    <div className="relative bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 shadow-md border border-gray-100 hover:shadow-xl transition-all duration-300">
+                    <div className="relative bg-white rounded-xl sm:rounded-2xl p-4 sm:p-5 lg:p-6 shadow-md border border-gray-100 hover:shadow-xl transition-all duration-300">
                       <div className="flex items-start gap-3 sm:gap-4">
-                        <div className="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 bg-red-500 rounded-lg sm:rounded-xl flex items-center justify-center shadow-lg">
-                          <svg className="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div className="flex-shrink-0 w-10 h-10 sm:w-11 sm:h-11 lg:w-12 lg:h-12 bg-red-500 rounded-lg sm:rounded-xl flex items-center justify-center shadow-lg">
+                          <svg className="w-5 h-5 sm:w-5 sm:h-5 lg:w-6 lg:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path
                               strokeLinecap="round"
                               strokeLinejoin="round"
@@ -77,22 +77,22 @@ export default function ProductShowcase({ showHeader = true, autoRotate = true, 
                           </svg>
                         </div>
                         <div className="flex-1 min-w-0">
-                          <div className="flex flex-wrap items-center gap-2 mb-2 sm:mb-3">
-                            <h3 className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-gray-900">The Challenge</h3>
+                          <div className="flex flex-wrap items-center gap-2 mb-2 sm:mb-2.5">
+                            <h3 className="text-base sm:text-lg lg:text-xl font-bold text-gray-900">The Challenge</h3>
                             <span className="text-[10px] sm:text-xs font-semibold px-2 sm:px-3 py-0.5 sm:py-1 bg-red-50 text-red-600 rounded-full border border-red-200 whitespace-nowrap">
                               Pain Point
                             </span>
                           </div>
-                          <p className="text-gray-700 text-sm sm:text-base md:text-lg leading-relaxed">{activeStage.painDescription}</p>
+                          <p className="text-gray-700 text-sm sm:text-base lg:text-base leading-relaxed">{activeStage.painDescription}</p>
                         </div>
                       </div>
                     </div>
                   </div>
 
                   {/* Arrow Indicator */}
-                  <div className="flex justify-center -my-2 sm:-my-4 relative z-10">
-                    <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-primary-orange to-orange-600 rounded-full flex items-center justify-center shadow-lg">
-                      <svg className="w-4 h-4 sm:w-5 sm:h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div className="flex justify-center -my-2 sm:-my-2 relative z-10">
+                    <div className="w-8 h-8 sm:w-9 sm:h-9 lg:w-10 lg:h-10 bg-gradient-to-br from-primary-orange to-orange-600 rounded-full flex items-center justify-center shadow-lg">
+                      <svg className="w-4 h-4 sm:w-4 sm:h-4 lg:w-5 lg:h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
                       </svg>
                     </div>
@@ -100,21 +100,21 @@ export default function ProductShowcase({ showHeader = true, autoRotate = true, 
 
                   {/* SOLUTION Card */}
                   <div className="relative">
-                    <div className="relative bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 shadow-md border border-gray-100 hover:shadow-xl transition-all duration-300">
+                    <div className="relative bg-white rounded-xl sm:rounded-2xl p-4 sm:p-5 lg:p-6 shadow-md border border-gray-100 hover:shadow-xl transition-all duration-300">
                       <div className="flex items-start gap-3 sm:gap-4">
-                        <div className="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-primary-orange to-orange-600 rounded-lg sm:rounded-xl flex items-center justify-center shadow-lg">
-                          <svg className="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div className="flex-shrink-0 w-10 h-10 sm:w-11 sm:h-11 lg:w-12 lg:h-12 bg-gradient-to-br from-primary-orange to-orange-600 rounded-lg sm:rounded-xl flex items-center justify-center shadow-lg">
+                          <svg className="w-5 h-5 sm:w-5 sm:h-5 lg:w-6 lg:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                           </svg>
                         </div>
                         <div className="flex-1 min-w-0">
-                          <div className="flex flex-wrap items-center gap-2 mb-2 sm:mb-3">
-                            <h3 className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-gray-900">{activeStage.solutionTitle}</h3>
+                          <div className="flex flex-wrap items-center gap-2 mb-2 sm:mb-2.5">
+                            <h3 className="text-base sm:text-lg lg:text-xl font-bold text-gray-900">{activeStage.solutionTitle}</h3>
                             <span className="text-[10px] sm:text-xs font-semibold px-2 sm:px-3 py-0.5 sm:py-1 bg-orange-50 text-primary-orange rounded-full border border-orange-200 whitespace-nowrap">
                               Solution
                             </span>
                           </div>
-                          <p className="text-gray-700 text-sm sm:text-base md:text-lg leading-relaxed">{activeStage.solution}</p>
+                          <p className="text-gray-700 text-sm sm:text-base lg:text-base leading-relaxed">{activeStage.solution}</p>
                         </div>
                       </div>
                     </div>
@@ -122,13 +122,13 @@ export default function ProductShowcase({ showHeader = true, autoRotate = true, 
                 </div>
 
                 {/* CTA Button */}
-                <div className="mt-4 sm:mt-6 md:mt-8">
+                <div className="mt-4 sm:mt-5 lg:mt-6">
                   <button
                     onClick={() => {
                       const productId = stageToProductMap[activeStage.id];
                       router.push(`/products?product=${productId}`);
                     }}
-                    className="w-full group relative px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-primary-purple to-purple-700 hover:from-primary-purple hover:to-purple-800 text-white text-base sm:text-lg font-bold rounded-full transition-all duration-300 transform hover:scale-105 shadow-xl flex items-center justify-center gap-2 sm:gap-3"
+                    className="w-full group relative px-6 sm:px-7 lg:px-8 py-3 sm:py-3.5 lg:py-4 bg-gradient-to-r from-primary-purple to-purple-700 hover:from-primary-purple hover:to-purple-800 text-white text-base sm:text-base lg:text-lg font-bold rounded-full transition-all duration-300 transform hover:scale-105 shadow-xl flex items-center justify-center gap-2"
                   >
                     <span>{activeStage.ctaLabel}</span>
                     <svg className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -139,23 +139,21 @@ export default function ProductShowcase({ showHeader = true, autoRotate = true, 
               </div>
 
               {/* RIGHT SIDE - Product Image */}
-              <div className="relative overflow-hidden min-h-[250px] sm:min-h-[350px] md:min-h-[450px] lg:min-h-[600px] flex items-center justify-center bg-gradient-to-br from-purple-50 to-blue-50">
+              <div className="relative overflow-hidden min-h-[250px] sm:min-h-[350px] md:min-h-[450px] lg:min-h-0 lg:h-full flex items-center justify-center bg-gradient-to-br from-purple-50 to-blue-50 rounded-b-2xl sm:rounded-b-3xl lg:rounded-b-none lg:rounded-r-2xl lg:sm:rounded-r-3xl">
                 <div className="absolute inset-0 bg-gradient-to-br from-purple-100/20 to-blue-100/20"></div>
-                <div className="relative w-full h-full">
-                  <Image 
-                    src={activeStage.image} 
-                    alt={activeStage.title} 
-                    fill
-                    priority 
-                    className="object-cover md:object-fill"
-                  />
-                </div>
+                <Image 
+                  src={activeStage.image} 
+                  alt={activeStage.title} 
+                  fill
+                  priority 
+                  className="object-cover lg:object-fill"
+                />
               </div>
             </div>
           </div>
 
           {/* BOTTOM NAVIGATION STEPS */}
-          <div className="mt-6 sm:mt-8 md:mt-12">
+          <div className="mt-5 sm:mt-6 lg:mt-8">
             {/* Mobile View - Slideshow Grid with Dots */}
             <div className="block sm:hidden">
               {/* Stage Grid - All stages visible */}

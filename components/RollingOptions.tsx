@@ -96,7 +96,7 @@ export default function RollingOptions({
               </button>
 
               {/* Accordion Content */}
-              <AnimatePresence>
+              <AnimatePresence initial={true}>
                 {isOpen && (
                   <motion.div
                     initial={{ height: 0, opacity: 0 }}

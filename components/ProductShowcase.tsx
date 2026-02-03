@@ -54,8 +54,8 @@ export default function ProductShowcase({ showHeader = true, autoRotate = true, 
           )}
 
           {/* Main Content Card */}
-          <div className="relative w-full overflow-hidden rounded-2xl sm:rounded-3xl shadow-lg sm:shadow-2xl bg-gradient-to-br from-gray-50 to-white lg:flex-1 lg:flex lg:flex-col lg:max-h-[calc(100vh-280px)]">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 lg:h-full">
+          <div className="relative w-full overflow-hidden rounded-2xl sm:rounded-3xl shadow-lg sm:shadow-2xl bg-gradient-to-br from-gray-50 to-white">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
               {/* LEFT SIDE - Pain & Solution Cards + CTA Button */}
               <div className="p-4 sm:p-6 md:p-8 lg:p-10 xl:p-12 flex flex-col justify-between bg-white">
                 <div className="w-full space-y-4 sm:space-y-5 lg:space-y-6">
@@ -139,7 +139,7 @@ export default function ProductShowcase({ showHeader = true, autoRotate = true, 
               </div>
 
               {/* RIGHT SIDE - Product Image */}
-              <div className="relative overflow-hidden min-h-[250px] sm:min-h-[350px] md:min-h-[450px] lg:min-h-0 lg:h-full flex items-center justify-center bg-gradient-to-br from-purple-50 to-blue-50 rounded-b-2xl sm:rounded-b-3xl lg:rounded-b-none lg:rounded-r-2xl lg:sm:rounded-r-3xl">
+              <div className="relative overflow-hidden min-h-[250px] sm:min-h-[350px] md:min-h-[450px] lg:min-h-[500px] flex items-center justify-center bg-gradient-to-br from-purple-50 to-blue-50 rounded-b-2xl sm:rounded-b-3xl lg:rounded-b-none lg:rounded-r-2xl lg:sm:rounded-r-3xl">
                 <div className="absolute inset-0 bg-gradient-to-br from-purple-100/20 to-blue-100/20"></div>
                 <Image 
                   src={activeStage.image} 

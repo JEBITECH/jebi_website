@@ -305,13 +305,13 @@ export default function Home() {
       {/* 6. Why JebiTech - Animated */}
       <ParallaxSection speed={0.1}>
         <div className="bg-secondary-gray section-padding">
-          <div className="container-custom">
+          <div className="container-custom px-4 sm:px-6">
             <AnimatedSection direction="up">
-              <div className="mx-auto max-w-2xl text-center mb-16">
-                <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl font-heading">
+              <div className="mx-auto max-w-2xl text-center mb-8 sm:mb-12 md:mb-16">
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-gray-900 font-heading">
                   Why Choose JebiTech
                 </h2>
-                <p className="mt-6 text-lg leading-8 text-gray-600">
+                <p className="mt-4 sm:mt-6 text-base sm:text-lg leading-7 sm:leading-8 text-gray-600">
                   Our expertise and experience in hospitality technology
                 </p>
               </div>

@@ -110,19 +110,19 @@ export default function Home() {
   return (
     <div className="bg-white overflow-hidden">
       {/* 1. Hero Section - Guesty Style */}
-      <div className="relative isolate lg:px-8 py-8 md:py-12 flex items-center">
+      <div className="relative isolate lg:px-8 pt-24 pb-12 md:pt-28 md:pb-16 lg:pt-32 lg:pb-20 flex items-center">
         <FloatingElements />
 
         <div className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80">
           <div className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-primary-orange/20 opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]" />
         </div>
 
-        <div className="container-custom w-full">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center min-h-[300px]">
+        <div className="container-custom w-full px-4 sm:px-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center">
             {/* Left Content */}
-            <div className="flex flex-col justify-center space-y-8">
+            <div className="flex flex-col justify-center space-y-6 md:space-y-8">
               <AnimatedSection direction="up" delay={0.2}>
-                <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-3xl lg:text-3xl xl:text-3xl font-heading leading-tight">
+                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-4xl xl:text-5xl font-bold tracking-tight text-gray-900 font-heading leading-tight">
                   Empowering the <span className="text-primary-orange">Hospitality Tech</span> Ecosystem
                 </h1>
               </AnimatedSection>
@@ -142,11 +142,11 @@ export default function Home() {
 
               {/* CTA Buttons */}
               <AnimatedSection direction="up" delay={0.8}>
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <MagneticButton href="/contact" intensity={0.1} className="btn-primary text-lg px-8 py-4">
+                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+                  <MagneticButton href="/contact" intensity={0.1} className="btn-primary text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4 w-full sm:w-auto text-center">
                     Request Demo
                   </MagneticButton>
-                  <MagneticButton href="/products" intensity={0.1} className="btn-secondary text-lg px-8 py-4">
+                  <MagneticButton href="/products" intensity={0.1} className="btn-secondary text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4 w-full sm:w-auto text-center">
                     Explore Products
                   </MagneticButton>
                 </div>
@@ -154,7 +154,7 @@ export default function Home() {
 
               {/* Trust Indicators */}
               <AnimatedSection direction="up" delay={1.0}>
-                <div className="flex flex-wrap items-center gap-6 text-sm text-gray-500">
+                <div className="flex flex-wrap items-center gap-4 sm:gap-6 text-xs sm:text-sm text-gray-500">
                   <div className="flex items-center gap-2">
                     <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
                     <span>500+ Happy Clients</span>
@@ -172,9 +172,9 @@ export default function Home() {
             </div>
 
             {/* Right Motion Graphic */}
-            <div className="flex justify-top">
+            <div className="flex justify-center lg:justify-start mt-8 lg:mt-0">
               {/* <AnimatedSection direction="right" delay={0.5}> */}
-              <div className="w-full max-w-lg lg:max-w-xl">
+              <div className="w-full max-w-md sm:max-w-lg lg:max-w-xl">
                 <HeroMotionGraphic />
               </div>
               {/* </AnimatedSection> */}

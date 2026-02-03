@@ -414,7 +414,7 @@ const services: ServiceCard[] = [
     id: 'Custom development',
     title: 'Custom development',
     description: 'Analysis / Develop / implement / Support.',
-    icon: <Layers size={32} />,
+    icon: <Layers size={20} />,
     color: 'bg-purple-600',
     position: { x: 0, y: -180 }
   },
@@ -422,7 +422,7 @@ const services: ServiceCard[] = [
     id: 'team',
     title: 'Dedicated team',
     description: 'Develop / implement / Support.',
-    icon: <Users size={32} />,
+    icon: <Users size={20} />,
     color: 'bg-orange-600',
     position: { x: -180, y: 0 }
   },
@@ -430,7 +430,7 @@ const services: ServiceCard[] = [
     id: 'products',
     title: 'In house product',
     description: 'Develop / Implement / Support.',
-    icon: <Box size={32} />,
+    icon: <Box size={20} />,
     color: 'bg-orange-500',
     position: { x: 180, y: 0 }
   },
@@ -438,7 +438,7 @@ const services: ServiceCard[] = [
     id: 'Other services',
     title: 'Other services',
     description: 'Data Alysis / System user service for any department.',
-    icon: <PlusSquare size={32} />,
+    icon: <PlusSquare size={20} />,
     color: 'bg-purple-500',
     position: { x: 0, y: 180 }
   },
@@ -446,22 +446,22 @@ const services: ServiceCard[] = [
 
 const HeroMotionGraphic = () => {
   return (
-    <div className="relative flex items-center justify-center min-h-screen overflow-hidden">
+    <div className="relative flex items-center justify-center h-[500px] sm:h-[600px] md:h-[700px] lg:h-[600px] overflow-hidden">
 
       {/* Background Glow */}
-      <div className="absolute w-[500px] h-[500px] rounded-full" />
+      <div className="absolute w-[300px] sm:w-[400px] md:w-[500px] h-[300px] sm:h-[400px] md:h-[500px] rounded-full" />
 
       {/* Central Hub Card */}
       <motion.div
         animate={{ y: [0, -10, 0] }}
         transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-        className="z-20 w-48 h-56 bg-zinc-900/90 border border-zinc-700 rounded-3xl flex flex-col items-center justify-center p-6 shadow-2xl backdrop-blur-md"
+        className="z-20 w-32 h-40 sm:w-40 sm:h-48 md:w-48 md:h-56 bg-zinc-900/90 border border-zinc-700 rounded-2xl sm:rounded-3xl flex flex-col items-center justify-center p-3 sm:p-4 md:p-6 shadow-2xl backdrop-blur-md"
       >
-        <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-orange-500 rounded-2xl flex items-center justify-center mb-4">
-          <Square className="text-white fill-current" size={32} />
+        <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 bg-gradient-to-br from-purple-500 to-orange-500 rounded-xl sm:rounded-2xl flex items-center justify-center mb-2 sm:mb-3 md:mb-4">
+          <Square className="text-white fill-current" size={20} />
         </div>
-        <h2 className="text-white text-2xl font-bold">Jebitech</h2>
-        <p className="text-zinc-400 text-[10px] uppercase tracking-widest mt-2 text-center">
+        <h2 className="text-white text-base sm:text-xl md:text-2xl font-bold">Jebitech</h2>
+        <p className="text-zinc-400 text-[8px] sm:text-[9px] md:text-[10px] uppercase tracking-widest mt-1 sm:mt-2 text-center">
           Software, IT & AI Solutions
         </p>
       </motion.div>
@@ -473,10 +473,10 @@ const HeroMotionGraphic = () => {
 
       {/* Connecting Lines (SVG) */}
       <svg className="absolute w-full h-full pointer-events-none opacity-20">
-        <line x1="50%" y1="50%" x2="50%" y2="calc(50% - 160px)" stroke="orange" strokeDasharray="5,5" />
-        <line x1="50%" y1="50%" x2="50%" y2="calc(50% + 160px)" stroke="orange" strokeDasharray="5,5" />
-        <line x1="50%" y1="50%" x2="calc(50% - 220px)" y2="50%" stroke="orange" strokeDasharray="5,5" />
-        <line x1="50%" y1="50%" x2="calc(50% + 220px)" y2="50%" stroke="orange" strokeDasharray="5,5" />
+        <line x1="50%" y1="50%" x2="50%" y2="calc(50% - 180px)" stroke="orange" strokeDasharray="5,5" className="hidden sm:block" />
+        <line x1="50%" y1="50%" x2="50%" y2="calc(50% + 180px)" stroke="orange" strokeDasharray="5,5" className="hidden sm:block" />
+        <line x1="50%" y1="50%" x2="calc(50% - 240px)" y2="50%" stroke="orange" strokeDasharray="5,5" className="hidden sm:block" />
+        <line x1="50%" y1="50%" x2="calc(50% + 240px)" y2="50%" stroke="orange" strokeDasharray="5,5" className="hidden sm:block" />
       </svg>
     </div>
   );
@@ -485,11 +485,32 @@ const HeroMotionGraphic = () => {
 const OrbitCard = ({ service, index }: { service: ServiceCard, index: number }) => {
   const [isHovered, setIsHovered] = useState(false);
 
+  // Responsive positions
+  const getResponsivePosition = () => {
+    if (typeof window !== 'undefined') {
+      const width = window.innerWidth;
+      if (width < 640) { // mobile
+        return {
+          x: service.position.x * 0.7,
+          y: service.position.y * 0.7
+        };
+      } else if (width < 1024) { // tablet (iPad Pro, etc.)
+        return {
+          x: service.position.x * 0.65,
+          y: service.position.y * 0.75
+        };
+      }
+    }
+    return service.position;
+  };
+
+  const position = getResponsivePosition();
+
   return (
     <motion.div
-      initial={{ x: service.position.x, y: service.position.y }}
+      initial={{ x: position.x, y: position.y }}
       animate={{
-        y: [service.position.y, service.position.y - 15, service.position.y],
+        y: [position.y, position.y - 10, position.y],
       }}
       transition={{
         duration: 3,
@@ -500,10 +521,10 @@ const OrbitCard = ({ service, index }: { service: ServiceCard, index: number }) 
       whileHover={{ scale: 1.1, zIndex: 50 }}
       onHoverStart={() => setIsHovered(true)}
       onHoverEnd={() => setIsHovered(false)}
-      className={`absolute w-36 h-36 ${service.color} rounded-2xl flex flex-col items-center justify-center cursor-pointer shadow-lg p-4 text-white text-center`}
+      className={`absolute w-24 h-24 sm:w-28 sm:h-28 md:w-36 md:h-36 ${service.color} rounded-xl sm:rounded-2xl flex flex-col items-center justify-center cursor-pointer shadow-lg p-2 sm:p-3 md:p-4 text-white text-center`}
     >
-      <div className="mb-2 opacity-90">{service.icon}</div>
-      <span className="font-semibold text-sm">{service.title}</span>
+      <div className="mb-1 sm:mb-2 opacity-90">{service.icon}</div>
+      <span className="font-semibold text-[10px] sm:text-xs md:text-sm leading-tight">{service.title}</span>
 
       <AnimatePresence>
         {isHovered && (
@@ -511,9 +532,9 @@ const OrbitCard = ({ service, index }: { service: ServiceCard, index: number }) 
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="overflow-hidden"
+            className="overflow-hidden hidden md:block"
           >
-            <p className="text-[10px] mt-2 leading-tight text-white/90">
+            <p className="text-[9px] sm:text-[10px] mt-1 sm:mt-2 leading-tight text-white/90">
               {service.description}
             </p>
           </motion.div>

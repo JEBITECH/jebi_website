@@ -60,7 +60,7 @@ const TechnologyTeamSection = () => {
             </div>
 
             {/* Desktop View - Original Arc Design */}
-            <section className="hidden lg:block relative w-full bg-white flex items-center justify-center p-4">
+            <section className="hidden lg:block relative w-full bg-white flex items-center justify-center">
                 {/* Wrapper to hold everything in place */}
                 <div className="relative w-full max-w-6xl h-[700px]">
 
@@ -110,6 +110,15 @@ const TechnologyTeamSection = () => {
                         const x = center + arcRadius * Math.cos(rad);
                         const y = center + arcRadius * Math.sin(rad);
 
+                        // Different gradient colors for each number
+                        const gradients = [
+                            'from-blue-500 to-blue-600',
+                            'from-purple-500 to-purple-600',
+                            'from-pink-500 to-pink-600',
+                            'from-orange-500 to-orange-600',
+                            'from-green-500 to-green-600'
+                        ];
+
                         return (
                             <motion.div
                                 key={item.id}
@@ -125,7 +134,7 @@ const TechnologyTeamSection = () => {
                                 }}
                             >
                                 {/* The Number Bubble (Exactly on the blue line) */}
-                                <div className="w-12 h-12 rounded-full bg-white shadow-lg border border-gray-100 flex items-center justify-center text-[#1e1b4b] font-bold text-lg flex-shrink-0">
+                                <div className={`w-12 h-12 rounded-full bg-gradient-to-br ${gradients[index]} shadow-lg flex items-center justify-center text-white font-bold text-lg flex-shrink-0`}>
                                     {item.id}
                                 </div>
 

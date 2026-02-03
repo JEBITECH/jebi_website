@@ -14,7 +14,7 @@ const AnimatedHeroHeadline = () => {
     },
     {
       col1: 'Delivering',
-      col3: 'hospitality tech companies',
+      col3: 'hospitality tech firms',
       color: 'text-primary-purple'
     }
   ]

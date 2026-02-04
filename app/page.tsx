@@ -325,30 +325,77 @@ export default function Home() {
       </ParallaxSection>
 
       {/* 7. Experience Boxes */}
-      <div className="bg-white section-padding">
-        <div className="container-custom">
+      <div className="relative bg-white section-padding overflow-hidden">
+        {/* Background Elements */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute inset-0" style={{
+            backgroundImage: 'radial-gradient(circle at 2px 2px, #4A1A5C 1px, transparent 0)',
+            backgroundSize: '48px 48px'
+          }}></div>
+        </div>
+        <div className="absolute top-20 left-0 w-96 h-96 bg-primary-purple/5 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-20 right-0 w-96 h-96 bg-primary-orange/5 rounded-full blur-3xl"></div>
+
+        <div className="container-custom relative z-10 px-4 sm:px-6">
           <AnimatedSection direction="up">
-            <div className="mx-auto max-w-2xl text-center mb-16">
-              <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl font-heading">
+            <div className="mx-auto max-w-3xl text-center mb-12 sm:mb-16">
+              {/* Badge */}
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-primary-purple/10 to-primary-orange/10 rounded-full border border-primary-purple/20 mb-4 sm:mb-6">
+                <span className="text-primary-purple text-xs sm:text-sm font-semibold">📊 Track Record</span>
+              </div>
+              
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-gray-900 font-heading mb-4 sm:mb-6 px-4">
                 Our Experience
               </h2>
-              <p className="mt-6 text-lg leading-8 text-gray-600">
+              <p className="text-base sm:text-lg md:text-xl leading-7 sm:leading-8 text-gray-600 px-4">
                 Proven track record across different markets and scales
               </p>
             </div>
           </AnimatedSection>
 
-          <StaggeredList className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {experienceData.map((experience) => (
-              <div key={experience.category} className="bg-secondary-gray rounded-xl p-8 text-center card-hover hover-glow">
-                <div className={`mx-auto w-16 h-16 ${experience.color} rounded-full flex items-center justify-center mb-6 floating`}>
-                  <span className="text-2xl">{experience.icon}</span>
-                </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-2">{experience.category}</h3>
-                <p className="text-primary-orange font-semibold mb-2">{experience.location}</p>
-                <p className="text-gray-600 mb-4">{experience.description}</p>
-                <div className="bg-white rounded-lg p-3">
-                  <p className="text-sm font-semibold text-primary-purple">{experience.units}</p>
+          <StaggeredList className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+            {experienceData.map((experience, index) => (
+              <div 
+                key={experience.category} 
+                className="relative bg-white rounded-2xl p-6 sm:p-8 text-center shadow-lg border border-gray-100 transition-all duration-300 overflow-hidden flex flex-col h-full hover:scale-105"
+              >
+                {/* Content */}
+                <div className="relative z-10 flex flex-col flex-1">
+                  {/* Icon with enhanced styling */}
+                  <div className="relative mx-auto w-16 h-16 sm:w-20 sm:h-20 mb-4 sm:mb-6">
+                    <div className={`absolute inset-0 ${experience.color} rounded-2xl blur-xl opacity-40 transition-opacity duration-300`}></div>
+                    <div className={`relative w-16 h-16 sm:w-20 sm:h-20 ${experience.color} rounded-2xl flex items-center justify-center shadow-lg transition-all duration-300`}>
+                      <span className="text-2xl sm:text-3xl">{experience.icon}</span>
+                    </div>
+                  </div>
+
+                  {/* Category */}
+                  <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3 transition-colors duration-300 px-2">
+                    {experience.category}
+                  </h3>
+
+                  {/* Location Badge */}
+                  <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 bg-gradient-to-r from-primary-orange/10 to-primary-orange/20 rounded-full mb-4 mx-auto">
+                    <svg className="w-3 h-3 sm:w-4 sm:h-4 text-primary-orange flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
+                    </svg>
+                    <span className="text-primary-orange font-bold text-xs sm:text-sm whitespace-nowrap">{experience.location}</span>
+                  </div>
+
+                  {/* Description */}
+                  <p className="text-gray-600 mb-6 text-sm sm:text-base leading-relaxed px-2">
+                    {experience.description}
+                  </p>
+
+                  {/* Spacer to push units card to bottom */}
+                  <div className="flex-1"></div>
+
+                  {/* Units Card */}
+                  <div className="bg-gradient-to-br from-gray-50 to-white rounded-xl p-3 sm:p-4 border border-gray-100 shadow-sm transition-all duration-300">
+                    <p className="text-xs sm:text-sm font-bold text-primary-purple">
+                      {experience.units}
+                    </p>
+                  </div>
                 </div>
               </div>
             ))}

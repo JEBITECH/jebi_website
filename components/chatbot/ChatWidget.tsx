@@ -33,6 +33,7 @@ const ChatWidget = () => {
     const [messages, setMessages] = useState<Message[]>([]);
     const scrollRef = useRef<HTMLDivElement>(null);
     const [isInitialized, setIsInitialized] = useState(false);
+    const [showHelloMessage, setShowHelloMessage] = useState(false);
 
     // Load saved state from localStorage on mount
     useEffect(() => {
@@ -46,6 +47,28 @@ const ChatWidget = () => {
         }
         setIsInitialized(true);
     }, []);
+
+    // Show hello message periodically when chat is hidden
+    useEffect(() => {
+        if (view === 'hidden') {
+            const initialTimer = setTimeout(() => {
+                setShowHelloMessage(true);
+                setTimeout(() => setShowHelloMessage(false), 4000); // Hide after 4 seconds
+            }, 3000);
+
+            const interval = setInterval(() => {
+                setShowHelloMessage(true);
+                setTimeout(() => setShowHelloMessage(false), 4000); // Hide after 4 seconds
+            }, 15000);
+
+            return () => {
+                clearTimeout(initialTimer);
+                clearInterval(interval);
+            };
+        } else {
+            setShowHelloMessage(false);
+        }
+    }, [view]);
 
     useEffect(() => {
         const content = pageContent[pathname] || pageContent["/"];
@@ -262,17 +285,64 @@ const ChatWidget = () => {
                 </div>
             )}
 
-            {/* Launcher Button (Circular Avatar) */}
-            <button
-                onClick={() => view === 'chat' ? closeAll() : view === 'hidden' ? showIntro() : openChat()}
-                className="w-16 h-16 rounded-full overflow-hidden shadow-xl border-4 border-blue-600 hover:scale-105 transition-transform"
-            >
-                <img
-                    src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150"
-                    className="w-full h-full object-cover"
-                    alt="Sophia"
-                />
-            </button>
+            {/* Hello Message Bubble - appears periodically */}
+            {showHelloMessage && view === 'hidden' && (
+                <div className="absolute bottom-20 right-0 animate-in slide-in-from-bottom-5 fade-in duration-500">
+                    <div className="relative">
+                        {/* Main Speech Bubble - Glassmorphic */}
+                        <div className="relative rounded-3xl shadow-2xl p-5 min-w-[240px]" style={{
+                            backdropFilter: 'blur(5px) saturate(180%)',
+                            WebkitBackdropFilter: 'blur(5px) saturate(180%)',
+                            backgroundColor: 'rgba(247, 248, 250, 0.49)',
+                            border: '1px solid rgba(255, 255, 255, 0.125)'
+                        }}>
+                            
+                            {/* Content */}
+                            <div className="relative z-10">
+                                <div className="flex items-center gap-2 mb-2">
+                                    <span className="text-2xl animate-wave">👋</span>
+                                    <p className="text-base font-bold text-gray-800">Hello there!</p>
+                                </div>
+                                <p className="text-sm text-gray-600 leading-relaxed">
+                                    Need help? I'm Sophia, your AI assistant. Click to chat!
+                                </p>
+                            </div>
+
+                            {/* Decorative dot */}
+                            <div className="absolute top-4 right-4 w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {/* Launcher Button (Circular Avatar) with Bubble Animation */}
+            <div className="relative">
+                {/* Animated Bubbles - only show when chat is hidden */}
+                {view === 'hidden' && (
+                    <>
+                        {/* Bubble 1 */}
+                        <div className="absolute -top-2 -right-2 w-4 h-4 bg-blue-500 rounded-full animate-bubble-1 opacity-70"></div>
+                        {/* Bubble 2 */}
+                        <div className="absolute -top-4 right-2 w-3 h-3 bg-blue-400 rounded-full animate-bubble-2 opacity-60"></div>
+                        {/* Bubble 3 */}
+                        <div className="absolute -top-6 right-6 w-2 h-2 bg-blue-300 rounded-full animate-bubble-3 opacity-50"></div>
+                        
+                        {/* Pulsing Ring */}
+                        <div className="absolute inset-0 rounded-full border-4 border-blue-500 animate-ping opacity-20"></div>
+                    </>
+                )}
+                
+                <button
+                    onClick={() => view === 'chat' ? closeAll() : view === 'hidden' ? showIntro() : openChat()}
+                    className="w-16 h-16 rounded-full overflow-hidden shadow-xl border-4 border-blue-600 hover:scale-105 transition-transform relative z-10"
+                >
+                    <img
+                        src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150"
+                        className="w-full h-full object-cover"
+                        alt="Sophia"
+                    />
+                </button>
+            </div>
         </div>
     );
 };

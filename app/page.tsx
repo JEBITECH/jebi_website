@@ -305,8 +305,8 @@ export default function Home() {
 
       {/* 6. Why JebiTech - Animated */}
       <ParallaxSection speed={0.1}>
-        <div className="bg-secondary-gray py-8 sm:py-12 md:py-16">
-          <div className="container-custom px-4 sm:px-6">
+        <div className="relative bg-secondary-gray py-8 sm:py-12 md:py-16 overflow-hidden">
+          <div className="container-custom px-4 sm:px-6 relative z-10">
             <AnimatedSection direction="up">
               <div className="mx-auto max-w-2xl text-center mb-4 sm:mb-6 md:mb-8">
                 <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-gray-900 font-heading">
@@ -326,22 +326,12 @@ export default function Home() {
       </ParallaxSection>
 
       {/* 7. Experience Boxes */}
-      <div className="relative bg-white section-padding overflow-hidden">
-        {/* Background Elements */}
-        <div className="absolute inset-0 opacity-5">
-          <div className="absolute inset-0" style={{
-            backgroundImage: 'radial-gradient(circle at 2px 2px, #4A1A5C 1px, transparent 0)',
-            backgroundSize: '48px 48px'
-          }}></div>
-        </div>
-        <div className="absolute top-20 left-0 w-96 h-96 bg-primary-purple/5 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-20 right-0 w-96 h-96 bg-primary-orange/5 rounded-full blur-3xl"></div>
-
-        <div className="container-custom relative z-10 px-4 sm:px-6">
+      <div className="bg-white section-padding">
+        <div className="container-custom px-4 sm:px-6">
           <AnimatedSection direction="up">
             <div className="mx-auto max-w-3xl text-center mb-12 sm:mb-16">
               {/* Badge */}
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-primary-purple/10 to-primary-orange/10 rounded-full border border-primary-purple/20 mb-4 sm:mb-6">
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-gray-100 rounded-full border border-gray-200 mb-4 sm:mb-6">
                 <BarChart3 className="w-4 h-4 text-primary-purple" />
                 <span className="text-primary-purple text-xs sm:text-sm font-semibold">Track Record</span>
               </div>
@@ -452,37 +442,57 @@ export default function Home() {
 
       {/* 9. Social Proof */}
       <div className="bg-primary-purple section-padding relative overflow-hidden">
-        <div className="container-custom relative z-10">
+        <div className="container-custom relative z-10 px-4 sm:px-6">
           <AnimatedSection direction="up">
-            <div className="mx-auto max-w-2xl text-center mb-16">
-              <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl font-heading">
+            <div className="mx-auto max-w-3xl text-center mb-12 sm:mb-16">
+              {/* Badge */}
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 rounded-full border border-white/20 mb-6">
+                <BarChart3 className="w-4 h-4 text-white" />
+                <span className="text-white text-sm font-semibold">Global Impact</span>
+              </div>
+
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white font-heading mb-6">
                 Trusted Worldwide
               </h2>
-              <p className="mt-6 text-lg leading-8 text-gray-300">
+              <p className="text-lg sm:text-xl leading-8 text-white/90">
                 Join thousands of hospitality businesses that trust JebiTech
               </p>
             </div>
           </AnimatedSection>
 
-          <StaggeredList className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+          <StaggeredList className="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 mb-12 sm:mb-16">
             {[
-              { number: socialProof.clients, label: 'Happy Clients' },
-              { number: socialProof.properties, label: 'Properties Managed' },
-              { number: socialProof.countries, label: 'Countries' },
-              { number: socialProof.uptime, label: 'Uptime' }
+              { number: socialProof.clients, label: 'Happy Clients', icon: Users },
+              { number: socialProof.properties, label: 'Properties Managed', icon: Building2 },
+              { number: socialProof.countries, label: 'Countries', icon: Globe },
+              { number: socialProof.uptime, label: 'Uptime', icon: BarChart3 }
             ].map((stat, index) => (
-              <div key={index} className="card-hover">
-                <div className="text-4xl font-bold text-primary-orange mb-2 pulse-glow">{stat.number}</div>
-                <div className="text-gray-300">{stat.label}</div>
-              </div>
+              <AnimatedSection key={index} direction="up" delay={0.1 * index}>
+                <div className="relative bg-white/10 rounded-2xl p-6 sm:p-8 border border-white/20 hover:bg-white/15 transition-all duration-300 group">
+                  {/* Icon */}
+                  <div className="mb-4">
+                    <stat.icon className="w-8 h-8 sm:w-10 sm:h-10 text-primary-orange mx-auto" strokeWidth={1.5} />
+                  </div>
+                  
+                  {/* Number */}
+                  <div className="text-4xl sm:text-5xl font-bold text-white mb-2">
+                    {stat.number}
+                  </div>
+                  
+                  {/* Label */}
+                  <div className="text-sm sm:text-base text-white/80 font-medium">
+                    {stat.label}
+                  </div>
+                </div>
+              </AnimatedSection>
             ))}
           </StaggeredList>
 
           {/* Client Logos */}
           <AnimatedSection direction="up" delay={0.4}>
-            <div className="mt-16">
-              <p className="text-center text-gray-300 mb-8">Trusted by leading hospitality brands</p>
-              <div className="grid grid-cols-2 md:grid-cols-6 gap-8 items-center opacity-60">
+            <div>
+              <p className="text-center text-white/80 text-base sm:text-lg mb-8 font-medium">Trusted by leading hospitality brands</p>
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-6">
                 {[
                   'Hotel Chain',
                   'Resort Group',
@@ -492,7 +502,7 @@ export default function Home() {
                   'Enterprise'
                 ].map((name, index) => (
                   <div key={index} className="flex justify-center">
-                    <div className="h-12 w-32 bg-white/20 rounded-lg flex items-center justify-center text-white text-xs font-medium hover:bg-white/30 transition-all duration-300">
+                    <div className="h-16 sm:h-20 w-full bg-white/10 rounded-xl flex items-center justify-center text-white text-xs sm:text-sm font-semibold hover:bg-white/20 transition-all duration-300 border border-white/10">
                       {name}
                     </div>
                   </div>
@@ -505,20 +515,26 @@ export default function Home() {
 
       {/* 10. Final CTA */}
       <div className="bg-white section-padding">
-        <div className="container-custom">
+        <div className="container-custom px-4 sm:px-6">
           <AnimatedSection direction="up">
-            <div className="mx-auto max-w-2xl text-center">
-              <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl font-heading">
+            <div className="mx-auto max-w-3xl text-center">
+              {/* Badge */}
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-gray-100 rounded-full border border-gray-200 mb-6">
+                <Rocket className="w-4 h-4 text-primary-purple" />
+                <span className="text-primary-purple text-sm font-semibold">Get Started Today</span>
+              </div>
+
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-gray-900 font-heading mb-6">
                 Ready to Transform Your Operations?
               </h2>
-              <p className="mx-auto mt-6 max-w-xl text-lg leading-8 text-gray-600">
+              <p className="mx-auto max-w-2xl text-lg sm:text-xl leading-8 text-gray-600 mb-10">
                 Join hundreds of hospitality businesses that trust JebiTech for their technology needs.
               </p>
-              <div className="mt-10 flex items-center justify-center gap-x-6">
-                <MagneticButton href="/contact" className="btn-primary text-lg px-8 py-4 hover-glow pulse-glow">
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <MagneticButton href="/contact" className="btn-primary text-base sm:text-lg px-8 py-4 w-full sm:w-auto">
                   Book a Demo
                 </MagneticButton>
-                <MagneticButton href="/contact" className="btn-secondary text-lg px-8 py-4 card-hover">
+                <MagneticButton href="/contact" className="btn-secondary text-base sm:text-lg px-8 py-4 w-full sm:w-auto">
                   Talk to Our Experts
                 </MagneticButton>
               </div>

@@ -507,7 +507,7 @@ export default function Home() {
                 {[
                   { name: 'Hotel Chains', icon: Building2 },
                   { name: 'Resort Group', icon: Palmtree },
-                  { name: 'Property Mgmt', icon: Building2 },
+                  { name: 'Property Management', icon: Building2 },
                   { name: 'Vacation Rentals', icon: Palmtree },
                   { name: 'Boutique Hotels', icon: Building2 },
                   { name: 'Enterprise', icon: Rocket }

@@ -110,7 +110,7 @@ const values = [
     icon: CheckBadgeIcon
   },
   {
-    title: "People-Centric Culture",
+    title: "Employee Culture",
     description: "We invest in our people, nurture talent, and foster continuous growth & development, celebrate diversity, creating an environment where everyone can grow, excel, and succeed.",
     icon: ShieldCheckIcon
   },

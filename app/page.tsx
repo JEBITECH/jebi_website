@@ -442,12 +442,23 @@ export default function Home() {
 
       {/* 9. Social Proof */}
       <div className="bg-primary-purple section-padding relative overflow-hidden">
+        {/* Decorative background elements */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute top-0 right-0 w-96 h-96 bg-primary-orange/10 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl"></div>
+        </div>
+
         <div className="container-custom relative z-10 px-4 sm:px-6">
           <AnimatedSection direction="up">
             <div className="mx-auto max-w-3xl text-center mb-12 sm:mb-16">
               {/* Badge */}
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 rounded-full border border-white/20 mb-6">
-                <BarChart3 className="w-4 h-4 text-white" />
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6" style={{
+                backdropFilter: 'blur(5px) saturate(180%)',
+                WebkitBackdropFilter: 'blur(5px) saturate(180%)',
+                backgroundColor: 'rgba(255, 255, 255, 0.15)',
+                border: '1px solid rgba(255, 255, 255, 0.2)'
+              }}>
+                <Globe className="w-4 h-4 text-white" />
                 <span className="text-white text-sm font-semibold">Global Impact</span>
               </div>
 
@@ -460,22 +471,22 @@ export default function Home() {
             </div>
           </AnimatedSection>
 
-          <StaggeredList className="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 mb-12 sm:mb-16">
+          <StaggeredList className="grid grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-12 mb-12 sm:mb-16">
             {[
               { number: socialProof.clients, label: 'Happy Clients', icon: Users },
               { number: socialProof.properties, label: 'Properties Managed', icon: Building2 },
               { number: socialProof.countries, label: 'Countries', icon: Globe },
               { number: socialProof.uptime, label: 'Uptime', icon: BarChart3 }
-            ].map((stat, index) => (
-              <AnimatedSection key={index} direction="up" delay={0.1 * index}>
-                <div className="relative bg-white/10 rounded-2xl p-6 sm:p-8 border border-white/20 hover:bg-white/15 transition-all duration-300 group">
+            ].map((stat) => (
+              <AnimatedSection key={stat.label} direction="up" delay={0.1}>
+                <div className="text-center">
                   {/* Icon */}
-                  <div className="mb-4">
-                    <stat.icon className="w-8 h-8 sm:w-10 sm:h-10 text-primary-orange mx-auto" strokeWidth={1.5} />
+                  <div className="mb-3">
+                    <stat.icon className="w-8 h-8 sm:w-10 sm:h-10 text-white/60 mx-auto" strokeWidth={1.5} />
                   </div>
                   
                   {/* Number */}
-                  <div className="text-4xl sm:text-5xl font-bold text-white mb-2">
+                  <div className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-2">
                     {stat.number}
                   </div>
                   
@@ -491,19 +502,25 @@ export default function Home() {
           {/* Client Logos */}
           <AnimatedSection direction="up" delay={0.4}>
             <div>
-              <p className="text-center text-white/80 text-base sm:text-lg mb-8 font-medium">Trusted by leading hospitality brands</p>
-              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-6">
+              <p className="text-center text-white/90 text-base sm:text-lg mb-8 font-medium">Trusted by leading hospitality brands</p>
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4">
                 {[
-                  'Hotel Chain',
-                  'Resort Group',
-                  'Property Mgmt',
-                  'Vacation Rentals',
-                  'Boutique Hotels',
-                  'Enterprise'
-                ].map((name, index) => (
-                  <div key={index} className="flex justify-center">
-                    <div className="h-16 sm:h-20 w-full bg-white/10 rounded-xl flex items-center justify-center text-white text-xs sm:text-sm font-semibold hover:bg-white/20 transition-all duration-300 border border-white/10">
-                      {name}
+                  { name: 'Hotel Chains', icon: Building2 },
+                  { name: 'Resort Group', icon: Palmtree },
+                  { name: 'Property Mgmt', icon: Building2 },
+                  { name: 'Vacation Rentals', icon: Palmtree },
+                  { name: 'Boutique Hotels', icon: Building2 },
+                  { name: 'Enterprise', icon: Rocket }
+                ].map((client) => (
+                  <div key={client.name} className="flex justify-center">
+                    <div className="h-20 sm:h-24 w-full rounded-xl flex flex-col items-center justify-center gap-2 text-white hover:scale-105 transition-all duration-300 group" style={{
+                      backdropFilter: 'blur(5px) saturate(180%)',
+                      WebkitBackdropFilter: 'blur(5px) saturate(180%)',
+                      backgroundColor: 'rgba(255, 255, 255, 0.08)',
+                      border: '1px solid rgba(255, 255, 255, 0.15)'
+                    }}>
+                      <client.icon className="w-5 h-5 sm:w-6 sm:h-6 text-white/70 group-hover:text-white transition-colors" strokeWidth={1.5} />
+                      <span className="text-xs sm:text-sm font-semibold text-center px-2">{client.name}</span>
                     </div>
                   </div>
                 ))}

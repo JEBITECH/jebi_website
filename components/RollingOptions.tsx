@@ -2,14 +2,14 @@
 
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ChevronDown } from 'lucide-react'
+import { ChevronDown, LucideIcon } from 'lucide-react'
 
 interface RollingOption {
   id: string
   title: string
   subtitle: string
   description: string
-  icon: string
+  icon: LucideIcon
 }
 
 interface RollingOptionsProps {
@@ -82,7 +82,7 @@ export default function RollingOptions({
                 className={`w-full bg-gradient-to-r ${getGradientColor(index)} p-4 flex items-center justify-between text-white transition-all duration-300`}
               >
                 <div className="flex items-center gap-3">
-                  <span className="text-3xl">{option.icon}</span>
+                  <option.icon className="w-7 h-7 text-primary-purple flex-shrink-0" strokeWidth={2} />
                   <div className="text-left">
                     <h3 className="text-base font-bold leading-tight">{option.title}</h3>
                   </div>
@@ -138,7 +138,7 @@ export default function RollingOptions({
                 }`}
             >
               <div className="flex items-center justify-center gap-2">
-                <span className="text-base md:text-lg">{option.icon}</span>
+                <option.icon className="w-4 h-4 md:w-5 md:h-5 text-primary-purple flex-shrink-0" strokeWidth={2} />
                 <span className="text-xs md:text-sm truncate leading-tight">{option.title}</span>
               </div>
             </button>
@@ -156,7 +156,12 @@ export default function RollingOptions({
               transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
               className="text-center"
             >
-              <div className="text-4xl md:text-5xl mb-4">{options[currentIndex].icon}</div>
+              <div className="mb-4">
+                {(() => {
+                  const IconComponent = options[currentIndex].icon;
+                  return <IconComponent className="w-16 h-16 md:w-20 md:h-20 text-primary-purple mx-auto" strokeWidth={1.5} />;
+                })()}
+              </div>
               <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-2 px-2">
                 {options[currentIndex].title}
               </h3>

@@ -1,5 +1,6 @@
 'use client'
 import { useRouter } from "next/navigation";
+import { Laptop, Palmtree, Globe, BarChart3, Building2, Rocket, Settings, Users, Package } from 'lucide-react'
 import AnimatedSection from '@/components/AnimatedSection'
 import ParallaxSection from '@/components/ParallaxSection'
 import StaggeredList from '@/components/StaggeredList'
@@ -24,28 +25,28 @@ const rollingOptions = [
     title: 'Custom Development',
     subtitle: 'Analysis → Develop → Implement → Support',
     description: 'End-to-end custom software development tailored to your specific hospitality needs. From initial analysis to ongoing support.',
-    icon: '⚙️'
+    icon: Settings
   },
   {
     id: 'dedicated-team',
     title: 'Dedicated Team',
     subtitle: 'Develop → Implement → Support',
     description: 'Dedicated development teams for existing tech companies. Seamlessly integrate with your current operations.',
-    icon: '👥'
+    icon: Users
   },
   {
     id: 'in-house-products',
     title: 'In-House Products',
     subtitle: 'Develop → Implement → Support',
     description: 'Ready-to-deploy hospitality products including booking engines, inspection tools, and management platforms.',
-    icon: '📦'
+    icon: Package
   },
   {
     id: 'other-services',
     title: 'Other Services',
     subtitle: 'Data Analysis → System Integration → User Support',
     description: 'Comprehensive data analysis and system user services for any department in your organization.',
-    icon: '📊'
+    icon: BarChart3
   }
 ]
 
@@ -56,7 +57,7 @@ const experienceData = [
     location: 'USA & Europe',
     description: 'Custom Development',
     units: '30 to 30,000 units',
-    icon: '💻',
+    icon: Laptop,
     color: 'bg-blue-500'
   },
   {
@@ -64,7 +65,7 @@ const experienceData = [
     location: 'UAE & USA',
     description: 'Vacation rental solutions',
     units: '18 to 120 units per group',
-    icon: '🏖️',
+    icon: Palmtree,
     color: 'bg-green-500'
   },
   {
@@ -72,7 +73,7 @@ const experienceData = [
     location: 'Europe',
     description: 'Comprehensive support',
     units: '10 to 100k units',
-    icon: '🌍',
+    icon: Globe,
     color: 'bg-purple-500'
   }
 ]
@@ -341,7 +342,8 @@ export default function Home() {
             <div className="mx-auto max-w-3xl text-center mb-12 sm:mb-16">
               {/* Badge */}
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-primary-purple/10 to-primary-orange/10 rounded-full border border-primary-purple/20 mb-4 sm:mb-6">
-                <span className="text-primary-purple text-xs sm:text-sm font-semibold">📊 Track Record</span>
+                <BarChart3 className="w-4 h-4 text-primary-purple" />
+                <span className="text-primary-purple text-xs sm:text-sm font-semibold">Track Record</span>
               </div>
               
               <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-gray-900 font-heading mb-4 sm:mb-6 px-4">
@@ -365,7 +367,7 @@ export default function Home() {
                   <div className="relative mx-auto w-16 h-16 sm:w-20 sm:h-20 mb-4 sm:mb-6">
                     <div className={`absolute inset-0 ${experience.color} rounded-2xl blur-xl opacity-40 transition-opacity duration-300`}></div>
                     <div className={`relative w-16 h-16 sm:w-20 sm:h-20 ${experience.color} rounded-2xl flex items-center justify-center shadow-lg transition-all duration-300`}>
-                      <span className="text-2xl sm:text-3xl">{experience.icon}</span>
+                      <experience.icon className="w-8 h-8 sm:w-10 sm:h-10 text-white" strokeWidth={2} />
                     </div>
                   </div>
 

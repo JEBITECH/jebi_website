@@ -183,21 +183,40 @@ export default function About() {
   return (
     <div className="bg-white overflow-hidden">
       {/* 1. Hero Section */}
-      <div className="relative isolate px-6 pt-24 pb-12 md:pt-28 md:pb-16 lg:px-8">
+      <div className="relative isolate px-6 pt-24 pb-16 md:pt-28 md:pb-20 lg:px-8 overflow-hidden bg-gradient-to-br from-primary-purple via-purple-700 to-purple-800">
         <FloatingElements />
 
-        <div className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80">
-          <div className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-r from-primary-orange/20 to-primary-purple/20 opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]" />
+        {/* Enhanced Background */}
+        <div className="absolute inset-0 -z-10">
+          {/* Gradient Orbs */}
+          <div className="absolute top-0 left-1/4 w-96 h-96 bg-white/5 rounded-full blur-3xl"></div>
+          <div className="absolute top-20 right-1/4 w-96 h-96 bg-primary-orange/10 rounded-full blur-3xl"></div>
+          
+          {/* Dot Pattern */}
+          <div className="absolute inset-0 opacity-5">
+            <div className="absolute inset-0" style={{
+              backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)',
+              backgroundSize: '48px 48px'
+            }}></div>
+          </div>
         </div>
 
-        <div className="container-custom">
+        <div className="container-custom relative z-10">
           <AnimatedSection direction="up" delay={0.2}>
             <div className="text-center max-w-4xl mx-auto">
-              <h1 className="text-5xl font-bold tracking-tight text-gray-900 sm:text-6xl lg:text-7xl font-heading mb-6">
+              {/* Badge */}
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full border border-white/20 mb-6">
+                <span className="text-white text-sm font-semibold">🏢 Who We Are</span>
+              </div>
+
+              {/* Main Heading */}
+              <h1 className="text-5xl font-bold tracking-tight text-white sm:text-6xl lg:text-7xl font-heading mb-8">
                 About JebiTech
               </h1>
+              
+              {/* Description */}
               <AnimatedSection direction="up" delay={0.4}>
-                <p className="text-xl leading-relaxed text-gray-600 max-w-3xl mx-auto">
+                <p className="text-xl md:text-2xl leading-relaxed text-white/90 max-w-3xl mx-auto">
                   Built by hospitality and technology experts to solve real operational challenges
                   and empower the future of hospitality.
                 </p>

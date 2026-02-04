@@ -246,7 +246,7 @@ export default function About() {
                 <StarIcon className="w-5 h-5 text-primary-purple" />
                 <span className="text-primary-purple text-sm font-semibold">Our Journey</span>
               </div>
-              <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-5xl font-heading mb-6">
+              <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-gray-900 font-heading mb-6">
                 Our Story
               </h2>
               <p className="text-xl leading-8 text-gray-600">
@@ -330,7 +330,7 @@ export default function About() {
                 <StarIcon className="w-5 h-5 text-primary-purple" />
                 <span className="text-primary-purple text-sm font-semibold">Our Foundation</span>
               </div>
-              <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-5xl font-heading mb-6">
+              <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-gray-900 font-heading mb-6">
                 Vision, Mission & Values
               </h2>
               <p className="text-xl leading-8 text-gray-600">
@@ -454,7 +454,7 @@ export default function About() {
                   <UsersIcon className="w-5 h-5 text-primary-purple" />
                   <span className="text-primary-purple text-sm font-semibold">Meet Our Leaders</span>
                 </div>
-                <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-5xl font-heading mb-6">
+                <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-gray-900 font-heading mb-6">
                   Leadership Team
                 </h2>
                 <p className="text-xl leading-8 text-gray-600">
@@ -591,7 +591,7 @@ export default function About() {
                 <UserGroupIcon className="w-5 h-5 text-primary-purple" />
                 <span className="text-primary-purple text-sm font-semibold">Meet the Team</span>
               </div>
-              <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-5xl font-heading mb-6">
+              <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-gray-900 font-heading mb-6">
                 Our Team
               </h2>
               <p className="text-xl leading-8 text-gray-600 max-w-2xl mx-auto">
@@ -648,7 +648,7 @@ export default function About() {
                 <CogIcon className="w-5 h-5 text-primary-purple" />
                 <span className="text-primary-purple text-sm font-semibold">Our Methodology</span>
               </div>
-              <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-5xl font-heading mb-6">
+              <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-gray-900 font-heading mb-6">
                 How We Work
               </h2>
               <p className="text-xl leading-8 text-gray-600">
@@ -890,7 +890,7 @@ export default function About() {
                 <ChartBarIcon className="w-5 h-5 text-primary-purple" />
                 <span className="text-primary-purple text-sm font-semibold">Proven Results</span>
               </div>
-              <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-5xl font-heading mb-6">
+              <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-gray-900 font-heading mb-6">
                 Our Impact
               </h2>
               <p className="text-xl leading-8 text-gray-600">

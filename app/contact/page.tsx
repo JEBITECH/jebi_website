@@ -320,7 +320,7 @@ export default function Contact() {
             {/* Contact Form */}
             <AnimatedSection direction="left" className="flex">
               <div className="bg-white rounded-2xl shadow-xl p-8 border border-gray-100 w-full flex flex-col">
-                <h2 className="text-3xl font-bold text-gray-900 font-heading mb-2">
+                <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 font-heading mb-2">
                   Send us a Message
                 </h2>
                 <p className="text-gray-600 mb-8">Fill out the form and we'll get back to you shortly</p>
@@ -496,7 +496,7 @@ export default function Contact() {
               {/* Response Expectations */}
               <AnimatedSection direction="right" delay={0.2} className="flex">
                 <div className="w-full flex flex-col">
-                  <h2 className="text-3xl font-bold text-gray-900 font-heading mb-2">
+                  <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 font-heading mb-2">
                     What to Expect
                   </h2>
                   <p className="text-gray-600 mb-8">
@@ -756,7 +756,7 @@ export default function Contact() {
                 <span className="text-white text-sm font-semibold">Let's Get Started</span>
               </div>
               
-              <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
+              <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6 leading-tight">
                 Start Your Project With Us
               </h2>
               

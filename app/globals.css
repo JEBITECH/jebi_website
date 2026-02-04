@@ -35,7 +35,7 @@
   }
 
   .btn-secondary {
-    @apply border-2 border-primary-purple text-primary-purple px-6 py-3 rounded-lg font-medium hover:bg-primary-purple hover:text-white transition-all duration-300 hover:shadow-lg transform hover:-translate-y-1;
+    @apply bg-primary-purple text-white border-2 border-primary-purple px-6 py-3 rounded-lg font-medium hover:bg-purple-700 hover:border-purple-700 transition-all duration-300 hover:shadow-lg transform hover:-translate-y-1;
   }
 
   .section-padding {

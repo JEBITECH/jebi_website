@@ -44,7 +44,7 @@ export default function ProductShowcase({ showHeader = true, autoRotate = true, 
           {/* Header */}
           {showHeader && (
             <div className="text-center mb-6 sm:mb-8 lg:mb-10">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-4xl xl:text-5xl font-bold text-gray-900 mb-2 sm:mb-3 lg:mb-4 px-2">
+              <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-2 sm:mb-3 lg:mb-4 px-2">
                 Unified Hospitality Operations Platform
               </h2>
               <p className="text-gray-600 text-sm sm:text-base md:text-lg lg:text-lg xl:text-xl max-w-3xl mx-auto px-4">

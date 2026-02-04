@@ -190,7 +190,7 @@ export default function Home() {
           <div className="container-custom">
             <AnimatedSection direction="up">
               <div className="mx-auto max-w-2xl text-center mb-16">
-                <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl font-heading">
+                <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-gray-900 font-heading">
                   Who We Serve
                 </h2>
                 <p className="mt-6 text-lg leading-8 text-gray-600">
@@ -209,7 +209,7 @@ export default function Home() {
         <div className="container-custom px-4 sm:px-6">
           <AnimatedSection direction="up">
             <div className="mx-auto max-w-2xl text-center mb-8 sm:mb-12 md:mb-16">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-gray-900 font-heading">
+              <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-gray-900 font-heading">
                 Our Solutions
               </h2>
               <p className="mt-4 sm:mt-6 text-base sm:text-lg leading-7 sm:leading-8 text-gray-600 px-4 sm:px-0">
@@ -309,7 +309,7 @@ export default function Home() {
           <div className="container-custom px-4 sm:px-6 relative z-10">
             <AnimatedSection direction="up">
               <div className="mx-auto max-w-2xl text-center mb-4 sm:mb-6 md:mb-8">
-                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-gray-900 font-heading">
+                <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-gray-900 font-heading">
                   Why Choose JebiTech
                 </h2>
                 <p className="mt-2 sm:mt-3 text-sm sm:text-base leading-6 sm:leading-7 text-gray-600">
@@ -336,7 +336,7 @@ export default function Home() {
                 <span className="text-primary-purple text-xs sm:text-sm font-semibold">Track Record</span>
               </div>
               
-              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-gray-900 font-heading mb-4 sm:mb-6 px-4">
+              <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-gray-900 font-heading mb-4 sm:mb-6 px-4">
                 Our Experience
               </h2>
               <p className="text-base sm:text-lg md:text-xl leading-7 sm:leading-8 text-gray-600 px-4">
@@ -401,7 +401,7 @@ export default function Home() {
           <div className="container-custom">
             <AnimatedSection direction="up">
               <div className="mx-auto max-w-2xl text-center mb-16">
-                <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl font-heading">
+                <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-gray-900 font-heading">
                   What Our Clients Say
                 </h2>
                 <p className="mt-6 text-lg leading-8 text-gray-600">
@@ -462,7 +462,7 @@ export default function Home() {
                 <span className="text-white text-sm font-semibold">Global Impact</span>
               </div>
 
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white font-heading mb-6">
+              <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white font-heading mb-6">
                 Trusted Worldwide
               </h2>
               <p className="text-lg sm:text-xl leading-8 text-white/90">
@@ -541,7 +541,7 @@ export default function Home() {
                 <span className="text-primary-purple text-sm font-semibold">Get Started Today</span>
               </div>
 
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-gray-900 font-heading mb-6">
+              <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-gray-900 font-heading mb-6">
                 Ready to Transform Your Operations?
               </h2>
               <p className="mx-auto max-w-2xl text-lg sm:text-xl leading-8 text-gray-600 mb-10">

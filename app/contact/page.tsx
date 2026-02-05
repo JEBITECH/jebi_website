@@ -320,7 +320,7 @@ export default function Contact() {
             {/* Contact Form */}
             <AnimatedSection direction="left" className="flex">
               <div className="bg-white rounded-2xl shadow-xl p-8 border border-gray-100 w-full flex flex-col">
-                <h2 className="text-3xl font-bold text-gray-900 font-heading mb-2">
+                <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 font-heading mb-2">
                   Send us a Message
                 </h2>
                 <p className="text-gray-600 mb-8">Fill out the form and we'll get back to you shortly</p>
@@ -496,7 +496,7 @@ export default function Contact() {
               {/* Response Expectations */}
               <AnimatedSection direction="right" delay={0.2} className="flex">
                 <div className="w-full flex flex-col">
-                  <h2 className="text-3xl font-bold text-gray-900 font-heading mb-2">
+                  <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 font-heading mb-2">
                     What to Expect
                   </h2>
                   <p className="text-gray-600 mb-8">
@@ -638,25 +638,18 @@ export default function Contact() {
             </div>
             
             <div className="bg-white rounded-2xl shadow-2xl overflow-hidden border border-gray-100">
-              <div className="h-96 bg-gradient-to-br from-primary-purple/10 via-primary-orange/5 to-primary-purple/10 flex items-center justify-center relative">
-                {/* Decorative Elements */}
-                <div className="absolute top-10 left-10 w-3 h-3 bg-primary-orange rounded-full animate-pulse"></div>
-                <div className="absolute top-20 right-20 w-2 h-2 bg-primary-purple rounded-full animate-pulse delay-100"></div>
-                <div className="absolute bottom-20 left-20 w-2 h-2 bg-primary-orange rounded-full animate-pulse delay-200"></div>
-                <div className="absolute bottom-10 right-10 w-3 h-3 bg-primary-purple rounded-full animate-pulse delay-300"></div>
-                
-                <div className="text-center z-10">
-                  <div className="w-20 h-20 bg-gradient-to-br from-primary-purple to-purple-700 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-xl">
-                    <GlobeAltIcon className="h-10 w-10 text-white" />
-                  </div>
-                  <h3 className="text-2xl font-bold text-gray-900 mb-3">Interactive Map</h3>
-                  <p className="text-gray-600 max-w-md mx-auto mb-2">
-                    Interactive map with office locations would be integrated here
-                  </p>
-                  <p className="text-sm text-gray-500">
-                    Google Maps or Mapbox integration with clickable office markers
-                  </p>
-                </div>
+              <div className="h-[500px] relative">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d100940.14243827845!2d-122.50764019453125!3d37.75767381874453!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80859a6d00690021%3A0x4a501367f076adff!2sSan%20Francisco%2C%20CA%2C%20USA!5e0!3m2!1sen!2s!4v1234567890123!5m2!1sen!2s"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="JebiTech Office Locations"
+                  className="w-full h-full"
+                ></iframe>
               </div>
             </div>
           </AnimatedSection>
@@ -763,7 +756,7 @@ export default function Contact() {
                 <span className="text-white text-sm font-semibold">Let's Get Started</span>
               </div>
               
-              <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
+              <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6 leading-tight">
                 Start Your Project With Us
               </h2>
               

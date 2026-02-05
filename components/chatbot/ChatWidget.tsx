@@ -33,6 +33,7 @@ const ChatWidget = () => {
     const [messages, setMessages] = useState<Message[]>([]);
     const scrollRef = useRef<HTMLDivElement>(null);
     const [isInitialized, setIsInitialized] = useState(false);
+    const [showHelloMessage, setShowHelloMessage] = useState(false);
 
     // Load saved state from localStorage on mount
     useEffect(() => {
@@ -46,6 +47,28 @@ const ChatWidget = () => {
         }
         setIsInitialized(true);
     }, []);
+
+    // Show hello message periodically when chat is hidden
+    useEffect(() => {
+        if (view === 'hidden') {
+            const initialTimer = setTimeout(() => {
+                setShowHelloMessage(true);
+                setTimeout(() => setShowHelloMessage(false), 4000); // Hide after 4 seconds
+            }, 3000);
+
+            const interval = setInterval(() => {
+                setShowHelloMessage(true);
+                setTimeout(() => setShowHelloMessage(false), 4000); // Hide after 4 seconds
+            }, 15000);
+
+            return () => {
+                clearTimeout(initialTimer);
+                clearInterval(interval);
+            };
+        } else {
+            setShowHelloMessage(false);
+        }
+    }, [view]);
 
     useEffect(() => {
         const content = pageContent[pathname] || pageContent["/"];
@@ -123,16 +146,16 @@ const ChatWidget = () => {
                     <div className="flex items-center gap-3 mb-3">
                         <img
                             src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100"
-                            className="w-10 h-10 rounded-full object-cover"
+                            className="w-10 h-10 rounded-full object-cover border-2 border-primary-orange"
                             alt="Sophia"
                         />
                         <div className="flex-1">
                             <h3 className="font-bold text-gray-800 text-sm">Sophia</h3>
-                            <p className="text-[10px] text-gray-500 uppercase tracking-wider">AI Hospitality Agent</p>
+                            <p className="text-[10px] text-primary-purple uppercase tracking-wider font-semibold">AI Hospitality Agent</p>
                         </div>
                         <button
                             onClick={closeAll}
-                            className="text-gray-400 hover:text-gray-600 hover:bg-gray-100 p-1.5 rounded-full transition-colors"
+                            className="text-gray-400 hover:text-primary-purple hover:bg-gray-100 p-1.5 rounded-full transition-colors"
                             aria-label="Minimize chat"
                         >
                             <ChevronDown size={20} />
@@ -146,7 +169,7 @@ const ChatWidget = () => {
 
                         <div className="flex gap-2 mb-4">
                             {currentData.buttons.map(btn => (
-                                <button key={btn} className="px-3 py-1.5 border border-[#00a699] text-[#00a699] rounded-full text-[11px] font-bold hover:bg-[#00a699] hover:text-white transition-colors">
+                                <button key={btn} className="px-3 py-1.5 border-2 border-primary-orange text-primary-orange rounded-full text-[11px] font-bold hover:bg-primary-orange hover:text-white transition-colors">
                                     {btn}
                                 </button>
                             ))}
@@ -155,16 +178,16 @@ const ChatWidget = () => {
                         <div className="relative flex items-center">
                             <input
                                 readOnly
-                                placeholder="Ask a question"
-                                className="w-full pl-4 pr-10 py-2.5 bg-white border border-gray-200 rounded-xl text-sm cursor-pointer"
+                                placeholder="Enter a message"
+                                className="w-full pl-4 pr-10 py-2.5 bg-white border border-gray-200 rounded-xl text-sm cursor-pointer focus:border-primary-purple"
                             />
-                            <Send size={18} className="absolute right-3 text-[#00a699]" />
+                            <Send size={18} className="absolute right-3 text-primary-orange" />
                         </div>
                     </div>
 
                     <div className="mt-4 pt-3 border-t border-gray-100 text-center">
                         <p className="text-[10px] text-gray-400">
-                            This chat may be recorded and used in line with our <span className="underline">Privacy Policy</span>
+                            This chat may be recorded and used in line with our <span className="underline cursor-pointer hover:text-primary-purple">Privacy Policy</span>
                         </p>
                     </div>
                 </div>
@@ -172,17 +195,17 @@ const ChatWidget = () => {
 
             {/* STAGE 2: Full Chat UI (from second_chat_UI.png) */}
             {view === 'chat' && (
-                <div className="mb-4 w-[400px] h-[600px] bg-white rounded-t-2xl shadow-2xl border border-gray-100 flex flex-col overflow-hidden animate-in slide-in-from-bottom-5 duration-300">
-                    {/* Green Header */}
-                    <div className="bg-[#00664b] p-4 flex items-center justify-between">
+                <div className="mb-4 w-[400px] h-[600px] bg-white rounded-2xl shadow-2xl border border-gray-100 flex flex-col overflow-hidden animate-in slide-in-from-bottom-5 duration-300">
+                    {/* Purple Header */}
+                    <div className="bg-gradient-to-r from-primary-purple to-purple-700 p-4 flex items-center justify-between rounded-t-2xl">
                         <div className="flex items-center gap-3">
-                            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100" className="w-10 h-10 rounded-full border border-white/20" alt="Sophia" />
+                            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100" className="w-10 h-10 rounded-full border-2 border-white/30" alt="Sophia" />
                             <div className="text-white">
                                 <h3 className="font-bold text-sm">Sophia</h3>
-                                <p className="text-[10px] opacity-80">AI Hospitality Agent</p>
+                                <p className="text-[10px] opacity-90">AI Hospitality Agent</p>
                             </div>
                         </div>
-                        <button onClick={closeAll} className="text-white hover:bg-white/10 p-1 rounded">
+                        <button onClick={closeAll} className="text-white hover:bg-white/10 p-1.5 rounded-full transition-colors">
                             <X size={20} />
                         </button>
                     </div>
@@ -207,7 +230,7 @@ const ChatWidget = () => {
                         {messages.map((msg) => (
                             <div key={msg.id} className={`flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'} animate-in fade-in slide-in-from-bottom-2`}>
                                 <div className={`max-w-[80%] p-3 rounded-2xl text-[13px] shadow-sm ${msg.sender === 'user'
-                                    ? 'bg-[#00a699] text-white rounded-tr-none'
+                                    ? 'bg-primary-orange text-white rounded-tr-none'
                                     : 'bg-white text-gray-800 border border-gray-100 rounded-tl-none'
                                     }`}>
                                     {msg.text}
@@ -223,7 +246,7 @@ const ChatWidget = () => {
                     <div className="p-4 bg-white border-t border-gray-100">
                         <div className="flex gap-2 mb-4">
                             {currentData.buttons.map(btn => (
-                                <button key={btn} className="px-3 py-1.5 border border-[#00a699] text-[#00a699] rounded-full text-[11px] font-bold">
+                                <button key={btn} className="px-3 py-1.5 border-2 border-primary-orange text-primary-orange rounded-full text-[11px] font-bold hover:bg-primary-orange hover:text-white transition-colors">
                                     {btn}
                                 </button>
                             ))}
@@ -248,31 +271,78 @@ const ChatWidget = () => {
                                     value={inputValue}
                                     onChange={(e) => setInputValue(e.target.value)}
                                     placeholder="Enter a message"
-                                    className="w-full pl-4 pr-12 py-3 bg-white border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#00a699]/20"
+                                    className="w-full pl-4 pr-12 py-3 bg-white border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary-purple/20 focus:border-primary-purple"
                                 />
-                                <button type="submit" className="absolute right-3 text-[#00664b] hover:scale-110 transition-transform">
+                                <button type="submit" className="absolute right-3 text-primary-orange hover:scale-110 transition-transform">
                                     <Send size={20} />
                                 </button>
                             </div>
                         </form>
                         <p className="mt-3 text-[10px] text-gray-400 text-center">
-                            This chat may be recorded and used in line with our <span className="underline">Privacy Policy</span>
+                            This chat may be recorded and used in line with our <span className="underline cursor-pointer hover:text-primary-purple">Privacy Policy</span>
                         </p>
                     </div>
                 </div>
             )}
 
-            {/* Launcher Button (Circular Avatar) */}
-            <button
-                onClick={() => view === 'chat' ? closeAll() : view === 'hidden' ? showIntro() : openChat()}
-                className="w-16 h-16 rounded-full overflow-hidden shadow-xl border-4 border-blue-600 hover:scale-105 transition-transform"
-            >
-                <img
-                    src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150"
-                    className="w-full h-full object-cover"
-                    alt="Sophia"
-                />
-            </button>
+            {/* Hello Message Bubble - appears periodically */}
+            {showHelloMessage && view === 'hidden' && (
+                <div className="absolute bottom-20 right-0 animate-in slide-in-from-bottom-5 fade-in duration-500">
+                    <div className="relative">
+                        {/* Main Speech Bubble - Glassmorphic */}
+                        <div className="relative rounded-3xl shadow-2xl p-5 min-w-[240px]" style={{
+                            backdropFilter: 'blur(5px) saturate(180%)',
+                            WebkitBackdropFilter: 'blur(5px) saturate(180%)',
+                            backgroundColor: 'rgba(247, 248, 250, 0.49)',
+                            border: '1px solid rgba(255, 255, 255, 0.125)'
+                        }}>
+                            
+                            {/* Content */}
+                            <div className="relative z-10">
+                                <div className="flex items-center gap-2 mb-2">
+                                    <span className="text-2xl animate-wave">👋</span>
+                                    <p className="text-base font-bold text-gray-800">Hello there!</p>
+                                </div>
+                                <p className="text-sm text-gray-600 leading-relaxed">
+                                    Need help? I'm Sophia, your AI assistant. Click to chat!
+                                </p>
+                            </div>
+
+                            {/* Decorative dot */}
+                            <div className="absolute top-4 right-4 w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {/* Launcher Button (Circular Avatar) with Bubble Animation */}
+            <div className="relative">
+                {/* Animated Bubbles - only show when chat is hidden */}
+                {view === 'hidden' && (
+                    <>
+                        {/* Bubble 1 */}
+                        <div className="absolute -top-2 -right-2 w-4 h-4 bg-primary-orange rounded-full animate-bubble-1 opacity-70"></div>
+                        {/* Bubble 2 */}
+                        <div className="absolute -top-4 right-2 w-3 h-3 bg-primary-orange/80 rounded-full animate-bubble-2 opacity-60"></div>
+                        {/* Bubble 3 */}
+                        <div className="absolute -top-6 right-6 w-2 h-2 bg-primary-orange/60 rounded-full animate-bubble-3 opacity-50"></div>
+                        
+                        {/* Pulsing Ring */}
+                        <div className="absolute inset-0 rounded-full border-4 border-primary-purple animate-ping opacity-20"></div>
+                    </>
+                )}
+                
+                <button
+                    onClick={() => view === 'chat' ? closeAll() : view === 'hidden' ? showIntro() : openChat()}
+                    className="w-16 h-16 rounded-full overflow-hidden shadow-xl border-4 border-primary-purple hover:scale-105 transition-transform relative z-10"
+                >
+                    <img
+                        src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150"
+                        className="w-full h-full object-cover"
+                        alt="Sophia"
+                    />
+                </button>
+            </div>
         </div>
     );
 };

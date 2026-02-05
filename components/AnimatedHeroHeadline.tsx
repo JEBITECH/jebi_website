@@ -14,7 +14,7 @@ const AnimatedHeroHeadline = () => {
     },
     {
       col1: 'Delivering',
-      col3: 'hospitality tech companies',
+      col3: 'hospitality tech firms',
       color: 'text-primary-purple'
     }
   ]
@@ -39,8 +39,8 @@ const AnimatedHeroHeadline = () => {
       </div>
 
       {/* Visible animated headline */}
-      <p className="text-lg leading-8 text-gray-900 max-w-7xl">
-        <span className="block mb-2 text-2xl font-medium">
+      <p className="text-base sm:text-lg md:text-xl leading-7 sm:leading-8 text-gray-900 max-w-7xl">
+        <span className="block mb-2 sm:mb-3 text-lg sm:text-xl md:text-2xl font-medium">
           A strategic growth partner,{' '}
           <motion.span
             key={`inline-${state}`}
@@ -71,13 +71,13 @@ const AnimatedHeroHeadline = () => {
           transition={{ duration: 0.5, ease: 'easeInOut', delay: 0.15 }}
           className="inline-block"
         >
-          <span className="text-gray-900 text-2xl font-medium">end-to-end management for</span>
+          <span className="text-gray-900 text-lg sm:text-xl md:text-2xl font-medium">end-to-end management for</span>
           {' '}
           <motion.span
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.3, delay: 0.35 }}
-            className={`font-semibold ${currentState.color} transition-colors duration-500 text-2xl`}
+            className={`font-semibold ${currentState.color} transition-colors duration-500 text-lg sm:text-xl md:text-2xl`}
           >
             {currentState.col3}
           </motion.span>

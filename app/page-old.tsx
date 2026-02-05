@@ -548,7 +548,7 @@ export default function Home() {
                 {[
                   'Hotel Chain',
                   'Resort Group', 
-                  'Property Mgmt',
+                  'Property Management',
                   'Vacation Rentals',
                   'Boutique Hotels',
                   'Enterprise'

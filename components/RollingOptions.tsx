@@ -71,9 +71,9 @@ export default function RollingOptions({
           return (
             <motion.div
               key={option.id}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }}
+              transition={{ delay: index * 0.12, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
               className="bg-white rounded-2xl shadow-md border border-gray-100 overflow-hidden hover:shadow-lg transition-shadow duration-300"
             >
               {/* Accordion Header */}
@@ -89,7 +89,7 @@ export default function RollingOptions({
                 </div>
                 <motion.div
                   animate={{ rotate: isOpen ? 180 : 0 }}
-                  transition={{ duration: 0.3 }}
+                  transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
                 >
                   <ChevronDown className="w-5 h-5" />
                 </motion.div>
@@ -102,7 +102,7 @@ export default function RollingOptions({
                     initial={{ height: 0, opacity: 0 }}
                     animate={{ height: 'auto', opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.3, ease: 'easeInOut' }}
+                    transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
                     className="overflow-hidden"
                   >
                     <div className="p-4 bg-gradient-to-b from-gray-50 to-white">
@@ -153,7 +153,7 @@ export default function RollingOptions({
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
               className="text-center"
             >
               <div className="mb-4">

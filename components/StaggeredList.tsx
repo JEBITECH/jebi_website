@@ -15,7 +15,8 @@ const containerVariants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.1
+      staggerChildren: 0.15,
+      delayChildren: 0.1
     }
   }
 }
@@ -23,16 +24,16 @@ const containerVariants = {
 const itemVariants = {
   hidden: { 
     opacity: 0, 
-    y: 40,
-    scale: 0.9
+    y: 50,
+    scale: 0.95
   },
   visible: { 
     opacity: 1, 
     y: 0,
     scale: 1,
     transition: {
-      duration: 0.6,
-      ease: [0.16, 1, 0.3, 1] // Modern easing
+      duration: 0.8,
+      ease: [0.16, 1, 0.3, 1]
     }
   }
 }
@@ -44,7 +45,8 @@ export default function StaggeredList({
 }: StaggeredListProps) {
   const [ref, inView] = useInView({
     triggerOnce: true,
-    threshold: 0.1
+    threshold: 0.15,
+    rootMargin: '0px 0px'
   })
 
   return (

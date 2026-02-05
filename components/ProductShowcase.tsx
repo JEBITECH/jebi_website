@@ -3,6 +3,8 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import { useInView } from "react-intersection-observer";
+import { motion, AnimatePresence } from "framer-motion";
 import AnimatedSection from "./AnimatedSection";
 import { stages } from "@/app/products/page";
 
@@ -22,25 +24,32 @@ const stageToProductMap: { [key: number]: string } = {
   5: 'virtue-connect-erp'
 };
 
-export default function ProductShowcase({ showHeader = true, autoRotate = true, rotationInterval = 8000, className = "" }: ProductShowcaseProps) {
+export default function ProductShowcase({ showHeader = true, autoRotate = true, rotationInterval = 5000, className = "" }: ProductShowcaseProps) {
   const router = useRouter();
   const [activeIndex, setActiveIndex] = useState(0);
   const activeStage = stages[activeIndex];
+  
+  // Track if component is in view
+  const { ref, inView } = useInView({
+    threshold: 0.3,
+    triggerOnce: false
+  });
 
   useEffect(() => {
-    if (!autoRotate) return;
+    if (!autoRotate || !inView) return;
 
     const interval = setInterval(() => {
       setActiveIndex((prev) => (prev + 1) % stages.length);
     }, rotationInterval);
 
     return () => clearInterval(interval);
-  }, [autoRotate, rotationInterval]);
+  }, [autoRotate, rotationInterval, inView]);
 
   return (
-    <AnimatedSection direction="up">
-      <div className={`bg-white ${className}`}>
-        <div className="container-custom px-4 sm:px-6 lg:min-h-screen lg:flex lg:flex-col lg:justify-center lg:py-12">
+    <div ref={ref}>
+      <AnimatedSection direction="up">
+        <div className={`bg-white ${className}`}>
+          <div className="container-custom px-4 sm:px-6 lg:min-h-screen lg:flex lg:flex-col lg:justify-center lg:py-12">
           {/* Header */}
           {showHeader && (
             <div className="text-center mb-6 sm:mb-8 lg:mb-10">
@@ -58,7 +67,15 @@ export default function ProductShowcase({ showHeader = true, autoRotate = true, 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
               {/* LEFT SIDE - Pain & Solution Cards + CTA Button */}
               <div className="p-4 sm:p-6 md:p-8 lg:p-10 xl:p-12 flex flex-col justify-between bg-white">
-                <div className="w-full space-y-4 sm:space-y-5 lg:space-y-6">
+                <AnimatePresence mode="wait">
+                  <motion.div 
+                    key={activeIndex}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: 20 }}
+                    transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                    className="w-full space-y-4 sm:space-y-5 lg:space-y-6"
+                  >
                   {/* PAIN Card */}
                   <div className="relative">
                     {/* Connecting Line - Hidden on mobile */}
@@ -119,7 +136,8 @@ export default function ProductShowcase({ showHeader = true, autoRotate = true, 
                       </div>
                     </div>
                   </div>
-                </div>
+                </motion.div>
+                </AnimatePresence>
 
                 {/* CTA Button */}
                 <div className="mt-4 sm:mt-5 lg:mt-6">
@@ -141,13 +159,24 @@ export default function ProductShowcase({ showHeader = true, autoRotate = true, 
               {/* RIGHT SIDE - Product Image */}
               <div className="relative overflow-hidden min-h-[250px] sm:min-h-[350px] md:min-h-[450px] lg:min-h-[500px] flex items-center justify-center bg-gradient-to-br from-purple-50 to-blue-50 rounded-b-2xl sm:rounded-b-3xl lg:rounded-b-none lg:rounded-r-2xl lg:sm:rounded-r-3xl">
                 <div className="absolute inset-0 bg-gradient-to-br from-purple-100/20 to-blue-100/20"></div>
-                <Image 
-                  src={activeStage.image} 
-                  alt={activeStage.title} 
-                  fill
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={activeIndex}
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 1.05 }}
+                    transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                    className="relative w-full h-full"
+                  >
+                    <Image 
+                      src={activeStage.image} 
+                      alt={activeStage.title} 
+                      fill
                   priority 
                   className="object-cover lg:object-fill"
                 />
+                  </motion.div>
+                </AnimatePresence>
               </div>
             </div>
           </div>
@@ -289,5 +318,6 @@ export default function ProductShowcase({ showHeader = true, autoRotate = true, 
         </div>
       </div>
     </AnimatedSection>
+    </div>
   );
 }

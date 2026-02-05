@@ -14,31 +14,31 @@ interface AnimatedSectionProps {
 
 const variants = {
   up: {
-    hidden: { opacity: 0, y: 80, scale: 0.95 },
+    hidden: { opacity: 0, y: 60, scale: 0.97 },
     visible: { opacity: 1, y: 0, scale: 1 }
   },
   down: {
-    hidden: { opacity: 0, y: -80, scale: 0.95 },
+    hidden: { opacity: 0, y: -60, scale: 0.97 },
     visible: { opacity: 1, y: 0, scale: 1 }
   },
   left: {
-    hidden: { opacity: 0, x: -80, scale: 0.95 },
+    hidden: { opacity: 0, x: -60, scale: 0.97 },
     visible: { opacity: 1, x: 0, scale: 1 }
   },
   right: {
-    hidden: { opacity: 0, x: 80, scale: 0.95 },
+    hidden: { opacity: 0, x: 60, scale: 0.97 },
     visible: { opacity: 1, x: 0, scale: 1 }
   },
   fade: {
-    hidden: { opacity: 0, scale: 0.9 },
+    hidden: { opacity: 0, scale: 0.95 },
     visible: { opacity: 1, scale: 1 }
   },
   scale: {
-    hidden: { opacity: 0, scale: 0.8 },
+    hidden: { opacity: 0, scale: 0.85 },
     visible: { opacity: 1, scale: 1 }
   },
   rotate: {
-    hidden: { opacity: 0, rotate: -10, scale: 0.8 },
+    hidden: { opacity: 0, rotate: -8, scale: 0.9 },
     visible: { opacity: 1, rotate: 0, scale: 1 }
   }
 }
@@ -48,12 +48,12 @@ export default function AnimatedSection({
   className = '', 
   delay = 0, 
   direction = 'up',
-  duration = 0.6 
+  duration = 0.8 
 }: AnimatedSectionProps) {
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
-    rootMargin: '-50px 0px'
+    rootMargin: '0px 0px'
   })
 
   return (

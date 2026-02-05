@@ -935,7 +935,7 @@ function ProductsContent() {
                 <span className="text-primary-purple text-sm font-semibold">Enterprise-Grade Infrastructure</span>
               </div>
               <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-5xl font-heading mb-6">
-                Built for <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-purple to-primary-orange">Scale & Reliability</span>
+                Built for <span className="text-primary-purple">Scale & Reliability</span>
               </h2>
               <p className="text-xl leading-8 text-gray-600">
                 Modern architecture principles and cutting-edge technology ensure your platform grows seamlessly with your business
@@ -1017,10 +1017,10 @@ function ProductsContent() {
                 { metric: '24/7', label: 'Support', icon: CogIcon }
               ].map((stat, index) => (
                 <div key={stat.label} className="bg-white rounded-xl p-6 shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-primary-purple/30 text-center group">
-                  <div className="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-br from-primary-purple to-purple-700 rounded-xl mb-4 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                  <div className="inline-flex items-center justify-center w-12 h-12 bg-primary-purple rounded-xl mb-4 group-hover:scale-110 transition-transform duration-300 shadow-lg">
                     <stat.icon className="w-6 h-6 text-white" />
                   </div>
-                  <div className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary-purple to-primary-orange mb-2">
+                  <div className="text-3xl font-bold text-primary-purple mb-2">
                     {stat.metric}
                   </div>
                   <div className="text-sm text-gray-600 font-medium">{stat.label}</div>

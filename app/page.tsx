@@ -354,7 +354,7 @@ export default function Home() {
               </div>
 
               <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-gray-900 font-heading mb-4 sm:mb-6 px-4">Our Experience</h2>
-              <p className="text-base sm:text-lg md:text-xl leading-7 sm:leading-8 text-gray-600 px-4">Proven track record across different markets and scales</p>
+              {/* <p className="text-base sm:text-lg md:text-xl leading-7 sm:leading-8 text-gray-600 px-4">Proven track record across different markets and scales</p> */}
               <p className="text-base sm:text-lg md:text-xl leading-7 sm:leading-8 text-gray-600 px-4">Join thousands of hospitality businesses that trust JebiTech</p>
             </div>
           </AnimatedSection>

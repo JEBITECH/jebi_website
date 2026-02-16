@@ -139,7 +139,7 @@ const TechnologyTeamSection = () => {
                                 </div>
 
                                 {/* The Description Text */}
-                                <p className="text-[#4338ca] font-medium text-lg leading-snug max-w-md">
+                                <p className="text-[#1e1b4b] font-medium text-lg leading-snug max-w-md">
                                     {item.text}
                                 </p>
                             </motion.div>

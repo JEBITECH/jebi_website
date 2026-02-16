@@ -1,6 +1,6 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { Laptop, Palmtree, Globe, BarChart3, Building2, Rocket, Settings, Users, Package } from "lucide-react";
+import { Laptop, Palmtree, Globe, BarChart3, Building2, Rocket, Settings, Users, Package, Briefcase } from "lucide-react";
 import AnimatedSection from "@/components/AnimatedSection";
 import ParallaxSection from "@/components/ParallaxSection";
 import StaggeredList from "@/components/StaggeredList";
@@ -49,28 +49,36 @@ const rollingOptions = [
 // Experience Data
 const experienceData = [
   {
-    category: "Tech Companies",
+    category: "SAAS Tech providers in Hospitality",
     location: "USA & Europe",
-    description: "Custom Development",
-    units: "30 to 30,000 units",
+    description: "Dedicated development teams",
+    units: "5000+ properties, 100k+ rooms",
     icon: Laptop,
     color: "bg-blue-500",
   },
   {
-    category: "Product Implementation",
+    category: "Property Management companies",
     location: "UAE & USA",
-    description: "Vacation rental solutions",
-    units: "18 to 120 units per group",
-    icon: Palmtree,
-    color: "bg-green-500",
+    description: "In house SAAS product implemented",
+    units: "3000+ units",
+    icon: Building2,
+    color: "bg-purple-500",
   },
   {
-    category: "Other Services",
+    category: "Property management companies",
+    location: "USA",
+    description: "Custom development",
+    units: "1000+ units",
+    icon: Building2,
+    color: "bg-pink-500",
+  },
+  {
+    category: "Vacation rental companies",
     location: "Europe",
-    description: "Comprehensive support",
-    units: "10 to 100k units",
-    icon: Globe,
-    color: "bg-purple-500",
+    description: "Implementations Services",
+    units: "30k+ units",
+    icon: Palmtree,
+    color: "bg-orange-500",
   },
 ];
 
@@ -96,9 +104,9 @@ const testimonials = [
 ];
 
 const socialProof = {
-  clients: "500+",
-  properties: "10,000+",
-  countries: "25+",
+  clients: "10+",
+  properties: "5k+",
+  countries: "5",
   uptime: "99.9%",
 };
 
@@ -191,14 +199,10 @@ export default function Home() {
               </div>
 
               {/* Main Heading */}
-              <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-gray-900 font-heading mb-2">
-                Ready-to-Deploy Hospitality Solutions
-              </h2>
+              <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-gray-900 font-heading mb-2">Ready-to-Deploy Hospitality Solutions</h2>
 
               {/* Subheading */}
-              <p className="text-base leading-6 text-gray-600">
-                Enterprise-grade products for vacation rentals and property management operations
-              </p>
+              <p className="text-base leading-6 text-gray-600">Enterprise-grade products for vacation rentals and property management operations</p>
             </div>
           </AnimatedSection>
         </div>
@@ -209,9 +213,15 @@ export default function Home() {
       <div className="bg-white section-padding">
         <div className="container-custom px-4 sm:px-6">
           <AnimatedSection direction="up">
-            <div className="mx-auto max-w-2xl text-center mb-8 sm:mb-12 md:mb-16">
-              <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-gray-900 font-heading">Our Solutions</h2>
-              <p className="mt-4 sm:mt-6 text-base sm:text-lg leading-7 sm:leading-8 text-gray-600 px-4 sm:px-0">Comprehensive technology solutions for every stage of your growth</p>
+            <div className="mx-auto max-w-3xl text-center mb-8 sm:mb-12 md:mb-16">
+              {/* Badge */}
+              <div className="inline-flex items-center gap-2 px-6 py-3 bg-gray-100 rounded-full mb-3 border border-gray-200">
+                <Briefcase className="w-4 h-4 text-primary-purple" />
+                <span className="text-primary-purple text-sm font-semibold">Our Services</span>
+              </div>
+
+              <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-gray-900 font-heading mb-4">Technology Solutions for Hospitality</h2>
+              <p className="text-base sm:text-lg leading-7 text-gray-600 px-4 sm:px-0">Comprehensive development services tailored to property management and hospitality technology needs</p>
             </div>
           </AnimatedSection>
 
@@ -222,12 +232,18 @@ export default function Home() {
       </div>
       {/* 3. Offering & Delivering Section */}
       <ParallaxSection speed={0.3}>
-        <div className="bg-secondary-gray section-padding">
-          <div className="container-custom">
+        <div className="bg-primary-purple section-padding relative overflow-hidden">
+          {/* Decorative background elements */}
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            <div className="absolute top-0 right-0 w-96 h-96 bg-primary-orange/10 rounded-full blur-3xl"></div>
+            <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl"></div>
+          </div>
+
+          <div className="container-custom relative z-10">
             <AnimatedSection direction="up">
               <div className="mx-auto max-w-2xl text-center mb-16">
-                <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-gray-900 font-heading">Who We Serve</h2>
-                <p className="mt-6 text-lg leading-8 text-gray-600">Strategic partnerships across the hospitality ecosystem</p>
+                <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white font-heading">Who We Serve</h2>
+                <p className="mt-6 text-lg leading-8 text-white/90">Strategic partnerships across the hospitality ecosystem</p>
               </div>
             </AnimatedSection>
 
@@ -342,43 +358,40 @@ export default function Home() {
             </div>
           </AnimatedSection>
 
-          <StaggeredList className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+          <StaggeredList className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
             {experienceData.map((experience, index) => (
               <div
                 key={experience.category}
-                className="relative bg-white rounded-2xl p-6 sm:p-8 text-center shadow-lg border border-gray-100 transition-all duration-300 overflow-hidden flex flex-col h-full hover:scale-105"
+                className="relative bg-white rounded-2xl p-6 text-center shadow-md border border-gray-100 transition-all duration-300 flex flex-col hover:shadow-xl"
               >
-                {/* Content */}
-                <div className="relative z-10 flex flex-col flex-1">
-                  {/* Icon with enhanced styling */}
-                  <div className="relative mx-auto w-16 h-16 sm:w-20 sm:h-20 mb-4 sm:mb-6">
-                    <div className={`absolute inset-0 ${experience.color} rounded-2xl blur-xl opacity-40 transition-opacity duration-300`}></div>
-                    <div className={`relative w-16 h-16 sm:w-20 sm:h-20 ${experience.color} rounded-2xl flex items-center justify-center shadow-lg transition-all duration-300`}>
-                      <experience.icon className="w-8 h-8 sm:w-10 sm:h-10 text-white" strokeWidth={2} />
-                    </div>
+                {/* Icon */}
+                <div className="relative mx-auto w-16 h-16 mb-4">
+                  <div className={`w-16 h-16 ${experience.color} rounded-2xl flex items-center justify-center shadow-lg`}>
+                    <experience.icon className="w-8 h-8 text-white" strokeWidth={2} />
                   </div>
+                </div>
 
-                  {/* Category */}
-                  <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3 transition-colors duration-300 px-2">{experience.category}</h3>
+                {/* Category Title */}
+                <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-3 leading-tight min-h-[3rem]">
+                  {experience.category}
+                </h3>
 
-                  {/* Location Badge */}
-                  <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 bg-gradient-to-r from-primary-orange/10 to-primary-orange/20 rounded-full mb-4 mx-auto">
-                    <svg className="w-3 h-3 sm:w-4 sm:h-4 text-primary-orange flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
-                    </svg>
-                    <span className="text-primary-orange font-bold text-xs sm:text-sm whitespace-nowrap">{experience.location}</span>
-                  </div>
+                {/* Location Badge */}
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-orange-50 rounded-full mb-3 mx-auto">
+                  <svg className="w-3 h-3 text-primary-orange flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
+                  </svg>
+                  <span className="text-primary-orange font-semibold text-xs">{experience.location}</span>
+                </div>
 
-                  {/* Description */}
-                  <p className="text-gray-600 mb-6 text-sm sm:text-base leading-relaxed px-2">{experience.description}</p>
+                {/* Description */}
+                <p className="text-gray-600 mb-4 text-sm leading-relaxed min-h-[2.5rem]">
+                  {experience.description}
+                </p>
 
-                  {/* Spacer to push units card to bottom */}
-                  <div className="flex-1"></div>
-
-                  {/* Units Card */}
-                  <div className="bg-gradient-to-br from-gray-50 to-white rounded-xl p-3 sm:p-4 border border-gray-100 shadow-sm transition-all duration-300">
-                    <p className="text-xs sm:text-sm font-bold text-primary-purple">{experience.units}</p>
-                  </div>
+                {/* Units - Bottom */}
+                <div className="mt-auto pt-4 border-t border-gray-100">
+                  <p className="text-sm font-bold text-gray-900">{experience.units}</p>
                 </div>
               </div>
             ))}
@@ -387,7 +400,7 @@ export default function Home() {
       </div>
 
       {/* 8. Client Testimonials */}
-      <ParallaxSection speed={0.2}>
+      {/* <ParallaxSection speed={0.2}>
         <div className="bg-secondary-gray section-padding">
           <div className="container-custom">
             <AnimatedSection direction="up">
@@ -428,7 +441,7 @@ export default function Home() {
             </StaggeredList>
           </div>
         </div>
-      </ParallaxSection>
+      </ParallaxSection> */}
 
       {/* 9. Social Proof */}
       <div className="bg-primary-purple section-padding relative overflow-hidden">
@@ -462,9 +475,9 @@ export default function Home() {
 
           <StaggeredList className="grid grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-12 mb-12 sm:mb-16">
             {[
-              { number: socialProof.clients, label: "Happy Clients", icon: Users },
+              { number: socialProof.clients, label: "Products", icon: Package },
               { number: socialProof.properties, label: "Properties Managed", icon: Building2 },
-              { number: socialProof.countries, label: "Countries", icon: Globe },
+              { number: socialProof.countries, label: "Continents", icon: Globe },
               { number: socialProof.uptime, label: "Uptime", icon: BarChart3 },
             ].map((stat) => (
               <AnimatedSection key={stat.label} direction="up" delay={0.1}>

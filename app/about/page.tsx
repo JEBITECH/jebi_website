@@ -912,13 +912,11 @@ export default function About() {
           </StaggeredList>
 
           {/* Testimonial */}
-          <AnimatedSection direction="up" delay={0.4}>
+          {/* <AnimatedSection direction="up" delay={0.4}>
             <div className="max-w-4xl mx-auto bg-gradient-to-br from-primary-purple to-purple-700 rounded-2xl p-10 md:p-12 shadow-2xl relative overflow-hidden">
-              {/* Decorative Elements */}
               <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2"></div>
               <div className="absolute bottom-0 left-0 w-48 h-48 bg-primary-orange/10 rounded-full translate-y-1/2 -translate-x-1/2"></div>
               
-              {/* Quote Icon */}
               <div className="relative z-10">
                 <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center mx-auto mb-6">
                   <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
@@ -935,9 +933,9 @@ export default function About() {
                     <div className="text-white/80 text-sm">VP Operations, Luxury Resort Group</div>
                   </footer>
                 </blockquote>
-              </div>
+              </div> 
             </div>
-          </AnimatedSection>
+          </AnimatedSection> */}
         </div>
       </div>
 

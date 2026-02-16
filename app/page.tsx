@@ -183,20 +183,20 @@ export default function Home() {
       <div className="bg-white py-2">
         <div className="container-custom px-4 sm:px-6">
           <AnimatedSection direction="up">
-            <div className="mx-auto max-w-3xl text-center mb-8">
+            <div className="mx-auto max-w-3xl text-center mb-3">
               {/* Badge */}
-              <div className="inline-flex items-center gap-2 px-6 py-3 bg-gray-100 rounded-full mb-6 border border-gray-200">
+              <div className="inline-flex items-center gap-2 px-6 py-3 bg-gray-100 rounded-full mb-3 border border-gray-200">
                 <Package className="w-4 h-4 text-primary-purple" />
                 <span className="text-primary-purple text-sm font-semibold">SAAS Products</span>
               </div>
 
               {/* Main Heading */}
-              <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-gray-900 font-heading mb-4">
+              <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-gray-900 font-heading mb-2">
                 Ready-to-Deploy Hospitality Solutions
               </h2>
 
               {/* Subheading */}
-              <p className="text-lg leading-8 text-gray-600">
+              <p className="text-base leading-6 text-gray-600">
                 Enterprise-grade products for vacation rentals and property management operations
               </p>
             </div>

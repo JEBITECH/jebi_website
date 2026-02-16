@@ -179,8 +179,32 @@ export default function Home() {
           </div>
         </div>
       </div>
-      {/*  SAAS products  */}
-      <ProductShowcase showHeader={true} autoRotate={true} rotationInterval={8000} />
+      {/* SAAS Products Section */}
+      <div className="bg-white py-2">
+        <div className="container-custom px-4 sm:px-6">
+          <AnimatedSection direction="up">
+            <div className="mx-auto max-w-3xl text-center mb-8">
+              {/* Badge */}
+              <div className="inline-flex items-center gap-2 px-6 py-3 bg-gray-100 rounded-full mb-6 border border-gray-200">
+                <Package className="w-4 h-4 text-primary-purple" />
+                <span className="text-primary-purple text-sm font-semibold">SAAS Products</span>
+              </div>
+
+              {/* Main Heading */}
+              <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-gray-900 font-heading mb-4">
+                Ready-to-Deploy Hospitality Solutions
+              </h2>
+
+              {/* Subheading */}
+              <p className="text-lg leading-8 text-gray-600">
+                Enterprise-grade products for vacation rentals and property management operations
+              </p>
+            </div>
+          </AnimatedSection>
+        </div>
+      </div>
+
+      <ProductShowcase showHeader={false} autoRotate={true} rotationInterval={8000} />
       {/* 2. Rolling Options Section */}
       <div className="bg-white section-padding">
         <div className="container-custom px-4 sm:px-6">

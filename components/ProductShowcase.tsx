@@ -49,7 +49,7 @@ export default function ProductShowcase({ showHeader = true, autoRotate = true, 
     <div ref={ref}>
       <AnimatedSection direction="up">
         <div className={`bg-white ${className}`}>
-          <div className="container-custom px-4 sm:px-6 lg:min-h-screen lg:flex lg:flex-col lg:justify-center lg:py-12">
+          <div className="container-custom px-4 sm:px-6 py-8">
           {/* Header */}
           {showHeader && (
             <div className="text-center mb-6 sm:mb-8 lg:mb-10">

@@ -435,9 +435,9 @@ const services: ServiceCard[] = [
     position: { x: 180, y: 0 }
   },
   {
-    id: 'Other services',
-    title: 'Other services',
-    description: 'Data Alysis / System user service for any department.',
+    id: 'Intergerationservices',
+    title: ' Implementation and Intergeration services',
+    description: 'Solution implementation/ System configuration/ Onboarding & Rollout  /Training.',
     icon: <PlusSquare size={20} />,
     color: 'bg-purple-500',
     position: { x: 0, y: 180 }

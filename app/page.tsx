@@ -355,9 +355,10 @@ export default function Home() {
 
               <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-gray-900 font-heading mb-4 sm:mb-6 px-4">Our Experience</h2>
               <p className="text-base sm:text-lg md:text-xl leading-7 sm:leading-8 text-gray-600 px-4">Proven track record across different markets and scales</p>
+              <p className="text-base sm:text-lg md:text-xl leading-7 sm:leading-8 text-gray-600 px-4">Join thousands of hospitality businesses that trust JebiTech</p>
             </div>
           </AnimatedSection>
-
+         
           <StaggeredList className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
             {experienceData.map((experience, index) => (
               <div
@@ -444,17 +445,17 @@ export default function Home() {
       </ParallaxSection> */}
 
       {/* 9. Social Proof */}
-      <div className="bg-primary-purple section-padding relative overflow-hidden">
-        {/* Decorative background elements */}
+      {/* <div className="bg-primary-purple section-padding relative overflow-hidden">
+      
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div className="absolute top-0 right-0 w-96 h-96 bg-primary-orange/10 rounded-full blur-3xl"></div>
           <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl"></div>
         </div>
 
-        <div className="container-custom relative z-10 px-4 sm:px-6">
+         <div className="container-custom relative z-10 px-4 sm:px-6">
           <AnimatedSection direction="up">
             <div className="mx-auto max-w-3xl text-center mb-12 sm:mb-16">
-              {/* Badge */}
+        
               <div
                 className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6"
                 style={{
@@ -482,22 +483,20 @@ export default function Home() {
             ].map((stat) => (
               <AnimatedSection key={stat.label} direction="up" delay={0.1}>
                 <div className="text-center">
-                  {/* Icon */}
+               
                   <div className="mb-3">
                     <stat.icon className="w-8 h-8 sm:w-10 sm:h-10 text-white/60 mx-auto" strokeWidth={1.5} />
                   </div>
 
-                  {/* Number */}
                   <div className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-2">{stat.number}</div>
 
-                  {/* Label */}
+              
                   <div className="text-sm sm:text-base text-white/80 font-medium">{stat.label}</div>
                 </div>
               </AnimatedSection>
             ))}
           </StaggeredList>
 
-          {/* Client Logos */}
           <AnimatedSection direction="up" delay={0.4}>
             <div>
               <p className="text-center text-white/90 text-base sm:text-lg mb-8 font-medium">Trusted by leading hospitality brands</p>
@@ -529,7 +528,7 @@ export default function Home() {
             </div>
           </AnimatedSection>
         </div>
-      </div>
+      </div> */}
 
       {/* 10. Final CTA */}
       <div className="bg-white section-padding">

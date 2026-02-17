@@ -1,14 +1,12 @@
 'use client'
 
 import { useState } from 'react'
-import Link from 'next/link'
 import { 
   EnvelopeIcon, 
-  PhoneIcon, 
+  PhoneIcon,
   MapPinIcon,
   ClockIcon,
   ChatBubbleLeftRightIcon,
-  GlobeAltIcon,
   CheckCircleIcon,
   ExclamationCircleIcon,
   BuildingOfficeIcon,
@@ -44,10 +42,10 @@ const offices = [
   {
     name: "Pune Office",
     address: '12, Sweet Watervilla, Amanora\nPune, India',
-    phone: '+91 (555) 123-4567',
+    phone: '+91 20 1234 5678',
     email: 'sales@jebitech.com',
-    hours: 'Mon-Fri: 9:00 AM - 6:00 PM IST',
-    timezone: 'Indian Standard Time',
+    hours: 'Mon-Fri: 9:00 AM - 6:00 PM',
+    timezone: 'Indian Standard Time (IST)',
     coordinates: { lat: 18.514794, lng: 73.94373 },
     isPrimary: true
   }
@@ -515,7 +513,7 @@ export default function Contact() {
         </div>
       </div>
 
-      {/* 2. Contact Details & Offices */}
+      {/* 2. Contact Details & Office Location - Combined */}
       <div className="relative bg-white section-padding overflow-hidden">
         {/* Background Elements */}
         <div className="absolute inset-0 opacity-5">
@@ -528,7 +526,7 @@ export default function Contact() {
         
         <div className="container-custom relative z-10">
           <AnimatedSection direction="up">
-            <div className="mx-auto max-w-2xl text-center mb-16">
+            <div className="mx-auto max-w-4xl text-center mb-12">
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-primary-purple/10 to-primary-orange/10 rounded-full border border-primary-purple/20 mb-6">
                 <BuildingOfficeIcon className="w-5 h-5 text-primary-purple" />
                 <span className="text-primary-purple text-sm font-semibold">Our Office</span>
@@ -542,10 +540,11 @@ export default function Contact() {
             </div>
           </AnimatedSection>
           
-          <StaggeredList className="max-w-2xl mx-auto">
-            {offices.map((office) => (
-              <div key={office.name} className="flex">
-                <div className="bg-white rounded-2xl p-8 shadow-xl border border-gray-100 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 flex flex-col w-full relative overflow-hidden">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch">
+            {/* Office Details Card */}
+            <AnimatedSection direction="left">
+              {offices.map((office) => (
+                <div key={office.name} className="bg-white rounded-2xl p-6 md:p-8 shadow-xl border border-gray-100 transition-all duration-300 hover:shadow-2xl h-full flex flex-col relative overflow-hidden">
                   {office.isPrimary && (
                     <div className="absolute top-0 right-0">
                       <div className="bg-gradient-to-br from-primary-orange to-orange-600 text-white px-6 py-2 text-xs font-bold shadow-lg" style={{ clipPath: 'polygon(0 0, 100% 0, 100% 100%, 20% 100%)' }}>
@@ -554,79 +553,74 @@ export default function Contact() {
                     </div>
                   )}
                   
-                  <h3 className="text-2xl font-bold text-gray-900 mb-8">{office.name}</h3>
+                  <h3 className="text-2xl font-bold text-gray-900 mb-6">{office.name}</h3>
                   
-                  <div className="space-y-4 flex-1">
+                  <div className="space-y-5 flex-1">
                     <div className="flex items-start">
-                      <div className="w-10 h-10 bg-gradient-to-br from-primary-purple to-purple-700 rounded-lg flex items-center justify-center flex-shrink-0 mr-4 shadow-md">
-                        <MapPinIcon className="h-5 w-5 text-white" />
+                      <div className="w-12 h-12 bg-gradient-to-br from-primary-purple to-purple-700 rounded-lg flex items-center justify-center flex-shrink-0 mr-4 shadow-md">
+                        <MapPinIcon className="h-6 w-6 text-white" />
                       </div>
-                      <div className="text-gray-600 text-sm whitespace-pre-line leading-relaxed">{office.address}</div>
-                    </div>
-                    
-                    <div className="flex items-center">
-                      <div className="w-10 h-10 bg-gradient-to-br from-primary-purple to-purple-700 rounded-lg flex items-center justify-center flex-shrink-0 mr-4 shadow-md">
-                        <PhoneIcon className="h-5 w-5 text-white" />
+                      <div className="flex-1">
+                        <div className="text-sm font-semibold text-gray-900 mb-1">Address</div>
+                        <div className="text-gray-600 text-base whitespace-pre-line leading-relaxed">{office.address}</div>
                       </div>
-                      <a href={`tel:${office.phone}`} className="text-gray-600 text-sm hover:text-primary-orange transition-colors font-medium">
-                        {office.phone}
-                      </a>
-                    </div>
-                    
-                    <div className="flex items-center">
-                      <div className="w-10 h-10 bg-gradient-to-br from-primary-purple to-purple-700 rounded-lg flex items-center justify-center flex-shrink-0 mr-4 shadow-md">
-                        <EnvelopeIcon className="h-5 w-5 text-white" />
-                      </div>
-                      <a href={`mailto:${office.email}`} className="text-gray-600 text-sm hover:text-primary-orange transition-colors font-medium">
-                        {office.email}
-                      </a>
                     </div>
                     
                     <div className="flex items-start">
-                      <div className="w-10 h-10 bg-gradient-to-br from-primary-purple to-purple-700 rounded-lg flex items-center justify-center flex-shrink-0 mr-4 shadow-md">
-                        <ClockIcon className="h-5 w-5 text-white" />
+                      <div className="w-12 h-12 bg-gradient-to-br from-primary-purple to-purple-700 rounded-lg flex items-center justify-center flex-shrink-0 mr-4 shadow-md">
+                        <EnvelopeIcon className="h-6 w-6 text-white" />
                       </div>
-                      <div>
-                        <div className="text-gray-600 text-sm font-medium">{office.hours}</div>
-                        <div className="text-gray-500 text-xs mt-1">{office.timezone}</div>
+                      <div className="flex-1">
+                        <div className="text-sm font-semibold text-gray-900 mb-1">Email</div>
+                        <a href={`mailto:${office.email}`} className="text-gray-600 text-base hover:text-primary-orange transition-colors font-medium break-all">
+                          {office.email}
+                        </a>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-start">
+                      <div className="w-12 h-12 bg-gradient-to-br from-primary-purple to-purple-700 rounded-lg flex items-center justify-center flex-shrink-0 mr-4 shadow-md">
+                        <PhoneIcon className="h-6 w-6 text-white" />
+                      </div>
+                      <div className="flex-1">
+                        <div className="text-sm font-semibold text-gray-900 mb-1">Phone</div>
+                        <a href={`tel:${office.phone}`} className="text-gray-600 text-base hover:text-primary-orange transition-colors font-medium">
+                          {office.phone}
+                        </a>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-start">
+                      <div className="w-12 h-12 bg-gradient-to-br from-primary-purple to-purple-700 rounded-lg flex items-center justify-center flex-shrink-0 mr-4 shadow-md">
+                        <ClockIcon className="h-6 w-6 text-white" />
+                      </div>
+                      <div className="flex-1">
+                        <div className="text-sm font-semibold text-gray-900 mb-1">Business Hours</div>
+                        <div className="text-gray-600 text-base font-medium">{office.hours}</div>
+                        <div className="text-gray-500 text-sm mt-1">{office.timezone}</div>
                       </div>
                     </div>
                   </div>
+                  
+                  {/* CTA Button */}
+                  <div className="mt-6 pt-5 border-t border-gray-100">
+                    <a 
+                      href="https://www.google.com/maps/dir/?api=1&destination=18.514794,73.94373"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center gap-2 w-full px-6 py-3 bg-gradient-to-r from-primary-purple to-purple-700 text-white rounded-lg font-semibold hover:shadow-lg transition-all duration-300 hover:scale-105"
+                    >
+                      <MapPinIcon className="h-5 w-5" />
+                      <span>Get Directions</span>
+                    </a>
+                  </div>
                 </div>
-              </div>
-            ))}
-          </StaggeredList>
-        </div>
-      </div>
+              ))}
+            </AnimatedSection>
 
-      {/* 3. Map Section */}
-      <div className="relative bg-gradient-to-br from-gray-50 via-white to-gray-50 section-padding overflow-hidden">
-        {/* Background Elements */}
-        <div className="absolute inset-0 opacity-5">
-          <div className="absolute inset-0" style={{
-            backgroundImage: 'radial-gradient(circle at 2px 2px, #FF6B35 1px, transparent 0)',
-            backgroundSize: '48px 48px'
-          }}></div>
-        </div>
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-primary-purple/5 rounded-full blur-3xl"></div>
-        
-        <div className="container-custom relative z-10">
-          <AnimatedSection direction="up">
-            <div className="mx-auto max-w-2xl text-center mb-12">
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-primary-purple/10 to-primary-orange/10 rounded-full border border-primary-purple/20 mb-6">
-                <GlobeAltIcon className="w-5 h-5 text-primary-purple" />
-                <span className="text-primary-purple text-sm font-semibold">Our Location</span>
-              </div>
-              <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl font-heading">
-                Find Us on the Map
-              </h2>
-              <p className="mt-6 text-lg leading-8 text-gray-600">
-                Visit us at our office in Pune, India
-              </p>
-            </div>
-            
-            <div className="bg-white rounded-2xl shadow-2xl overflow-hidden border border-gray-100">
-              <div className="h-[500px] relative">
+            {/* Map */}
+            <AnimatedSection direction="right" delay={0.2}>
+              <div className="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100 h-full min-h-[500px]">
                 <iframe
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3783.0!2d73.94373!3d18.514794!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2c22273d37a27%3A0xc0ebc21bde9b31f4!2sSweet%20Water%20Villas!5e0!3m2!1sen!2sus!4v1771312989069!5m2!1sen!2sus"
                   width="100%"
@@ -639,12 +633,12 @@ export default function Contact() {
                   className="w-full h-full"
                 ></iframe>
               </div>
-            </div>
-          </AnimatedSection>
+            </AnimatedSection>
+          </div>
         </div>
       </div>
 
-      {/* 4. Alternative Channels */}
+      {/* 3. Alternative Channels */}
       <div className="relative bg-white section-padding overflow-hidden">
         {/* Background Elements */}
         <div className="absolute inset-0 opacity-5">

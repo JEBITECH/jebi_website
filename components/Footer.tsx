@@ -11,7 +11,7 @@ const navigation = {
   social: [
     {
       name: 'LinkedIn',
-      href: '#',
+      href: 'https://www.linkedin.com/company/jebi-softech-services/',
       icon: (props: any) => (
         <svg fill="currentColor" viewBox="0 0 20 20" {...props}>
           <path
@@ -59,7 +59,7 @@ export default function Footer() {
               </span>
             </div>
             <p className="text-base leading-7 text-white/80">
-              Empowering Hospitality Technology with innovative solutions that drive growth and enhance guest experiences.
+              Built by hospitality technology experts, we solve real operational challenges and empower the future of hospitality.
             </p>
             <div className="flex space-x-4">
               {navigation.social.map((item) => (
@@ -98,13 +98,11 @@ export default function Footer() {
                 <h3 className="text-base font-bold leading-6 text-white mb-6">Contact Info</h3>
                 <div className="space-y-3 text-sm text-white/80">
                   <p className="flex items-center gap-2">
-                    <span className="text-primary-orange">✉</span> info@jebitech.com
+                    <span className="text-primary-orange">✉</span> sales@jebitech.com
                   </p>
-                  <p className="flex items-center gap-2">
-                    <span className="text-primary-orange">📞</span> +1 (555) 123-4567
-                  </p>
-                  <p className="flex items-center gap-2">
-                    <span className="text-primary-orange">📍</span> 123 Tech Street, Innovation City
+                  <p className="flex items-start gap-2">
+                    <span className="text-primary-orange">�</span> 
+                    <span>12, Sweet Watervilla, Amanora<br />Pune, India</span>
                   </p>
                 </div>
               </div>

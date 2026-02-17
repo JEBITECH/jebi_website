@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { 
   EnvelopeIcon, 
   PhoneIcon,
@@ -12,12 +13,12 @@ import {
   BuildingOfficeIcon,
   UserGroupIcon,
   RocketLaunchIcon,
-  HeartIcon
+  HeartIcon,
+  PaperAirplaneIcon,
+  SparklesIcon
 } from '@heroicons/react/24/outline'
 
-import AnimatedSection from '@/components/AnimatedSection'
 import StaggeredList from '@/components/StaggeredList'
-import FloatingElements from '@/components/FloatingElements'
 
 const inquiryTypes = [
   { value: 'services', label: 'Our Services' },
@@ -168,12 +169,11 @@ export default function Contact() {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value, type } = e.target
     
-    // Reset product selection when inquiry type changes
     if (name === 'inquiryType') {
       setFormData(prev => ({
         ...prev,
         [name]: value,
-        product: '' // Reset product when inquiry type changes
+        product: ''
       }))
     } else {
       setFormData(prev => ({
@@ -182,13 +182,11 @@ export default function Contact() {
       }))
     }
     
-    // Clear error when user starts typing
     if (errors[name]) {
       setErrors(prev => ({ ...prev, [name]: '' }))
     }
   }
   
-  // Check if product selection should be shown
   const showProductSelection = formData.inquiryType === 'demo' || formData.inquiryType === 'trial'
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -199,11 +197,9 @@ export default function Contact() {
     setFormStatus('submitting')
     
     try {
-      // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 2000))
       setFormStatus('success')
       
-      // Reset form after success
       setTimeout(() => {
         setFormData({
           name: '',
@@ -225,11 +221,9 @@ export default function Contact() {
 
   return (
     <div className="bg-white overflow-hidden">
-      {/* 1. Hero + Contact Form Section - Combined */}
-      <div className="relative bg-gradient-to-br from-gray-50 via-white to-gray-50 pt-20 pb-16 overflow-hidden">
-        <FloatingElements />
-        
-        {/* Background Elements */}
+      {/* 1. Hero + Contact Form Section - Redesigned with Animations */}
+      <div className="relative bg-gradient-to-br from-gray-50 via-white to-purple-50/30 pt-20 pb-16 overflow-hidden">
+        {/* Animated Background Blobs */}
         <div className="absolute inset-0 -z-10">
           <div className="absolute inset-0 opacity-5">
             <div className="absolute inset-0" style={{
@@ -237,56 +231,138 @@ export default function Contact() {
               backgroundSize: '48px 48px'
             }}></div>
           </div>
-          <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary-orange/10 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-primary-purple/10 rounded-full blur-3xl"></div>
+          <motion.div 
+            className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary-orange/10 rounded-full blur-3xl"
+            animate={{
+              scale: [1, 1.2, 1],
+              opacity: [0.3, 0.5, 0.3],
+            }}
+            transition={{
+              duration: 8,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          />
+          <motion.div 
+            className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-primary-purple/10 rounded-full blur-3xl"
+            animate={{
+              scale: [1.2, 1, 1.2],
+              opacity: [0.5, 0.3, 0.5],
+            }}
+            transition={{
+              duration: 8,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 1
+            }}
+          />
         </div>
 
         <div className="container-custom relative z-10">
-          {/* Hero Header */}
-          <AnimatedSection direction="up">
-            <div className="text-center max-w-4xl mx-auto mb-12">
-              <div className="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-primary-purple/10 to-primary-orange/10 rounded-full border border-primary-purple/20 mb-6">
+          {/* Hero Header with Stagger Animation */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="text-center max-w-4xl mx-auto mb-12"
+          >
+            <motion.div 
+              className="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-primary-purple/10 to-primary-orange/10 rounded-full border border-primary-purple/20 mb-6"
+              whileHover={{ scale: 1.05 }}
+              transition={{ type: "spring", stiffness: 400 }}
+            >
+              <motion.div
+                animate={{ rotate: [0, 10, -10, 0] }}
+                transition={{ duration: 2, repeat: Infinity }}
+              >
                 <ChatBubbleLeftRightIcon className="w-5 h-5 text-primary-purple" />
-                <span className="text-primary-purple text-sm font-semibold">Let's Connect</span>
-              </div>
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-gray-900 font-heading mb-6">
-                Get in Touch with <span className="text-primary-orange">JebiTech</span>
-              </h1>
-              <p className="text-lg md:text-xl leading-relaxed text-gray-600 max-w-3xl mx-auto">
-                Let's build smarter hospitality technology together. Whether you need a demo, consultation, or have questions, we're here to help transform your operations.
-              </p>
-            </div>
-          </AnimatedSection>
+              </motion.div>
+              <span className="text-primary-purple text-sm font-semibold">Let's Connect</span>
+            </motion.div>
+            
+            <motion.h1 
+              className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-gray-900 font-heading mb-6"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2, duration: 0.6 }}
+            >
+              Get in Touch with <span className="text-primary-orange">JebiTech</span>
+            </motion.h1>
+            
+            <motion.p 
+              className="text-lg md:text-xl leading-relaxed text-gray-600 max-w-3xl mx-auto"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4, duration: 0.6 }}
+            >
+              Let's build smarter hospitality technology together. Whether you need a demo, consultation, or have questions, we're here to help transform your operations.
+            </motion.p>
+          </motion.div>
 
-          {/* Main Content - Single Box */}
+          {/* Main Content - Single Box with Enhanced Animations */}
           <div className="max-w-7xl mx-auto">
-            <AnimatedSection direction="up" delay={0.2}>
-              <div className="bg-white rounded-3xl shadow-2xl border border-gray-100 overflow-hidden">
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6, duration: 0.7 }}
+            >
+              <motion.div 
+                className="bg-white rounded-3xl shadow-2xl border border-gray-100 overflow-hidden"
+                whileHover={{ boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.15)" }}
+                transition={{ duration: 0.3 }}
+              >
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-0">
                   {/* Contact Form - Takes 2 columns */}
                   <div className="lg:col-span-2 p-6 md:p-8 border-r border-gray-100">
-                    <h2 className="text-xl md:text-2xl font-bold text-gray-900 font-heading mb-1">
-                      Send us a Message
-                    </h2>
-                    <p className="text-gray-600 text-sm mb-5">We typically respond within 2 hours during business hours</p>
+                    <motion.div
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.8, duration: 0.5 }}
+                    >
+                      <h2 className="text-xl md:text-2xl font-bold text-gray-900 font-heading mb-1 flex items-center gap-2">
+                        <SparklesIcon className="w-6 h-6 text-primary-orange" />
+                        Send us a Message
+                      </h2>
+                      <p className="text-gray-600 text-sm mb-5">We typically respond within 2 hours during business hours</p>
+                    </motion.div>
                   
-                    {formStatus === 'success' && (
-                      <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg flex items-center">
-                        <CheckCircleIcon className="h-5 w-5 text-green-600 mr-3" />
-                        <span className="text-green-800">Message sent successfully! We'll get back to you soon.</span>
-                      </div>
-                    )}
-                    
-                    {formStatus === 'error' && (
-                      <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg flex items-center">
-                        <ExclamationCircleIcon className="h-5 w-5 text-red-600 mr-3" />
-                        <span className="text-red-800">Something went wrong. Please try again.</span>
-                      </div>
-                    )}
+                    <AnimatePresence mode="wait">
+                      {formStatus === 'success' && (
+                        <motion.div 
+                          className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg flex items-center"
+                          initial={{ opacity: 0, scale: 0.9, y: -10 }}
+                          animate={{ opacity: 1, scale: 1, y: 0 }}
+                          exit={{ opacity: 0, scale: 0.9, y: -10 }}
+                          transition={{ type: "spring", stiffness: 200 }}
+                        >
+                          <CheckCircleIcon className="h-5 w-5 text-green-600 mr-3" />
+                          <span className="text-green-800">Message sent successfully! We'll get back to you soon.</span>
+                        </motion.div>
+                      )}
+                      
+                      {formStatus === 'error' && (
+                        <motion.div 
+                          className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg flex items-center"
+                          initial={{ opacity: 0, scale: 0.9, y: -10 }}
+                          animate={{ opacity: 1, scale: 1, y: 0 }}
+                          exit={{ opacity: 0, scale: 0.9, y: -10 }}
+                          transition={{ type: "spring", stiffness: 200 }}
+                        >
+                          <ExclamationCircleIcon className="h-5 w-5 text-red-600 mr-3" />
+                          <span className="text-red-800">Something went wrong. Please try again.</span>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
                     
                     <form onSubmit={handleSubmit} className="space-y-4">
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div className="relative">
+                        <motion.div 
+                          className="relative"
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: 0.9, duration: 0.4 }}
+                          whileFocus={{ scale: 1.02 }}
+                        >
                           <input
                             type="text"
                             id="name"
@@ -305,9 +381,14 @@ export default function Contact() {
                             Full Name *
                           </label>
                           {errors.name && <p className="mt-1 text-sm text-red-600">{errors.name}</p>}
-                        </div>
+                        </motion.div>
                         
-                        <div className="relative">
+                        <motion.div 
+                          className="relative"
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: 1.0, duration: 0.4 }}
+                        >
                           <input
                             type="email"
                             id="email"
@@ -326,11 +407,16 @@ export default function Contact() {
                             Email Address *
                           </label>
                           {errors.email && <p className="mt-1 text-sm text-red-600">{errors.email}</p>}
-                        </div>
+                        </motion.div>
                       </div>
 
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div className="relative">
+                        <motion.div 
+                          className="relative"
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: 1.1, duration: 0.4 }}
+                        >
                           <input
                             type="tel"
                             id="phone"
@@ -346,9 +432,14 @@ export default function Contact() {
                           >
                             Phone Number
                           </label>
-                        </div>
+                        </motion.div>
                         
-                        <div className="relative">
+                        <motion.div 
+                          className="relative"
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: 1.2, duration: 0.4 }}
+                        >
                           <input
                             type="text"
                             id="company"
@@ -367,10 +458,14 @@ export default function Contact() {
                             Company Name *
                           </label>
                           {errors.company && <p className="mt-1 text-sm text-red-600">{errors.company}</p>}
-                        </div>
+                        </motion.div>
                       </div>
 
-                      <div>
+                      <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 1.3, duration: 0.4 }}
+                      >
                         <label htmlFor="inquiryType" className="block text-sm font-medium text-gray-700 mb-2">
                           Inquiry Type *
                         </label>
@@ -389,33 +484,44 @@ export default function Contact() {
                           ))}
                         </select>
                         {errors.inquiryType && <p className="mt-1 text-sm text-red-600">{errors.inquiryType}</p>}
-                      </div>
+                      </motion.div>
 
-                      {/* Conditional Product Selection */}
-                      {showProductSelection && (
-                        <div>
-                          <label htmlFor="product" className="block text-sm font-medium text-gray-700 mb-2">
-                            Select Product *
-                          </label>
-                          <select
-                            id="product"
-                            name="product"
-                            value={formData.product}
-                            onChange={handleChange}
-                            className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary-orange focus:border-transparent ${
-                              errors.product ? 'border-red-500' : 'border-gray-300'
-                            }`}
+                      {/* Conditional Product Selection with Animation */}
+                      <AnimatePresence>
+                        {showProductSelection && (
+                          <motion.div
+                            initial={{ opacity: 0, height: 0 }}
+                            animate={{ opacity: 1, height: "auto" }}
+                            exit={{ opacity: 0, height: 0 }}
+                            transition={{ duration: 0.3 }}
                           >
-                            <option value="">Select a product</option>
-                            {products.map(product => (
-                              <option key={product.value} value={product.value}>{product.label}</option>
-                            ))}
-                          </select>
-                          {errors.product && <p className="mt-1 text-sm text-red-600">{errors.product}</p>}
-                        </div>
-                      )}
+                            <label htmlFor="product" className="block text-sm font-medium text-gray-700 mb-2">
+                              Select Product *
+                            </label>
+                            <select
+                              id="product"
+                              name="product"
+                              value={formData.product}
+                              onChange={handleChange}
+                              className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary-orange focus:border-transparent ${
+                                errors.product ? 'border-red-500' : 'border-gray-300'
+                              }`}
+                            >
+                              <option value="">Select a product</option>
+                              {products.map(product => (
+                                <option key={product.value} value={product.value}>{product.label}</option>
+                              ))}
+                            </select>
+                            {errors.product && <p className="mt-1 text-sm text-red-600">{errors.product}</p>}
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
 
-                      <div>
+                      <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 1.4, duration: 0.4 }}
+                      >
                         <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
                           Message *
                         </label>
@@ -431,9 +537,14 @@ export default function Contact() {
                           }`}
                         />
                         {errors.message && <p className="mt-1 text-sm text-red-600">{errors.message}</p>}
-                      </div>
+                      </motion.div>
 
-                      <div className="flex items-center">
+                      <motion.div 
+                        className="flex items-center"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 1.5, duration: 0.4 }}
+                      >
                         <input
                           id="subscribe"
                           name="subscribe"
@@ -445,30 +556,51 @@ export default function Contact() {
                         <label htmlFor="subscribe" className="ml-2 block text-sm text-gray-700">
                           Subscribe to product updates and hospitality tech insights
                         </label>
-                      </div>
+                      </motion.div>
 
-                      <button
+                      <motion.button
                         type="submit"
                         disabled={formStatus === 'submitting'}
-                        className={`w-full py-3 px-6 rounded-lg font-medium transition-all ${
+                        className={`w-full py-3 px-6 rounded-lg font-medium transition-all flex items-center justify-center gap-2 ${
                           formStatus === 'submitting'
                             ? 'bg-gray-400 cursor-not-allowed'
                             : 'btn-primary'
                         }`}
+                        whileHover={formStatus !== 'submitting' ? { scale: 1.02 } : {}}
+                        whileTap={formStatus !== 'submitting' ? { scale: 0.98 } : {}}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 1.6, duration: 0.4 }}
                       >
+                        <motion.div
+                          animate={formStatus === 'submitting' ? { rotate: 360 } : {}}
+                          transition={{ duration: 1, repeat: formStatus === 'submitting' ? Infinity : 0, ease: "linear" }}
+                        >
+                          <PaperAirplaneIcon className="w-5 h-5" />
+                        </motion.div>
                         {formStatus === 'submitting' ? 'Sending Message...' : 'Send Message'}
-                      </button>
+                      </motion.button>
                     </form>
                   </div>
 
-                  {/* Sidebar - Contact Info & Response Times */}
-                  <div className="lg:col-span-1 p-6 bg-gray-50 flex flex-col justify-between">
+                  {/* Sidebar - Contact Info & Response Times with Stagger */}
+                  <div className="lg:col-span-1 p-6 bg-gradient-to-br from-gray-50 to-purple-50/50 flex flex-col justify-between">
                     <div>
                       {/* Quick Contact Section */}
-                      <div className="mb-6 pb-6 border-b border-gray-200">
+                      <motion.div 
+                        className="mb-6 pb-6 border-b border-gray-200"
+                        initial={{ opacity: 0, x: 20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 1.0, duration: 0.5 }}
+                      >
                         <h3 className="text-lg font-bold text-gray-900 mb-4">Quick Contact</h3>
                         
-                        <a href="mailto:sales@jebitech.com" className="flex items-center gap-3 p-3 bg-gradient-to-br from-primary-purple to-purple-700 rounded-xl hover:shadow-lg transition-all group">
+                        <motion.a 
+                          href="mailto:sales@jebitech.com" 
+                          className="flex items-center gap-3 p-3 bg-gradient-to-br from-primary-purple to-purple-700 rounded-xl hover:shadow-lg transition-all group"
+                          whileHover={{ scale: 1.05, y: -2 }}
+                          whileTap={{ scale: 0.95 }}
+                        >
                           <div className="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center flex-shrink-0">
                             <EnvelopeIcon className="h-5 w-5 text-white" />
                           </div>
@@ -476,44 +608,65 @@ export default function Contact() {
                             <div className="text-xs text-white/90 mb-0.5">Email Us</div>
                             <div className="font-semibold text-white text-sm">sales@jebitech.com</div>
                           </div>
-                        </a>
-                      </div>
+                        </motion.a>
+                      </motion.div>
 
-                      {/* Response Times Section */}
-                      <div>
+                      {/* Response Times Section with Stagger */}
+                      <motion.div
+                        initial={{ opacity: 0, x: 20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 1.2, duration: 0.5 }}
+                      >
                         <h3 className="text-base font-bold text-gray-900 mb-4">Response Times</h3>
                         <div className="space-y-3">
                           {responseExpectations.map((expectation, index) => (
-                            <div key={index} className="flex items-start gap-3 pb-3 border-b border-gray-200 last:border-0 last:pb-0">
-                              <div className="w-8 h-8 bg-gradient-to-br from-primary-purple to-purple-700 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <motion.div 
+                              key={index} 
+                              className="flex items-start gap-3 pb-3 border-b border-gray-200 last:border-0 last:pb-0"
+                              initial={{ opacity: 0, x: 20 }}
+                              animate={{ opacity: 1, x: 0 }}
+                              transition={{ delay: 1.3 + (index * 0.1), duration: 0.4 }}
+                              whileHover={{ x: 5 }}
+                            >
+                              <motion.div 
+                                className="w-8 h-8 bg-gradient-to-br from-primary-purple to-purple-700 rounded-lg flex items-center justify-center flex-shrink-0"
+                                whileHover={{ rotate: 360 }}
+                                transition={{ duration: 0.6 }}
+                              >
                                 <expectation.icon className="h-4 w-4 text-white" />
-                              </div>
+                              </motion.div>
                               <div className="flex-1 min-w-0">
                                 <div className="font-semibold text-gray-900 text-xs mb-0.5">{expectation.type}</div>
                                 <div className="text-primary-orange font-bold text-xs mb-1">{expectation.time}</div>
                                 <p className="text-gray-600 text-xs leading-relaxed">{expectation.description}</p>
                               </div>
-                            </div>
+                            </motion.div>
                           ))}
                         </div>
-                      </div>
+                      </motion.div>
                     </div>
                     
                     {/* Spacer to push content alignment */}
-                    <div className="mt-6 pt-6 border-t border-gray-200">
-                      <div className="text-center text-xs text-gray-500">
+                    <motion.div 
+                      className="mt-6 pt-6 border-t border-gray-200"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ delay: 1.8, duration: 0.5 }}
+                    >
+                      <div className="text-center text-xs text-gray-500 flex items-center justify-center gap-1">
+                        <HeartIcon className="w-4 h-4 text-primary-orange" />
                         We're here to help you succeed
                       </div>
-                    </div>
+                    </motion.div>
                   </div>
                 </div>
-              </div>
-            </AnimatedSection>
+              </motion.div>
+            </motion.div>
           </div>
         </div>
       </div>
 
-      {/* 2. Contact Details & Office Location - Combined */}
+      {/* 2. Office Location - Animated Cards */}
       <div className="relative bg-white section-padding overflow-hidden">
         {/* Background Elements */}
         <div className="absolute inset-0 opacity-5">
@@ -522,105 +675,225 @@ export default function Contact() {
             backgroundSize: '48px 48px'
           }}></div>
         </div>
-        <div className="absolute top-0 right-0 w-96 h-96 bg-primary-orange/5 rounded-full blur-3xl"></div>
+        <motion.div 
+          className="absolute top-0 right-0 w-96 h-96 bg-primary-orange/5 rounded-full blur-3xl"
+          animate={{
+            x: [0, 50, 0],
+            y: [0, 30, 0],
+          }}
+          transition={{
+            duration: 10,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
         
         <div className="container-custom relative z-10">
-          <AnimatedSection direction="up">
-            <div className="mx-auto max-w-4xl text-center mb-12">
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-primary-purple/10 to-primary-orange/10 rounded-full border border-primary-purple/20 mb-6">
-                <BuildingOfficeIcon className="w-5 h-5 text-primary-purple" />
-                <span className="text-primary-purple text-sm font-semibold">Our Office</span>
-              </div>
-              <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl font-heading">
-                Visit Our Office
-              </h2>
-              <p className="mt-6 text-lg leading-8 text-gray-600">
-                Located in Pune, India - we're here to serve you
-              </p>
-            </div>
-          </AnimatedSection>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="mx-auto max-w-4xl text-center mb-12"
+          >
+            <motion.div 
+              className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-primary-purple/10 to-primary-orange/10 rounded-full border border-primary-purple/20 mb-6"
+              whileHover={{ scale: 1.05 }}
+            >
+              <BuildingOfficeIcon className="w-5 h-5 text-primary-purple" />
+              <span className="text-primary-purple text-sm font-semibold">Our Office</span>
+            </motion.div>
+            <motion.h2 
+              className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl font-heading"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2, duration: 0.6 }}
+            >
+              Visit Our Office
+            </motion.h2>
+            <motion.p 
+              className="mt-6 text-lg leading-8 text-gray-600"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.4, duration: 0.6 }}
+            >
+              Located in Pune, India - we're here to serve you
+            </motion.p>
+          </motion.div>
           
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch">
-            {/* Office Details Card */}
-            <AnimatedSection direction="left">
-              {offices.map((office) => (
-                <div key={office.name} className="bg-white rounded-2xl p-6 md:p-8 shadow-xl border border-gray-100 transition-all duration-300 hover:shadow-2xl h-full flex flex-col relative overflow-hidden">
+            {/* Office Details Card with Hover Effects */}
+            {offices.map((office, idx) => (
+              <motion.div
+                key={office.name}
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.6, duration: 0.6 }}
+              >
+                <motion.div 
+                  className="bg-white rounded-2xl p-6 md:p-8 shadow-xl border border-gray-100 h-full flex flex-col relative overflow-hidden"
+                  whileHover={{ 
+                    boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
+                    y: -5
+                  }}
+                  transition={{ duration: 0.3 }}
+                >
                   {office.isPrimary && (
-                    <div className="absolute top-0 right-0">
+                    <motion.div 
+                      className="absolute top-0 right-0"
+                      initial={{ x: 100 }}
+                      animate={{ x: 0 }}
+                      transition={{ delay: 1, type: "spring", stiffness: 100 }}
+                    >
                       <div className="bg-gradient-to-br from-primary-orange to-orange-600 text-white px-6 py-2 text-xs font-bold shadow-lg" style={{ clipPath: 'polygon(0 0, 100% 0, 100% 100%, 20% 100%)' }}>
                         Headquarter
                       </div>
-                    </div>
+                    </motion.div>
                   )}
                   
-                  <h3 className="text-2xl font-bold text-gray-900 mb-6">{office.name}</h3>
+                  <motion.h3 
+                    className="text-2xl font-bold text-gray-900 mb-6"
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.8 }}
+                  >
+                    {office.name}
+                  </motion.h3>
                   
                   <div className="space-y-5 flex-1">
-                    <div className="flex items-start">
-                      <div className="w-12 h-12 bg-gradient-to-br from-primary-purple to-purple-700 rounded-lg flex items-center justify-center flex-shrink-0 mr-4 shadow-md">
+                    <motion.div 
+                      className="flex items-start"
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.9 }}
+                      whileHover={{ x: 5 }}
+                    >
+                      <motion.div 
+                        className="w-12 h-12 bg-gradient-to-br from-primary-purple to-purple-700 rounded-lg flex items-center justify-center flex-shrink-0 mr-4 shadow-md"
+                        whileHover={{ rotate: 360, scale: 1.1 }}
+                        transition={{ duration: 0.6 }}
+                      >
                         <MapPinIcon className="h-6 w-6 text-white" />
-                      </div>
+                      </motion.div>
                       <div className="flex-1">
                         <div className="text-sm font-semibold text-gray-900 mb-1">Address</div>
                         <div className="text-gray-600 text-base whitespace-pre-line leading-relaxed">{office.address}</div>
                       </div>
-                    </div>
+                    </motion.div>
                     
-                    <div className="flex items-start">
-                      <div className="w-12 h-12 bg-gradient-to-br from-primary-purple to-purple-700 rounded-lg flex items-center justify-center flex-shrink-0 mr-4 shadow-md">
+                    <motion.div 
+                      className="flex items-start"
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 1.0 }}
+                      whileHover={{ x: 5 }}
+                    >
+                      <motion.div 
+                        className="w-12 h-12 bg-gradient-to-br from-primary-purple to-purple-700 rounded-lg flex items-center justify-center flex-shrink-0 mr-4 shadow-md"
+                        whileHover={{ rotate: 360, scale: 1.1 }}
+                        transition={{ duration: 0.6 }}
+                      >
                         <EnvelopeIcon className="h-6 w-6 text-white" />
-                      </div>
+                      </motion.div>
                       <div className="flex-1">
                         <div className="text-sm font-semibold text-gray-900 mb-1">Email</div>
                         <a href={`mailto:${office.email}`} className="text-gray-600 text-base hover:text-primary-orange transition-colors font-medium break-all">
                           {office.email}
                         </a>
                       </div>
-                    </div>
+                    </motion.div>
                     
-                    <div className="flex items-start">
-                      <div className="w-12 h-12 bg-gradient-to-br from-primary-purple to-purple-700 rounded-lg flex items-center justify-center flex-shrink-0 mr-4 shadow-md">
+                    <motion.div 
+                      className="flex items-start"
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 1.1 }}
+                      whileHover={{ x: 5 }}
+                    >
+                      <motion.div 
+                        className="w-12 h-12 bg-gradient-to-br from-primary-purple to-purple-700 rounded-lg flex items-center justify-center flex-shrink-0 mr-4 shadow-md"
+                        whileHover={{ rotate: 360, scale: 1.1 }}
+                        transition={{ duration: 0.6 }}
+                      >
                         <PhoneIcon className="h-6 w-6 text-white" />
-                      </div>
+                      </motion.div>
                       <div className="flex-1">
                         <div className="text-sm font-semibold text-gray-900 mb-1">Phone</div>
                         <a href={`tel:${office.phone}`} className="text-gray-600 text-base hover:text-primary-orange transition-colors font-medium">
                           {office.phone}
                         </a>
                       </div>
-                    </div>
+                    </motion.div>
                     
-                    <div className="flex items-start">
-                      <div className="w-12 h-12 bg-gradient-to-br from-primary-purple to-purple-700 rounded-lg flex items-center justify-center flex-shrink-0 mr-4 shadow-md">
+                    <motion.div 
+                      className="flex items-start"
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 1.2 }}
+                      whileHover={{ x: 5 }}
+                    >
+                      <motion.div 
+                        className="w-12 h-12 bg-gradient-to-br from-primary-purple to-purple-700 rounded-lg flex items-center justify-center flex-shrink-0 mr-4 shadow-md"
+                        whileHover={{ rotate: 360, scale: 1.1 }}
+                        transition={{ duration: 0.6 }}
+                      >
                         <ClockIcon className="h-6 w-6 text-white" />
-                      </div>
+                      </motion.div>
                       <div className="flex-1">
                         <div className="text-sm font-semibold text-gray-900 mb-1">Business Hours</div>
                         <div className="text-gray-600 text-base font-medium">{office.hours}</div>
                         <div className="text-gray-500 text-sm mt-1">{office.timezone}</div>
                       </div>
-                    </div>
+                    </motion.div>
                   </div>
                   
-                  {/* CTA Button */}
-                  <div className="mt-6 pt-5 border-t border-gray-100">
-                    <a 
+                  {/* CTA Button with Animation */}
+                  <motion.div 
+                    className="mt-6 pt-5 border-t border-gray-100"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 1.3 }}
+                  >
+                    <motion.a 
                       href="https://www.google.com/maps/dir/?api=1&destination=18.514794,73.94373"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center justify-center gap-2 w-full px-6 py-3 bg-gradient-to-r from-primary-purple to-purple-700 text-white rounded-lg font-semibold hover:shadow-lg transition-all duration-300 hover:scale-105"
+                      className="inline-flex items-center justify-center gap-2 w-full px-6 py-3 bg-gradient-to-r from-primary-purple to-purple-700 text-white rounded-lg font-semibold hover:shadow-lg transition-all duration-300"
+                      whileHover={{ scale: 1.05, y: -2 }}
+                      whileTap={{ scale: 0.95 }}
                     >
                       <MapPinIcon className="h-5 w-5" />
                       <span>Get Directions</span>
-                    </a>
-                  </div>
-                </div>
-              ))}
-            </AnimatedSection>
+                    </motion.a>
+                  </motion.div>
+                </motion.div>
+              </motion.div>
+            ))}
 
-            {/* Map */}
-            <AnimatedSection direction="right" delay={0.2}>
-              <div className="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100 h-full min-h-[500px]">
+            {/* Map with Fade In */}
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.6, duration: 0.6 }}
+            >
+              <motion.div 
+                className="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100 h-full min-h-[500px]"
+                whileHover={{ 
+                  boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
+                  y: -5
+                }}
+                transition={{ duration: 0.3 }}
+              >
                 <iframe
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3783.0!2d73.94373!3d18.514794!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2c22273d37a27%3A0xc0ebc21bde9b31f4!2sSweet%20Water%20Villas!5e0!3m2!1sen!2sus!4v1771312989069!5m2!1sen!2sus"
                   width="100%"
@@ -632,13 +905,13 @@ export default function Contact() {
                   title="JebiTech Office Location"
                   className="w-full h-full"
                 ></iframe>
-              </div>
-            </AnimatedSection>
+              </motion.div>
+            </motion.div>
           </div>
         </div>
       </div>
 
-      {/* 3. Alternative Channels */}
+      {/* 3. Alternative Channels - Animated Cards */}
       <div className="relative bg-white section-padding overflow-hidden">
         {/* Background Elements */}
         <div className="absolute inset-0 opacity-5">
@@ -647,72 +920,152 @@ export default function Contact() {
             backgroundSize: '48px 48px'
           }}></div>
         </div>
-        <div className="absolute top-0 left-0 w-96 h-96 bg-primary-orange/5 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-primary-purple/5 rounded-full blur-3xl"></div>
+        <motion.div 
+          className="absolute top-0 left-0 w-96 h-96 bg-primary-orange/5 rounded-full blur-3xl"
+          animate={{
+            scale: [1, 1.3, 1],
+            x: [0, 30, 0],
+          }}
+          transition={{
+            duration: 12,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
+        <motion.div 
+          className="absolute bottom-0 right-0 w-96 h-96 bg-primary-purple/5 rounded-full blur-3xl"
+          animate={{
+            scale: [1.3, 1, 1.3],
+            y: [0, -30, 0],
+          }}
+          transition={{
+            duration: 12,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 2
+          }}
+        />
         
         <div className="container-custom relative z-10">
-          <AnimatedSection direction="up">
-            <div className="mx-auto max-w-2xl text-center mb-16">
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-primary-purple/10 to-primary-orange/10 rounded-full border border-primary-purple/20 mb-6">
-                <ChatBubbleLeftRightIcon className="w-5 h-5 text-primary-purple" />
-                <span className="text-primary-purple text-sm font-semibold">Stay Connected</span>
-              </div>
-              <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl font-heading mb-4">
-                Connect with Us
-              </h2>
-              <p className="text-lg leading-8 text-gray-600">
-                Choose your preferred way to get in touch and stay updated
-              </p>
-            </div>
-          </AnimatedSection>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="mx-auto max-w-2xl text-center mb-16"
+          >
+            <motion.div 
+              className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-primary-purple/10 to-primary-orange/10 rounded-full border border-primary-purple/20 mb-6"
+              whileHover={{ scale: 1.05 }}
+            >
+              <ChatBubbleLeftRightIcon className="w-5 h-5 text-primary-purple" />
+              <span className="text-primary-purple text-sm font-semibold">Stay Connected</span>
+            </motion.div>
+            <motion.h2 
+              className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl font-heading mb-4"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2, duration: 0.6 }}
+            >
+              Connect with Us
+            </motion.h2>
+            <motion.p 
+              className="text-lg leading-8 text-gray-600"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.4, duration: 0.6 }}
+            >
+              Choose your preferred way to get in touch and stay updated
+            </motion.p>
+          </motion.div>
           
-          <StaggeredList className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {socialChannels.map((channel) => {
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {socialChannels.map((channel, index) => {
               const IconComponent = SocialIcons[channel.icon as keyof typeof SocialIcons];
               
               return (
-                <a
+                <motion.a
                   key={channel.name}
                   href={channel.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-white rounded-2xl p-8 text-center shadow-lg border border-gray-100 transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 group flex flex-col relative overflow-hidden h-full"
+                  className="bg-white rounded-2xl p-8 text-center shadow-lg border border-gray-100 flex flex-col relative overflow-hidden h-full group"
+                  initial={{ opacity: 0, y: 50 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.6 + (index * 0.1), duration: 0.5 }}
+                  whileHover={{ 
+                    y: -10,
+                    boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)"
+                  }}
                 >
                   {/* Hover gradient effect */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-primary-purple/5 to-primary-orange/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <motion.div 
+                    className="absolute inset-0 bg-gradient-to-br from-primary-purple/5 to-primary-orange/5 opacity-0"
+                    whileHover={{ opacity: 1 }}
+                    transition={{ duration: 0.3 }}
+                  />
                   
                   <div className="relative z-10 flex flex-col h-full">
-                    {/* Icon Container */}
-                    <div className="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-primary-purple to-purple-700 rounded-2xl flex items-center justify-center shadow-lg transform group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
+                    {/* Icon Container with Rotation */}
+                    <motion.div 
+                      className="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-primary-purple to-purple-700 rounded-2xl flex items-center justify-center shadow-lg"
+                      whileHover={{ 
+                        rotate: [0, -10, 10, -10, 0],
+                        scale: 1.1
+                      }}
+                      transition={{ duration: 0.6 }}
+                    >
                       <div className="text-white">
                         <IconComponent />
                       </div>
-                    </div>
+                    </motion.div>
                     
-                    <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-primary-orange transition-colors">
+                    <motion.h3 
+                      className="text-xl font-bold text-gray-900 mb-3"
+                      whileHover={{ color: "#FF6B35" }}
+                      transition={{ duration: 0.3 }}
+                    >
                       {channel.name}
-                    </h3>
-                    <div className="text-primary-purple font-semibold mb-4 text-sm bg-purple-50 rounded-lg py-2 px-3 inline-block mx-auto">
+                    </motion.h3>
+                    
+                    <motion.div 
+                      className="text-primary-purple font-semibold mb-4 text-sm bg-purple-50 rounded-lg py-2 px-3 inline-block mx-auto"
+                      whileHover={{ scale: 1.05 }}
+                    >
                       {channel.handle}
-                    </div>
+                    </motion.div>
+                    
                     <p className="text-gray-600 text-sm leading-relaxed flex-1 mb-6">{channel.description}</p>
                     
-                    {/* Arrow indicator */}
-                    <div className="flex items-center justify-center text-primary-orange opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    {/* Arrow indicator with Animation */}
+                    <motion.div 
+                      className="flex items-center justify-center text-primary-orange"
+                      initial={{ opacity: 0, x: -10 }}
+                      whileHover={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.3 }}
+                    >
                       <span className="text-sm font-semibold mr-2">Connect</span>
-                      <svg className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <motion.svg 
+                        className="w-4 h-4" 
+                        fill="none" 
+                        stroke="currentColor" 
+                        viewBox="0 0 24 24"
+                        animate={{ x: [0, 5, 0] }}
+                        transition={{ duration: 1.5, repeat: Infinity }}
+                      >
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                      </svg>
-                    </div>
+                      </motion.svg>
+                    </motion.div>
                   </div>
-                </a>
+                </motion.a>
               )
             })}
-          </StaggeredList>
+          </div>
         </div>
       </div>
-
-
     </div>
   )
 }

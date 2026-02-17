@@ -240,15 +240,15 @@ export default function About() {
         <div className="container-custom relative z-10">
           {/* Centered Header */}
           <AnimatedSection direction="up">
-            <div className="mx-auto max-w-4xl text-center mb-20">
-              <div className="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-primary-purple/10 to-primary-orange/10 rounded-full border border-primary-purple/20 mb-8">
+            <div className="mx-auto max-w-4xl text-center mb-12">
+              <div className="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-primary-purple/10 to-primary-orange/10 rounded-full border border-primary-purple/20 mb-6">
                 <StarIcon className="w-5 h-5 text-primary-purple" />
                 <span className="text-primary-purple text-sm font-semibold">Our Journey</span>
               </div>
-              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-gray-900 font-heading mb-8">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-gray-900 font-heading mb-6">
                 Our Story
               </h2>
-              <p className="text-2xl leading-relaxed text-gray-600 font-medium">
+              <p className="text-xl leading-relaxed text-gray-600 font-medium">
                 From a simple insight to enabling hospitality technology ecosystems
               </p>
             </div>
@@ -256,14 +256,14 @@ export default function About() {
 
           {/* Story Content - Enhanced Typography */}
           <AnimatedSection direction="up" delay={0.2}>
-            <div className="max-w-6xl mx-auto mb-20">
-              <div className="bg-gradient-to-br from-white to-gray-50/50 rounded-3xl p-12 md:p-16 shadow-xl border border-gray-100 relative overflow-hidden">
+            <div className="max-w-6xl mx-auto mb-12">
+              <div className="bg-gradient-to-br from-white to-gray-50/50 rounded-3xl p-8 md:p-10 shadow-xl border border-gray-100 relative overflow-hidden">
                 {/* Decorative corner elements */}
-                <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-primary-purple/5 to-transparent rounded-bl-full"></div>
-                <div className="absolute bottom-0 left-0 w-40 h-40 bg-gradient-to-tr from-primary-orange/5 to-transparent rounded-tr-full"></div>
+                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-primary-purple/5 to-transparent rounded-bl-full"></div>
+                <div className="absolute bottom-0 left-0 w-32 h-32 bg-gradient-to-tr from-primary-orange/5 to-transparent rounded-tr-full"></div>
                 
-                <div className="relative z-10 space-y-8 text-lg md:text-xl text-gray-700 leading-relaxed">
-                  <p className="first-letter:text-6xl first-letter:font-bold first-letter:text-primary-purple first-letter:mr-3 first-letter:float-left first-letter:leading-none">
+                <div className="relative z-10 space-y-5 text-base md:text-lg text-gray-700 leading-relaxed">
+                  <p className="first-letter:text-5xl first-letter:font-bold first-letter:text-primary-purple first-letter:mr-3 first-letter:float-left first-letter:leading-none">
                     Our journey began with a straightforward observation: the hospitality industry was not lacking technology, it was lacking the expertise to make technology truly work. Many organizations had access to capable platforms, yet struggled to configure them effectively, integrate them seamlessly, or receive timely enhancements that matched their operational realities.
                   </p>
                   <p>
@@ -278,7 +278,7 @@ export default function About() {
                   <p>
                     We began developing our own technology, solutions designed from operational realities, not theoretical assumptions, combining implementation experience, integration depth, and hands-on industry knowledge into platforms that address real challenges.
                   </p>
-                  <p className="text-xl md:text-2xl font-semibold text-gray-900 pt-4 border-t-2 border-primary-orange/20">
+                  <p className="text-lg md:text-xl font-semibold text-gray-900 pt-3 border-t-2 border-primary-orange/20">
                     Today, we continue to operate at the intersection of hospitality and technology, delivering our own products while serving as a trusted extension of our partners' ecosystems, focused on solving practical problems and shaping the future of hospitality operations.
                   </p>
                 </div>
@@ -289,43 +289,43 @@ export default function About() {
           {/* Stats Grid - Enhanced Design */}
           <AnimatedSection direction="up" delay={0.4}>
             <div className="max-w-7xl mx-auto">
-              <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
-                <div className="group bg-gradient-to-br from-primary-purple via-purple-700 to-purple-800 rounded-3xl p-10 text-center shadow-2xl relative overflow-hidden hover:scale-105 transition-transform duration-300">
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                <div className="group bg-gradient-to-br from-primary-purple via-purple-700 to-purple-800 rounded-3xl p-8 text-center shadow-2xl relative overflow-hidden hover:scale-105 transition-transform duration-300">
                   <div className="absolute inset-0 bg-white/0 group-hover:bg-white/5 transition-colors duration-300"></div>
                   <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2"></div>
                   <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/2"></div>
                   <div className="relative z-10">
-                    <div className="text-6xl font-bold text-white mb-3 group-hover:scale-110 transition-transform duration-300">2017</div>
+                    <div className="text-5xl font-bold text-white mb-2 group-hover:scale-110 transition-transform duration-300">2017</div>
                     <div className="text-sm text-white/90 font-semibold uppercase tracking-wider">Founded</div>
                   </div>
                 </div>
                 
-                <div className="group bg-gradient-to-br from-primary-orange via-orange-600 to-orange-700 rounded-3xl p-10 text-center shadow-2xl relative overflow-hidden hover:scale-105 transition-transform duration-300">
+                <div className="group bg-gradient-to-br from-primary-orange via-orange-600 to-orange-700 rounded-3xl p-8 text-center shadow-2xl relative overflow-hidden hover:scale-105 transition-transform duration-300">
                   <div className="absolute inset-0 bg-white/0 group-hover:bg-white/5 transition-colors duration-300"></div>
                   <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2"></div>
                   <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/2"></div>
                   <div className="relative z-10">
-                    <div className="text-6xl font-bold text-white mb-3 group-hover:scale-110 transition-transform duration-300">50+</div>
+                    <div className="text-5xl font-bold text-white mb-2 group-hover:scale-110 transition-transform duration-300">50+</div>
                     <div className="text-sm text-white/90 font-semibold uppercase tracking-wider">Team Members</div>
                   </div>
                 </div>
                 
-                <div className="group bg-gradient-to-br from-primary-purple via-purple-700 to-purple-800 rounded-3xl p-10 text-center shadow-2xl relative overflow-hidden hover:scale-105 transition-transform duration-300">
+                <div className="group bg-gradient-to-br from-primary-purple via-purple-700 to-purple-800 rounded-3xl p-8 text-center shadow-2xl relative overflow-hidden hover:scale-105 transition-transform duration-300">
                   <div className="absolute inset-0 bg-white/0 group-hover:bg-white/5 transition-colors duration-300"></div>
                   <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2"></div>
                   <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/2"></div>
                   <div className="relative z-10">
-                    <div className="text-6xl font-bold text-white mb-3 group-hover:scale-110 transition-transform duration-300">10+</div>
+                    <div className="text-5xl font-bold text-white mb-2 group-hover:scale-110 transition-transform duration-300">10+</div>
                     <div className="text-sm text-white/90 font-semibold uppercase tracking-wider">AI enabled Products</div>
                   </div>
                 </div>
                 
-                <div className="group bg-gradient-to-br from-primary-orange via-orange-600 to-orange-700 rounded-3xl p-10 text-center shadow-2xl relative overflow-hidden hover:scale-105 transition-transform duration-300">
+                <div className="group bg-gradient-to-br from-primary-orange via-orange-600 to-orange-700 rounded-3xl p-8 text-center shadow-2xl relative overflow-hidden hover:scale-105 transition-transform duration-300">
                   <div className="absolute inset-0 bg-white/0 group-hover:bg-white/5 transition-colors duration-300"></div>
                   <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2"></div>
                   <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/2"></div>
                   <div className="relative z-10">
-                    <div className="text-6xl font-bold text-white mb-3 group-hover:scale-110 transition-transform duration-300">5</div>
+                    <div className="text-5xl font-bold text-white mb-2 group-hover:scale-110 transition-transform duration-300">5</div>
                     <div className="text-sm text-white/90 font-semibold uppercase tracking-wider">Continents</div>
                   </div>
                 </div>

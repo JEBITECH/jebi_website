@@ -92,7 +92,7 @@ export default function WhyJebiTechAnimated() {
   }
 
   return (
-    <div className="relative w-full min-h-[600px] lg:min-h-[700px] bg-gray-50 rounded-3xl p-8 lg:p-12 overflow-hidden">
+    <div className="relative w-full max-h-[580px] lg:max-h-[580px] bg-gray-50 rounded-3xl p-8 lg:p-12 overflow-hidden">
       <motion.div
         variants={containerVariants}
         initial="hidden"
@@ -107,33 +107,13 @@ export default function WhyJebiTechAnimated() {
           <div className="absolute top-1/2 right-20 w-2 h-2 bg-purple-400 rounded-full"></div>
         </div>
 
-        {/* Central Technology Team Circle - LEFT SIDE */}
+        {/* Central technology team Circle - LEFT SIDE */}
         <motion.div
           variants={circleVariants}
           className="absolute top-1/2 left-8 lg:left-16 transform -translate-y-1/2 z-10"
         >
           <div className="relative w-48 h-48 lg:w-56 lg:h-56">
-            {/* Gradient Circle */}
-            <svg className="absolute inset-0 w-full h-full -rotate-90" viewBox="0 0 200 200">
-              <circle
-                cx="100"
-                cy="100"
-                r="85"
-                fill="none"
-                stroke="url(#circleGradient)"
-                strokeWidth="8"
-                strokeLinecap="round"
-              />
-              <defs>
-                <linearGradient id="circleGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#84CC16" />
-                  <stop offset="25%" stopColor="#FF6B35" />
-                  <stop offset="50%" stopColor="#06B6D4" />
-                  <stop offset="75%" stopColor="#9333EA" />
-                  <stop offset="100%" stopColor="#84CC16" />
-                </linearGradient>
-              </defs>
-            </svg>
+         
 
             {/* Center Content */}
             <div className="absolute inset-0 flex flex-col items-center justify-center text-center bg-white rounded-full shadow-lg border-4 border-gray-100 m-4">
@@ -146,18 +126,6 @@ export default function WhyJebiTechAnimated() {
             </div>
           </div>
         </motion.div>
-
-        {/* Curved Connecting Path */}
-        <svg className="absolute inset-0 w-full h-full pointer-events-none" style={{ zIndex: 1 }}>
-          <motion.path
-            d="M 280 300 Q 400 200 500 150 Q 600 100 700 120 Q 800 140 900 180 Q 950 200 1000 240"
-            fill="none"
-            stroke="rgba(147, 51, 234, 0.3)"
-            strokeWidth="3"
-            strokeDasharray="8,8"
-            variants={pathVariants}
-          />
-        </svg>
 
         {/* JebiTech Logo - TOP RIGHT */}
         <motion.div

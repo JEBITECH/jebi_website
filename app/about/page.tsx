@@ -173,10 +173,10 @@ const cultureHighlights = [
 ]
 
 const impactMetrics = [
-  { metric: "500+", label: "Properties Managed" },
-  { metric: "10M+", label: "Guest Interactions" },
-  { metric: "99.9%", label: "System Uptime" },
-  { metric: "25+", label: "Countries Served" }
+  { metric: "15+", label: "Years in Hospitality" },
+  { metric: "10K+", label: "Properties Served" },
+  { metric: "100+", label: "Operational Challenges Solved" },
+  { metric: "99.9%", label: "System Uptime" }
 ]
 
 export default function About() {
@@ -217,8 +217,7 @@ export default function About() {
               {/* Description */}
               <AnimatedSection direction="up" delay={0.4}>
                 <p className="text-xl md:text-2xl leading-relaxed text-white/90 max-w-3xl mx-auto">
-                  Built by hospitality and technology experts to solve real operational challenges
-                  and empower the future of hospitality.
+                  Built by hospitality technology experts, we solve real operational challenges and empower the future of hospitality by delivering innovative technology and serving as a trusted extension of our partners' business operations, platforms, and ecosystems.
                 </p>
               </AnimatedSection>
             </div>
@@ -227,91 +226,6 @@ export default function About() {
       </div>
 
       {/* 2. Story Section */}
-      <div className="relative bg-gradient-to-br from-gray-50 via-white to-gray-50 section-padding overflow-hidden">
-        {/* Background Elements */}
-        <div className="absolute inset-0 opacity-5">
-          <div className="absolute inset-0" style={{
-            backgroundImage: 'radial-gradient(circle at 2px 2px, #4A1A5C 1px, transparent 0)',
-            backgroundSize: '48px 48px'
-          }}></div>
-        </div>
-        <div className="absolute top-20 left-0 w-96 h-96 bg-primary-purple/5 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-20 right-0 w-96 h-96 bg-primary-orange/5 rounded-full blur-3xl"></div>
-
-        <div className="container-custom relative z-10">
-          {/* Centered Header */}
-          <AnimatedSection direction="up">
-            <div className="mx-auto max-w-3xl text-center mb-16">
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-primary-purple/10 to-primary-orange/10 rounded-full border border-primary-purple/20 mb-6">
-                <StarIcon className="w-5 h-5 text-primary-purple" />
-                <span className="text-primary-purple text-sm font-semibold">Our Journey</span>
-              </div>
-              <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-gray-900 font-heading mb-6">
-                Our Story
-              </h2>
-              <p className="text-xl leading-8 text-gray-600">
-                From a simple observation to a comprehensive hospitality technology platform
-              </p>
-            </div>
-          </AnimatedSection>
-
-          {/* Content Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
-            <AnimatedSection direction="left" delay={0.2} className="flex">
-              <div className="bg-white rounded-2xl p-8 shadow-md border border-gray-100 w-full flex flex-col">
-                <div className="space-y-6 text-base text-gray-600 leading-relaxed flex-1">
-                  <p>
-                    JebiTech was born from a simple observation: hospitality businesses were drowning in
-                    manual processes, disconnected systems, and technology that didn't understand their
-                    unique operational challenges.
-                  </p>
-                  <p>
-                    Founded by former hospitality operators and technology leaders, we've experienced
-                    firsthand the frustration of systems that promise everything but deliver complexity.
-                    We built JebiTech to bridge this gap.
-                  </p>
-                  <p>
-                    Today, we're a team of hospitality domain experts and world-class engineers,
-                    building the technology platform that we wished existed when we were running
-                    hotels, vacation rentals, and hospitality operations.
-                  </p>
-                </div>
-              </div>
-            </AnimatedSection>
-
-            <AnimatedSection direction="right" delay={0.3} className="flex">
-              <div className="bg-gradient-to-br from-primary-purple via-purple-700 to-purple-800 rounded-2xl p-10 shadow-2xl relative overflow-hidden w-full flex flex-col">
-                {/* Decorative Elements */}
-                <div className="absolute top-0 right-0 w-40 h-40 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2"></div>
-                <div className="absolute bottom-0 left-0 w-32 h-32 bg-primary-orange/10 rounded-full translate-y-1/2 -translate-x-1/2"></div>
-                
-                <div className="relative z-10 flex-1 flex items-center">
-                  <div className="grid grid-cols-2 gap-6 w-full">
-                    <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 text-center">
-                      <div className="text-5xl font-bold text-white mb-2">2019</div>
-                      <div className="text-sm text-white/80 font-medium">Founded</div>
-                    </div>
-                    <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 text-center">
-                      <div className="text-5xl font-bold text-primary-orange mb-2">50+</div>
-                      <div className="text-sm text-white/80 font-medium">Team Members</div>
-                    </div>
-                    <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 text-center">
-                      <div className="text-5xl font-bold text-white mb-2">500+</div>
-                      <div className="text-sm text-white/80 font-medium">Properties</div>
-                    </div>
-                    <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 text-center">
-                      <div className="text-5xl font-bold text-primary-orange mb-2">25+</div>
-                      <div className="text-sm text-white/80 font-medium">Countries</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </AnimatedSection>
-          </div>
-        </div>
-      </div>
-
-      {/* 3. Vision, Mission & Values */}
       <div className="relative bg-white section-padding overflow-hidden">
         {/* Background Elements */}
         <div className="absolute inset-0 opacity-5">
@@ -320,8 +234,118 @@ export default function About() {
             backgroundSize: '48px 48px'
           }}></div>
         </div>
-        <div className="absolute top-20 right-0 w-96 h-96 bg-primary-orange/5 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-20 left-0 w-96 h-96 bg-primary-purple/5 rounded-full blur-3xl"></div>
+        <div className="absolute top-20 left-0 w-[600px] h-[600px] bg-primary-purple/5 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-20 right-0 w-[600px] h-[600px] bg-primary-orange/5 rounded-full blur-3xl"></div>
+
+        <div className="container-custom relative z-10">
+          {/* Centered Header */}
+          <AnimatedSection direction="up">
+            <div className="mx-auto max-w-4xl text-center mb-12">
+              <div className="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-primary-purple/10 to-primary-orange/10 rounded-full border border-primary-purple/20 mb-6">
+                <StarIcon className="w-5 h-5 text-primary-purple" />
+                <span className="text-primary-purple text-sm font-semibold">Our Journey</span>
+              </div>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-gray-900 font-heading mb-6">
+                Our Story
+              </h2>
+              <p className="text-xl leading-relaxed text-gray-600 font-medium">
+                From a simple insight to enabling hospitality technology ecosystems
+              </p>
+            </div>
+          </AnimatedSection>
+
+          {/* Story Content - Enhanced Typography */}
+          <AnimatedSection direction="up" delay={0.2}>
+            <div className="max-w-6xl mx-auto mb-12">
+              <div className="bg-gradient-to-br from-white to-gray-50/50 rounded-3xl p-8 md:p-10 shadow-xl border border-gray-100 relative overflow-hidden">
+                {/* Decorative corner elements */}
+                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-primary-purple/5 to-transparent rounded-bl-full"></div>
+                <div className="absolute bottom-0 left-0 w-32 h-32 bg-gradient-to-tr from-primary-orange/5 to-transparent rounded-tr-full"></div>
+                
+                <div className="relative z-10 space-y-5 text-base md:text-lg text-gray-700 leading-relaxed">
+                  <p className="first-letter:text-5xl first-letter:font-bold first-letter:text-primary-purple first-letter:mr-3 first-letter:float-left first-letter:leading-none">
+                    Our journey began with a straightforward observation: the hospitality industry was not lacking technology, it was lacking the expertise to make technology truly work. Many organizations had access to capable platforms, yet struggled to configure them effectively, integrate them seamlessly, or receive timely enhancements that matched their operational realities.
+                  </p>
+                  <p>
+                    Working closely with operators, we saw teams facing real-world challenges, delayed feature delivery, disconnected systems, and limitations in adapting existing solutions to evolving business needs. In many cases, the gap was not the software itself, but the absence of deep domain expertise bridging hospitality operations and technology execution.
+                  </p>
+                  <p>
+                    We stepped in to fill that gap, partnering with clients as subject-matter experts, enabling better system usage, accelerating delivery, and building custom solutions where standard tools fell short. Over time, these engagements revealed recurring patterns and unmet needs across the industry.
+                  </p>
+                  <p className="font-semibold text-primary-purple">
+                    That insight led us to go further.
+                  </p>
+                  <p>
+                    We began developing our own technology, solutions designed from operational realities, not theoretical assumptions, combining implementation experience, integration depth, and hands-on industry knowledge into platforms that address real challenges.
+                  </p>
+                  <p className="text-lg md:text-xl font-semibold text-gray-900 pt-3 border-t-2 border-primary-orange/20">
+                    Today, we continue to operate at the intersection of hospitality and technology, delivering our own products while serving as a trusted extension of our partners' ecosystems, focused on solving practical problems and shaping the future of hospitality operations.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </AnimatedSection>
+
+          {/* Stats Grid - Enhanced Design */}
+          <AnimatedSection direction="up" delay={0.4}>
+            <div className="max-w-7xl mx-auto">
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                <div className="group bg-gradient-to-br from-primary-purple via-purple-700 to-purple-800 rounded-3xl p-8 text-center shadow-2xl relative overflow-hidden hover:scale-105 transition-transform duration-300">
+                  <div className="absolute inset-0 bg-white/0 group-hover:bg-white/5 transition-colors duration-300"></div>
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+                  <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/2"></div>
+                  <div className="relative z-10">
+                    <div className="text-5xl font-bold text-white mb-2 group-hover:scale-110 transition-transform duration-300">2017</div>
+                    <div className="text-sm text-white/90 font-semibold uppercase tracking-wider">Founded</div>
+                  </div>
+                </div>
+                
+                <div className="group bg-gradient-to-br from-primary-orange via-orange-600 to-orange-700 rounded-3xl p-8 text-center shadow-2xl relative overflow-hidden hover:scale-105 transition-transform duration-300">
+                  <div className="absolute inset-0 bg-white/0 group-hover:bg-white/5 transition-colors duration-300"></div>
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+                  <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/2"></div>
+                  <div className="relative z-10">
+                    <div className="text-5xl font-bold text-white mb-2 group-hover:scale-110 transition-transform duration-300">50+</div>
+                    <div className="text-sm text-white/90 font-semibold uppercase tracking-wider">Team Members</div>
+                  </div>
+                </div>
+                
+                <div className="group bg-gradient-to-br from-primary-purple via-purple-700 to-purple-800 rounded-3xl p-8 text-center shadow-2xl relative overflow-hidden hover:scale-105 transition-transform duration-300">
+                  <div className="absolute inset-0 bg-white/0 group-hover:bg-white/5 transition-colors duration-300"></div>
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+                  <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/2"></div>
+                  <div className="relative z-10">
+                    <div className="text-5xl font-bold text-white mb-2 group-hover:scale-110 transition-transform duration-300">10+</div>
+                    <div className="text-sm text-white/90 font-semibold uppercase tracking-wider">AI enabled Products</div>
+                  </div>
+                </div>
+                
+                <div className="group bg-gradient-to-br from-primary-orange via-orange-600 to-orange-700 rounded-3xl p-8 text-center shadow-2xl relative overflow-hidden hover:scale-105 transition-transform duration-300">
+                  <div className="absolute inset-0 bg-white/0 group-hover:bg-white/5 transition-colors duration-300"></div>
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+                  <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/2"></div>
+                  <div className="relative z-10">
+                    <div className="text-5xl font-bold text-white mb-2 group-hover:scale-110 transition-transform duration-300">5</div>
+                    <div className="text-sm text-white/90 font-semibold uppercase tracking-wider">Continents</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </AnimatedSection>
+        </div>
+      </div>
+
+      {/* 3. Vision, Mission & Values */}
+      <div className="relative bg-gradient-to-br from-gray-50 via-white to-gray-50 section-padding overflow-hidden">
+        {/* Background Elements */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute inset-0" style={{
+            backgroundImage: 'radial-gradient(circle at 2px 2px, #4A1A5C 1px, transparent 0)',
+            backgroundSize: '48px 48px'
+          }}></div>
+        </div>
+        <div className="absolute top-20 right-0 w-[600px] h-[600px] bg-primary-orange/5 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-20 left-0 w-[600px] h-[600px] bg-primary-purple/5 rounded-full blur-3xl"></div>
 
         <div className="container-custom relative z-10">
           <AnimatedSection direction="up">
@@ -341,46 +365,44 @@ export default function About() {
 
           <div className="space-y-12">
             {/* Vision & Mission */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-20">
               <AnimatedSection direction="left" delay={0.2}>
-                <div className="relative bg-gradient-to-br from-primary-purple via-purple-700 to-purple-800 rounded-2xl p-10 text-white shadow-2xl overflow-hidden h-full flex flex-col">
+                <div className="group relative bg-gradient-to-br from-primary-purple via-purple-700 to-purple-800 rounded-3xl p-12 text-white shadow-2xl overflow-hidden h-full flex flex-col hover:shadow-3xl transition-all duration-300">
                   {/* Decorative Elements */}
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2"></div>
-                  <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/2"></div>
+                  <div className="absolute top-0 right-0 w-40 h-40 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2 group-hover:scale-150 transition-transform duration-500"></div>
+                  <div className="absolute bottom-0 left-0 w-32 h-32 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/2 group-hover:scale-150 transition-transform duration-500"></div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   
                   <div className="relative z-10 flex flex-col h-full">
-                    <div className="flex items-center gap-4 mb-6">
-                      <div className="w-14 h-14 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center flex-shrink-0 shadow-lg">
-                        <StarIcon className="w-7 h-7 text-white" />
+                    <div className="flex items-center gap-4 mb-8">
+                      <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center flex-shrink-0 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                        <StarIcon className="w-8 h-8 text-white" />
                       </div>
-                      <h3 className="text-3xl font-bold">Our Vision</h3>
+                      <h3 className="text-4xl font-bold">Our Vision</h3>
                     </div>
-                    <p className="text-lg text-white/90 leading-relaxed flex-1">
-                      To be the trusted technology partner Globally for the hospitality industry,
-                      helping organisations into technology or hospitality business and end-users,
-                      through innovative, seamless, and customized solutions and Services delivered by top domain and technology experts.
+                    <p className="text-xl text-white/95 leading-relaxed flex-1">
+                      To be the trusted technology partner globally for the hospitality industry, helping organisations into technology or hospitality business and end-users, through innovative, seamless, and customized solutions and services delivered by top domain and technology experts.
                     </p>
                   </div>
                 </div>
               </AnimatedSection>
 
               <AnimatedSection direction="right" delay={0.3}>
-                <div className="relative bg-gradient-to-br from-primary-orange via-orange-600 to-orange-700 rounded-2xl p-10 text-white shadow-2xl overflow-hidden h-full flex flex-col">
+                <div className="group relative bg-gradient-to-br from-primary-orange via-orange-600 to-orange-700 rounded-3xl p-12 text-white shadow-2xl overflow-hidden h-full flex flex-col hover:shadow-3xl transition-all duration-300">
                   {/* Decorative Elements */}
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2"></div>
-                  <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/2"></div>
+                  <div className="absolute top-0 right-0 w-40 h-40 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2 group-hover:scale-150 transition-transform duration-500"></div>
+                  <div className="absolute bottom-0 left-0 w-32 h-32 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/2 group-hover:scale-150 transition-transform duration-500"></div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   
                   <div className="relative z-10 flex flex-col h-full">
-                    <div className="flex items-center gap-4 mb-6">
-                      <div className="w-14 h-14 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center flex-shrink-0 shadow-lg">
-                        <ChartBarIcon className="w-7 h-7 text-white" />
+                    <div className="flex items-center gap-4 mb-8">
+                      <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center flex-shrink-0 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                        <ChartBarIcon className="w-8 h-8 text-white" />
                       </div>
-                      <h3 className="text-3xl font-bold">Our Mission</h3>
+                      <h3 className="text-4xl font-bold">Our Mission</h3>
                     </div>
-                    <p className="text-lg text-white/90 leading-relaxed flex-1">
-                      At Jebitech, we partner with hospitality technology companies,
-                      combining technology, data, expertise, and service excellence
-                      to drive client success, innovation, and sustainable growth.
+                    <p className="text-xl text-white/95 leading-relaxed flex-1">
+                      At Jebitech, we partner with hospitality technology companies, combining technology, data, expertise, and service excellence to drive client success, innovation, and sustainable growth.
                     </p>
                   </div>
                 </div>
@@ -403,28 +425,33 @@ export default function About() {
                 </div>
 
                 {/* Values Grid */}
-                <StaggeredList className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <StaggeredList className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                   {values.map((value, index) => (
                     <div 
                       key={value.title} 
-                      className="flex flex-col bg-white rounded-2xl p-8 shadow-md border border-gray-100 h-full"
+                      className="group flex flex-col bg-white rounded-3xl p-8 shadow-lg border border-gray-100 h-full hover:shadow-2xl hover:border-primary-purple/30 hover:-translate-y-2 transition-all duration-300"
                     >
                       {/* Icon */}
                       <div className="mb-6">
-                        <div className="w-16 h-16 bg-gradient-to-br from-primary-purple to-purple-700 rounded-2xl flex items-center justify-center shadow-lg">
-                          <value.icon className="h-8 w-8 text-white" />
+                        <div className="w-20 h-20 bg-gradient-to-br from-primary-purple to-purple-700 rounded-2xl flex items-center justify-center shadow-xl group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
+                          <value.icon className="h-10 w-10 text-white" />
                         </div>
                       </div>
                       
                       {/* Title */}
-                      <h4 className="text-xl font-bold text-gray-900 mb-4">
+                      <h4 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-primary-purple transition-colors duration-300">
                         {value.title}
                       </h4>
                       
                       {/* Description */}
-                      <p className="text-gray-600 text-sm leading-relaxed flex-1">
+                      <p className="text-gray-600 text-base leading-relaxed flex-1">
                         {value.description}
                       </p>
+                      
+                      {/* Bottom accent line */}
+                      <div className="mt-6 pt-4 border-t border-gray-100">
+                        <div className="w-12 h-1 bg-gradient-to-r from-primary-orange to-orange-600 rounded-full group-hover:w-full transition-all duration-500"></div>
+                      </div>
                     </div>
                   ))}
                 </StaggeredList>
@@ -726,48 +753,7 @@ export default function About() {
         </div>
       </div>
 
-      {/* 8. Hospitality Domain Expertise */}
-      <div className="bg-primary-purple section-padding relative overflow-hidden">
-        <div className="absolute inset-0 animated-gradient opacity-20"></div>
-        <div className="container-custom relative z-10">
-          <AnimatedSection direction="up">
-            <div className="mx-auto max-w-2xl text-center mb-16">
-              <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl font-heading">
-                Deep Hospitality Expertise
-              </h2>
-              <p className="mt-6 text-lg leading-8 text-gray-300">
-                We don't just build software—we understand hospitality operations inside and out
-              </p>
-            </div>
-          </AnimatedSection>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <AnimatedSection direction="up" delay={0.2}>
-              <div className="text-center">
-                <div className="text-4xl font-bold text-primary-orange mb-4">15+</div>
-                <div className="text-white font-semibold mb-2">Years in Hospitality</div>
-                <div className="text-gray-300 text-sm">Combined team experience in hotel operations, vacation rentals, and property management</div>
-              </div>
-            </AnimatedSection>
-
-            <AnimatedSection direction="up" delay={0.4}>
-              <div className="text-center">
-                <div className="text-4xl font-bold text-primary-orange mb-4">10K+</div>
-                <div className="text-white font-semibold mb-2">Properties Served</div>
-                <div className="text-gray-300 text-sm">From boutique hotels to large resort chains, vacation rentals to serviced apartments</div>
-              </div>
-            </AnimatedSection>
-
-            <AnimatedSection direction="up" delay={0.6}>
-              <div className="text-center">
-                <div className="text-4xl font-bold text-primary-orange mb-4">100+</div>
-                <div className="text-white font-semibold mb-2">Operational Challenges Solved</div>
-                <div className="text-gray-300 text-sm">Real-world problems from housekeeping workflows to revenue optimization</div>
-              </div>
-            </AnimatedSection>
-          </div>
-        </div>
-      </div>
 
       {/* 9. Culture & Life at JebiTech */}
       {/* <ParallaxSection speed={0.3}>
@@ -871,118 +857,52 @@ export default function About() {
         </div>
       </div> */}
 
-      {/* 12. Client Impact & Proof */}
-      <div className="relative bg-white section-padding overflow-hidden">
+      {/* 12. Our Impact - Deep Hospitality Expertise */}
+      <div className="relative bg-gradient-to-br from-primary-purple via-purple-700 to-purple-800 section-padding overflow-hidden">
         {/* Background Elements */}
-        <div className="absolute inset-0 opacity-5">
+        <div className="absolute inset-0 opacity-10">
           <div className="absolute inset-0" style={{
-            backgroundImage: 'radial-gradient(circle at 2px 2px, #4A1A5C 1px, transparent 0)',
+            backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)',
             backgroundSize: '48px 48px'
           }}></div>
         </div>
-        <div className="absolute top-20 right-0 w-96 h-96 bg-primary-orange/5 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-20 left-0 w-96 h-96 bg-primary-purple/5 rounded-full blur-3xl"></div>
+        <div className="absolute top-20 right-0 w-96 h-96 bg-white/5 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-20 left-0 w-96 h-96 bg-primary-orange/10 rounded-full blur-3xl"></div>
 
         <div className="container-custom relative z-10">
           <AnimatedSection direction="up">
             <div className="mx-auto max-w-3xl text-center mb-16">
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-primary-purple/10 to-primary-orange/10 rounded-full border border-primary-purple/20 mb-6">
-                <ChartBarIcon className="w-5 h-5 text-primary-purple" />
-                <span className="text-primary-purple text-sm font-semibold">Proven Results</span>
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full border border-white/20 mb-6">
+                <ChartBarIcon className="w-5 h-5 text-white" />
+                <span className="text-white text-sm font-semibold">Proven Results</span>
               </div>
-              <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-gray-900 font-heading mb-6">
+              <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white font-heading mb-6">
                 Our Impact
               </h2>
-              <p className="text-xl leading-8 text-gray-600">
-                Real results from real hospitality businesses using JebiTech solutions
+              <p className="text-xl leading-8 text-white/90">
+                Deep hospitality knowledge and proven impact across the industry
               </p>
             </div>
           </AnimatedSection>
 
-          {/* Impact Metrics */}
-          <StaggeredList className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
+          {/* Impact Metrics - Enhanced Design */}
+          <StaggeredList className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-7xl mx-auto">
             {impactMetrics.map((item, index) => (
-              <div key={index} className="bg-gradient-to-br from-gray-50 to-white rounded-2xl p-8 shadow-md border border-gray-100 text-center">
-                <div className="text-5xl font-bold text-primary-purple mb-3">
-                  {item.metric}
+              <div key={index} className="group bg-white/10 backdrop-blur-sm rounded-3xl p-10 shadow-2xl border border-white/20 text-center hover:bg-white/20 hover:scale-105 transition-all duration-300 relative overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-t from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div className="relative z-10">
+                  <div className="text-6xl font-bold text-white mb-4 group-hover:scale-110 transition-transform duration-300">
+                    {item.metric}
+                  </div>
+                  <div className="text-white/90 font-semibold text-sm uppercase tracking-wider">{item.label}</div>
                 </div>
-                <div className="text-gray-600 font-medium text-sm">{item.label}</div>
               </div>
             ))}
           </StaggeredList>
-
-          {/* Testimonial */}
-          <AnimatedSection direction="up" delay={0.4}>
-            <div className="max-w-4xl mx-auto bg-gradient-to-br from-primary-purple to-purple-700 rounded-2xl p-10 md:p-12 shadow-2xl relative overflow-hidden">
-              {/* Decorative Elements */}
-              <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2"></div>
-              <div className="absolute bottom-0 left-0 w-48 h-48 bg-primary-orange/10 rounded-full translate-y-1/2 -translate-x-1/2"></div>
-              
-              {/* Quote Icon */}
-              <div className="relative z-10">
-                <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center mx-auto mb-6">
-                  <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
-                  </svg>
-                </div>
-                
-                <blockquote className="text-center">
-                  <p className="text-xl md:text-2xl text-white font-medium leading-relaxed mb-8">
-                    "JebiTech doesn't just provide software—they understand our business. Their team has walked in our shoes, and it shows in every feature they build."
-                  </p>
-                  <footer className="border-t border-white/20 pt-6">
-                    <div className="font-bold text-white text-lg mb-1">Sarah Mitchell</div>
-                    <div className="text-white/80 text-sm">VP Operations, Luxury Resort Group</div>
-                  </footer>
-                </blockquote>
-              </div>
-            </div>
-          </AnimatedSection>
         </div>
       </div>
 
-      {/* 13. Global Presence */}
-      <div className="bg-primary-purple section-padding relative overflow-hidden">
-        <div className="absolute inset-0 animated-gradient opacity-20"></div>
-        <div className="container-custom relative z-10">
-          <AnimatedSection direction="up">
-            <div className="mx-auto max-w-2xl text-center mb-16">
-              <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl font-heading">
-                Global Reach, Local Understanding
-              </h2>
-              <p className="mt-6 text-lg leading-8 text-gray-300">
-                Supporting hospitality businesses across multiple continents with 24/7 coverage
-              </p>
-            </div>
-          </AnimatedSection>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-            <AnimatedSection direction="up" delay={0.2}>
-              <div>
-                <MapPinIcon className="h-12 w-12 text-primary-orange mx-auto mb-4" />
-                <div className="text-2xl font-bold text-white mb-2">North America</div>
-                <div className="text-gray-300">Headquarters in San Francisco, distributed team across US & Canada</div>
-              </div>
-            </AnimatedSection>
-
-            <AnimatedSection direction="up" delay={0.4}>
-              <div>
-                <GlobeAltIcon className="h-12 w-12 text-primary-orange mx-auto mb-4" />
-                <div className="text-2xl font-bold text-white mb-2">Europe & APAC</div>
-                <div className="text-gray-300">Development centers in London, Berlin, and Singapore</div>
-              </div>
-            </AnimatedSection>
-
-            <AnimatedSection direction="up" delay={0.6}>
-              <div>
-                <UsersIcon className="h-12 w-12 text-primary-orange mx-auto mb-4" />
-                <div className="text-2xl font-bold text-white mb-2">24/7 Support</div>
-                <div className="text-gray-300">Round-the-clock technical support across all time zones</div>
-              </div>
-            </AnimatedSection>
-          </div>
-        </div>
-      </div>
 
       {/* 14. Final CTA */}
       <div className="relative bg-white section-padding overflow-hidden">

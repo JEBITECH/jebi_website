@@ -1,73 +1,62 @@
 'use client'
 
 import { useState } from 'react'
-import Link from 'next/link'
+import { motion, AnimatePresence } from 'framer-motion'
 import { 
   EnvelopeIcon, 
-  PhoneIcon, 
+  PhoneIcon,
   MapPinIcon,
   ClockIcon,
   ChatBubbleLeftRightIcon,
-  GlobeAltIcon,
   CheckCircleIcon,
   ExclamationCircleIcon,
   BuildingOfficeIcon,
   UserGroupIcon,
   RocketLaunchIcon,
-  HeartIcon
+  HeartIcon,
+  PaperAirplaneIcon,
+  SparklesIcon
 } from '@heroicons/react/24/outline'
 
-import AnimatedSection from '@/components/AnimatedSection'
 import StaggeredList from '@/components/StaggeredList'
-import FloatingElements from '@/components/FloatingElements'
 
 const inquiryTypes = [
-  { value: 'demo', label: 'Request a Demo' },
-  { value: 'consultation', label: 'Free Consultation' },
-  { value: 'partnership', label: 'Partnership Inquiry' },
-  { value: 'support', label: 'Technical Support' },
-  { value: 'careers', label: 'Career Opportunities' },
+  { value: 'services', label: 'Our Services' },
+  { value: 'custom-development', label: 'Custom Development' },
+  { value: 'implementation', label: 'Implementation and Integration Services' },
+  { value: 'demo', label: 'Demo of our SaaS Product' },
+  { value: 'trial', label: 'Book Trial' },
+  { value: 'partnership', label: 'Partnership' },
   { value: 'general', label: 'General Inquiry' }
+]
+
+const products = [
+  { value: 'all', label: 'All Products' },
+  { value: 'booking-engine', label: 'Booking Engine' },
+  { value: 'channel-manager', label: 'Channel Manager' },
+  { value: 'guest-handbook', label: 'Guest Handbook' },
+  { value: 'virtue-connect', label: 'Virtue Connect ER' },
+  { value: 'virtue-inspect', label: 'Virtue Inspect' }
 ]
 
 const offices = [
   {
-    name: 'San Francisco HQ',
-    address: '123 Tech Street, Suite 400\nSan Francisco, CA 94105',
-    phone: '+1 (555) 123-4567',
-    email: 'sf@jebitech.com',
-    hours: 'Mon-Fri: 9:00 AM - 6:00 PM PST',
-    timezone: 'Pacific Time',
-    coordinates: { lat: 37.7749, lng: -122.4194 },
+    name: "Pune Office",
+    address: '12, Sweet Watervilla, Amanora\nPune, India',
+    phone: '+91 20 1234 5678',
+    email: 'sales@jebitech.com',
+    hours: 'Mon-Fri: 9:00 AM - 6:00 PM',
+    timezone: 'Indian Standard Time (IST)',
+    coordinates: { lat: 18.514794, lng: 73.94373 },
     isPrimary: true
-  },
-  {
-    name: 'London Office',
-    address: '45 Innovation Square\nLondon EC2A 4DP, UK',
-    phone: '+44 20 7123 4567',
-    email: 'london@jebitech.com',
-    hours: 'Mon-Fri: 9:00 AM - 5:30 PM GMT',
-    timezone: 'Greenwich Mean Time',
-    coordinates: { lat: 51.5074, lng: -0.1278 },
-    isPrimary: false
-  },
-  {
-    name: 'Singapore Office',
-    address: '88 Marina Bay Drive\nSingapore 018956',
-    phone: '+65 6123 4567',
-    email: 'singapore@jebitech.com',
-    hours: 'Mon-Fri: 9:00 AM - 6:00 PM SGT',
-    timezone: 'Singapore Time',
-    coordinates: { lat: 1.3521, lng: 103.8198 },
-    isPrimary: false
   }
 ]
 
 const socialChannels = [
   {
     name: 'LinkedIn',
-    handle: '@jebitech',
-    url: 'https://linkedin.com/company/jebitech',
+    handle: '@jebi-softech-services',
+    url: 'https://www.linkedin.com/company/jebi-softech-services/',
     description: 'Professional updates and industry insights',
     icon: 'linkedin'
   },
@@ -152,22 +141,13 @@ export default function Contact() {
     phone: '',
     company: '',
     inquiryType: '',
+    product: '',
     message: '',
     subscribe: false
   })
   
   const [formStatus, setFormStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle')
   const [errors, setErrors] = useState<Record<string, string>>({})
-
-  const scrollToForm = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault()
-    const formElement = document.getElementById('contact-form')
-    if (formElement) {
-      formElement.scrollIntoView({ behavior: 'smooth', block: 'start' })
-      // Update URL hash without triggering navigation
-      window.history.pushState(null, '', '#contact-form')
-    }
-  }
 
   const validateForm = () => {
     const newErrors: Record<string, string> = {}
@@ -177,6 +157,9 @@ export default function Contact() {
     else if (!/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = 'Email is invalid'
     if (!formData.company.trim()) newErrors.company = 'Company is required'
     if (!formData.inquiryType) newErrors.inquiryType = 'Please select an inquiry type'
+    if ((formData.inquiryType === 'demo' || formData.inquiryType === 'trial') && !formData.product) {
+      newErrors.product = 'Please select a product'
+    }
     if (!formData.message.trim()) newErrors.message = 'Message is required'
     
     setErrors(newErrors)
@@ -185,16 +168,26 @@ export default function Contact() {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value, type } = e.target
-    setFormData(prev => ({
-      ...prev,
-      [name]: type === 'checkbox' ? (e.target as HTMLInputElement).checked : value
-    }))
     
-    // Clear error when user starts typing
+    if (name === 'inquiryType') {
+      setFormData(prev => ({
+        ...prev,
+        [name]: value,
+        product: ''
+      }))
+    } else {
+      setFormData(prev => ({
+        ...prev,
+        [name]: type === 'checkbox' ? (e.target as HTMLInputElement).checked : value
+      }))
+    }
+    
     if (errors[name]) {
       setErrors(prev => ({ ...prev, [name]: '' }))
     }
   }
+  
+  const showProductSelection = formData.inquiryType === 'demo' || formData.inquiryType === 'trial'
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -204,11 +197,9 @@ export default function Contact() {
     setFormStatus('submitting')
     
     try {
-      // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 2000))
       setFormStatus('success')
       
-      // Reset form after success
       setTimeout(() => {
         setFormData({
           name: '',
@@ -216,6 +207,7 @@ export default function Contact() {
           phone: '',
           company: '',
           inquiryType: '',
+          product: '',
           message: '',
           subscribe: false
         })
@@ -229,304 +221,452 @@ export default function Contact() {
 
   return (
     <div className="bg-white overflow-hidden">
-      {/* 1. Hero Section */}
-      <div className="relative isolate px-6 pt-32 pb-16 md:pt-36 md:pb-20 lg:px-8">
-        <FloatingElements />
-        
-        {/* Background Elements */}
-        <div className="absolute inset-0 -z-10 overflow-hidden">
+      {/* 1. Hero + Contact Form Section - Redesigned with Animations */}
+      <div className="relative bg-gradient-to-br from-gray-50 via-white to-purple-50/30 pt-20 pb-16 overflow-hidden">
+        {/* Animated Background Blobs */}
+        <div className="absolute inset-0 -z-10">
           <div className="absolute inset-0 opacity-5">
             <div className="absolute inset-0" style={{
               backgroundImage: 'radial-gradient(circle at 2px 2px, #4A1A5C 1px, transparent 0)',
               backgroundSize: '48px 48px'
             }}></div>
           </div>
-          <div className="absolute top-0 right-0 w-96 h-96 bg-primary-orange/10 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-0 left-0 w-96 h-96 bg-primary-purple/10 rounded-full blur-3xl"></div>
+          <motion.div 
+            className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary-orange/10 rounded-full blur-3xl"
+            animate={{
+              scale: [1, 1.2, 1],
+              opacity: [0.3, 0.5, 0.3],
+            }}
+            transition={{
+              duration: 8,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          />
+          <motion.div 
+            className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-primary-purple/10 rounded-full blur-3xl"
+            animate={{
+              scale: [1.2, 1, 1.2],
+              opacity: [0.5, 0.3, 0.5],
+            }}
+            transition={{
+              duration: 8,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 1
+            }}
+          />
         </div>
-        
-        <div className="container-custom">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-            <AnimatedSection direction="left" className="flex">
-              <div className="flex flex-col justify-center w-full">
-                <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-primary-purple/10 to-primary-orange/10 rounded-full border border-primary-purple/20 mb-6 w-fit">
-                  <ChatBubbleLeftRightIcon className="w-5 h-5 text-primary-purple" />
-                  <span className="text-primary-purple text-sm font-semibold">Let's Connect</span>
-                </div>
-                <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl font-heading mb-6">
-                  Get in Touch with <span className="text-primary-orange">JebiTech</span>
-                </h1>
-                <p className="text-xl leading-8 text-gray-600 mb-10">
-                  Let's build smarter hospitality technology together. Whether you need a demo, 
-                  consultation, or have questions, we're here to help transform your operations.
-                </p>
-                <div className="flex flex-col sm:flex-row items-start gap-4">
-                  <Link href="#contact-form" onClick={scrollToForm} className="btn-primary text-lg px-8 py-4">
-                    Request Demo
-                  </Link>
-                  <Link href="#contact-form" onClick={scrollToForm} className="btn-secondary text-lg px-8 py-4">
-                    Talk to Experts
-                  </Link>
-                </div>
-              </div>
-            </AnimatedSection>
+
+        <div className="container-custom relative z-10">
+          {/* Hero Header with Stagger Animation */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="text-center max-w-4xl mx-auto mb-12"
+          >
+            <motion.div 
+              className="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-primary-purple/10 to-primary-orange/10 rounded-full border border-primary-purple/20 mb-6"
+              whileHover={{ scale: 1.05 }}
+              transition={{ type: "spring", stiffness: 400 }}
+            >
+              <motion.div
+                animate={{ rotate: [0, 10, -10, 0] }}
+                transition={{ duration: 2, repeat: Infinity }}
+              >
+                <ChatBubbleLeftRightIcon className="w-5 h-5 text-primary-purple" />
+              </motion.div>
+              <span className="text-primary-purple text-sm font-semibold">Let's Connect</span>
+            </motion.div>
             
-            <AnimatedSection direction="right" delay={0.2} className="flex">
-              <div className="w-full">
-                {/* Collaboration Cards */}
-                <div className="bg-white rounded-2xl p-10 shadow-xl border border-gray-100 w-full h-full flex flex-col justify-center">
-                  <div className="grid grid-cols-2 gap-6 mb-6">
-                    <div className="bg-gradient-to-br from-gray-50 to-white rounded-xl p-8 shadow-sm border border-gray-100 text-center flex flex-col items-center justify-center h-40">
-                      <div className="w-16 h-16 bg-gradient-to-br from-primary-purple to-purple-700 rounded-xl flex items-center justify-center mx-auto mb-4 shadow-md">
-                        <BuildingOfficeIcon className="h-8 w-8 text-white" />
+            <motion.h1 
+              className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-gray-900 font-heading mb-6"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2, duration: 0.6 }}
+            >
+              Get in Touch with <span className="text-primary-orange">JebiTech</span>
+            </motion.h1>
+            
+            <motion.p 
+              className="text-lg md:text-xl leading-relaxed text-gray-600 max-w-3xl mx-auto"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4, duration: 0.6 }}
+            >
+              Let's build smarter hospitality technology together. Whether you need a demo, consultation, or have questions, we're here to help transform your operations.
+            </motion.p>
+          </motion.div>
+
+          {/* Main Content - Single Box with Enhanced Animations */}
+          <div className="max-w-7xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6, duration: 0.7 }}
+            >
+              <motion.div 
+                className="bg-white rounded-3xl shadow-2xl border border-gray-100 overflow-hidden"
+                whileHover={{ boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.15)" }}
+                transition={{ duration: 0.3 }}
+              >
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-0">
+                  {/* Contact Form - Takes 2 columns */}
+                  <div className="lg:col-span-2 p-6 md:p-8 border-r border-gray-100">
+                    <motion.div
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.8, duration: 0.5 }}
+                    >
+                      <h2 className="text-xl md:text-2xl font-bold text-gray-900 font-heading mb-1 flex items-center gap-2">
+                        <SparklesIcon className="w-6 h-6 text-primary-orange" />
+                        Send us a Message
+                      </h2>
+                      <p className="text-gray-600 text-sm mb-5">We typically respond within 2 hours during business hours</p>
+                    </motion.div>
+                  
+                    <AnimatePresence mode="wait">
+                      {formStatus === 'success' && (
+                        <motion.div 
+                          className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg flex items-center"
+                          initial={{ opacity: 0, scale: 0.9, y: -10 }}
+                          animate={{ opacity: 1, scale: 1, y: 0 }}
+                          exit={{ opacity: 0, scale: 0.9, y: -10 }}
+                          transition={{ type: "spring", stiffness: 200 }}
+                        >
+                          <CheckCircleIcon className="h-5 w-5 text-green-600 mr-3" />
+                          <span className="text-green-800">Message sent successfully! We'll get back to you soon.</span>
+                        </motion.div>
+                      )}
+                      
+                      {formStatus === 'error' && (
+                        <motion.div 
+                          className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg flex items-center"
+                          initial={{ opacity: 0, scale: 0.9, y: -10 }}
+                          animate={{ opacity: 1, scale: 1, y: 0 }}
+                          exit={{ opacity: 0, scale: 0.9, y: -10 }}
+                          transition={{ type: "spring", stiffness: 200 }}
+                        >
+                          <ExclamationCircleIcon className="h-5 w-5 text-red-600 mr-3" />
+                          <span className="text-red-800">Something went wrong. Please try again.</span>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                    
+                    <form onSubmit={handleSubmit} className="space-y-4">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <motion.div 
+                          className="relative"
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: 0.9, duration: 0.4 }}
+                          whileFocus={{ scale: 1.02 }}
+                        >
+                          <input
+                            type="text"
+                            id="name"
+                            name="name"
+                            value={formData.name}
+                            onChange={handleChange}
+                            className={`peer w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary-orange focus:border-transparent transition-all ${
+                              errors.name ? 'border-red-500' : 'border-gray-300'
+                            }`}
+                            placeholder=" "
+                          />
+                          <label
+                            htmlFor="name"
+                            className="absolute left-4 top-3 text-gray-500 transition-all peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-focus:top-1 peer-focus:text-xs peer-focus:text-primary-orange peer-[:not(:placeholder-shown)]:top-1 peer-[:not(:placeholder-shown)]:text-xs"
+                          >
+                            Full Name *
+                          </label>
+                          {errors.name && <p className="mt-1 text-sm text-red-600">{errors.name}</p>}
+                        </motion.div>
+                        
+                        <motion.div 
+                          className="relative"
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: 1.0, duration: 0.4 }}
+                        >
+                          <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            value={formData.email}
+                            onChange={handleChange}
+                            className={`peer w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary-orange focus:border-transparent transition-all ${
+                              errors.email ? 'border-red-500' : 'border-gray-300'
+                            }`}
+                            placeholder=" "
+                          />
+                          <label
+                            htmlFor="email"
+                            className="absolute left-4 top-3 text-gray-500 transition-all peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-focus:top-1 peer-focus:text-xs peer-focus:text-primary-orange peer-[:not(:placeholder-shown)]:top-1 peer-[:not(:placeholder-shown)]:text-xs"
+                          >
+                            Email Address *
+                          </label>
+                          {errors.email && <p className="mt-1 text-sm text-red-600">{errors.email}</p>}
+                        </motion.div>
                       </div>
-                      <div className="text-base font-bold text-gray-900">Your Business</div>
-                    </div>
-                    <div className="bg-gradient-to-br from-gray-50 to-white rounded-xl p-8 shadow-sm border border-gray-100 text-center flex flex-col items-center justify-center h-40">
-                      <div className="w-16 h-16 bg-gradient-to-br from-primary-purple to-purple-700 rounded-xl flex items-center justify-center mx-auto mb-4 shadow-md">
-                        <UserGroupIcon className="h-8 w-8 text-white" />
+
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <motion.div 
+                          className="relative"
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: 1.1, duration: 0.4 }}
+                        >
+                          <input
+                            type="tel"
+                            id="phone"
+                            name="phone"
+                            value={formData.phone}
+                            onChange={handleChange}
+                            className="peer w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-orange focus:border-transparent transition-all"
+                            placeholder=" "
+                          />
+                          <label
+                            htmlFor="phone"
+                            className="absolute left-4 top-3 text-gray-500 transition-all peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-focus:top-1 peer-focus:text-xs peer-focus:text-primary-orange peer-[:not(:placeholder-shown)]:top-1 peer-[:not(:placeholder-shown)]:text-xs"
+                          >
+                            Phone Number
+                          </label>
+                        </motion.div>
+                        
+                        <motion.div 
+                          className="relative"
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: 1.2, duration: 0.4 }}
+                        >
+                          <input
+                            type="text"
+                            id="company"
+                            name="company"
+                            value={formData.company}
+                            onChange={handleChange}
+                            className={`peer w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary-orange focus:border-transparent transition-all ${
+                              errors.company ? 'border-red-500' : 'border-gray-300'
+                            }`}
+                            placeholder=" "
+                          />
+                          <label
+                            htmlFor="company"
+                            className="absolute left-4 top-3 text-gray-500 transition-all peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-focus:top-1 peer-focus:text-xs peer-focus:text-primary-orange peer-[:not(:placeholder-shown)]:top-1 peer-[:not(:placeholder-shown)]:text-xs"
+                          >
+                            Company Name *
+                          </label>
+                          {errors.company && <p className="mt-1 text-sm text-red-600">{errors.company}</p>}
+                        </motion.div>
                       </div>
-                      <div className="text-base font-bold text-gray-900">Our Experts</div>
-                    </div>
+
+                      <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 1.3, duration: 0.4 }}
+                      >
+                        <label htmlFor="inquiryType" className="block text-sm font-medium text-gray-700 mb-2">
+                          Inquiry Type *
+                        </label>
+                        <select
+                          id="inquiryType"
+                          name="inquiryType"
+                          value={formData.inquiryType}
+                          onChange={handleChange}
+                          className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary-orange focus:border-transparent ${
+                            errors.inquiryType ? 'border-red-500' : 'border-gray-300'
+                          }`}
+                        >
+                          <option value="">Select inquiry type</option>
+                          {inquiryTypes.map(type => (
+                            <option key={type.value} value={type.value}>{type.label}</option>
+                          ))}
+                        </select>
+                        {errors.inquiryType && <p className="mt-1 text-sm text-red-600">{errors.inquiryType}</p>}
+                      </motion.div>
+
+                      {/* Conditional Product Selection with Animation */}
+                      <AnimatePresence>
+                        {showProductSelection && (
+                          <motion.div
+                            initial={{ opacity: 0, height: 0 }}
+                            animate={{ opacity: 1, height: "auto" }}
+                            exit={{ opacity: 0, height: 0 }}
+                            transition={{ duration: 0.3 }}
+                          >
+                            <label htmlFor="product" className="block text-sm font-medium text-gray-700 mb-2">
+                              Select Product *
+                            </label>
+                            <select
+                              id="product"
+                              name="product"
+                              value={formData.product}
+                              onChange={handleChange}
+                              className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary-orange focus:border-transparent ${
+                                errors.product ? 'border-red-500' : 'border-gray-300'
+                              }`}
+                            >
+                              <option value="">Select a product</option>
+                              {products.map(product => (
+                                <option key={product.value} value={product.value}>{product.label}</option>
+                              ))}
+                            </select>
+                            {errors.product && <p className="mt-1 text-sm text-red-600">{errors.product}</p>}
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+
+                      <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 1.4, duration: 0.4 }}
+                      >
+                        <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
+                          Message *
+                        </label>
+                        <textarea
+                          id="message"
+                          name="message"
+                          rows={4}
+                          value={formData.message}
+                          onChange={handleChange}
+                          placeholder="Tell us about your project, requirements, or how we can help you..."
+                          className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary-orange focus:border-transparent resize-none ${
+                            errors.message ? 'border-red-500' : 'border-gray-300'
+                          }`}
+                        />
+                        {errors.message && <p className="mt-1 text-sm text-red-600">{errors.message}</p>}
+                      </motion.div>
+
+                      <motion.div 
+                        className="flex items-center"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 1.5, duration: 0.4 }}
+                      >
+                        <input
+                          id="subscribe"
+                          name="subscribe"
+                          type="checkbox"
+                          checked={formData.subscribe}
+                          onChange={handleChange}
+                          className="h-4 w-4 text-primary-orange focus:ring-primary-orange border-gray-300 rounded"
+                        />
+                        <label htmlFor="subscribe" className="ml-2 block text-sm text-gray-700">
+                          Subscribe to product updates and hospitality tech insights
+                        </label>
+                      </motion.div>
+
+                      <motion.button
+                        type="submit"
+                        disabled={formStatus === 'submitting'}
+                        className={`w-full py-3 px-6 rounded-lg font-medium transition-all flex items-center justify-center gap-2 ${
+                          formStatus === 'submitting'
+                            ? 'bg-gray-400 cursor-not-allowed'
+                            : 'btn-primary'
+                        }`}
+                        whileHover={formStatus !== 'submitting' ? { scale: 1.02 } : {}}
+                        whileTap={formStatus !== 'submitting' ? { scale: 0.98 } : {}}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 1.6, duration: 0.4 }}
+                      >
+                        <motion.div
+                          animate={formStatus === 'submitting' ? { rotate: 360 } : {}}
+                          transition={{ duration: 1, repeat: formStatus === 'submitting' ? Infinity : 0, ease: "linear" }}
+                        >
+                          <PaperAirplaneIcon className="w-5 h-5" />
+                        </motion.div>
+                        {formStatus === 'submitting' ? 'Sending Message...' : 'Send Message'}
+                      </motion.button>
+                    </form>
                   </div>
-                  <div className="text-center">
-                    <div className="bg-primary-orange text-white rounded-xl p-8 font-semibold shadow-lg h-40 flex flex-col items-center justify-center">
-                      <RocketLaunchIcon className="h-10 w-10 mx-auto mb-4" />
-                      <div className="text-xl mb-2">Successful Partnership</div>
-                      <div className="text-base text-white/90">Transforming hospitality operations together</div>
+
+                  {/* Sidebar - Contact Info & Response Times with Stagger */}
+                  <div className="lg:col-span-1 p-6 bg-gradient-to-br from-gray-50 to-purple-50/50 flex flex-col justify-between">
+                    <div>
+                      {/* Quick Contact Section */}
+                      <motion.div 
+                        className="mb-6 pb-6 border-b border-gray-200"
+                        initial={{ opacity: 0, x: 20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 1.0, duration: 0.5 }}
+                      >
+                        <h3 className="text-lg font-bold text-gray-900 mb-4">Quick Contact</h3>
+                        
+                        <motion.a 
+                          href="mailto:sales@jebitech.com" 
+                          className="flex items-center gap-3 p-3 bg-gradient-to-br from-primary-purple to-purple-700 rounded-xl hover:shadow-lg transition-all group"
+                          whileHover={{ scale: 1.05, y: -2 }}
+                          whileTap={{ scale: 0.95 }}
+                        >
+                          <div className="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <EnvelopeIcon className="h-5 w-5 text-white" />
+                          </div>
+                          <div className="min-w-0">
+                            <div className="text-xs text-white/90 mb-0.5">Email Us</div>
+                            <div className="font-semibold text-white text-sm">sales@jebitech.com</div>
+                          </div>
+                        </motion.a>
+                      </motion.div>
+
+                      {/* Response Times Section with Stagger */}
+                      <motion.div
+                        initial={{ opacity: 0, x: 20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 1.2, duration: 0.5 }}
+                      >
+                        <h3 className="text-base font-bold text-gray-900 mb-4">Response Times</h3>
+                        <div className="space-y-3">
+                          {responseExpectations.map((expectation, index) => (
+                            <motion.div 
+                              key={index} 
+                              className="flex items-start gap-3 pb-3 border-b border-gray-200 last:border-0 last:pb-0"
+                              initial={{ opacity: 0, x: 20 }}
+                              animate={{ opacity: 1, x: 0 }}
+                              transition={{ delay: 1.3 + (index * 0.1), duration: 0.4 }}
+                              whileHover={{ x: 5 }}
+                            >
+                              <motion.div 
+                                className="w-8 h-8 bg-gradient-to-br from-primary-purple to-purple-700 rounded-lg flex items-center justify-center flex-shrink-0"
+                                whileHover={{ rotate: 360 }}
+                                transition={{ duration: 0.6 }}
+                              >
+                                <expectation.icon className="h-4 w-4 text-white" />
+                              </motion.div>
+                              <div className="flex-1 min-w-0">
+                                <div className="font-semibold text-gray-900 text-xs mb-0.5">{expectation.type}</div>
+                                <div className="text-primary-orange font-bold text-xs mb-1">{expectation.time}</div>
+                                <p className="text-gray-600 text-xs leading-relaxed">{expectation.description}</p>
+                              </div>
+                            </motion.div>
+                          ))}
+                        </div>
+                      </motion.div>
                     </div>
+                    
+                    {/* Spacer to push content alignment */}
+                    <motion.div 
+                      className="mt-6 pt-6 border-t border-gray-200"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ delay: 1.8, duration: 0.5 }}
+                    >
+                      <div className="text-center text-xs text-gray-500 flex items-center justify-center gap-1">
+                        <HeartIcon className="w-4 h-4 text-primary-orange" />
+                        We're here to help you succeed
+                      </div>
+                    </motion.div>
                   </div>
                 </div>
-              </div>
-            </AnimatedSection>
+              </motion.div>
+            </motion.div>
           </div>
         </div>
       </div>
 
-      {/* 2. Contact Form Section */}
-      <div id="contact-form" className="relative bg-gradient-to-br from-gray-50 via-white to-gray-50 section-padding overflow-hidden">
-        {/* Background Elements */}
-        <div className="absolute inset-0 opacity-5">
-          <div className="absolute inset-0" style={{
-            backgroundImage: 'radial-gradient(circle at 2px 2px, #4A1A5C 1px, transparent 0)',
-            backgroundSize: '48px 48px'
-          }}></div>
-        </div>
-        <div className="absolute top-20 left-0 w-96 h-96 bg-primary-purple/5 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-20 right-0 w-96 h-96 bg-primary-orange/5 rounded-full blur-3xl"></div>
-
-        <div className="container-custom relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-stretch">
-            {/* Contact Form */}
-            <AnimatedSection direction="left" className="flex">
-              <div className="bg-white rounded-2xl shadow-xl p-8 border border-gray-100 w-full flex flex-col">
-                <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 font-heading mb-2">
-                  Send us a Message
-                </h2>
-                <p className="text-gray-600 mb-8">Fill out the form and we'll get back to you shortly</p>
-                  
-                  {formStatus === 'success' && (
-                    <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg flex items-center">
-                      <CheckCircleIcon className="h-5 w-5 text-green-600 mr-3" />
-                      <span className="text-green-800">Message sent successfully! We'll get back to you soon.</span>
-                    </div>
-                  )}
-                  
-                  {formStatus === 'error' && (
-                    <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg flex items-center">
-                      <ExclamationCircleIcon className="h-5 w-5 text-red-600 mr-3" />
-                      <span className="text-red-800">Something went wrong. Please try again.</span>
-                    </div>
-                  )}
-                  
-                  <form onSubmit={handleSubmit} className="space-y-6 flex-1 flex flex-col">
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                      <div className="relative">
-                        <input
-                          type="text"
-                          id="name"
-                          name="name"
-                          value={formData.name}
-                          onChange={handleChange}
-                          className={`peer w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary-orange focus:border-transparent transition-all ${
-                            errors.name ? 'border-red-500' : 'border-gray-300'
-                          }`}
-                          placeholder=" "
-                        />
-                        <label
-                          htmlFor="name"
-                          className="absolute left-4 top-3 text-gray-500 transition-all peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-focus:top-1 peer-focus:text-xs peer-focus:text-primary-orange peer-[:not(:placeholder-shown)]:top-1 peer-[:not(:placeholder-shown)]:text-xs"
-                        >
-                          Full Name *
-                        </label>
-                        {errors.name && <p className="mt-1 text-sm text-red-600">{errors.name}</p>}
-                      </div>
-                      
-                      <div className="relative">
-                        <input
-                          type="email"
-                          id="email"
-                          name="email"
-                          value={formData.email}
-                          onChange={handleChange}
-                          className={`peer w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary-orange focus:border-transparent transition-all ${
-                            errors.email ? 'border-red-500' : 'border-gray-300'
-                          }`}
-                          placeholder=" "
-                        />
-                        <label
-                          htmlFor="email"
-                          className="absolute left-4 top-3 text-gray-500 transition-all peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-focus:top-1 peer-focus:text-xs peer-focus:text-primary-orange peer-[:not(:placeholder-shown)]:top-1 peer-[:not(:placeholder-shown)]:text-xs"
-                        >
-                          Email Address *
-                        </label>
-                        {errors.email && <p className="mt-1 text-sm text-red-600">{errors.email}</p>}
-                      </div>
-                    </div>
-
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                      <div className="relative">
-                        <input
-                          type="tel"
-                          id="phone"
-                          name="phone"
-                          value={formData.phone}
-                          onChange={handleChange}
-                          className="peer w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-orange focus:border-transparent transition-all"
-                          placeholder=" "
-                        />
-                        <label
-                          htmlFor="phone"
-                          className="absolute left-4 top-3 text-gray-500 transition-all peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-focus:top-1 peer-focus:text-xs peer-focus:text-primary-orange peer-[:not(:placeholder-shown)]:top-1 peer-[:not(:placeholder-shown)]:text-xs"
-                        >
-                          Phone Number
-                        </label>
-                      </div>
-                      
-                      <div className="relative">
-                        <input
-                          type="text"
-                          id="company"
-                          name="company"
-                          value={formData.company}
-                          onChange={handleChange}
-                          className={`peer w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary-orange focus:border-transparent transition-all ${
-                            errors.company ? 'border-red-500' : 'border-gray-300'
-                          }`}
-                          placeholder=" "
-                        />
-                        <label
-                          htmlFor="company"
-                          className="absolute left-4 top-3 text-gray-500 transition-all peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-focus:top-1 peer-focus:text-xs peer-focus:text-primary-orange peer-[:not(:placeholder-shown)]:top-1 peer-[:not(:placeholder-shown)]:text-xs"
-                        >
-                          Company Name *
-                        </label>
-                        {errors.company && <p className="mt-1 text-sm text-red-600">{errors.company}</p>}
-                      </div>
-                    </div>
-
-                    <div>
-                      <label htmlFor="inquiryType" className="block text-sm font-medium text-gray-700 mb-2">
-                        Inquiry Type *
-                      </label>
-                      <select
-                        id="inquiryType"
-                        name="inquiryType"
-                        value={formData.inquiryType}
-                        onChange={handleChange}
-                        className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary-orange focus:border-transparent ${
-                          errors.inquiryType ? 'border-red-500' : 'border-gray-300'
-                        }`}
-                      >
-                        <option value="">Select inquiry type</option>
-                        {inquiryTypes.map(type => (
-                          <option key={type.value} value={type.value}>{type.label}</option>
-                        ))}
-                      </select>
-                      {errors.inquiryType && <p className="mt-1 text-sm text-red-600">{errors.inquiryType}</p>}
-                    </div>
-
-                    <div className="flex-1 flex flex-col">
-                      <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
-                        Message *
-                      </label>
-                      <textarea
-                        id="message"
-                        name="message"
-                        rows={6}
-                        value={formData.message}
-                        onChange={handleChange}
-                        placeholder="Tell us about your project, requirements, or how we can help you..."
-                        className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary-orange focus:border-transparent flex-1 ${
-                          errors.message ? 'border-red-500' : 'border-gray-300'
-                        }`}
-                      />
-                      {errors.message && <p className="mt-1 text-sm text-red-600">{errors.message}</p>}
-                    </div>
-
-                    <div className="flex items-center">
-                      <input
-                        id="subscribe"
-                        name="subscribe"
-                        type="checkbox"
-                        checked={formData.subscribe}
-                        onChange={handleChange}
-                        className="h-4 w-4 text-primary-orange focus:ring-primary-orange border-gray-300 rounded"
-                      />
-                      <label htmlFor="subscribe" className="ml-2 block text-sm text-gray-700">
-                        Subscribe to product updates and hospitality tech insights
-                      </label>
-                    </div>
-
-                    <button
-                      type="submit"
-                      disabled={formStatus === 'submitting'}
-                      className={`w-full py-3 px-6 rounded-lg font-medium transition-all ${
-                        formStatus === 'submitting'
-                          ? 'bg-gray-400 cursor-not-allowed'
-                          : 'btn-primary'
-                      }`}
-                    >
-                      {formStatus === 'submitting' ? 'Sending Message...' : 'Send Message'}
-                    </button>
-                  </form>
-                </div>
-              </AnimatedSection>
-
-              {/* Response Expectations */}
-              <AnimatedSection direction="right" delay={0.2} className="flex">
-                <div className="w-full flex flex-col">
-                  <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 font-heading mb-2">
-                    What to Expect
-                  </h2>
-                  <p className="text-gray-600 mb-8">
-                    We understand that time is valuable in hospitality. Here's how quickly 
-                    you can expect to hear from our team:
-                  </p>
-                  
-                  <div className="space-y-4 flex-1 flex flex-col justify-between">
-                    {responseExpectations.map((expectation, index) => (
-                      <div key={index} className="bg-white rounded-xl p-6 shadow-md border border-gray-100 flex-1 flex items-start">
-                        <div className="flex items-start gap-4 w-full">
-                          <div className="w-12 h-12 bg-gradient-to-br from-primary-purple to-purple-700 rounded-xl flex items-center justify-center flex-shrink-0 shadow-md">
-                            <expectation.icon className="h-6 w-6 text-white" />
-                          </div>
-                          <div className="flex-1">
-                            <h3 className="font-bold text-gray-900 mb-1">{expectation.type}</h3>
-                            <div className="text-primary-orange font-semibold text-sm mb-2">{expectation.time}</div>
-                            <p className="text-gray-600 text-sm leading-relaxed">{expectation.description}</p>
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </AnimatedSection>
-            </div>
-          </div>
-        </div>
-
-      {/* 3. Contact Details & Offices */}
+      {/* 2. Office Location - Animated Cards */}
       <div className="relative bg-white section-padding overflow-hidden">
         {/* Background Elements */}
         <div className="absolute inset-0 opacity-5">
@@ -535,128 +675,243 @@ export default function Contact() {
             backgroundSize: '48px 48px'
           }}></div>
         </div>
-        <div className="absolute top-0 right-0 w-96 h-96 bg-primary-orange/5 rounded-full blur-3xl"></div>
+        <motion.div 
+          className="absolute top-0 right-0 w-96 h-96 bg-primary-orange/5 rounded-full blur-3xl"
+          animate={{
+            x: [0, 50, 0],
+            y: [0, 30, 0],
+          }}
+          transition={{
+            duration: 10,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
         
         <div className="container-custom relative z-10">
-          <AnimatedSection direction="up">
-            <div className="mx-auto max-w-2xl text-center mb-16">
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-primary-purple/10 to-primary-orange/10 rounded-full border border-primary-purple/20 mb-6">
-                <BuildingOfficeIcon className="w-5 h-5 text-primary-purple" />
-                <span className="text-primary-purple text-sm font-semibold">Global Presence</span>
-              </div>
-              <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl font-heading">
-                Our Global Offices
-              </h2>
-              <p className="mt-6 text-lg leading-8 text-gray-600">
-                With offices across three continents, we provide 24/7 support and local expertise
-              </p>
-            </div>
-          </AnimatedSection>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="mx-auto max-w-4xl text-center mb-12"
+          >
+            <motion.div 
+              className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-primary-purple/10 to-primary-orange/10 rounded-full border border-primary-purple/20 mb-6"
+              whileHover={{ scale: 1.05 }}
+            >
+              <BuildingOfficeIcon className="w-5 h-5 text-primary-purple" />
+              <span className="text-primary-purple text-sm font-semibold">Our Office</span>
+            </motion.div>
+            <motion.h2 
+              className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl font-heading"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2, duration: 0.6 }}
+            >
+              Visit Our Office
+            </motion.h2>
+            <motion.p 
+              className="mt-6 text-lg leading-8 text-gray-600"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.4, duration: 0.6 }}
+            >
+              Located in Pune, India - we're here to serve you
+            </motion.p>
+          </motion.div>
           
-          <StaggeredList className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
-            {offices.map((office) => (
-              <div key={office.name} className="flex">
-                <div className="bg-white rounded-2xl p-8 shadow-xl border border-gray-100 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 flex flex-col w-full relative overflow-hidden">
-                  {/* Headquarters Corner Badge */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch">
+            {/* Office Details Card with Hover Effects */}
+            {offices.map((office, idx) => (
+              <motion.div
+                key={office.name}
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.6, duration: 0.6 }}
+              >
+                <motion.div 
+                  className="bg-white rounded-2xl p-6 md:p-8 shadow-xl border border-gray-100 h-full flex flex-col relative overflow-hidden"
+                  whileHover={{ 
+                    boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
+                    y: -5
+                  }}
+                  transition={{ duration: 0.3 }}
+                >
                   {office.isPrimary && (
-                    <div className="absolute top-0 right-0">
+                    <motion.div 
+                      className="absolute top-0 right-0"
+                      initial={{ x: 100 }}
+                      animate={{ x: 0 }}
+                      transition={{ delay: 1, type: "spring", stiffness: 100 }}
+                    >
                       <div className="bg-gradient-to-br from-primary-orange to-orange-600 text-white px-6 py-2 text-xs font-bold shadow-lg" style={{ clipPath: 'polygon(0 0, 100% 0, 100% 100%, 20% 100%)' }}>
                         Headquarter
                       </div>
-                    </div>
+                    </motion.div>
                   )}
                   
-                  <h3 className="text-2xl font-bold text-gray-900 mb-8">{office.name}</h3>
+                  <motion.h3 
+                    className="text-2xl font-bold text-gray-900 mb-6"
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.8 }}
+                  >
+                    {office.name}
+                  </motion.h3>
                   
-                  <div className="space-y-4 flex-1">
-                    <div className="flex items-start">
-                      <div className="w-10 h-10 bg-gradient-to-br from-primary-purple to-purple-700 rounded-lg flex items-center justify-center flex-shrink-0 mr-4 shadow-md">
-                        <MapPinIcon className="h-5 w-5 text-white" />
+                  <div className="space-y-5 flex-1">
+                    <motion.div 
+                      className="flex items-start"
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.9 }}
+                      whileHover={{ x: 5 }}
+                    >
+                      <motion.div 
+                        className="w-12 h-12 bg-gradient-to-br from-primary-purple to-purple-700 rounded-lg flex items-center justify-center flex-shrink-0 mr-4 shadow-md"
+                        whileHover={{ rotate: 360, scale: 1.1 }}
+                        transition={{ duration: 0.6 }}
+                      >
+                        <MapPinIcon className="h-6 w-6 text-white" />
+                      </motion.div>
+                      <div className="flex-1">
+                        <div className="text-sm font-semibold text-gray-900 mb-1">Address</div>
+                        <div className="text-gray-600 text-base whitespace-pre-line leading-relaxed">{office.address}</div>
                       </div>
-                      <div className="text-gray-600 text-sm whitespace-pre-line leading-relaxed">{office.address}</div>
-                    </div>
+                    </motion.div>
                     
-                    <div className="flex items-center">
-                      <div className="w-10 h-10 bg-gradient-to-br from-primary-purple to-purple-700 rounded-lg flex items-center justify-center flex-shrink-0 mr-4 shadow-md">
-                        <PhoneIcon className="h-5 w-5 text-white" />
+                    <motion.div 
+                      className="flex items-start"
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 1.0 }}
+                      whileHover={{ x: 5 }}
+                    >
+                      <motion.div 
+                        className="w-12 h-12 bg-gradient-to-br from-primary-purple to-purple-700 rounded-lg flex items-center justify-center flex-shrink-0 mr-4 shadow-md"
+                        whileHover={{ rotate: 360, scale: 1.1 }}
+                        transition={{ duration: 0.6 }}
+                      >
+                        <EnvelopeIcon className="h-6 w-6 text-white" />
+                      </motion.div>
+                      <div className="flex-1">
+                        <div className="text-sm font-semibold text-gray-900 mb-1">Email</div>
+                        <a href={`mailto:${office.email}`} className="text-gray-600 text-base hover:text-primary-orange transition-colors font-medium break-all">
+                          {office.email}
+                        </a>
                       </div>
-                      <a href={`tel:${office.phone}`} className="text-gray-600 text-sm hover:text-primary-orange transition-colors font-medium">
-                        {office.phone}
-                      </a>
-                    </div>
+                    </motion.div>
                     
-                    <div className="flex items-center">
-                      <div className="w-10 h-10 bg-gradient-to-br from-primary-purple to-purple-700 rounded-lg flex items-center justify-center flex-shrink-0 mr-4 shadow-md">
-                        <EnvelopeIcon className="h-5 w-5 text-white" />
+                    <motion.div 
+                      className="flex items-start"
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 1.1 }}
+                      whileHover={{ x: 5 }}
+                    >
+                      <motion.div 
+                        className="w-12 h-12 bg-gradient-to-br from-primary-purple to-purple-700 rounded-lg flex items-center justify-center flex-shrink-0 mr-4 shadow-md"
+                        whileHover={{ rotate: 360, scale: 1.1 }}
+                        transition={{ duration: 0.6 }}
+                      >
+                        <PhoneIcon className="h-6 w-6 text-white" />
+                      </motion.div>
+                      <div className="flex-1">
+                        <div className="text-sm font-semibold text-gray-900 mb-1">Phone</div>
+                        <a href={`tel:${office.phone}`} className="text-gray-600 text-base hover:text-primary-orange transition-colors font-medium">
+                          {office.phone}
+                        </a>
                       </div>
-                      <a href={`mailto:${office.email}`} className="text-gray-600 text-sm hover:text-primary-orange transition-colors font-medium">
-                        {office.email}
-                      </a>
-                    </div>
+                    </motion.div>
                     
-                    <div className="flex items-start">
-                      <div className="w-10 h-10 bg-gradient-to-br from-primary-purple to-purple-700 rounded-lg flex items-center justify-center flex-shrink-0 mr-4 shadow-md">
-                        <ClockIcon className="h-5 w-5 text-white" />
+                    <motion.div 
+                      className="flex items-start"
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 1.2 }}
+                      whileHover={{ x: 5 }}
+                    >
+                      <motion.div 
+                        className="w-12 h-12 bg-gradient-to-br from-primary-purple to-purple-700 rounded-lg flex items-center justify-center flex-shrink-0 mr-4 shadow-md"
+                        whileHover={{ rotate: 360, scale: 1.1 }}
+                        transition={{ duration: 0.6 }}
+                      >
+                        <ClockIcon className="h-6 w-6 text-white" />
+                      </motion.div>
+                      <div className="flex-1">
+                        <div className="text-sm font-semibold text-gray-900 mb-1">Business Hours</div>
+                        <div className="text-gray-600 text-base font-medium">{office.hours}</div>
+                        <div className="text-gray-500 text-sm mt-1">{office.timezone}</div>
                       </div>
-                      <div>
-                        <div className="text-gray-600 text-sm font-medium">{office.hours}</div>
-                        <div className="text-gray-500 text-xs mt-1">{office.timezone}</div>
-                      </div>
-                    </div>
+                    </motion.div>
                   </div>
-                </div>
-              </div>
+                  
+                  {/* CTA Button with Animation */}
+                  <motion.div 
+                    className="mt-6 pt-5 border-t border-gray-100"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 1.3 }}
+                  >
+                    <motion.a 
+                      href="https://www.google.com/maps/dir/?api=1&destination=18.514794,73.94373"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center gap-2 w-full px-6 py-3 bg-gradient-to-r from-primary-purple to-purple-700 text-white rounded-lg font-semibold hover:shadow-lg transition-all duration-300"
+                      whileHover={{ scale: 1.05, y: -2 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      <MapPinIcon className="h-5 w-5" />
+                      <span>Get Directions</span>
+                    </motion.a>
+                  </motion.div>
+                </motion.div>
+              </motion.div>
             ))}
-          </StaggeredList>
-        </div>
-      </div>
 
-      {/* 4. Map Section */}
-      <div className="relative bg-gradient-to-br from-gray-50 via-white to-gray-50 section-padding overflow-hidden">
-        {/* Background Elements */}
-        <div className="absolute inset-0 opacity-5">
-          <div className="absolute inset-0" style={{
-            backgroundImage: 'radial-gradient(circle at 2px 2px, #FF6B35 1px, transparent 0)',
-            backgroundSize: '48px 48px'
-          }}></div>
-        </div>
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-primary-purple/5 rounded-full blur-3xl"></div>
-        
-        <div className="container-custom relative z-10">
-          <AnimatedSection direction="up">
-            <div className="mx-auto max-w-2xl text-center mb-12">
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-primary-purple/10 to-primary-orange/10 rounded-full border border-primary-purple/20 mb-6">
-                <GlobeAltIcon className="w-5 h-5 text-primary-purple" />
-                <span className="text-primary-purple text-sm font-semibold">Worldwide Coverage</span>
-              </div>
-              <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl font-heading">
-                Find Us on the Map
-              </h2>
-              <p className="mt-6 text-lg leading-8 text-gray-600">
-                Strategically located to serve you better across different time zones
-              </p>
-            </div>
-            
-            <div className="bg-white rounded-2xl shadow-2xl overflow-hidden border border-gray-100">
-              <div className="h-[500px] relative">
+            {/* Map with Fade In */}
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.6, duration: 0.6 }}
+            >
+              <motion.div 
+                className="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100 h-full min-h-[500px]"
+                whileHover={{ 
+                  boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
+                  y: -5
+                }}
+                transition={{ duration: 0.3 }}
+              >
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d100940.14243827845!2d-122.50764019453125!3d37.75767381874453!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80859a6d00690021%3A0x4a501367f076adff!2sSan%20Francisco%2C%20CA%2C%20USA!5e0!3m2!1sen!2s!4v1234567890123!5m2!1sen!2s"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3783.0!2d73.94373!3d18.514794!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2c22273d37a27%3A0xc0ebc21bde9b31f4!2sSweet%20Water%20Villas!5e0!3m2!1sen!2sus!4v1771312989069!5m2!1sen!2sus"
                   width="100%"
                   height="100%"
                   style={{ border: 0 }}
                   allowFullScreen
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
-                  title="JebiTech Office Locations"
+                  title="JebiTech Office Location"
                   className="w-full h-full"
                 ></iframe>
-              </div>
-            </div>
-          </AnimatedSection>
+              </motion.div>
+            </motion.div>
+          </div>
         </div>
       </div>
 
-      {/* 5. Alternative Channels */}
+      {/* 3. Alternative Channels - Animated Cards */}
       <div className="relative bg-white section-padding overflow-hidden">
         {/* Background Elements */}
         <div className="absolute inset-0 opacity-5">
@@ -665,149 +920,150 @@ export default function Contact() {
             backgroundSize: '48px 48px'
           }}></div>
         </div>
-        <div className="absolute top-0 left-0 w-96 h-96 bg-primary-orange/5 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-primary-purple/5 rounded-full blur-3xl"></div>
+        <motion.div 
+          className="absolute top-0 left-0 w-96 h-96 bg-primary-orange/5 rounded-full blur-3xl"
+          animate={{
+            scale: [1, 1.3, 1],
+            x: [0, 30, 0],
+          }}
+          transition={{
+            duration: 12,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
+        <motion.div 
+          className="absolute bottom-0 right-0 w-96 h-96 bg-primary-purple/5 rounded-full blur-3xl"
+          animate={{
+            scale: [1.3, 1, 1.3],
+            y: [0, -30, 0],
+          }}
+          transition={{
+            duration: 12,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 2
+          }}
+        />
         
         <div className="container-custom relative z-10">
-          <AnimatedSection direction="up">
-            <div className="mx-auto max-w-2xl text-center mb-16">
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-primary-purple/10 to-primary-orange/10 rounded-full border border-primary-purple/20 mb-6">
-                <ChatBubbleLeftRightIcon className="w-5 h-5 text-primary-purple" />
-                <span className="text-primary-purple text-sm font-semibold">Stay Connected</span>
-              </div>
-              <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl font-heading mb-4">
-                Connect with Us
-              </h2>
-              <p className="text-lg leading-8 text-gray-600">
-                Choose your preferred way to get in touch and stay updated
-              </p>
-            </div>
-          </AnimatedSection>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="mx-auto max-w-2xl text-center mb-16"
+          >
+            <motion.div 
+              className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-primary-purple/10 to-primary-orange/10 rounded-full border border-primary-purple/20 mb-6"
+              whileHover={{ scale: 1.05 }}
+            >
+              <ChatBubbleLeftRightIcon className="w-5 h-5 text-primary-purple" />
+              <span className="text-primary-purple text-sm font-semibold">Stay Connected</span>
+            </motion.div>
+            <motion.h2 
+              className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl font-heading mb-4"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2, duration: 0.6 }}
+            >
+              Connect with Us
+            </motion.h2>
+            <motion.p 
+              className="text-lg leading-8 text-gray-600"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.4, duration: 0.6 }}
+            >
+              Choose your preferred way to get in touch and stay updated
+            </motion.p>
+          </motion.div>
           
-          <StaggeredList className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {socialChannels.map((channel) => {
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {socialChannels.map((channel, index) => {
               const IconComponent = SocialIcons[channel.icon as keyof typeof SocialIcons];
               
               return (
-                <a
+                <motion.a
                   key={channel.name}
                   href={channel.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-white rounded-2xl p-8 text-center shadow-lg border border-gray-100 transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 group flex flex-col relative overflow-hidden h-full"
+                  className="bg-white rounded-2xl p-8 text-center shadow-lg border border-gray-100 flex flex-col relative overflow-hidden h-full group"
+                  initial={{ opacity: 0, y: 50 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.6 + (index * 0.1), duration: 0.5 }}
+                  whileHover={{ 
+                    y: -10,
+                    boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)"
+                  }}
                 >
                   {/* Hover gradient effect */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-primary-purple/5 to-primary-orange/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <motion.div 
+                    className="absolute inset-0 bg-gradient-to-br from-primary-purple/5 to-primary-orange/5 opacity-0"
+                    whileHover={{ opacity: 1 }}
+                    transition={{ duration: 0.3 }}
+                  />
                   
                   <div className="relative z-10 flex flex-col h-full">
-                    {/* Icon Container */}
-                    <div className="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-primary-purple to-purple-700 rounded-2xl flex items-center justify-center shadow-lg transform group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
+                    {/* Icon Container with Rotation */}
+                    <motion.div 
+                      className="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-primary-purple to-purple-700 rounded-2xl flex items-center justify-center shadow-lg"
+                      whileHover={{ 
+                        rotate: [0, -10, 10, -10, 0],
+                        scale: 1.1
+                      }}
+                      transition={{ duration: 0.6 }}
+                    >
                       <div className="text-white">
                         <IconComponent />
                       </div>
-                    </div>
+                    </motion.div>
                     
-                    <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-primary-orange transition-colors">
+                    <motion.h3 
+                      className="text-xl font-bold text-gray-900 mb-3"
+                      whileHover={{ color: "#FF6B35" }}
+                      transition={{ duration: 0.3 }}
+                    >
                       {channel.name}
-                    </h3>
-                    <div className="text-primary-purple font-semibold mb-4 text-sm bg-purple-50 rounded-lg py-2 px-3 inline-block mx-auto">
+                    </motion.h3>
+                    
+                    <motion.div 
+                      className="text-primary-purple font-semibold mb-4 text-sm bg-purple-50 rounded-lg py-2 px-3 inline-block mx-auto"
+                      whileHover={{ scale: 1.05 }}
+                    >
                       {channel.handle}
-                    </div>
+                    </motion.div>
+                    
                     <p className="text-gray-600 text-sm leading-relaxed flex-1 mb-6">{channel.description}</p>
                     
-                    {/* Arrow indicator */}
-                    <div className="flex items-center justify-center text-primary-orange opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    {/* Arrow indicator with Animation */}
+                    <motion.div 
+                      className="flex items-center justify-center text-primary-orange"
+                      initial={{ opacity: 0, x: -10 }}
+                      whileHover={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.3 }}
+                    >
                       <span className="text-sm font-semibold mr-2">Connect</span>
-                      <svg className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <motion.svg 
+                        className="w-4 h-4" 
+                        fill="none" 
+                        stroke="currentColor" 
+                        viewBox="0 0 24 24"
+                        animate={{ x: [0, 5, 0] }}
+                        transition={{ duration: 1.5, repeat: Infinity }}
+                      >
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                      </svg>
-                    </div>
+                      </motion.svg>
+                    </motion.div>
                   </div>
-                </a>
+                </motion.a>
               )
             })}
-          </StaggeredList>
-        </div>
-      </div>
-
-      {/* 6. Final CTA */}
-      <div className="relative bg-gradient-to-br from-primary-purple via-purple-700 to-primary-purple section-padding overflow-hidden">
-        {/* Background Elements */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute inset-0" style={{
-            backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)',
-            backgroundSize: '48px 48px'
-          }}></div>
-        </div>
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary-orange/20 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-white/10 rounded-full blur-3xl"></div>
-        
-        {/* Floating decorative elements */}
-        <div className="absolute top-20 left-20 w-4 h-4 bg-white/20 rounded-full animate-pulse"></div>
-        <div className="absolute top-40 right-40 w-3 h-3 bg-primary-orange/30 rounded-full animate-pulse delay-100"></div>
-        <div className="absolute bottom-20 left-40 w-3 h-3 bg-white/20 rounded-full animate-pulse delay-200"></div>
-        <div className="absolute bottom-40 right-20 w-4 h-4 bg-primary-orange/30 rounded-full animate-pulse delay-300"></div>
-        
-        <div className="container-custom relative z-10">
-          <AnimatedSection direction="up">
-            <div className="max-w-4xl mx-auto text-center">
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 rounded-full border border-white/20 mb-8 backdrop-blur-sm">
-                <RocketLaunchIcon className="w-5 h-5 text-white" />
-                <span className="text-white text-sm font-semibold">Let's Get Started</span>
-              </div>
-              
-              <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6 leading-tight">
-                Start Your Project With Us
-              </h2>
-              
-              <p className="text-white/90 text-xl mb-10 max-w-2xl mx-auto leading-relaxed">
-                Ready to transform your hospitality operations? Let's discuss your needs and build something amazing together.
-              </p>
-              
-              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <Link 
-                  href="#contact-form" 
-                  onClick={scrollToForm} 
-                  className="group bg-white text-primary-purple px-10 py-5 rounded-xl font-bold text-lg hover:bg-gray-100 transition-all shadow-2xl hover:shadow-3xl hover:-translate-y-1 flex items-center gap-3"
-                >
-                  <span>Request Demo</span>
-                  <svg className="w-5 h-5 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                  </svg>
-                </Link>
-                <Link 
-                  href="#contact-form" 
-                  onClick={scrollToForm} 
-                  className="group border-2 border-white text-white px-10 py-5 rounded-xl font-bold text-lg hover:bg-white/10 transition-all backdrop-blur-sm flex items-center gap-3"
-                >
-                  <span>Talk to Experts</span>
-                  <ChatBubbleLeftRightIcon className="w-5 h-5 transform group-hover:scale-110 transition-transform" />
-                </Link>
-              </div>
-              
-              {/* Trust indicators */}
-              <div className="mt-12 pt-8 border-t border-white/20">
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-                  <div>
-                    <div className="text-3xl font-bold text-white mb-2">24/7</div>
-                    <div className="text-white/80 text-sm">Support Available</div>
-                  </div>
-                  <div>
-                    <div className="text-3xl font-bold text-white mb-2">2hrs</div>
-                    <div className="text-white/80 text-sm">Response Time</div>
-                  </div>
-                  <div>
-                    <div className="text-3xl font-bold text-white mb-2">100+</div>
-                    <div className="text-white/80 text-sm">Happy Clients</div>
-                  </div>
-                  <div>
-                    <div className="text-3xl font-bold text-white mb-2">99.9%</div>
-                    <div className="text-white/80 text-sm">Uptime SLA</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </AnimatedSection>
+          </div>
         </div>
       </div>
     </div>

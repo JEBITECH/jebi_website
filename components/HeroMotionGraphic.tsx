@@ -374,7 +374,7 @@
 
 // export default HeroMotionGraphic;
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Calendar,
@@ -435,9 +435,9 @@ const services: ServiceCard[] = [
     position: { x: 180, y: 0 }
   },
   {
-    id: 'Other services',
-    title: 'Other services',
-    description: 'Data Alysis / System user service for any department.',
+    id: 'Intergerationservices',
+    title: 'Intergeration services',
+    description: 'Solution implementation/ System configuration/ Onboarding & Rollout  /Training.',
     icon: <PlusSquare size={20} />,
     color: 'bg-purple-500',
     position: { x: 0, y: 180 }
@@ -445,6 +445,19 @@ const services: ServiceCard[] = [
 ];
 
 const HeroMotionGraphic = () => {
+  const [activeCardIndex, setActiveCardIndex] = useState<number | null>(null);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveCardIndex((prev) => {
+        if (prev === null) return 0;
+        return (prev + 1) % services.length;
+      });
+    }, 3000); // Change card every 3 seconds
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div className="relative flex items-center justify-center h-[500px] sm:h-[600px] md:h-[700px] lg:h-[600px] overflow-hidden">
 
@@ -468,7 +481,13 @@ const HeroMotionGraphic = () => {
 
       {/* Orbiting Cards */}
       {services.map((service, index) => (
-        <OrbitCard key={service.id} service={service} index={index} />
+        <OrbitCard 
+          key={service.id} 
+          service={service} 
+          index={index}
+          isActive={activeCardIndex === index}
+          onHover={() => setActiveCardIndex(null)}
+        />
       ))}
 
       {/* Connecting Lines (SVG) */}
@@ -482,7 +501,17 @@ const HeroMotionGraphic = () => {
   );
 };
 
-const OrbitCard = ({ service, index }: { service: ServiceCard, index: number }) => {
+const OrbitCard = ({ 
+  service, 
+  index, 
+  isActive,
+  onHover 
+}: { 
+  service: ServiceCard; 
+  index: number;
+  isActive: boolean;
+  onHover: () => void;
+}) => {
   const [isHovered, setIsHovered] = useState(false);
 
   // Responsive positions
@@ -505,12 +534,14 @@ const OrbitCard = ({ service, index }: { service: ServiceCard, index: number }) 
   };
 
   const position = getResponsivePosition();
+  const showDescription = isHovered || isActive;
 
   return (
     <motion.div
       initial={{ x: position.x, y: position.y }}
       animate={{
         y: [position.y, position.y - 10, position.y],
+        scale: showDescription ? 1.1 : 1,
       }}
       transition={{
         duration: 3,
@@ -518,21 +549,24 @@ const OrbitCard = ({ service, index }: { service: ServiceCard, index: number }) 
         repeat: Infinity,
         ease: "easeInOut"
       }}
-      whileHover={{ scale: 1.1, zIndex: 50 }}
-      onHoverStart={() => setIsHovered(true)}
+      onHoverStart={() => {
+        setIsHovered(true);
+        onHover();
+      }}
       onHoverEnd={() => setIsHovered(false)}
-      className={`absolute w-24 h-24 sm:w-28 sm:h-28 md:w-36 md:h-36 ${service.color} rounded-xl sm:rounded-2xl flex flex-col items-center justify-center cursor-pointer shadow-lg p-2 sm:p-3 md:p-4 text-white text-center`}
+      className={`absolute w-24 h-24 sm:w-28 sm:h-28 md:w-36 md:h-36 ${service.color} rounded-xl sm:rounded-2xl flex flex-col items-center justify-center cursor-pointer shadow-lg p-2 sm:p-3 md:p-4 text-white text-center z-10`}
+      style={{ zIndex: showDescription ? 50 : 10 }}
     >
       <div className="mb-1 sm:mb-2 opacity-90">{service.icon}</div>
       <span className="font-semibold text-[10px] sm:text-xs md:text-sm leading-tight">{service.title}</span>
 
       <AnimatePresence>
-        {isHovered && (
+        {showDescription && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="overflow-hidden hidden md:block"
+            className="overflow-hidden"
           >
             <p className="text-[9px] sm:text-[10px] mt-1 sm:mt-2 leading-tight text-white/90">
               {service.description}

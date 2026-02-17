@@ -11,7 +11,7 @@ const navigation = {
   social: [
     {
       name: 'LinkedIn',
-      href: '#',
+      href: 'https://www.linkedin.com/company/jebi-softech-services/',
       icon: (props: any) => (
         <svg fill="currentColor" viewBox="0 0 20 20" {...props}>
           <path
@@ -26,8 +26,8 @@ const navigation = {
       name: 'Twitter',
       href: '#',
       icon: (props: any) => (
-        <svg fill="currentColor" viewBox="0 0 20 20" {...props}>
-          <path d="M6.29 18.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0020 3.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.073 4.073 0 01.8 7.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 010 16.407a11.616 11.616 0 006.29 1.84" />
+        <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
+          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
         </svg>
       ),
     },
@@ -59,7 +59,7 @@ export default function Footer() {
               </span>
             </div>
             <p className="text-base leading-7 text-white/80">
-              Empowering Hospitality Technology with innovative solutions that drive growth and enhance guest experiences.
+              Built by hospitality technology experts, we solve real operational challenges and empower the future of hospitality.
             </p>
             <div className="flex space-x-4">
               {navigation.social.map((item) => (
@@ -98,13 +98,11 @@ export default function Footer() {
                 <h3 className="text-base font-bold leading-6 text-white mb-6">Contact Info</h3>
                 <div className="space-y-3 text-sm text-white/80">
                   <p className="flex items-center gap-2">
-                    <span className="text-primary-orange">✉</span> info@jebitech.com
+                    <span className="text-primary-orange">✉</span> sales@jebitech.com
                   </p>
-                  <p className="flex items-center gap-2">
-                    <span className="text-primary-orange">📞</span> +1 (555) 123-4567
-                  </p>
-                  <p className="flex items-center gap-2">
-                    <span className="text-primary-orange">📍</span> 123 Tech Street, Innovation City
+                  <p className="flex items-start gap-2">
+                    <span className="text-primary-orange">�</span> 
+                    <span>12, Sweet Watervilla, Amanora<br />Pune, India</span>
                   </p>
                 </div>
               </div>

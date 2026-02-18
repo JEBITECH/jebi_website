@@ -998,7 +998,7 @@ function ProductsContent() {
       </div>
 
       {/* 6. Integrations */}
-      <div className="bg-gradient-to-br from-gray-50 to-white section-padding">
+      {/* <div className="bg-gradient-to-br from-gray-50 to-white section-padding">
         <div className="container-custom">
           <AnimatedSection direction="up">
             <div className="mx-auto max-w-3xl text-center mb-16">
@@ -1007,17 +1007,14 @@ function ProductsContent() {
             </div>
           </AnimatedSection>
 
-          {/* Integration Categories Grid */}
           <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6 mb-12">
             {integrations.map((integration, index) => (
               <AnimatedSection key={integration.name} direction="up" delay={index * 0.05}>
                 <div className="group bg-white rounded-lg p-4 shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 hover:border-primary-orange/30 h-full">
                   <div className="flex flex-col items-center justify-center text-center space-y-2 h-full">
-                    {/* Logo Container */}
                     <div className="w-14 h-14 flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
                       <Image src={integration.logo} alt={integration.name} width={56} height={56} className="max-w-full max-h-full object-contain" />
                     </div>
-                    {/* Integration Name */}
                     <div className="w-full">
                       <div className="text-xs font-semibold text-gray-900 group-hover:text-primary-purple transition-colors line-clamp-1">{integration.name}</div>
                       <div className="text-[10px] text-gray-500 mt-1">{integration.category}</div>
@@ -1028,10 +1025,8 @@ function ProductsContent() {
             ))}
           </div>
 
-          {/* Open API Platform Card */}
           <AnimatedSection direction="up" delay={0.5}>
             <div className="relative overflow-hidden bg-gradient-to-r from-primary-purple to-purple-700 rounded-2xl p-8 md:p-12 text-center shadow-2xl">
-              {/* Background Pattern */}
               <div className="absolute inset-0 opacity-10">
                 <div
                   className="absolute inset-0"
@@ -1068,7 +1063,6 @@ function ProductsContent() {
             </div>
           </AnimatedSection>
 
-          {/* View All Link */}
           <AnimatedSection direction="up" delay={0.7}>
             <div className="text-center mt-12">
               <Link href="/integrations" className="inline-flex items-center gap-2 text-primary-purple font-semibold hover:text-primary-orange transition-colors text-lg group">
@@ -1078,7 +1072,7 @@ function ProductsContent() {
             </div>
           </AnimatedSection>
         </div>
-      </div>
+      </div> */}
 
       {/* 7. Primary CTA */}
       <div className="relative bg-gradient-to-br from-primary-purple via-purple-800 to-primary-purple section-padding overflow-hidden">

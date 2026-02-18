@@ -32,7 +32,7 @@ const rollingOptions = [
   },
   {
     id: "in-house-products",
-    title: "In-House Products",
+    title: "Inhouse SAAS products",
     subtitle: "Develop → Implement → Support",
     description: "Ready-to-deploy hospitality products including booking engines, inspection tools, and management platforms.",
     icon: Package,

@@ -504,9 +504,9 @@ export const stages: Stage[] = [
     painDescription: "On-site issues with no centralized control",
     solutionTitle: "Guest Stay Tools",
     solution: "Live issue tracking, guest support, and service coordination",
-    ctaLabel: "Discover Virtual Inspect",
+    ctaLabel: "Discover Virtue  Inspect",
     scrollToId: "Stay-details",
-    productName: "Virtual Inspect",
+    productName: "Virtue  Inspect",
   },
   {
     id: 4,
@@ -530,9 +530,9 @@ export const stages: Stage[] = [
     painDescription: "Hard to scale without operational visibility",
     solutionTitle: "Scale Platform",
     solution: "Insights, automation, and performance analytics for growth",
-    ctaLabel: "Discover Virtual Connect ERP",
+    ctaLabel: "Discover Virtue  Connect",
     scrollToId: "Scale-details",
-    productName: "Virtual Connect ERP",
+    productName: "Virtue  Connect",
   },
 ];
 

@@ -27,6 +27,8 @@ const stageToProductMap: { [key: number]: string } = {
 export default function ProductShowcase({ showHeader = true, autoRotate = true, rotationInterval = 5000, className = "" }: ProductShowcaseProps) {
   const router = useRouter();
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+  const [pauseTimeout, setPauseTimeout] = useState<NodeJS.Timeout | null>(null);
   const activeStage = stages[activeIndex];
   
   // Track if component is in view
@@ -35,15 +37,38 @@ export default function ProductShowcase({ showHeader = true, autoRotate = true, 
     triggerOnce: false
   });
 
+  // Handle user interaction (click or hover)
+  const handleUserInteraction = (index: number) => {
+    setActiveIndex(index);
+    setIsPaused(true);
+    if (pauseTimeout) {
+      clearTimeout(pauseTimeout);
+    }
+    // Set new timeout to resume auto-rotation after 40 seconds
+    const timeout = setTimeout(() => {
+      setIsPaused(false);
+    }, 40000); // 40 seconds
+    setPauseTimeout(timeout);
+  };
+
   useEffect(() => {
-    if (!autoRotate || !inView) return;
+    if (!autoRotate || !inView || isPaused) return;
 
     const interval = setInterval(() => {
       setActiveIndex((prev) => (prev + 1) % stages.length);
     }, rotationInterval);
 
     return () => clearInterval(interval);
-  }, [autoRotate, rotationInterval, inView]);
+  }, [autoRotate, rotationInterval, inView, isPaused]);
+
+  // Cleanup timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (pauseTimeout) {
+        clearTimeout(pauseTimeout);
+      }
+    };
+  }, [pauseTimeout]);
 
   return (
     <div ref={ref}>
@@ -200,7 +225,7 @@ export default function ProductShowcase({ showHeader = true, autoRotate = true, 
                     return (
                       <button
                         key={stage.id}
-                        onClick={() => setActiveIndex(index)}
+                        onClick={() => handleUserInteraction(index)}
                         className={`relative p-2 rounded-lg flex flex-col items-center transition-all duration-300 shadow-md ${
                           active 
                             ? 'bg-gradient-to-br from-primary-purple to-purple-700 text-white scale-105 shadow-xl' 
@@ -241,7 +266,7 @@ export default function ProductShowcase({ showHeader = true, autoRotate = true, 
                     return (
                       <button
                         key={stage.id}
-                        onClick={() => setActiveIndex(actualIndex)}
+                        onClick={() => handleUserInteraction(actualIndex)}
                         className={`relative p-2 rounded-lg flex flex-col items-center transition-all duration-300 shadow-md w-[calc(33.333%-0.5rem)] ${
                           active 
                             ? 'bg-gradient-to-br from-primary-purple to-purple-700 text-white scale-105 shadow-xl' 
@@ -279,7 +304,7 @@ export default function ProductShowcase({ showHeader = true, autoRotate = true, 
                 {stages.map((stage, index) => (
                   <button
                     key={stage.id}
-                    onClick={() => setActiveIndex(index)}
+                    onClick={() => handleUserInteraction(index)}
                     className={`transition-all duration-300 rounded-full ${
                       index === activeIndex 
                         ? 'w-6 h-1.5 bg-primary-purple' 
@@ -299,7 +324,7 @@ export default function ProductShowcase({ showHeader = true, autoRotate = true, 
 
                 return (
                   <button
-                    onClick={() => setActiveIndex(index)}
+                    onClick={() => handleUserInteraction(index)}
                     key={stage.id}
                     className={`group relative px-3 md:px-4 py-2 rounded-xl flex flex-col items-center justify-center shadow-md transition-all duration-300 transform hover:scale-105 min-w-[100px] md:min-w-[110px] ${
                       active ? "bg-gradient-to-br from-primary-purple to-purple-700 text-white scale-105 shadow-xl" : "bg-white text-gray-700 hover:shadow-lg border border-gray-200"

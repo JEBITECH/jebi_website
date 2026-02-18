@@ -222,7 +222,7 @@ export default function Contact() {
   return (
     <div className="bg-white overflow-hidden">
       {/* 1. Hero + Contact Form Section - Redesigned with Animations */}
-      <div className="relative bg-gradient-to-br from-gray-50 via-white to-purple-50/30 pt-20 pb-16 overflow-hidden">
+      <div className="relative bg-gradient-to-br from-gray-50 via-white to-purple-50/30 pt-24 md:pt-32 lg:pt-30 pb-16 overflow-hidden">
         {/* Animated Background Blobs */}
         <div className="absolute inset-0 -z-10">
           <div className="absolute inset-0 opacity-5">

@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation';
 
 const pageContent: Record<string, { message: string; buttons: string[] }> = {
     "/": {
-        message: "Welcome back! I'm Sophia, an AI Hospitality Agent at Jebitech. Do you have any questions about our vacation rental solutions?",
+        message: "Welcome back! I'm Nova, an AI Hospitality Agent at Jebitech. Do you have any questions about our vacation rental solutions?",
         buttons: ["Get Started", "Customer Support"],
     },
     "/products/": {
@@ -147,10 +147,10 @@ const ChatWidget = () => {
                         <img
                             src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100"
                             className="w-10 h-10 rounded-full object-cover border-2 border-primary-orange"
-                            alt="Sophia"
+                            alt="Nova"
                         />
                         <div className="flex-1">
-                            <h3 className="font-bold text-gray-800 text-sm">Sophia</h3>
+                            <h3 className="font-bold text-gray-800 text-sm">Nova</h3>
                             <p className="text-[10px] text-primary-purple uppercase tracking-wider font-semibold">AI Hospitality Agent</p>
                         </div>
                         <button
@@ -199,9 +199,9 @@ const ChatWidget = () => {
                     {/* Purple Header */}
                     <div className="bg-gradient-to-r from-primary-purple to-purple-700 p-4 flex items-center justify-between rounded-t-2xl">
                         <div className="flex items-center gap-3">
-                            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100" className="w-10 h-10 rounded-full border-2 border-white/30" alt="Sophia" />
+                            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100" className="w-10 h-10 rounded-full border-2 border-white/30" alt="Nova" />
                             <div className="text-white">
-                                <h3 className="font-bold text-sm">Sophia</h3>
+                                <h3 className="font-bold text-sm">Nova</h3>
                                 <p className="text-[10px] opacity-90">AI Hospitality Agent</p>
                             </div>
                         </div>
@@ -304,7 +304,7 @@ const ChatWidget = () => {
                                     <p className="text-base font-bold text-gray-800">Hello there!</p>
                                 </div>
                                 <p className="text-sm text-gray-600 leading-relaxed">
-                                    Need help? I'm Sophia, your AI assistant. Click to chat!
+                                    Need help? I'm Nova, your AI assistant. Click to chat!
                                 </p>
                             </div>
 
@@ -339,7 +339,7 @@ const ChatWidget = () => {
                     <img
                         src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150"
                         className="w-full h-full object-cover"
-                        alt="Sophia"
+                        alt="Nova"
                     />
                 </button>
             </div>

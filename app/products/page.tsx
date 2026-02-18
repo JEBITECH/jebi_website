@@ -510,7 +510,7 @@ export const stages: Stage[] = [
   },
   {
     id: 4,
-    title: "Operations",
+    title: "Operations Suite",
     icon: Settings,
     image: accounting5,
     painTitle: "Get started with ease",

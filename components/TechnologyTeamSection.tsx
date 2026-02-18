@@ -62,7 +62,7 @@ const TechnologyTeamSection = () => {
             {/* Desktop View - Original Arc Design */}
             <section className="hidden lg:block relative w-full bg-white flex items-center justify-center">
                 {/* Wrapper to hold everything in place */}
-                <div className="relative w-full max-w-6xl h-[700px]">
+                <div className="relative w-full max-w-6xl h-[670px]">
 
                     {/* 1. THE MAIN SVG LAYER (Contains the Arc and the "Video" Pointer) */}
                     <svg

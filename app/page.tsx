@@ -327,12 +327,12 @@ export default function Home() {
 
       {/* 6. Why JebiTech - Animated */}
       <ParallaxSection speed={0.1}>
-        <div className="relative bg-secondary-gray py-8 sm:py-12 md:py-16 overflow-hidden">
-          <div className="container-custom px-4 sm:px-6 relative z-10">
+        <div className="relative pt-8 sm:pt-12 md:pt-16 overflow-hidden">
+          <div className="container-custom relative z-10">
             <AnimatedSection direction="up">
-              <div className="mx-auto max-w-2xl text-center mb-4 sm:mb-6 md:mb-8">
+              <div className="mx-auto max-w-2xl text-center">
                 <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-gray-900 font-heading">Why Choose JebiTech</h2>
-                <p className="mt-2 sm:mt-3 text-sm sm:text-base leading-6 sm:leading-7 text-gray-600">Our expertise and experience in hospitality technology</p>
+                <p className="text-sm sm:text-base leading-6 sm:leading-7 text-gray-600">Our expertise and experience in hospitality technology</p>
               </div>
             </AnimatedSection>
 

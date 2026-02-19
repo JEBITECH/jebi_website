@@ -339,8 +339,8 @@ export const products = [
     ],
   },
   {
-    id: "accounting",
-    name: "Accounting",
+    id: "virtue-finance",
+    name: "Virtue Finance",
     tagline: "Hospitality-focused accounting & bookkeeping platform",
     outcome: "Reduce manual accounting effort by up to 80%",
     icon: ChartBarIcon,

@@ -208,6 +208,7 @@ export const products = [
     outcome: "Increase direct bookings by 40%",
     icon: DevicePhoneMobileIcon,
     link: "http://139.59.22.205:5174",
+    videoUrl: null, // No video yet
     description:
       "AI-powered booking engine website builder with CMS for vacation rentals and service apartments that unifies reservations, websites, and operations with seamless PMS and ERP integration—built for scale, performance, and automation.",
     features: [
@@ -218,8 +219,8 @@ export const products = [
       "AI-assisted content creation, website generation, and translations",
       "Role-based access control with ERP-driven authentication (SSO)",
       "Multi-site, multi-language, and multi-currency support",
-      // 'Real-time availability and pricing',
-      // 'Mobile-optimized booking flow',
+      "Real-time availability and pricing",
+      // "Mobile-optimized booking flow",
       // 'Dynamic pricing integration',
       // 'Multi-language support',
       // 'Payment gateway integration',
@@ -284,6 +285,7 @@ export const products = [
     outcome: "Reduce inspection time by up to 80%",
     icon: EyeIcon,
     link: "http://139.59.22.205:5173/",
+    videoUrl: "nomgejOybno", // YouTube video ID
     description: "VirtueInspect is an AI-powered hospitality inspection and operations platform that detects damages, stains, and missing inventory while managing end-to-end inspection workflows.",
     features: [
       "AI-powered detection of damages, stains, and missing items",
@@ -313,6 +315,7 @@ export const products = [
     outcome: "Single source of truth across all PMS systems",
     icon: LinkIcon,
     link: "http://139.59.22.205:5173/",
+    videoUrl: null, // No video yet
     description:
       "Virtue Connect / ERP unifies multiple PMS platforms into one normalized, secure, and scalable data layer that powers analytics, booking engines, inspections, accounting, and guest-facing applications.",
     features: [
@@ -345,6 +348,7 @@ export const products = [
     outcome: "Reduce manual accounting effort by up to 80%",
     icon: ChartBarIcon,
     link: "http://139.59.22.205:5173/",
+    videoUrl: "BAnf11XSb48", // YouTube video ID
     description: "A PMS-driven accounting platform that automatically converts hospitality operational data into structured financial records, journals, trial balances, and financial statements.",
     features: [
       "Automated journal entry creation from PMS data",
@@ -355,8 +359,8 @@ export const products = [
       "Trust accounting for owner and guest funds",
       "Tax modules including VAT, GST, and regional taxes",
       "Formula-based accounting engine with configurable rules",
-      "Real-time PMS data fetching via APIs",
-      "Manual and bulk data import support",
+      // "Real-time PMS data fetching via APIs",
+      // "Manual and bulk data import support",
     ],
     differentiators: [
       "Built exclusively for hospitality accounting complexities",
@@ -379,6 +383,7 @@ export const products = [
     outcome: "Eliminate settlement disputes and manual reconciliation",
     icon: DevicePhoneMobileIcon,
     link: "http://139.59.22.205:5173/",
+    videoUrl: "LvCI4nXtcBw", // YouTube video ID
     description: "A formula-driven settlement platform that calculates owner and PMC revenue shares in real time, with full transparency, auditability, and zero spreadsheet dependency.",
     features: [
       "Real-time settlement calculations from PMS data",
@@ -790,11 +795,11 @@ function ProductsContent() {
                 ))}
               </div>
 
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-                <div>
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:items-start">
+                {/* Left Column */}
+                <div className="flex flex-col">
                   {/* Tab Navigation */}
-                  <div className="flex space-x-1 mb-8 bg-gray-100 rounded-lg p-1">
-                    {/* {['capabilities', 'benefits', 'useCases'].map((tab) => ( */}
+                  <div className="flex space-x-1 mb-6 bg-gray-100 rounded-lg p-1">
                     {["features", "benefits", "differentiators"].map((tab) => (
                       <button
                         key={tab}
@@ -811,7 +816,7 @@ function ProductsContent() {
                   </div>
 
                   {/* Tab Content */}
-                  <div className="space-y-4">
+                  <div className="mb-6">
                     {activeTab === "features" && (
                       <div>
                         <h3 className="text-lg font-semibold text-gray-900 mb-4">Key features</h3>
@@ -855,19 +860,69 @@ function ProductsContent() {
                     )}
                   </div>
 
-                  <div className="mt-8">
-                    <Link href={selectedProduct.link} target="_blank" className="btn-primary">
+                  {/* CTA Button */}
+                  <div>
+                    <Link href={selectedProduct.link} target="_blank" className="btn-primary w-full inline-flex items-center justify-center gap-2">
                       See {selectedProduct.name} in Action
+                      <ArrowRightIcon className="h-4 w-4" />
                     </Link>
                   </div>
                 </div>
 
-                <div className="bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl p-8 flex items-center justify-center">
-                  <div className="text-center">
-                    <selectedProduct.icon className="h-24 w-24 text-primary-orange mx-auto mb-4" />
-                    <div className="text-lg font-semibold text-gray-900 mb-2">{selectedProduct.name}</div>
-                    <div className="text-primary-orange font-medium">{selectedProduct.outcome}</div>
-                    <div className="mt-4 text-sm text-gray-600">Interactive demo and screenshots coming soon</div>
+                {/* Right Column */}
+                <div className="relative">
+                  {/* Decorative Background Elements */}
+                  <div className="absolute -inset-4 bg-gradient-to-br from-primary-purple/10 via-primary-orange/5 to-transparent rounded-2xl blur-2xl"></div>
+
+                  {/* Main Video Container */}
+                  <div className="relative bg-white rounded-2xl p-6 shadow-2xl border border-gray-100">
+                    {/* Video Header */}
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 bg-gradient-to-br from-primary-orange to-orange-600 rounded-lg flex items-center justify-center shadow-lg">
+                          <selectedProduct.icon className="h-6 w-6 text-white" />
+                        </div>
+                        <div className="text-sm font-semibold text-gray-900">{selectedProduct.name}</div>
+                      </div>
+                      <div className="flex items-center gap-2 px-3 py-1.5 bg-gradient-to-r from-primary-purple/10 to-primary-orange/10 rounded-full">
+                        <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
+                        <span className="text-xs font-medium text-gray-700">Live Demo</span>
+                      </div>
+                    </div>
+
+                    {/* Video Container */}
+                    <div className="mb-4">
+                      {selectedProduct.videoUrl ? (
+                        <div className="relative w-full rounded-xl overflow-hidden shadow-xl border-2 border-gray-200 group">
+                          <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
+                            <iframe
+                              className="absolute top-0 left-0 w-full h-full"
+                              src={`https://www.youtube.com/embed/${selectedProduct.videoUrl}?rel=0&modestbranding=1`}
+                              title={`${selectedProduct.name} Demo`}
+                              frameBorder="0"
+                              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                              allowFullScreen
+                            ></iframe>
+                          </div>
+                          <div className="absolute inset-0 bg-gradient-to-t from-primary-purple/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+                        </div>
+                      ) : (
+                        <div className="relative w-full rounded-xl overflow-hidden shadow-xl border-2 border-gray-200 bg-gradient-to-br from-gray-50 to-gray-100" style={{ paddingBottom: "56.25%" }}>
+                          <div className="absolute inset-0 flex items-center justify-center">
+                            <div className="text-center">
+                              <selectedProduct.icon className="h-20 w-20 text-primary-orange mx-auto mb-4 opacity-50" />
+                              <p className="text-gray-500 text-sm">Demo video coming soon</p>
+                            </div>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Outcome Badge */}
+                    <div className="flex items-center justify-center gap-2 p-4 bg-gradient-to-r from-primary-orange/10 via-orange-50 to-primary-orange/10 rounded-xl border border-primary-orange/20">
+                      <CheckCircleIcon className="h-5 w-5 text-primary-orange flex-shrink-0" />
+                      <span className="text-sm font-semibold text-gray-900">{selectedProduct.outcome}</span>
+                    </div>
                   </div>
                 </div>
               </div>

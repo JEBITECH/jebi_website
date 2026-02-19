@@ -599,7 +599,7 @@ function ProductsContent() {
   };
 
   return (
-    <div className="bg-white overflow-hidden pt-8 md:pt-12">
+    <div className="bg-white overflow-hidden pt-20 md:pt-12">
       <FloatingElements />
 
       {/* Product Showcase - Reusable Component */}

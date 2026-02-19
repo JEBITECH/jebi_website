@@ -428,15 +428,15 @@ const services: ServiceCard[] = [
   },
   {
     id: 'products',
-    title: 'In house product',
+    title: 'Inhouse SAAS products',
     description: 'Develop / Implement / Support.',
     icon: <Box size={20} />,
     color: 'bg-orange-500',
     position: { x: 180, y: 0 }
   },
   {
-    id: 'Intergerationservices',
-    title: 'Intergeration services',
+    id: 'integrationservices',
+    title: 'Integration services',
     description: 'Solution implementation/ System configuration/ Onboarding & Rollout  /Training.',
     icon: <PlusSquare size={20} />,
     color: 'bg-purple-500',

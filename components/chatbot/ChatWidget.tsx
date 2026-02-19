@@ -1,28 +1,31 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Send, X, ChevronDown } from 'lucide-react';
 import { usePathname } from 'next/navigation';
+import { createSession, updateContext, sendMessageStream } from './chatApi';
 
 const pageContent: Record<string, { message: string; buttons: string[] }> = {
     "/": {
-        message: "Welcome back! I'm Sophia, an AI Hospitality Agent at Jebitech. Do you have any questions about our vacation rental solutions?",
+        message: "Welcome back! I'm Nova, an AI Hospitality Agent at Jebitech. Do you have any questions about our vacation rental solutions?",
         buttons: ["Get Started", "Customer Support"],
     },
-    "/products/": {
+    "/products": {
         message: "Exploring our products? I can help you find the best tools for your property management needs.",
         buttons: ["View Features", "Pricing"],
     },
-    "/services/": {
+    "/services": {
         message: "Need a hand with your operations? Our expert services team is here to help you scale.",
         buttons: ["Consulting", "Setup Help"],
     },
 };
+
 interface Message {
     id: number;
     text: string;
     sender: 'user' | 'bot';
     time: string;
+    isStreaming?: boolean;
 }
 
 const ChatWidget = () => {
@@ -34,6 +37,34 @@ const ChatWidget = () => {
     const scrollRef = useRef<HTMLDivElement>(null);
     const [isInitialized, setIsInitialized] = useState(false);
     const [showHelloMessage, setShowHelloMessage] = useState(false);
+    const [sessionId, setSessionId] = useState<string | null>(null);
+    const [isLoading, setIsLoading] = useState(false);
+    const [suggestions, setSuggestions] = useState<string[]>([]);
+    const [contextInitialized, setContextInitialized] = useState(false);
+
+    // Initialize session on mount
+    useEffect(() => {
+        const initSession = async () => {
+            try {
+                // Check if we have a saved session
+                const savedSessionId = localStorage.getItem('chatSessionId');
+                if (savedSessionId) {
+                    setSessionId(savedSessionId);
+                } else {
+                    // Create new session
+                    const data = await createSession();
+                    if (data.session_id) {
+                        setSessionId(data.session_id);
+                        localStorage.setItem('chatSessionId', data.session_id);
+                    }
+                }
+            } catch (error) {
+                console.error('Failed to initialize session:', error);
+            }
+        };
+
+        initSession();
+    }, []);
 
     // Load saved state from localStorage on mount
     useEffect(() => {
@@ -70,27 +101,61 @@ const ChatWidget = () => {
         }
     }, [view]);
 
+    // Update context when page changes OR when session is first created
     useEffect(() => {
-        const content = pageContent[pathname] || pageContent["/"];
-        setCurrentData(content);
+        const updatePageContext = async () => {
+            if (!sessionId) return;
 
-        // Initialize the conversation with the page-specific greeting
-        setMessages([{
-            id: Date.now(),
-            text: content.message,
-            sender: 'bot',
-            time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-        }]);
+            const content = pageContent[pathname] || pageContent["/"];
+            setCurrentData(content);
 
-        // Don't auto-show intro on page change if user has minimized it
-        if (isInitialized) {
-            const savedView = localStorage.getItem('chatWidgetView');
-            if (savedView === 'hidden') {
-                // Keep it hidden if user minimized it
-                setView('hidden');
+            try {
+                // Update context on backend
+                const data = await updateContext({
+                    session_id: sessionId,
+                    page: pathname,
+                    url: typeof window !== 'undefined' ? window.location.href : '',
+                    metadata: {}
+                });
+                
+                // Update suggestions if provided
+                if (data.suggestions && Array.isArray(data.suggestions)) {
+                    setSuggestions(data.suggestions);
+                }
+
+                // Initialize the conversation with the page-specific greeting
+                setMessages([{
+                    id: Date.now(),
+                    text: content.message,
+                    sender: 'bot',
+                    time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+                }]);
+
+                setContextInitialized(true);
+
+            } catch (error) {
+                console.error('Failed to update context:', error);
+                // Fallback to local message
+                setMessages([{
+                    id: Date.now(),
+                    text: content.message,
+                    sender: 'bot',
+                    time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+                }]);
+                setContextInitialized(true);
             }
-        }
-    }, [pathname, isInitialized]);
+
+            // Don't auto-show intro on page change if user has minimized it
+            if (isInitialized && contextInitialized) {
+                const savedView = localStorage.getItem('chatWidgetView');
+                if (savedView === 'hidden') {
+                    setView('hidden');
+                }
+            }
+        };
+
+        updatePageContext();
+    }, [pathname, sessionId]);
 
     const openChat = () => {
         setView('chat');
@@ -107,32 +172,127 @@ const ChatWidget = () => {
         localStorage.setItem('chatWidgetView', 'intro');
     };
 
-    const handleSendMessage = (e?: React.FormEvent) => {
+    // Auto-scroll to bottom when messages change
+    useEffect(() => {
+        if (scrollRef.current) {
+            scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+        }
+    }, [messages]);
+
+    const handleSendMessage = async (e?: React.FormEvent, messageText?: string, retryCount = 0) => {
         e?.preventDefault();
-        if (!inputValue.trim()) return;
+        const textToSend = messageText || inputValue;
+        if (!textToSend.trim() || !sessionId || isLoading) return;
 
-        // 1. Add User Message
-        const userMsg: Message = {
-            id: Date.now(),
-            text: inputValue,
-            sender: 'user',
-            time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-        };
+        // Add User Message (only on first attempt)
+        if (retryCount === 0) {
+            const userMsg: Message = {
+                id: Date.now(),
+                text: textToSend,
+                sender: 'user',
+                time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+            };
+            setMessages(prev => [...prev, userMsg]);
+            setInputValue("");
+        }
+        
+        setIsLoading(true);
 
-        setMessages(prev => [...prev, userMsg]);
-        const lastInput = inputValue;
-        setInputValue("");
+        try {
+            // Use streaming endpoint for real-time response
+            const response = await sendMessageStream({
+                session_id: sessionId,
+                message: textToSend,
+                timestamp: new Date().toISOString()
+            });
 
-        // 2. Simulate Bot Response
-        setTimeout(() => {
-            const botMsg: Message = {
+            if (!response.ok) {
+                throw new Error('Failed to get response');
+            }
+
+            // Handle Server-Sent Events (SSE)
+            const reader = response.body?.getReader();
+            const decoder = new TextDecoder();
+            let botMessageId = Date.now() + 1;
+            let accumulatedText = '';
+            let hasError = false;
+
+            if (reader) {
+                // Add initial bot message placeholder
+                const botMsg: Message = {
+                    id: botMessageId,
+                    text: '',
+                    sender: 'bot',
+                    time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+                    isStreaming: true
+                };
+                setMessages(prev => [...prev, botMsg]);
+
+                while (true) {
+                    const { done, value } = await reader.read();
+                    if (done) break;
+
+                    const chunk = decoder.decode(value);
+                    const lines = chunk.split('\n');
+
+                    for (const line of lines) {
+                        if (line.startsWith('data: ')) {
+                            try {
+                                const data = JSON.parse(line.slice(6));
+                                
+                                if (data.chunk) {
+                                    accumulatedText += data.chunk;
+                                    
+                                    // Check if this is an error message from backend
+                                    if (accumulatedText.includes('Connection error') || 
+                                        accumulatedText.includes('trouble connecting')) {
+                                        hasError = true;
+                                    }
+                                    
+                                    // Update the streaming message
+                                    setMessages(prev => prev.map(msg => 
+                                        msg.id === botMessageId 
+                                            ? { ...msg, text: accumulatedText }
+                                            : msg
+                                    ));
+                                }
+
+                                if (data.complete) {
+                                    // Mark streaming as complete
+                                    setMessages(prev => prev.map(msg => 
+                                        msg.id === botMessageId 
+                                            ? { ...msg, isStreaming: false }
+                                            : msg
+                                    ));
+                                }
+                            } catch (e) {
+                                // Skip invalid JSON
+                                console.warn('Failed to parse SSE data:', line);
+                            }
+                        }
+                    }
+                }
+                
+                // If backend returned an error and we haven't retried yet, could add retry logic here
+                // For now, we just display the error message from the backend
+            }
+        } catch (error) {
+            console.error('Failed to send message:', error);
+            // Add error message
+            const errorMsg: Message = {
                 id: Date.now() + 1,
-                text: `You asked about "${lastInput}". I'm a demo bot, but I can tell you more about our ${pathname === '/' ? 'Home page' : pathname.replace('/', '')} services!`,
+                text: "I'm having trouble connecting to the server. Please try again in a moment.",
                 sender: 'bot',
                 time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
             };
-            setMessages(prev => [...prev, botMsg]);
-        }, 1000);
+            setMessages(prev => [...prev, errorMsg]);
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+    const handleButtonClick = (buttonText: string) => {
+        handleSendMessage(undefined, buttonText);
     };
 
     return (
@@ -147,10 +307,10 @@ const ChatWidget = () => {
                         <img
                             src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100"
                             className="w-10 h-10 rounded-full object-cover border-2 border-primary-orange"
-                            alt="Sophia"
+                            alt="Nova"
                         />
                         <div className="flex-1">
-                            <h3 className="font-bold text-gray-800 text-sm">Sophia</h3>
+                            <h3 className="font-bold text-gray-800 text-sm">Nova</h3>
                             <p className="text-[10px] text-primary-purple uppercase tracking-wider font-semibold">AI Hospitality Agent</p>
                         </div>
                         <button
@@ -169,7 +329,15 @@ const ChatWidget = () => {
 
                         <div className="flex gap-2 mb-4">
                             {currentData.buttons.map(btn => (
-                                <button key={btn} className="px-3 py-1.5 border-2 border-primary-orange text-primary-orange rounded-full text-[11px] font-bold hover:bg-primary-orange hover:text-white transition-colors">
+                                <button 
+                                    key={btn} 
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        openChat();
+                                        setTimeout(() => handleButtonClick(btn), 100);
+                                    }}
+                                    className="px-3 py-1.5 border-2 border-primary-orange text-primary-orange rounded-full text-[11px] font-bold hover:bg-primary-orange hover:text-white transition-colors"
+                                >
                                     {btn}
                                 </button>
                             ))}
@@ -199,9 +367,9 @@ const ChatWidget = () => {
                     {/* Purple Header */}
                     <div className="bg-gradient-to-r from-primary-purple to-purple-700 p-4 flex items-center justify-between rounded-t-2xl">
                         <div className="flex items-center gap-3">
-                            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100" className="w-10 h-10 rounded-full border-2 border-white/30" alt="Sophia" />
+                            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100" className="w-10 h-10 rounded-full border-2 border-white/30" alt="Nova" />
                             <div className="text-white">
-                                <h3 className="font-bold text-sm">Sophia</h3>
+                                <h3 className="font-bold text-sm">Nova</h3>
                                 <p className="text-[10px] opacity-90">AI Hospitality Agent</p>
                             </div>
                         </div>
@@ -244,40 +412,42 @@ const ChatWidget = () => {
 
                     {/* Footer */}
                     <div className="p-4 bg-white border-t border-gray-100">
-                        <div className="flex gap-2 mb-4">
-                            {currentData.buttons.map(btn => (
-                                <button key={btn} className="px-3 py-1.5 border-2 border-primary-orange text-primary-orange rounded-full text-[11px] font-bold hover:bg-primary-orange hover:text-white transition-colors">
+                        {/* Show suggestions from backend or default buttons */}
+                        <div className="flex flex-wrap gap-2 mb-4">
+                            {(suggestions.length > 0 ? suggestions : currentData.buttons).map((btn, idx) => (
+                                <button 
+                                    key={`${btn}-${idx}`}
+                                    onClick={() => handleButtonClick(btn)}
+                                    disabled={isLoading}
+                                    className="px-3 py-1.5 border-2 border-primary-orange text-primary-orange rounded-full text-[11px] font-bold hover:bg-primary-orange hover:text-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                                >
                                     {btn}
                                 </button>
                             ))}
                         </div>
-                        {/* <div className="relative flex items-center">
-                            <input
-                                autoFocus
-                                type="text"
-                                placeholder="Enter a message"
-                                className="w-full pl-4 pr-12 py-3 bg-white border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-[#00a699]"
-                            />
-                            <button className="absolute right-3 text-[#00664b]">
-                                <Send size={20} />
-                            </button>
-                        </div> */}
+                        
                         {/* Input Area */}
-                        <form onSubmit={handleSendMessage} className="p-4 bg-white border-t border-gray-100">
+                        <form onSubmit={handleSendMessage} className="mb-0">
                             <div className="relative flex items-center">
                                 <input
                                     autoFocus
                                     type="text"
                                     value={inputValue}
                                     onChange={(e) => setInputValue(e.target.value)}
-                                    placeholder="Enter a message"
-                                    className="w-full pl-4 pr-12 py-3 bg-white border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary-purple/20 focus:border-primary-purple"
+                                    disabled={isLoading}
+                                    placeholder={isLoading ? "Sending..." : "Enter a message"}
+                                    className="w-full pl-4 pr-12 py-3 bg-white border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary-purple/20 focus:border-primary-purple disabled:opacity-50"
                                 />
-                                <button type="submit" className="absolute right-3 text-primary-orange hover:scale-110 transition-transform">
+                                <button 
+                                    type="submit" 
+                                    disabled={isLoading || !inputValue.trim()}
+                                    className="absolute right-3 text-primary-orange hover:scale-110 transition-transform disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+                                >
                                     <Send size={20} />
                                 </button>
                             </div>
                         </form>
+                        
                         <p className="mt-3 text-[10px] text-gray-400 text-center">
                             This chat may be recorded and used in line with our <span className="underline cursor-pointer hover:text-primary-purple">Privacy Policy</span>
                         </p>
@@ -304,7 +474,7 @@ const ChatWidget = () => {
                                     <p className="text-base font-bold text-gray-800">Hello there!</p>
                                 </div>
                                 <p className="text-sm text-gray-600 leading-relaxed">
-                                    Need help? I'm Sophia, your AI assistant. Click to chat!
+                                    Need help? I'm Nova, your AI assistant. Click to chat!
                                 </p>
                             </div>
 
@@ -339,7 +509,7 @@ const ChatWidget = () => {
                     <img
                         src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150"
                         className="w-full h-full object-cover"
-                        alt="Sophia"
+                        alt="Nova"
                     />
                 </button>
             </div>

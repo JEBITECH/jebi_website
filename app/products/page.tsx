@@ -897,7 +897,7 @@ function ProductsContent() {
                           <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
                             <iframe
                               className="absolute top-0 left-0 w-full h-full"
-                              src={`https://www.youtube.com/embed/${selectedProduct.videoUrl}?rel=0&modestbranding=1`}
+                              src={`https://www.youtube.com/embed/${selectedProduct.videoUrl}?autoplay=1&rel=0&modestbranding=1&loop=1&playlist=${selectedProduct.videoUrl}&controls=1&showinfo=0`}
                               title={`${selectedProduct.name} Demo`}
                               frameBorder="0"
                               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

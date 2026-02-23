@@ -25,21 +25,47 @@ export default function FloatingSidebar({ sections }: FloatingSidebarProps) {
         setIsVisible(false);
       }
 
-      // Determine active section
+      // Determine active section with improved logic
       const sectionElements = sections.map(section => ({
         id: section.id,
         element: document.getElementById(section.id)
       }));
 
-      for (let i = sectionElements.length - 1; i >= 0; i--) {
-        const section = sectionElements[i];
+      // Find the section that is most visible in the viewport
+      let closestSection = '';
+      let closestDistance = Infinity;
+
+      sectionElements.forEach(section => {
         if (section.element) {
           const rect = section.element.getBoundingClientRect();
-          if (rect.top <= 150) {
-            setActiveSection(section.id);
-            break;
+          const sectionMiddle = rect.top + rect.height / 2;
+          const viewportMiddle = window.innerHeight / 2;
+          const distance = Math.abs(sectionMiddle - viewportMiddle);
+
+          // If section is in viewport and closer to center than previous closest
+          if (rect.top < window.innerHeight && rect.bottom > 0 && distance < closestDistance) {
+            closestDistance = distance;
+            closestSection = section.id;
           }
         }
+      });
+
+      // Fallback: if no section found using center logic, use top-based detection
+      if (!closestSection) {
+        for (let i = sectionElements.length - 1; i >= 0; i--) {
+          const section = sectionElements[i];
+          if (section.element) {
+            const rect = section.element.getBoundingClientRect();
+            if (rect.top <= 150) {
+              closestSection = section.id;
+              break;
+            }
+          }
+        }
+      }
+
+      if (closestSection) {
+        setActiveSection(closestSection);
       }
     };
 

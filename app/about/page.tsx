@@ -1,3 +1,6 @@
+'use client';
+
+import { useState } from 'react';
 import Link from 'next/link'
 import {
   UserGroupIcon,
@@ -12,7 +15,9 @@ import {
   StarIcon,
   CheckBadgeIcon,
   MapPinIcon,
-  ArrowRightIcon
+  ArrowRightIcon,
+  ChevronDownIcon,
+  ChevronUpIcon
 } from '@heroicons/react/24/outline'
 
 import AnimatedSection from '@/components/AnimatedSection'
@@ -179,6 +184,62 @@ const impactMetrics = [
   { metric: "99.9%", label: "System Uptime" }
 ]
 
+// Story Section Component with Read More/Less
+function StorySection() {
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  return (
+    <div className="max-w-7xl mx-auto mb-12">
+      <div className="bg-gradient-to-br from-white to-gray-50/50 rounded-3xl p-8 md:p-10 shadow-xl border border-gray-100 relative overflow-hidden">
+        {/* Decorative corner elements */}
+        <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-primary-purple/5 to-transparent rounded-bl-full"></div>
+        <div className="absolute bottom-0 left-0 w-32 h-32 bg-gradient-to-tr from-primary-orange/5 to-transparent rounded-tr-full"></div>
+        
+        <div className="relative z-10 space-y-5 text-base md:text-lg text-gray-700 leading-relaxed">
+          {/* Always visible content */}
+          <p className="first-letter:text-5xl first-letter:font-bold first-letter:text-primary-purple first-letter:mr-3 first-letter:float-left first-letter:leading-none">
+            Our journey began with a straightforward observation: the hospitality industry was not lacking technology, it was lacking the expertise to make technology truly work. Many organizations had access to capable platforms, yet struggled to configure them effectively, integrate them seamlessly, or receive timely enhancements that matched their operational realities.
+          </p>
+          <p>
+            Working closely with operators, we saw teams facing real-world challenges, delayed feature delivery, disconnected systems, and limitations in adapting existing solutions to evolving business needs. In many cases, the gap was not the software itself, but the absence of deep domain expertise bridging hospitality operations and technology execution.
+          </p>
+          
+          {/* Expandable content */}
+          <div className={`space-y-5 transition-all duration-500 ease-in-out ${isExpanded ? 'opacity-100 max-h-[2000px]' : 'opacity-0 max-h-0 overflow-hidden'}`}>
+            <p>
+              We stepped in to fill that gap, partnering with clients as subject-matter experts, enabling better system usage, accelerating delivery, and building custom solutions where standard tools fell short. Over time, these engagements revealed recurring patterns and unmet needs across the industry.
+            </p>
+            <p className="font-semibold text-primary-purple">
+              That insight led us to go further.
+            </p>
+            <p>
+              We began developing our own technology, solutions designed from operational realities, not theoretical assumptions, combining implementation experience, integration depth, and hands-on industry knowledge into platforms that address real challenges.
+            </p>
+            <p className="text-lg md:text-xl font-semibold text-gray-900 pt-3 border-t-2 border-primary-orange/20">
+              Today, we continue to operate at the intersection of hospitality and technology, delivering our own products while serving as a trusted extension of our partners' ecosystems, focused on solving practical problems and shaping the future of hospitality operations.
+            </p>
+          </div>
+        </div>
+
+        {/* Read More/Less Button */}
+        <div className="relative z-10 mt-6 text-center">
+          <button
+            onClick={() => setIsExpanded(!isExpanded)}
+            className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-primary-purple to-purple-700 hover:from-primary-purple hover:to-purple-800 text-white font-semibold rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
+          >
+            <span>{isExpanded ? 'Read Less' : 'Read More'}</span>
+            {isExpanded ? (
+              <ChevronUpIcon className="w-5 h-5" />
+            ) : (
+              <ChevronDownIcon className="w-5 h-5" />
+            )}
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function About() {
   return (
     <div className="bg-white overflow-hidden">
@@ -210,14 +271,23 @@ export default function About() {
               </div>
 
               {/* Main Heading */}
-              <h1 className="text-5xl font-bold tracking-tight text-white sm:text-6xl lg:text-7xl font-heading mb-8">
-                About JebiTech
+              <h1 className="font-bold tracking-tight text-white font-heading mb-8">
+                <span className="text-7xl sm:text-8xl md:text-9xl block mb-6">
+                  JebiTech
+                </span>
+                <span className="text-2xl sm:text-3xl md:text-4xl block font-normal">
+                  is built by hospitality technology experts
+                </span>
               </h1>
               
               {/* Description */}
               <AnimatedSection direction="up" delay={0.4}>
-                <p className="text-xl md:text-2xl leading-relaxed text-white/90 max-w-3xl mx-auto">
-                  Built by hospitality technology experts, we solve real operational challenges and empower the future of hospitality by delivering innovative technology and serving as a trusted extension of our partners' business operations, platforms, and ecosystems.
+                <p className="text-lg md:text-xl leading-relaxed text-white/90 max-w-4xl mx-auto">
+                  We solve real operational challenges and empower the future of hospitality by{' '}
+                  <span className="font-bold text-primary-orange bg-white/10 px-2 py-1 rounded-md border border-primary-orange/30">
+                    delivering
+                  </span>
+                  {' '}innovative technology and serving as a trusted extension of our partners' business operations, platforms, and ecosystems.
                 </p>
               </AnimatedSection>
             </div>
@@ -256,34 +326,7 @@ export default function About() {
 
           {/* Story Content - Enhanced Typography */}
           <AnimatedSection direction="up" delay={0.2}>
-            <div className="max-w-6xl mx-auto mb-12">
-              <div className="bg-gradient-to-br from-white to-gray-50/50 rounded-3xl p-8 md:p-10 shadow-xl border border-gray-100 relative overflow-hidden">
-                {/* Decorative corner elements */}
-                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-primary-purple/5 to-transparent rounded-bl-full"></div>
-                <div className="absolute bottom-0 left-0 w-32 h-32 bg-gradient-to-tr from-primary-orange/5 to-transparent rounded-tr-full"></div>
-                
-                <div className="relative z-10 space-y-5 text-base md:text-lg text-gray-700 leading-relaxed">
-                  <p className="first-letter:text-5xl first-letter:font-bold first-letter:text-primary-purple first-letter:mr-3 first-letter:float-left first-letter:leading-none">
-                    Our journey began with a straightforward observation: the hospitality industry was not lacking technology, it was lacking the expertise to make technology truly work. Many organizations had access to capable platforms, yet struggled to configure them effectively, integrate them seamlessly, or receive timely enhancements that matched their operational realities.
-                  </p>
-                  <p>
-                    Working closely with operators, we saw teams facing real-world challenges, delayed feature delivery, disconnected systems, and limitations in adapting existing solutions to evolving business needs. In many cases, the gap was not the software itself, but the absence of deep domain expertise bridging hospitality operations and technology execution.
-                  </p>
-                  <p>
-                    We stepped in to fill that gap, partnering with clients as subject-matter experts, enabling better system usage, accelerating delivery, and building custom solutions where standard tools fell short. Over time, these engagements revealed recurring patterns and unmet needs across the industry.
-                  </p>
-                  <p className="font-semibold text-primary-purple">
-                    That insight led us to go further.
-                  </p>
-                  <p>
-                    We began developing our own technology, solutions designed from operational realities, not theoretical assumptions, combining implementation experience, integration depth, and hands-on industry knowledge into platforms that address real challenges.
-                  </p>
-                  <p className="text-lg md:text-xl font-semibold text-gray-900 pt-3 border-t-2 border-primary-orange/20">
-                    Today, we continue to operate at the intersection of hospitality and technology, delivering our own products while serving as a trusted extension of our partners' ecosystems, focused on solving practical problems and shaping the future of hospitality operations.
-                  </p>
-                </div>
-              </div>
-            </div>
+            <StorySection />
           </AnimatedSection>
 
           {/* Stats Grid - Enhanced Design */}

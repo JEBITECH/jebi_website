@@ -103,7 +103,7 @@ export default function ProductShowcase({ showHeader = true, autoRotate = true, 
                   >
                   {/* Product Name */}
                   <div className="mb-1">
-                    <h2 className="text-base sm:text-lg font-bold text-primary-purple">{activeStage.productName}</h2>
+                    <h2 className="text-base sm:text-lg font-bold text-primary-orange">{activeStage.productName}</h2>
                   </div>
 
                   {/* PAIN Card */}

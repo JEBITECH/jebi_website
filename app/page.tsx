@@ -32,14 +32,14 @@ const rollingOptions = [
   },
   // {
   //   id: "in-house-products",
-  //   title: "Inhouse SAAS products",
+  //   title: "Inhouse SaaS products",
   //   subtitle: "Develop → Implement → Support",
   //   description: "Ready-to-deploy hospitality products including booking engines, inspection tools, and management platforms.",
   //   icon: Package,
   // },
   {
     id: "Implementation-and-Integration-Services",
-    title: "Implementation and Integration Services",
+    title: "Implementation & Integration Services",
     subtitle: "Data Analysis → System Integration → User Support",
     description: "Comprehensive data analysis and system user services for any department in your organization.",
     icon: BarChart3,
@@ -49,7 +49,7 @@ const rollingOptions = [
 // Experience Data
 const experienceData = [
   {
-    category: "SAAS Tech providers in Hospitality",
+    category: "SaaS Tech providers in Hospitality",
     location: "USA & Europe",
     description: "Dedicated development teams",
     units: "5000+ properties, 100k+ rooms",
@@ -59,7 +59,7 @@ const experienceData = [
   {
     category: "Property Management companies",
     location: "UAE & USA",
-    description: "In house SAAS product implemented",
+    description: "In house SaaS product implemented",
     units: "3000+ units",
     icon: Building2,
     color: "bg-purple-500",
@@ -187,7 +187,7 @@ export default function Home() {
           </div>
         </div>
       </div>
-      {/* SAAS Products Section */}
+      {/* SaaS Products Section */}
       <div className="bg-white py-2">
         <div className="container-custom px-4 sm:px-6">
           <AnimatedSection direction="up">
@@ -195,7 +195,7 @@ export default function Home() {
               {/* Badge */}
               <div className="inline-flex items-center gap-2 px-6 py-3 bg-gray-100 rounded-full mb-3 border border-gray-200">
                 <Package className="w-4 h-4 text-primary-purple" />
-                <span className="text-primary-purple text-sm font-semibold">SAAS Products</span>
+                <span className="text-primary-purple text-sm font-semibold">SaaS Products</span>
               </div>
 
               {/* Main Heading */}

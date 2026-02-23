@@ -428,7 +428,7 @@ const services: ServiceCard[] = [
   },
   {
     id: 'products',
-    title: 'Inhouse SAAS products',
+    title: 'Inhouse SaaS products',
     description: 'Develop / Implement / Support.',
     icon: <Box size={20} />,
     color: 'bg-orange-500',

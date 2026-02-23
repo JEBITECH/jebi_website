@@ -23,7 +23,7 @@ import StaggeredList from '@/components/StaggeredList'
 const inquiryTypes = [
   { value: 'services', label: 'Our Services' },
   { value: 'custom-development', label: 'Custom Development' },
-  { value: 'implementation', label: 'Implementation and Integration Services' },
+  { value: 'implementation', label: 'Implementation & Integration Services' },
   { value: 'demo', label: 'Demo of our SaaS Product' },
   { value: 'trial', label: 'Book Trial' },
   { value: 'partnership', label: 'Partnership' },

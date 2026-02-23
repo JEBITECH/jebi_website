@@ -126,8 +126,11 @@ export default function ProductShowcase({ showHeader = true, autoRotate = true, 
                         <div className="flex-1 min-w-0">
                           <div className="flex flex-wrap items-center gap-2 mb-1.5 sm:mb-2">
                             <h3 className="text-sm sm:text-base lg:text-lg font-bold text-gray-900">The Challenge</h3>
-                            <span className="text-[10px] sm:text-xs font-semibold px-2 py-0.5 bg-red-50 text-red-600 rounded-full border border-red-200 whitespace-nowrap">
+                            {/* <span className="text-[10px] sm:text-xs font-semibold px-2 py-0.5 bg-red-50 text-red-600 rounded-full border border-red-200 whitespace-nowrap">
                               Pain Point
+                            </span> */}
+                            <span className="text-[10px] sm:text-xs font-semibold px-2 py-0.5 bg-red-50 text-red-600 rounded-full border border-red-200 whitespace-nowrap">
+                              Industry Challenge
                             </span>
                           </div>
                           <p className="text-gray-700 text-xs sm:text-sm leading-relaxed">{activeStage.painDescription}</p>
@@ -158,7 +161,7 @@ export default function ProductShowcase({ showHeader = true, autoRotate = true, 
                           <div className="flex flex-wrap items-center gap-2 mb-1.5 sm:mb-2">
                             <h3 className="text-sm sm:text-base lg:text-lg font-bold text-gray-900">{activeStage.solutionTitle}</h3>
                             <span className="text-[10px] sm:text-xs font-semibold px-2 py-0.5 bg-orange-50 text-primary-orange rounded-full border border-orange-200 whitespace-nowrap">
-                              Solution
+                              Our Solution
                             </span>
                           </div>
                           <p className="text-gray-700 text-xs sm:text-sm leading-relaxed">{activeStage.solution}</p>

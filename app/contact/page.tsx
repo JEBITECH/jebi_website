@@ -19,6 +19,7 @@ import {
 } from '@heroicons/react/24/outline'
 
 import StaggeredList from '@/components/StaggeredList'
+import FloatingSidebar from '@/components/FloatingSidebar'
 
 const inquiryTypes = [
   { value: 'services', label: 'Our Services' },
@@ -135,6 +136,12 @@ const SocialIcons = {
 }
 
 export default function Contact() {
+  const sections = [
+    { id: 'contact-form', label: 'Contact Form' },
+    { id: 'office-location', label: 'Office Location' },
+    { id: 'connect', label: 'Connect with Us' }
+  ];
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -233,8 +240,10 @@ export default function Contact() {
 
   return (
     <div className="bg-white overflow-hidden">
+      <FloatingSidebar sections={sections} />
+      
       {/* 1. Hero + Contact Form Section - Redesigned with Animations */}
-      <div className="relative bg-gradient-to-br from-gray-50 via-white to-purple-50/30 pt-24 md:pt-32 lg:pt-30 pb-16 overflow-hidden">
+      <div id="contact-form" className="relative bg-gradient-to-br from-gray-50 via-white to-purple-50/30 pt-24 md:pt-32 lg:pt-30 pb-16 overflow-hidden">
         {/* Animated Background Blobs */}
         <div className="absolute inset-0 -z-10">
           <div className="absolute inset-0 opacity-5">
@@ -373,6 +382,7 @@ export default function Contact() {
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ delay: 0.9, duration: 0.4 }}
+                          whileHover={{ scale: 1.02 }}
                           whileFocus={{ scale: 1.02 }}
                         >
                           <input
@@ -400,6 +410,8 @@ export default function Contact() {
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ delay: 1.0, duration: 0.4 }}
+                          whileHover={{ scale: 1.02 }}
+                          whileFocus={{ scale: 1.02 }}
                         >
                           <input
                             type="email"
@@ -428,6 +440,8 @@ export default function Contact() {
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ delay: 1.1, duration: 0.4 }}
+                          whileHover={{ scale: 1.02 }}
+                          whileFocus={{ scale: 1.02 }}
                         >
                           <input
                             type="tel"
@@ -451,6 +465,8 @@ export default function Contact() {
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ delay: 1.2, duration: 0.4 }}
+                          whileHover={{ scale: 1.02 }}
+                          whileFocus={{ scale: 1.02 }}
                         >
                           <input
                             type="text"
@@ -477,6 +493,7 @@ export default function Contact() {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 1.3, duration: 0.4 }}
+                        whileHover={{ scale: 1.01 }}
                       >
                         <label htmlFor="inquiryType" className="block text-sm font-medium text-gray-700 mb-2">
                           Inquiry Type *
@@ -533,6 +550,7 @@ export default function Contact() {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 1.4, duration: 0.4 }}
+                        whileHover={{ scale: 1.01 }}
                       >
                         <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
                           Message *
@@ -679,7 +697,7 @@ export default function Contact() {
       </div>
 
       {/* 2. Office Location - Animated Cards */}
-      <div className="relative bg-white section-padding overflow-hidden">
+      <div id="office-location" className="relative bg-white section-padding overflow-hidden">
         {/* Background Elements */}
         <div className="absolute inset-0 opacity-5">
           <div className="absolute inset-0" style={{
@@ -924,7 +942,7 @@ export default function Contact() {
       </div>
 
       {/* 3. Alternative Channels - Animated Cards */}
-      <div className="relative bg-white section-padding overflow-hidden">
+      <div id="connect" className="relative bg-white section-padding overflow-hidden">
         {/* Background Elements */}
         <div className="absolute inset-0 opacity-5">
           <div className="absolute inset-0" style={{

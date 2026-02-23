@@ -52,8 +52,8 @@ export default function AnimatedSection({
 }: AnimatedSectionProps) {
   const [ref, inView] = useInView({
     triggerOnce: true,
-    threshold: 0.1,
-    rootMargin: '0px 0px'
+    threshold: 0.05, // Reduced threshold for earlier trigger
+    rootMargin: '-50px 0px' // Trigger slightly before element enters viewport
   })
 
   return (

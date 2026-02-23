@@ -449,6 +449,7 @@ const integrations = [
 import { Calendar, ClipboardList, Home, Settings, Rocket, LucideIcon } from "lucide-react";
 import { MainStageCard } from "@/components/MainStageCard";
 import { PainSolution } from "@/components/PainSolution";
+import FloatingSidebar from "@/components/FloatingSidebar";
 import virturInspect from "../assets/virtueInspect.png";
 import BookingEngine from "../assets/BookingEngine.png";
 import GuestHandbook from "../assets/GuestHandbook.png";
@@ -548,6 +549,13 @@ function ProductsContent() {
   const [activeTab, setActiveTab] = useState("features");
   const [slideDirection, setSlideDirection] = useState<"left" | "right" | null>(null);
 
+  const sections = [
+    { id: 'hero', label: 'Products' },
+    { id: 'product-detail-section', label: 'Product Details' },
+    { id: 'architecture', label: 'Architecture' },
+    { id: 'cta', label: 'Get Started' }
+  ];
+
   useEffect(() => {
     if (!productId) return;
 
@@ -601,9 +609,12 @@ function ProductsContent() {
   return (
     <div className="bg-white overflow-hidden pt-20 md:pt-12">
       <FloatingElements />
+      <FloatingSidebar sections={sections} />
 
       {/* Product Showcase - Reusable Component */}
-      <ProductShowcase showHeader={true} autoRotate={true} rotationInterval={8000} />
+      <div id="hero">
+        <ProductShowcase showHeader={true} autoRotate={true} rotationInterval={8000} />
+      </div>
 
       {/* <div className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80">
           <div className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] animated-gradient opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]" />
@@ -932,7 +943,7 @@ function ProductsContent() {
       </ParallaxSection>
 
       {/* 5. Architecture & Scalability */}
-      <div className="relative bg-gradient-to-br from-gray-50 via-white to-gray-50 section-padding overflow-hidden">
+      <div id="architecture" className="relative bg-gradient-to-br from-gray-50 via-white to-gray-50 section-padding overflow-hidden">
         {/* Background Elements */}
         <div className="absolute inset-0 opacity-5">
           <div
@@ -1130,7 +1141,7 @@ function ProductsContent() {
       </div> */}
 
       {/* 7. Primary CTA */}
-      <div className="relative bg-gradient-to-br from-primary-purple via-purple-800 to-primary-purple section-padding overflow-hidden">
+      <div id="cta" className="relative bg-gradient-to-br from-primary-purple via-purple-800 to-primary-purple section-padding overflow-hidden">
         {/* Background Pattern */}
         <div className="absolute inset-0 opacity-10">
           <div

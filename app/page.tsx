@@ -13,6 +13,7 @@ import { PropertyIcon, IntegrationIcon, GrowthIcon } from "@/components/CustomIc
 import AnimatedHeroHeadline from "@/components/AnimatedHeroHeadline";
 import TechnologyTeamSection from "@/components/TechnologyTeamSection";
 import ProductShowcase from "@/components/ProductShowcase";
+import FloatingSidebar from "@/components/FloatingSidebar";
 
 // Rolling Options Data
 const rollingOptions = [
@@ -112,10 +113,23 @@ const socialProof = {
 
 export default function Home() {
   const router = useRouter();
+  
+  const sections = [
+    { id: 'hero', label: 'Home' },
+    { id: 'products', label: 'Products' },
+    { id: 'services', label: 'Services' },
+    { id: 'who-we-serve', label: 'Who We Serve' },
+    { id: 'why-jebitech', label: 'Why JebiTech' },
+    { id: 'experience', label: 'Experience' },
+    { id: 'cta', label: 'Get Started' }
+  ];
+
   return (
     <div className="bg-white overflow-hidden">
+      <FloatingSidebar sections={sections} />
+      
       {/* 1. Hero Section - Guesty Style */}
-      <div className="relative isolate lg:px-8 pt-24 pb-12 md:pt-28 md:pb-16 lg:pt-32 lg:pb-20 flex items-center">
+      <div id="hero" className="relative isolate lg:px-8 pt-24 pb-12 md:pt-28 md:pb-16 lg:pt-32 lg:pb-20 flex items-center">
         <FloatingElements />
 
         <div className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80">
@@ -188,7 +202,7 @@ export default function Home() {
         </div>
       </div>
       {/* SaaS Products Section */}
-      <div className="bg-white py-2">
+      <div id="products" className="bg-white py-2">
         <div className="container-custom px-4 sm:px-6">
           <AnimatedSection direction="up">
             <div className="mx-auto max-w-3xl text-center mb-3">
@@ -210,7 +224,7 @@ export default function Home() {
 
       <ProductShowcase showHeader={false} autoRotate={true} rotationInterval={8000} />
       {/* 2. Rolling Options Section */}
-      <div className="bg-white section-padding">
+      <div id="services" className="bg-white section-padding">
         <div className="container-custom px-4 sm:px-6">
           <AnimatedSection direction="up">
             <div className="mx-auto max-w-3xl text-center mb-8 sm:mb-12 md:mb-16">
@@ -232,7 +246,7 @@ export default function Home() {
       </div>
       {/* 3. Offering & Delivering Section */}
       <ParallaxSection speed={0.3}>
-        <div className="bg-primary-purple section-padding relative overflow-hidden">
+        <div id="who-we-serve" className="bg-primary-purple section-padding relative overflow-hidden">
           {/* Decorative background elements */}
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
             <div className="absolute top-0 right-0 w-96 h-96 bg-primary-orange/10 rounded-full blur-3xl"></div>
@@ -327,7 +341,7 @@ export default function Home() {
 
       {/* 6. Why JebiTech - Animated */}
       <ParallaxSection speed={0.1}>
-        <div className="relative pt-8 sm:pt-12 md:pt-16 overflow-hidden">
+        <div id="why-jebitech" className="relative pt-8 sm:pt-12 md:pt-16 overflow-hidden">
           <div className="container-custom relative z-10">
             <AnimatedSection direction="up">
               <div className="mx-auto max-w-2xl text-center">
@@ -343,7 +357,7 @@ export default function Home() {
       </ParallaxSection>
 
       {/* 7. Experience Boxes */}
-      <div className="bg-white section-padding">
+      <div id="experience" className="bg-white section-padding">
         <div className="container-custom px-4 sm:px-6">
           <AnimatedSection direction="up">
             <div className="mx-auto max-w-3xl text-center mb-12 sm:mb-16">
@@ -531,7 +545,7 @@ export default function Home() {
       </div> */}
 
       {/* 10. Final CTA */}
-      <div className="bg-white section-padding">
+      <div id="cta" className="bg-white section-padding">
         <div className="container-custom px-4 sm:px-6">
           <AnimatedSection direction="up">
             <div className="mx-auto max-w-3xl text-center">

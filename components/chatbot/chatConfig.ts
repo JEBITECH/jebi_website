@@ -2,7 +2,7 @@
 export const pageContent: Record<string, { title: string; message: string; buttons: string[] }> = {
     "/": {
         title: "Welcome to Jebitech!",
-        message: "I'm Sophia. Ready to automate your short-term rental business?",
+        message: "I'm Virtue. Ready to automate your short-term rental business?",
         buttons: ["Get Started", "View Demo"],
     },
     "/products": {

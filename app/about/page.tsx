@@ -1,3 +1,6 @@
+'use client';
+
+import { useState } from 'react';
 import Link from 'next/link'
 import {
   UserGroupIcon,
@@ -12,18 +15,23 @@ import {
   StarIcon,
   CheckBadgeIcon,
   MapPinIcon,
-  ArrowRightIcon
+  ArrowRightIcon,
+  ChevronDownIcon,
+  ChevronUpIcon
 } from '@heroicons/react/24/outline'
 
 import AnimatedSection from '@/components/AnimatedSection'
 import ParallaxSection from '@/components/ParallaxSection'
 import StaggeredList from '@/components/StaggeredList'
 import FloatingElements from '@/components/FloatingElements'
+import FloatingSidebar from '@/components/FloatingSidebar'
 import jayimage from '../assets/jayimage.jpg';
 import pradeepimage from '../assets/pradeepimage.jpg';
 import emmanuelimage from '../assets/emmanuelimage.jpg'
 import Image from "next/image";
 import { TeamCarousel } from '@/components/TeamCrousel'
+import { motion } from 'framer-motion';
+import { RocketLaunchIcon } from '@heroicons/react/24/outline';
 
 
 const leadership = [
@@ -179,11 +187,79 @@ const impactMetrics = [
   { metric: "99.9%", label: "System Uptime" }
 ]
 
+// Story Section Component with Read More/Less
+function StorySection() {
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  return (
+    <div className="max-w-7xl mx-auto mb-12">
+      <div className="bg-gradient-to-br from-white to-gray-50/50 rounded-3xl p-8 md:p-10 shadow-xl border border-gray-100 relative overflow-hidden">
+        {/* Decorative corner elements */}
+        <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-primary-purple/5 to-transparent rounded-bl-full"></div>
+        <div className="absolute bottom-0 left-0 w-32 h-32 bg-gradient-to-tr from-primary-orange/5 to-transparent rounded-tr-full"></div>
+        
+        <div className="relative z-10 space-y-5 text-base md:text-lg text-gray-700 leading-relaxed">
+          {/* Always visible content */}
+          <p className="first-letter:text-5xl first-letter:font-bold first-letter:text-primary-purple first-letter:mr-3 first-letter:float-left first-letter:leading-none">
+            Our journey began with a straightforward observation: the hospitality industry was not lacking technology, it was lacking the expertise to make technology truly work. Many organizations had access to capable platforms, yet struggled to configure them effectively, integrate them seamlessly, or receive timely enhancements that matched their operational realities.
+          </p>
+          <p>
+            Working closely with operators, we saw teams facing real-world challenges, delayed feature delivery, disconnected systems, and limitations in adapting existing solutions to evolving business needs. In many cases, the gap was not the software itself, but the absence of deep domain expertise bridging hospitality operations and technology execution.
+          </p>
+          
+          {/* Expandable content */}
+          <div className={`space-y-5 transition-all duration-500 ease-in-out ${isExpanded ? 'opacity-100 max-h-[2000px]' : 'opacity-0 max-h-0 overflow-hidden'}`}>
+            <p>
+              We stepped in to fill that gap, partnering with clients as subject-matter experts, enabling better system usage, accelerating delivery, and building custom solutions where standard tools fell short. Over time, these engagements revealed recurring patterns and unmet needs across the industry.
+            </p>
+            <p className="font-semibold text-primary-purple">
+              That insight led us to go further.
+            </p>
+            <p>
+              We began developing our own technology, solutions designed from operational realities, not theoretical assumptions, combining implementation experience, integration depth, and hands-on industry knowledge into platforms that address real challenges.
+            </p>
+            <p className="text-lg md:text-xl font-semibold text-gray-900 pt-3 border-t-2 border-primary-orange/20">
+              Today, we continue to operate at the intersection of hospitality and technology, delivering our own products while serving as a trusted extension of our partners' ecosystems, focused on solving practical problems and shaping the future of hospitality operations.
+            </p>
+          </div>
+        </div>
+
+        {/* Read More/Less Button */}
+        <div className="relative z-10 mt-6 text-center">
+          <button
+            onClick={() => setIsExpanded(!isExpanded)}
+            className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-primary-purple to-purple-700 hover:from-primary-purple hover:to-purple-800 text-white font-semibold rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
+          >
+            <span>{isExpanded ? 'Read Less' : 'Read More'}</span>
+            {isExpanded ? (
+              <ChevronUpIcon className="w-5 h-5" />
+            ) : (
+              <ChevronDownIcon className="w-5 h-5" />
+            )}
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function About() {
+  const sections = [
+    { id: 'hero', label: 'Overview' },
+    { id: 'story', label: 'Our Story' },
+    { id: 'vision-mission', label: 'Vision & Mission' },
+    { id: 'leadership', label: 'Leadership' },
+    { id: 'team', label: 'Team' },
+    { id: 'impact', label: 'Proven Results' },
+  ];
+
   return (
     <div className="bg-white overflow-hidden">
+      {/* Floating Sidebar Navigation */}
+      <FloatingSidebar sections={sections} />
+
       {/* 1. Hero Section */}
-      <div className="relative isolate px-6 pt-24 pb-16 md:pt-28 md:pb-20 lg:px-8 overflow-hidden bg-gradient-to-br from-primary-purple via-purple-700 to-purple-800">
+      <div id="hero" className="relative isolate px-6 pt-24 pb-16 md:pt-28 md:pb-20 lg:px-8 overflow-hidden bg-gradient-to-br from-primary-purple via-purple-700 to-purple-800">
         <FloatingElements />
 
         {/* Enhanced Background */}
@@ -210,14 +286,23 @@ export default function About() {
               </div>
 
               {/* Main Heading */}
-              <h1 className="text-5xl font-bold tracking-tight text-white sm:text-6xl lg:text-7xl font-heading mb-8">
-                About JebiTech
+              <h1 className="font-bold tracking-tight text-white font-heading mb-8">
+                <span className="text-7xl sm:text-8xl md:text-9xl block mb-6">
+                  JebiTech
+                </span>
+                <span className="text-2xl sm:text-3xl md:text-4xl block font-normal">
+                  is built by hospitality technology experts
+                </span>
               </h1>
               
               {/* Description */}
               <AnimatedSection direction="up" delay={0.4}>
-                <p className="text-xl md:text-2xl leading-relaxed text-white/90 max-w-3xl mx-auto">
-                  Built by hospitality technology experts, we solve real operational challenges and empower the future of hospitality by delivering innovative technology and serving as a trusted extension of our partners' business operations, platforms, and ecosystems.
+                <p className="text-lg md:text-xl leading-relaxed text-white/90 max-w-4xl mx-auto">
+                  We solve real operational challenges and empower the future of hospitality by{' '}
+                  <span className="font-bold text-primary-orange bg-white/10 px-2 py-1 rounded-md border border-primary-orange/30">
+                    delivering
+                  </span>
+                  {' '}innovative technology and serving as a trusted extension of our partners' business operations, platforms, and ecosystems.
                 </p>
               </AnimatedSection>
             </div>
@@ -226,7 +311,7 @@ export default function About() {
       </div>
 
       {/* 2. Story Section */}
-      <div className="relative bg-white section-padding overflow-hidden">
+      <div id="story" className="relative bg-white section-padding overflow-hidden">
         {/* Background Elements */}
         <div className="absolute inset-0 opacity-5">
           <div className="absolute inset-0" style={{
@@ -256,34 +341,7 @@ export default function About() {
 
           {/* Story Content - Enhanced Typography */}
           <AnimatedSection direction="up" delay={0.2}>
-            <div className="max-w-6xl mx-auto mb-12">
-              <div className="bg-gradient-to-br from-white to-gray-50/50 rounded-3xl p-8 md:p-10 shadow-xl border border-gray-100 relative overflow-hidden">
-                {/* Decorative corner elements */}
-                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-primary-purple/5 to-transparent rounded-bl-full"></div>
-                <div className="absolute bottom-0 left-0 w-32 h-32 bg-gradient-to-tr from-primary-orange/5 to-transparent rounded-tr-full"></div>
-                
-                <div className="relative z-10 space-y-5 text-base md:text-lg text-gray-700 leading-relaxed">
-                  <p className="first-letter:text-5xl first-letter:font-bold first-letter:text-primary-purple first-letter:mr-3 first-letter:float-left first-letter:leading-none">
-                    Our journey began with a straightforward observation: the hospitality industry was not lacking technology, it was lacking the expertise to make technology truly work. Many organizations had access to capable platforms, yet struggled to configure them effectively, integrate them seamlessly, or receive timely enhancements that matched their operational realities.
-                  </p>
-                  <p>
-                    Working closely with operators, we saw teams facing real-world challenges, delayed feature delivery, disconnected systems, and limitations in adapting existing solutions to evolving business needs. In many cases, the gap was not the software itself, but the absence of deep domain expertise bridging hospitality operations and technology execution.
-                  </p>
-                  <p>
-                    We stepped in to fill that gap, partnering with clients as subject-matter experts, enabling better system usage, accelerating delivery, and building custom solutions where standard tools fell short. Over time, these engagements revealed recurring patterns and unmet needs across the industry.
-                  </p>
-                  <p className="font-semibold text-primary-purple">
-                    That insight led us to go further.
-                  </p>
-                  <p>
-                    We began developing our own technology, solutions designed from operational realities, not theoretical assumptions, combining implementation experience, integration depth, and hands-on industry knowledge into platforms that address real challenges.
-                  </p>
-                  <p className="text-lg md:text-xl font-semibold text-gray-900 pt-3 border-t-2 border-primary-orange/20">
-                    Today, we continue to operate at the intersection of hospitality and technology, delivering our own products while serving as a trusted extension of our partners' ecosystems, focused on solving practical problems and shaping the future of hospitality operations.
-                  </p>
-                </div>
-              </div>
-            </div>
+            <StorySection />
           </AnimatedSection>
 
           {/* Stats Grid - Enhanced Design */}
@@ -336,7 +394,7 @@ export default function About() {
       </div>
 
       {/* 3. Vision, Mission & Values */}
-      <div className="relative bg-gradient-to-br from-gray-50 via-white to-gray-50 section-padding overflow-hidden">
+      <div id="vision-mission" className="relative bg-gradient-to-br from-gray-50 via-white to-gray-50 section-padding overflow-hidden">
         {/* Background Elements */}
         <div className="absolute inset-0 opacity-5">
           <div className="absolute inset-0" style={{
@@ -367,45 +425,190 @@ export default function About() {
             {/* Vision & Mission */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-20">
               <AnimatedSection direction="left" delay={0.2}>
-                <div className="group relative bg-gradient-to-br from-primary-purple via-purple-700 to-purple-800 rounded-3xl p-12 text-white shadow-2xl overflow-hidden h-full flex flex-col hover:shadow-3xl transition-all duration-300">
-                  {/* Decorative Elements */}
-                  <div className="absolute top-0 right-0 w-40 h-40 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2 group-hover:scale-150 transition-transform duration-500"></div>
-                  <div className="absolute bottom-0 left-0 w-32 h-32 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/2 group-hover:scale-150 transition-transform duration-500"></div>
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <motion.div 
+                  className="group relative bg-gradient-to-br from-primary-purple via-purple-700 to-purple-800 rounded-3xl p-12 text-white shadow-2xl overflow-hidden h-full flex flex-col hover:shadow-3xl transition-all duration-300"
+                  whileHover={{ scale: 1.02, y: -5 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  {/* Animated Decorative Elements */}
+                  <motion.div 
+                    className="absolute top-0 right-0 w-40 h-40 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2"
+                    animate={{
+                      scale: [1, 1.2, 1],
+                      opacity: [0.3, 0.5, 0.3],
+                    }}
+                    transition={{
+                      duration: 4,
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    }}
+                  />
+                  <motion.div 
+                    className="absolute bottom-0 left-0 w-32 h-32 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/2"
+                    animate={{
+                      scale: [1.2, 1, 1.2],
+                      opacity: [0.5, 0.3, 0.5],
+                    }}
+                    transition={{
+                      duration: 4,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                      delay: 2
+                    }}
+                  />
+                  <motion.div 
+                    className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  />
                   
                   <div className="relative z-10 flex flex-col h-full">
-                    <div className="flex items-center gap-4 mb-8">
-                      <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center flex-shrink-0 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                    <motion.div 
+                      className="flex items-center gap-4 mb-8"
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.3, duration: 0.5 }}
+                    >
+                      <motion.div 
+                        className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center flex-shrink-0 shadow-lg"
+                        whileHover={{ rotate: 360, scale: 1.1 }}
+                        transition={{ duration: 0.6 }}
+                      >
                         <StarIcon className="w-8 h-8 text-white" />
-                      </div>
-                      <h3 className="text-4xl font-bold">Our Vision</h3>
-                    </div>
-                    <p className="text-xl text-white/95 leading-relaxed flex-1">
+                      </motion.div>
+                      <motion.h3 
+                        className="text-4xl font-bold"
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.4, duration: 0.5 }}
+                      >
+                        Our Vision
+                      </motion.h3>
+                    </motion.div>
+                    <motion.p 
+                      className="text-xl text-white/95 leading-relaxed flex-1"
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.5, duration: 0.5 }}
+                    >
                       To be the trusted technology partner globally for the hospitality industry, helping organisations into technology or hospitality business and end-users, through innovative, seamless, and customized solutions and services delivered by top domain and technology experts.
-                    </p>
+                    </motion.p>
+                    
+                    {/* Animated bottom accent */}
+                    <motion.div 
+                      className="mt-6 pt-6 border-t border-white/20"
+                      initial={{ opacity: 0, scaleX: 0 }}
+                      whileInView={{ opacity: 1, scaleX: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.6, duration: 0.5 }}
+                    >
+                      <div className="flex items-center gap-2 text-white/80 text-sm">
+                        <motion.div
+                          animate={{ scale: [1, 1.2, 1] }}
+                          transition={{ duration: 2, repeat: Infinity }}
+                        >
+                          <StarIcon className="w-5 h-5 text-white" />
+                        </motion.div>
+                        <span>Empowering hospitality through innovation</span>
+                      </div>
+                    </motion.div>
                   </div>
-                </div>
+                </motion.div>
               </AnimatedSection>
 
               <AnimatedSection direction="right" delay={0.3}>
-                <div className="group relative bg-gradient-to-br from-primary-orange via-orange-600 to-orange-700 rounded-3xl p-12 text-white shadow-2xl overflow-hidden h-full flex flex-col hover:shadow-3xl transition-all duration-300">
-                  {/* Decorative Elements */}
-                  <div className="absolute top-0 right-0 w-40 h-40 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2 group-hover:scale-150 transition-transform duration-500"></div>
-                  <div className="absolute bottom-0 left-0 w-32 h-32 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/2 group-hover:scale-150 transition-transform duration-500"></div>
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <motion.div 
+                  className="group relative bg-gradient-to-br from-primary-orange via-orange-600 to-orange-700 rounded-3xl p-12 text-white shadow-2xl overflow-hidden h-full flex flex-col hover:shadow-3xl transition-all duration-300"
+                  whileHover={{ scale: 1.02, y: -5 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  {/* Animated Decorative Elements */}
+                  <motion.div 
+                    className="absolute top-0 right-0 w-40 h-40 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2"
+                    animate={{
+                      scale: [1, 1.2, 1],
+                      opacity: [0.3, 0.5, 0.3],
+                    }}
+                    transition={{
+                      duration: 4,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                      delay: 1
+                    }}
+                  />
+                  <motion.div 
+                    className="absolute bottom-0 left-0 w-32 h-32 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/2"
+                    animate={{
+                      scale: [1.2, 1, 1.2],
+                      opacity: [0.5, 0.3, 0.5],
+                    }}
+                    transition={{
+                      duration: 4,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                      delay: 3
+                    }}
+                  />
+                  <motion.div 
+                    className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  />
                   
                   <div className="relative z-10 flex flex-col h-full">
-                    <div className="flex items-center gap-4 mb-8">
-                      <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center flex-shrink-0 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                    <motion.div 
+                      className="flex items-center gap-4 mb-8"
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.4, duration: 0.5 }}
+                    >
+                      <motion.div 
+                        className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center flex-shrink-0 shadow-lg"
+                        whileHover={{ rotate: 360, scale: 1.1 }}
+                        transition={{ duration: 0.6 }}
+                      >
                         <ChartBarIcon className="w-8 h-8 text-white" />
-                      </div>
-                      <h3 className="text-4xl font-bold">Our Mission</h3>
-                    </div>
-                    <p className="text-xl text-white/95 leading-relaxed flex-1">
+                      </motion.div>
+                      <motion.h3 
+                        className="text-4xl font-bold"
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.5, duration: 0.5 }}
+                      >
+                        Our Mission
+                      </motion.h3>
+                    </motion.div>
+                    <motion.p 
+                      className="text-xl text-white/95 leading-relaxed flex-1"
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.6, duration: 0.5 }}
+                    >
                       At Jebitech, we partner with hospitality technology companies, combining technology, data, expertise, and service excellence to drive client success, innovation, and sustainable growth.
-                    </p>
+                    </motion.p>
+                    
+                    {/* Animated bottom accent */}
+                    <motion.div 
+                      className="mt-6 pt-6 border-t border-white/20"
+                      initial={{ opacity: 0, scaleX: 0 }}
+                      whileInView={{ opacity: 1, scaleX: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.7, duration: 0.5 }}
+                    >
+                      <div className="flex items-center gap-2 text-white/80 text-sm">
+                        <motion.div
+                          animate={{ scale: [1, 1.2, 1] }}
+                          transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
+                        >
+                          <RocketLaunchIcon className="w-5 h-5 text-white" />
+                        </motion.div>
+                        <span>Driving success through partnership</span>
+                      </div>
+                    </motion.div>
                   </div>
-                </div>
+                </motion.div>
               </AnimatedSection>
             </div>
 
@@ -463,7 +666,7 @@ export default function About() {
 
       {/* 4. Leadership Team */}
       <ParallaxSection speed={0.2}>
-        <div className="relative bg-gradient-to-br from-gray-50 via-white to-gray-50 section-padding overflow-hidden">
+        <div id="leadership" className="relative bg-gradient-to-br from-gray-50 via-white to-gray-50 section-padding overflow-hidden">
           {/* Background Elements */}
           <div className="absolute inset-0 opacity-5">
             <div className="absolute inset-0" style={{
@@ -600,7 +803,7 @@ export default function About() {
       </div> */}
 
       {/* 6. Our Team */}
-      <div className="relative bg-white section-padding overflow-hidden">
+      <div id="team" className="relative bg-white section-padding overflow-hidden">
         {/* Background Elements */}
         <div className="absolute inset-0 opacity-5">
           <div className="absolute inset-0" style={{
@@ -858,7 +1061,7 @@ export default function About() {
       </div> */}
 
       {/* 12. Our Impact - Deep Hospitality Expertise */}
-      <div className="relative bg-gradient-to-br from-primary-purple via-purple-700 to-purple-800 section-padding overflow-hidden">
+      <div id="impact" className="relative bg-gradient-to-br from-primary-purple via-purple-700 to-purple-800 section-padding overflow-hidden">
         {/* Background Elements */}
         <div className="absolute inset-0 opacity-10">
           <div className="absolute inset-0" style={{

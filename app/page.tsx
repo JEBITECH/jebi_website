@@ -13,6 +13,7 @@ import { PropertyIcon, IntegrationIcon, GrowthIcon } from "@/components/CustomIc
 import AnimatedHeroHeadline from "@/components/AnimatedHeroHeadline";
 import TechnologyTeamSection from "@/components/TechnologyTeamSection";
 import ProductShowcase from "@/components/ProductShowcase";
+import FloatingSidebar from "@/components/FloatingSidebar";
 
 // Rolling Options Data
 const rollingOptions = [
@@ -32,14 +33,14 @@ const rollingOptions = [
   },
   // {
   //   id: "in-house-products",
-  //   title: "Inhouse SAAS products",
+  //   title: "Inhouse SaaS products",
   //   subtitle: "Develop → Implement → Support",
   //   description: "Ready-to-deploy hospitality products including booking engines, inspection tools, and management platforms.",
   //   icon: Package,
   // },
   {
     id: "Implementation-and-Integration-Services",
-    title: "Implementation and Integration Services",
+    title: "Implementation & Integration Services",
     subtitle: "Data Analysis → System Integration → User Support",
     description: "Comprehensive data analysis and system user services for any department in your organization.",
     icon: BarChart3,
@@ -49,7 +50,7 @@ const rollingOptions = [
 // Experience Data
 const experienceData = [
   {
-    category: "SAAS Tech providers in Hospitality",
+    category: "SaaS Tech providers in Hospitality",
     location: "USA & Europe",
     description: "Dedicated development teams",
     units: "5000+ properties, 100k+ rooms",
@@ -59,7 +60,7 @@ const experienceData = [
   {
     category: "Property Management companies",
     location: "UAE & USA",
-    description: "In house SAAS product implemented",
+    description: "In house SaaS product implemented",
     units: "3000+ units",
     icon: Building2,
     color: "bg-purple-500",
@@ -112,10 +113,23 @@ const socialProof = {
 
 export default function Home() {
   const router = useRouter();
+  
+  const sections = [
+    { id: 'hero', label: 'Home' },
+    { id: 'products', label: 'Products' },
+    { id: 'services', label: 'Services' },
+    { id: 'who-we-serve', label: 'Who We Serve' },
+    { id: 'why-jebitech', label: 'Why JebiTech' },
+    { id: 'experience', label: 'Experience' },
+    { id: 'cta', label: 'Get Started' }
+  ];
+
   return (
     <div className="bg-white overflow-hidden">
+      <FloatingSidebar sections={sections} />
+      
       {/* 1. Hero Section - Guesty Style */}
-      <div className="relative isolate lg:px-8 pt-24 pb-12 md:pt-28 md:pb-16 lg:pt-32 lg:pb-20 flex items-center">
+      <div id="hero" className="relative isolate lg:px-8 pt-24 pb-12 md:pt-28 md:pb-16 lg:pt-32 lg:pb-20 flex items-center">
         <FloatingElements />
 
         <div className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80">
@@ -187,15 +201,15 @@ export default function Home() {
           </div>
         </div>
       </div>
-      {/* SAAS Products Section */}
-      <div className="bg-white py-2">
+      {/* SaaS Products Section */}
+      <div id="products" className="bg-white py-2">
         <div className="container-custom px-4 sm:px-6">
           <AnimatedSection direction="up">
             <div className="mx-auto max-w-3xl text-center mb-3">
               {/* Badge */}
               <div className="inline-flex items-center gap-2 px-6 py-3 bg-gray-100 rounded-full mb-3 border border-gray-200">
                 <Package className="w-4 h-4 text-primary-purple" />
-                <span className="text-primary-purple text-sm font-semibold">SAAS Products</span>
+                <span className="text-primary-purple text-sm font-semibold">SaaS Products</span>
               </div>
 
               {/* Main Heading */}
@@ -210,7 +224,7 @@ export default function Home() {
 
       <ProductShowcase showHeader={false} autoRotate={true} rotationInterval={8000} />
       {/* 2. Rolling Options Section */}
-      <div className="bg-white section-padding">
+      <div id="services" className="bg-white section-padding">
         <div className="container-custom px-4 sm:px-6">
           <AnimatedSection direction="up">
             <div className="mx-auto max-w-3xl text-center mb-8 sm:mb-12 md:mb-16">
@@ -232,7 +246,7 @@ export default function Home() {
       </div>
       {/* 3. Offering & Delivering Section */}
       <ParallaxSection speed={0.3}>
-        <div className="bg-primary-purple section-padding relative overflow-hidden">
+        <div id="who-we-serve" className="bg-primary-purple section-padding relative overflow-hidden">
           {/* Decorative background elements */}
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
             <div className="absolute top-0 right-0 w-96 h-96 bg-primary-orange/10 rounded-full blur-3xl"></div>
@@ -327,7 +341,7 @@ export default function Home() {
 
       {/* 6. Why JebiTech - Animated */}
       <ParallaxSection speed={0.1}>
-        <div className="relative pt-8 sm:pt-12 md:pt-16 overflow-hidden">
+        <div id="why-jebitech" className="relative pt-8 sm:pt-12 md:pt-16 overflow-hidden">
           <div className="container-custom relative z-10">
             <AnimatedSection direction="up">
               <div className="mx-auto max-w-2xl text-center">
@@ -343,7 +357,7 @@ export default function Home() {
       </ParallaxSection>
 
       {/* 7. Experience Boxes */}
-      <div className="bg-white section-padding">
+      <div id="experience" className="bg-white section-padding">
         <div className="container-custom px-4 sm:px-6">
           <AnimatedSection direction="up">
             <div className="mx-auto max-w-3xl text-center mb-12 sm:mb-16">
@@ -531,7 +545,7 @@ export default function Home() {
       </div> */}
 
       {/* 10. Final CTA */}
-      <div className="bg-white section-padding">
+      <div id="cta" className="bg-white section-padding">
         <div className="container-custom px-4 sm:px-6">
           <AnimatedSection direction="up">
             <div className="mx-auto max-w-3xl text-center">

@@ -56,6 +56,13 @@ const leadership = [
     image: pradeepimage,
     linkedin: "https://in.linkedin.com/in/dr-pradeep-tiwari-b63981b8"
   },
+  {
+    name: "Vishal Waghmare",
+    role: "Chief Solutions Officer",
+    bio: "Product specialist team lead with extensive expertise in business analysis, implementation management, and product ownership. Leading business operations and customer success initiatives while serving as a Scrum master and QA specialist, ensuring seamless delivery of hospitality technology solutions.",
+    image: null,
+    linkedin: "https://www.linkedin.com/in/vishal-waghmare-38574b41/"
+  }
 
   // {
   //   name: "Emma Rodriguez",
@@ -693,7 +700,7 @@ export default function About() {
               </div>
             </AnimatedSection>
 
-            <StaggeredList className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            <StaggeredList className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
               {leadership.map((leader) => {
                 const initials = leader.name
                   .split(" ")

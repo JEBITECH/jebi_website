@@ -189,7 +189,7 @@ export default function ProductShowcase({ showHeader = true, autoRotate = true, 
                 </div>
               </div>
 
-              {/* RIGHT SIDE - Product Image */}
+              {/* RIGHT SIDE - Product Image/Video */}
               <div className="relative overflow-hidden min-h-[180px] sm:min-h-[250px] md:min-h-[300px] lg:min-h-[350px] flex items-center justify-center bg-gradient-to-br from-purple-50 to-blue-50 rounded-b-2xl lg:rounded-b-none lg:rounded-r-2xl">
                 <div className="absolute inset-0 bg-gradient-to-br from-purple-100/20 to-blue-100/20"></div>
                 <AnimatePresence mode="wait">
@@ -201,13 +201,27 @@ export default function ProductShowcase({ showHeader = true, autoRotate = true, 
                     transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
                     className="relative w-full h-full"
                   >
-                    <Image 
-                      src={activeStage.image} 
-                      alt={activeStage.title} 
-                      fill
-                  priority 
-                  className="object-cover lg:object-fill"
-                />
+                    {activeStage.video ? (
+                      <video
+                        key={activeStage.id}
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                        className="w-full h-full object-cover"
+                      >
+                        <source src={activeStage.video} type="video/mp4" />
+                        Your browser does not support the video tag.
+                      </video>
+                    ) : (
+                      <Image 
+                        src={activeStage.image} 
+                        alt={activeStage.title} 
+                        fill
+                        priority 
+                        className="object-cover"
+                      />
+                    )}
                   </motion.div>
                 </AnimatePresence>
               </div>

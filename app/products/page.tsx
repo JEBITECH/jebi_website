@@ -285,7 +285,7 @@ export const products = [
     outcome: "Reduce inspection time by up to 80%",
     icon: EyeIcon,
     link: "http://139.59.22.205:5173/",
-    videoUrl: "nomgejOybno", // YouTube video ID
+    videoUrl: "/assets/VirtueInspect.mp4",
     description: "VirtueInspect is an AI-powered hospitality inspection and operations platform that detects damages, stains, and missing inventory while managing end-to-end inspection workflows.",
     features: [
       "AI-powered detection of damages, stains, and missing items",
@@ -315,7 +315,7 @@ export const products = [
     outcome: "Single source of truth across all PMS systems",
     icon: LinkIcon,
     link: "http://139.59.22.205:5173/",
-    videoUrl: null, // No video yet
+    videoUrl: "/assets/VirtueConnectVideo.mp4",
     description:
       "Virtue Connect / ERP unifies multiple PMS platforms into one normalized, secure, and scalable data layer that powers analytics, booking engines, inspections, accounting, and guest-facing applications.",
     features: [
@@ -469,6 +469,7 @@ export interface Stage {
   solutionTitle: string;
   solution: string;
   image: StaticImageData;
+  video?: string;
   ctaLabel: string;
   scrollToId: string;
   productName: string;
@@ -480,6 +481,7 @@ export const stages: Stage[] = [
     title: "Booking",
     icon: Calendar,
     image: BookingEngine,
+    video: "/assets/BookingEngine.mp4",
     painTitle: "Get started with ease",
     painDescription: "Lost revenue to OTA commissions, no direct booking channel",
     solutionTitle: "Booking Engine",
@@ -493,6 +495,7 @@ export const stages: Stage[] = [
     title: "Pre-Stay",
     icon: ClipboardList,
     image: GuestHandbook1,
+    video: "/assets/guestHandbook.mp4",
     painTitle: "Get started with ease",
     painDescription: "Manual guest communication and check-in coordination",
     solutionTitle: "Pre-Stay Automation",
@@ -506,6 +509,7 @@ export const stages: Stage[] = [
     title: "Stay",
     icon: Home,
     image: virturInspect,
+    video: "/assets/VirtueInspect.mp4",
     painTitle: "Get started with ease",
     painDescription: "On-site issues with no centralized control",
     solutionTitle: "Guest Stay Tools",
@@ -519,6 +523,7 @@ export const stages: Stage[] = [
     title: "Operations",
     icon: Settings,
     image: accounting5,
+    video: "/assets/OwnerSettelment.mp4",
     painTitle: "Get started with ease",
     painDescription: "Disconnected operations and manual processes",
     solutionTitle: "Operations",
@@ -532,6 +537,7 @@ export const stages: Stage[] = [
     title: "Scale",
     icon: Rocket,
     image: VirturConnectER3,
+    video: "/assets/VirtueConnectVideo.mp4",
     painTitle: "Get started with ease",
     painDescription: "Hard to scale without operational visibility",
     solutionTitle: "Scale Platform",

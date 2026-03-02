@@ -15,6 +15,7 @@ const navigation = [
   { name: "Products", href: "/products" },
   // { name: 'Services', href: '/services' },
   // { name: 'Case Studies', href: '/case-studies' },
+  { name: "Life at jebitech", href: "/careers" },
   { name: "Contact", href: "/contact" },
 ];
 

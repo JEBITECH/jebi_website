@@ -172,10 +172,19 @@ const ChatWidget = () => {
         localStorage.setItem('chatWidgetView', 'intro');
     };
 
-    // Auto-scroll to bottom when messages change
+    // Smart auto-scroll: only scroll if user is near bottom or when new message arrives
     useEffect(() => {
         if (scrollRef.current) {
-            scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+            const { scrollTop, scrollHeight, clientHeight } = scrollRef.current;
+            const isNearBottom = scrollHeight - scrollTop - clientHeight < 100;
+            
+            // Only auto-scroll if user is already near the bottom
+            if (isNearBottom) {
+                scrollRef.current.scrollTo({
+                    top: scrollRef.current.scrollHeight,
+                    behavior: 'smooth'
+                });
+            }
         }
     }, [messages]);
 
@@ -194,6 +203,16 @@ const ChatWidget = () => {
             };
             setMessages(prev => [...prev, userMsg]);
             setInputValue("");
+            
+            // Scroll to show user's message
+            setTimeout(() => {
+                if (scrollRef.current) {
+                    scrollRef.current.scrollTo({
+                        top: scrollRef.current.scrollHeight,
+                        behavior: 'smooth'
+                    });
+                }
+            }, 100);
         }
         
         setIsLoading(true);
@@ -301,7 +320,7 @@ const ChatWidget = () => {
             {/* STAGE 1: Intro Card (from first_chatbot_UI.png) */}
             {view === 'intro' && (
                 <div
-                    className="mb-4 w-[350px] bg-white rounded-2xl shadow-2xl border border-gray-100 p-5 animate-bounce-subtle"
+                    className="mb-4 w-[320px] bg-white rounded-2xl shadow-2xl border border-gray-100 p-4 animate-bounce-subtle"
                 >
                     <div className="flex items-center gap-3 mb-3">
                         <img
@@ -363,7 +382,7 @@ const ChatWidget = () => {
 
             {/* STAGE 2: Full Chat UI (from second_chat_UI.png) */}
             {view === 'chat' && (
-                <div className="mb-4 w-[400px] h-[600px] bg-white rounded-2xl shadow-2xl border border-gray-100 flex flex-col overflow-hidden animate-in slide-in-from-bottom-5 duration-300">
+                <div className="mb-4 w-[360px] h-[500px] bg-white rounded-2xl shadow-2xl border border-gray-100 flex flex-col overflow-hidden animate-in slide-in-from-bottom-5 duration-300">
                     {/* Purple Header */}
                     <div className="bg-gradient-to-r from-primary-purple to-purple-700 p-4 flex items-center justify-between rounded-t-2xl">
                         <div className="flex items-center gap-3">
@@ -394,26 +413,28 @@ const ChatWidget = () => {
                         </div>
                     </div> */}
 
-                    <div ref={scrollRef} className="flex-1 bg-gray-50 p-4 overflow-y-auto space-y-4">
-                        {messages.map((msg) => (
-                            <div key={msg.id} className={`flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'} animate-in fade-in slide-in-from-bottom-2`}>
-                                <div className={`max-w-[80%] p-3 rounded-2xl text-[13px] shadow-sm ${msg.sender === 'user'
-                                    ? 'bg-primary-orange text-white rounded-tr-none'
-                                    : 'bg-white text-gray-800 border border-gray-100 rounded-tl-none'
-                                    }`}>
-                                    {msg.text}
-                                    <div className={`text-[9px] mt-1 opacity-70 ${msg.sender === 'user' ? 'text-right' : 'text-left'}`}>
-                                        {msg.time}
+                    <div ref={scrollRef} className="flex-1 bg-gray-50 p-3 overflow-y-auto min-h-0">
+                        <div className="space-y-4">
+                            {messages.map((msg) => (
+                                <div key={msg.id} className={`flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'} animate-in fade-in slide-in-from-bottom-2`}>
+                                    <div className={`max-w-[80%] p-3 rounded-2xl text-[13px] shadow-sm ${msg.sender === 'user'
+                                        ? 'bg-primary-orange text-white rounded-tr-none'
+                                        : 'bg-white text-gray-800 border border-gray-100 rounded-tl-none'
+                                        }`}>
+                                        {msg.text}
+                                        <div className={`text-[9px] mt-1 opacity-70 ${msg.sender === 'user' ? 'text-right' : 'text-left'}`}>
+                                            {msg.time}
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        ))}
+                            ))}
+                        </div>
                     </div>
 
                     {/* Footer */}
-                    <div className="p-4 bg-white border-t border-gray-100">
+                    <div className="p-3 bg-white border-t border-gray-100">
                         {/* Show suggestions from backend or default buttons */}
-                        <div className="flex flex-wrap gap-2 mb-4">
+                        <div className="flex flex-wrap gap-2 mb-3">
                             {(suggestions.length > 0 ? suggestions : currentData.buttons).map((btn, idx) => (
                                 <button 
                                     key={`${btn}-${idx}`}
@@ -427,28 +448,27 @@ const ChatWidget = () => {
                         </div>
                         
                         {/* Input Area */}
-                        <form onSubmit={handleSendMessage} className="mb-0">
+                        <form onSubmit={handleSendMessage}>
                             <div className="relative flex items-center">
                                 <input
-                                    autoFocus
                                     type="text"
                                     value={inputValue}
                                     onChange={(e) => setInputValue(e.target.value)}
                                     disabled={isLoading}
                                     placeholder={isLoading ? "Sending..." : "Enter a message"}
-                                    className="w-full pl-4 pr-12 py-3 bg-white border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary-purple/20 focus:border-primary-purple disabled:opacity-50"
+                                    className="w-full pl-4 pr-12 py-2.5 bg-white border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary-purple/20 focus:border-primary-purple disabled:opacity-50"
                                 />
                                 <button 
                                     type="submit" 
                                     disabled={isLoading || !inputValue.trim()}
                                     className="absolute right-3 text-primary-orange hover:scale-110 transition-transform disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
                                 >
-                                    <Send size={20} />
+                                    <Send size={18} />
                                 </button>
                             </div>
                         </form>
                         
-                        <p className="mt-3 text-[10px] text-gray-400 text-center">
+                        <p className="mt-2 text-[10px] text-gray-400 text-center">
                             This chat may be recorded and used in line with our <span className="underline cursor-pointer hover:text-primary-purple">Privacy Policy</span>
                         </p>
                     </div>
@@ -504,7 +524,7 @@ const ChatWidget = () => {
                 
                 <button
                     onClick={() => view === 'chat' ? closeAll() : view === 'hidden' ? showIntro() : openChat()}
-                    className="w-16 h-16 rounded-full overflow-hidden shadow-xl border-4 border-primary-purple hover:scale-105 transition-transform relative z-10"
+                    className="w-14 h-14 rounded-full overflow-hidden shadow-xl border-4 border-primary-purple hover:scale-105 transition-transform relative z-10"
                 >
                     <img
                         src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150"

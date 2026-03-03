@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, Suspense } from "react";
+import { useEffect, useState, Suspense, useRef } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import ProductShowcase from "@/components/ProductShowcase";
@@ -29,7 +29,6 @@ import AnimatedSection from "@/components/AnimatedSection";
 import ParallaxSection from "@/components/ParallaxSection";
 import StaggeredList from "@/components/StaggeredList";
 import FloatingElements from "@/components/FloatingElements";
-import { useRef } from "react";
 import Image from "next/image";
 
 const platformCapabilities = [
@@ -208,7 +207,7 @@ export const products = [
     outcome: "Increase direct bookings by 40%",
     icon: DevicePhoneMobileIcon,
     link: "http://139.59.22.205:5174",
-    videoUrl: null, // No video yet
+    videoUrl: "/assets/BookingEngine.mp4",
     description:
       "AI-powered booking engine website builder with CMS for vacation rentals and service apartments that unifies reservations, websites, and operations with seamless PMS and ERP integration—built for scale, performance, and automation.",
     features: [
@@ -254,6 +253,7 @@ export const products = [
     outcome: "Reduce guest support queries by up to 60%",
     icon: DocumentTextIcon,
     link: "http://139.59.22.205:5173/",
+    videoUrl: "/assets/guestHandbook.mp4",
     description:
       "Guest Handbook is a digital, mobile-first guest assistant that delivers check-in instructions, house rules, local tips, messaging, and instant AI-powered answers throughout the guest journey.",
     features: [
@@ -348,7 +348,7 @@ export const products = [
     outcome: "Reduce manual accounting effort by up to 80%",
     icon: ChartBarIcon,
     link: "http://139.59.22.205:5173/",
-    videoUrl: "BAnf11XSb48", // YouTube video ID
+    videoUrl: null,
     description: "A PMS-driven accounting platform that automatically converts hospitality operational data into structured financial records, journals, trial balances, and financial statements.",
     features: [
       "Automated journal entry creation from PMS data",
@@ -383,7 +383,7 @@ export const products = [
     outcome: "Eliminate settlement disputes and manual reconciliation",
     icon: DevicePhoneMobileIcon,
     link: "http://139.59.22.205:5173/",
-    videoUrl: "LvCI4nXtcBw", // YouTube video ID
+    videoUrl: "/assets/OwnerSettelment.mp4",
     description: "A formula-driven settlement platform that calculates owner and PMC revenue shares in real time, with full transparency, auditability, and zero spreadsheet dependency.",
     features: [
       "Real-time settlement calculations from PMS data",
@@ -554,6 +554,7 @@ function ProductsContent() {
   const [selectedProduct, setSelectedProduct] = useState(products[0]);
   const [activeTab, setActiveTab] = useState("features");
   const [slideDirection, setSlideDirection] = useState<"left" | "right" | null>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   const sections = [
     { id: 'hero', label: 'Products' },
@@ -575,6 +576,14 @@ function ProductsContent() {
       }, 100);
     }
   }, [productId]);
+
+  // Force video reload when product changes
+  useEffect(() => {
+    if (videoRef.current && selectedProduct.videoUrl) {
+      videoRef.current.load();
+      videoRef.current.play().catch(err => console.log('Video play error:', err));
+    }
+  }, [selectedProduct.id, selectedProduct.videoUrl]);
 
   // Keyboard navigation
   useEffect(() => {
@@ -911,16 +920,18 @@ function ProductsContent() {
                     <div className="mb-4">
                       {selectedProduct.videoUrl ? (
                         <div className="relative w-full rounded-xl overflow-hidden shadow-xl border-2 border-gray-200 group">
-                          <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
-                            <iframe
-                              className="absolute top-0 left-0 w-full h-full"
-                              src={`https://www.youtube.com/embed/${selectedProduct.videoUrl}?autoplay=1&rel=0&modestbranding=1&loop=1&playlist=${selectedProduct.videoUrl}&controls=1&showinfo=0`}
-                              title={`${selectedProduct.name} Demo`}
-                              frameBorder="0"
-                              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                              allowFullScreen
-                            ></iframe>
-                          </div>
+                          <video
+                            ref={videoRef}
+                            key={selectedProduct.id}
+                            autoPlay
+                            loop
+                            muted
+                            playsInline
+                            className="w-full h-full object-cover"
+                          >
+                            <source src={`${selectedProduct.videoUrl}?v=${selectedProduct.id}`} type="video/mp4" />
+                            Your browser does not support the video tag.
+                          </video>
                           <div className="absolute inset-0 bg-gradient-to-t from-primary-purple/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
                         </div>
                       ) : (

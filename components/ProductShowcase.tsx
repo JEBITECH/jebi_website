@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { useInView } from "react-intersection-observer";
@@ -30,6 +30,7 @@ export default function ProductShowcase({ showHeader = true, autoRotate = true, 
   const [isPaused, setIsPaused] = useState(false);
   const [pauseTimeout, setPauseTimeout] = useState<NodeJS.Timeout | null>(null);
   const activeStage = stages[activeIndex];
+  const videoRef = useRef<HTMLVideoElement>(null);
   
   // Track if component is in view
   const { ref, inView } = useInView({
@@ -69,6 +70,14 @@ export default function ProductShowcase({ showHeader = true, autoRotate = true, 
       }
     };
   }, [pauseTimeout]);
+
+  // Force video reload when stage changes
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.load();
+      videoRef.current.play().catch(err => console.log('Video play error:', err));
+    }
+  }, [activeIndex, activeStage.video]);
 
   return (
     <div ref={ref}>
@@ -203,14 +212,15 @@ export default function ProductShowcase({ showHeader = true, autoRotate = true, 
                   >
                     {activeStage.video ? (
                       <video
-                        key={activeStage.id}
+                        ref={videoRef}
+                        key={`${activeStage.id}-${activeIndex}`}
                         autoPlay
                         loop
                         muted
                         playsInline
                         className="w-full h-full object-cover"
                       >
-                        <source src={activeStage.video} type="video/mp4" />
+                        <source src={`${activeStage.video}?v=${activeStage.id}`} type="video/mp4" />
                         Your browser does not support the video tag.
                       </video>
                     ) : (

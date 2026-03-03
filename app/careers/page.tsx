@@ -447,33 +447,94 @@ export default function LifeAtJebitech() {
 
           {/* Why Join Us */}
           <AnimatedSection direction="up" delay={0.2}>
-            <div className="max-w-4xl mx-auto mb-16">
-              <motion.div 
-                className="bg-gradient-to-br from-primary-purple/5 to-primary-orange/5 rounded-3xl p-10 border-2 border-primary-purple/20"
-                whileHover={{ scale: 1.01 }}
-                transition={{ duration: 0.3 }}
-              >
-                <h3 className="text-2xl font-bold text-gray-900 mb-8 text-center flex items-center justify-center gap-3">
-                  <SparklesIcon className="w-7 h-7 text-primary-orange" />
+            <div className="max-w-6xl mx-auto mb-16">
+              {/* Section Header */}
+              <div className="text-center mb-12">
+                <div className="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-primary-purple/10 to-primary-orange/10 rounded-full border border-primary-purple/20 mb-4">
+                  <SparklesIcon className="w-5 h-5 text-primary-purple" />
+                  <span className="text-primary-purple text-sm font-semibold">Why Choose Jebitech</span>
+                </div>
+                <h3 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
                   Why Join Us?
                 </h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {whyJoinReasons.map((reason, idx) => (
-                    <motion.div
-                      key={idx}
-                      className="flex items-start gap-3 bg-white rounded-xl p-4 shadow-sm"
-                      initial={{ opacity: 0, x: -20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: 0.1 * idx }}
-                      whileHover={{ x: 5 }}
-                    >
-                      <CheckCircleIcon className="w-6 h-6 text-primary-orange flex-shrink-0 mt-0.5" />
-                      <span className="text-base text-gray-700 font-medium">{reason}</span>
-                    </motion.div>
-                  ))}
-                </div>
-              </motion.div>
+                <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+                  Be part of a team that's transforming hospitality technology
+                </p>
+              </div>
+
+              {/* Reasons Grid - First 3 items */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                {whyJoinReasons.slice(0, 3).map((reason, idx) => (
+                  <motion.div
+                    key={idx}
+                    className="group relative bg-white rounded-2xl p-6 shadow-lg border border-gray-100 hover:shadow-2xl hover:border-primary-orange/30 transition-all duration-300"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.1 * idx }}
+                    whileHover={{ y: -5 }}
+                  >
+                    {/* Gradient Background on Hover */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-primary-purple/5 to-primary-orange/5 opacity-0 group-hover:opacity-100 rounded-2xl transition-opacity duration-300"></div>
+                    
+                    <div className="relative z-10 flex items-start gap-4">
+                      {/* Icon */}
+                      <div className="flex-shrink-0">
+                        <div className="w-12 h-12 bg-gradient-to-br from-primary-orange to-orange-600 rounded-xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+                          <CheckCircleIcon className="w-6 h-6 text-white" />
+                        </div>
+                      </div>
+                      
+                      {/* Text */}
+                      <div className="flex-1 pt-1">
+                        <p className="text-base text-gray-700 font-medium leading-relaxed group-hover:text-gray-900 transition-colors">
+                          {reason}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Bottom Accent Line */}
+                    <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-primary-purple via-primary-orange to-orange-600 rounded-b-2xl transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+                  </motion.div>
+                ))}
+              </div>
+
+              {/* Last 2 items - Centered */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+                {whyJoinReasons.slice(3).map((reason, idx) => (
+                  <motion.div
+                    key={idx + 3}
+                    className="group relative bg-white rounded-2xl p-6 shadow-lg border border-gray-100 hover:shadow-2xl hover:border-primary-orange/30 transition-all duration-300"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.1 * (idx + 3) }}
+                    whileHover={{ y: -5 }}
+                  >
+                    {/* Gradient Background on Hover */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-primary-purple/5 to-primary-orange/5 opacity-0 group-hover:opacity-100 rounded-2xl transition-opacity duration-300"></div>
+                    
+                    <div className="relative z-10 flex items-start gap-4">
+                      {/* Icon */}
+                      <div className="flex-shrink-0">
+                        <div className="w-12 h-12 bg-gradient-to-br from-primary-orange to-orange-600 rounded-xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+                          <CheckCircleIcon className="w-6 h-6 text-white" />
+                        </div>
+                      </div>
+                      
+                      {/* Text */}
+                      <div className="flex-1 pt-1">
+                        <p className="text-base text-gray-700 font-medium leading-relaxed group-hover:text-gray-900 transition-colors">
+                          {reason}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Bottom Accent Line */}
+                    <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-primary-purple via-primary-orange to-orange-600 rounded-b-2xl transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+                  </motion.div>
+                ))}
+              </div>
             </div>
           </AnimatedSection>
 
@@ -545,26 +606,6 @@ export default function LifeAtJebitech() {
                   <ArrowRightIcon className="w-5 h-5" />
                 </Link>
               </motion.div>
-
-              {/* How to Apply */}
-              <motion.div 
-                className="mt-10 bg-blue-50 rounded-2xl p-6 border border-blue-100"
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-              >
-                <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                    <span className="text-white font-bold text-lg">💡</span>
-                  </div>
-                  <div>
-                    <h5 className="font-bold text-gray-900 mb-2">How to Apply:</h5>
-                    <p className="text-gray-700 text-sm leading-relaxed">
-                      Explore current openings and submit through our career portal. Ensure your resume is updated and highlights your key skills, experience, and achievements.
-                    </p>
-                  </div>
-                </div>
-              </motion.div>
             </div>
           </AnimatedSection>
         </div>
@@ -598,7 +639,7 @@ export default function LifeAtJebitech() {
                       Explore current openings and submit through our career portal. Ensure your resume is updated and highlights your key skills, experience, and achievements.
                     </p>
                     <p className="text-gray-700 text-lg leading-relaxed">
-                      If you do not find a suitable opening, you can still share your profile with us — we are always excited to connect with talented professionals.
+                      If you do not find a suitable opening, you can still share your profile with us, we are always excited to connect with talented professionals.
                     </p>
                   </div>
                 </div>

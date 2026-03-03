@@ -245,7 +245,16 @@ const ChatWidget = () => {
                     time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
                     isStreaming: true
                 };
-                setMessages(prev => [...prev, botMsg]);
+                setMessages(prev => {
+                    const updated = [...prev, botMsg];
+                    // Scroll after state update
+                    requestAnimationFrame(() => {
+                        if (scrollRef.current) {
+                            scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+                        }
+                    });
+                    return updated;
+                });
 
                 while (true) {
                     const { done, value } = await reader.read();
@@ -269,11 +278,24 @@ const ChatWidget = () => {
                                     }
                                     
                                     // Update the streaming message
-                                    setMessages(prev => prev.map(msg => 
-                                        msg.id === botMessageId 
-                                            ? { ...msg, text: accumulatedText }
-                                            : msg
-                                    ));
+                                    setMessages(prev => {
+                                        const updated = prev.map(msg => 
+                                            msg.id === botMessageId 
+                                                ? { ...msg, text: accumulatedText }
+                                                : msg
+                                        );
+                                        // Keep scrolled to bottom during streaming
+                                        requestAnimationFrame(() => {
+                                            if (scrollRef.current) {
+                                                const { scrollTop, scrollHeight, clientHeight } = scrollRef.current;
+                                                const isNearBottom = scrollHeight - scrollTop - clientHeight < 150;
+                                                if (isNearBottom) {
+                                                    scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+                                                }
+                                            }
+                                        });
+                                        return updated;
+                                    });
                                 }
 
                                 if (data.complete) {

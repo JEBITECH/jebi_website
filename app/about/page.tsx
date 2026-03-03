@@ -27,7 +27,8 @@ import FloatingElements from '@/components/FloatingElements'
 import FloatingSidebar from '@/components/FloatingSidebar'
 import jayimage from '../assets/jayimage.jpg';
 import pradeepimage from '../assets/pradeepimage.jpg';
-import emmanuelimage from '../assets/emmanuelimage.jpg'
+import emmanuelimage from '../assets/emmanuelimage.jpg';
+import vishalimage from '../assets/vishalimage.png';
 import Image from "next/image";
 import { TeamCarousel } from '@/components/TeamCrousel'
 import { motion } from 'framer-motion';
@@ -60,7 +61,7 @@ const leadership = [
     name: "Vishal Waghmare",
     role: "Chief Solutions Officer",
     bio: "Product specialist team lead with extensive expertise in business analysis, implementation management, and product ownership. Leading business operations and customer success initiatives while serving as a Scrum master and QA specialist, ensuring seamless delivery of hospitality technology solutions.",
-    image: null,
+    image: vishalimage,
     linkedin: "https://www.linkedin.com/in/vishal-waghmare-38574b41/"
   }
 
@@ -1104,7 +1105,7 @@ export default function About() {
                   <div className="text-6xl font-bold text-white mb-4 group-hover:scale-110 transition-transform duration-300">
                     {item.metric}
                   </div>
-                  <div className="text-white/90 font-semibold text-sm uppercase tracking-wider">{item.label}</div>
+                  <div className="text-white/90 font-semibold text-xs uppercase tracking-wider">{item.label}</div>
                 </div>
               </div>
             ))}

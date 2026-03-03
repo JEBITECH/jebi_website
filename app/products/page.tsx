@@ -919,7 +919,7 @@ function ProductsContent() {
                     {/* Video Container */}
                     <div className="mb-4">
                       {selectedProduct.videoUrl ? (
-                        <div className="relative w-full rounded-xl overflow-hidden shadow-xl border-2 border-gray-200 group">
+                        <div className="relative w-full rounded-xl overflow-hidden shadow-xl border-2 border-gray-200 group" style={{ paddingBottom: "56.25%" }}>
                           <video
                             ref={videoRef}
                             key={selectedProduct.id}
@@ -927,7 +927,7 @@ function ProductsContent() {
                             loop
                             muted
                             playsInline
-                            className="w-full h-full object-cover"
+                            className="absolute top-0 left-0 w-full h-full object-cover"
                           >
                             <source src={`${selectedProduct.videoUrl}?v=${selectedProduct.id}`} type="video/mp4" />
                             Your browser does not support the video tag.

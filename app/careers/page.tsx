@@ -1,6 +1,7 @@
 "use client";
 
 import Link from 'next/link';
+import { useState } from 'react';
 import {
   BriefcaseIcon,
   MapPinIcon,
@@ -18,7 +19,11 @@ import {
   ScaleIcon,
   UsersIcon,
   FaceSmileIcon,
-  LightBulbIcon
+  LightBulbIcon,
+  ChevronDownIcon,
+  ChevronUpIcon,
+  CurrencyDollarIcon,
+  BuildingOfficeIcon
 } from '@heroicons/react/24/outline';
 
 import AnimatedSection from '@/components/AnimatedSection';
@@ -135,6 +140,154 @@ const whyJoinReasons = [
 ];
 
 const jobTags = ["Angular", "Node.js", "Nest.js", "Full-time"];
+
+// JobCard Component
+function JobCard({ title, company, type, location, region, salary, experience, skills, applyLink, description }: any) {
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  return (
+    <motion.div 
+      className="bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden hover:shadow-xl transition-all duration-300"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+    >
+      {/* Header - Always Visible */}
+      <div className="p-6 md:p-8">
+        <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6">
+          <div className="flex-1">
+            <h4 className="text-2xl font-bold text-gray-900 mb-3">{title}</h4>
+            
+            {/* Company & Meta Info */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4">
+              <div className="flex items-center gap-2 text-gray-600">
+                <BuildingOfficeIcon className="w-5 h-5 text-primary-purple" />
+                <span className="text-sm">{company}</span>
+              </div>
+              <div className="flex items-center gap-2 text-gray-600">
+                <MapPinIcon className="w-5 h-5 text-primary-orange" />
+                <span className="text-sm">{location} • {region}</span>
+              </div>
+              <div className="flex items-center gap-2 text-gray-600">
+                <BriefcaseIcon className="w-5 h-5 text-primary-purple" />
+                <span className="text-sm">{type}</span>
+              </div>
+              <div className="flex items-center gap-2 text-gray-600">
+                <ClockIcon className="w-5 h-5 text-primary-orange" />
+                <span className="text-sm">{experience}</span>
+              </div>
+              <div className="flex items-center gap-2 text-gray-600">
+                <CurrencyDollarIcon className="w-5 h-5 text-primary-purple" />
+                <span className="text-sm">{salary}</span>
+              </div>
+            </div>
+
+            {/* Skills */}
+            <div className="flex flex-wrap gap-2 mb-4">
+              {skills.map((skill: string, idx: number) => (
+                <span
+                  key={idx}
+                  className="px-3 py-1 bg-gradient-to-r from-primary-purple/10 to-primary-orange/10 text-primary-purple rounded-full text-xs font-semibold border border-primary-purple/20"
+                >
+                  {skill}
+                </span>
+              ))}
+            </div>
+
+            {/* Short Description */}
+            <p className="text-gray-600 leading-relaxed">{description.about}</p>
+          </div>
+
+          {/* Apply Button */}
+          <div className="lg:w-48 flex-shrink-0">
+            <Link
+              href={applyLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group w-full inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-primary-purple to-purple-700 text-white rounded-full font-bold hover:from-primary-purple hover:to-purple-800 transition-all duration-300 transform hover:scale-105 shadow-lg"
+            >
+              Apply Now
+              <ArrowRightIcon className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </div>
+        </div>
+
+        {/* Expand/Collapse Button */}
+        {(description.responsibilities.length > 0 || description.requiredSkills.length > 0 || description.preferredProfile) && (
+          <button
+            onClick={() => setIsExpanded(!isExpanded)}
+            className="mt-6 flex items-center gap-2 text-primary-purple font-semibold hover:text-purple-800 transition-colors"
+          >
+            {isExpanded ? (
+              <>
+                <ChevronUpIcon className="w-5 h-5" />
+                <span>Show Less</span>
+              </>
+            ) : (
+              <>
+                <ChevronDownIcon className="w-5 h-5" />
+                <span>View Full Job Description</span>
+              </>
+            )}
+          </button>
+        )}
+      </div>
+
+      {/* Expanded Content */}
+      {isExpanded && (
+        <motion.div
+          initial={{ height: 0, opacity: 0 }}
+          animate={{ height: "auto", opacity: 1 }}
+          exit={{ height: 0, opacity: 0 }}
+          transition={{ duration: 0.3 }}
+          className="border-t border-gray-200 bg-gray-50 p-6 md:p-8"
+        >
+          {/* Responsibilities */}
+          {description.responsibilities.length > 0 && (
+            <div className="mb-8">
+              <h5 className="text-xl font-bold text-gray-900 mb-4">Key Responsibilities</h5>
+              {description.responsibilities.map((section: any, idx: number) => (
+                <div key={idx} className="mb-6">
+                  <h6 className="text-lg font-semibold text-gray-800 mb-3">{section.title}</h6>
+                  <ul className="space-y-2">
+                    {section.items.map((item: string, itemIdx: number) => (
+                      <li key={itemIdx} className="flex items-start gap-3">
+                        <CheckCircleIcon className="w-5 h-5 text-primary-orange flex-shrink-0 mt-0.5" />
+                        <span className="text-gray-700">{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* Required Skills */}
+          {description.requiredSkills.length > 0 && (
+            <div className="mb-8">
+              <h5 className="text-xl font-bold text-gray-900 mb-4">Required Skills</h5>
+              <ul className="space-y-2">
+                {description.requiredSkills.map((skill: string, idx: number) => (
+                  <li key={idx} className="flex items-start gap-3">
+                    <CheckCircleIcon className="w-5 h-5 text-primary-purple flex-shrink-0 mt-0.5" />
+                    <span className="text-gray-700">{skill}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {/* Preferred Profile */}
+          {description.preferredProfile && (
+            <div>
+              <h5 className="text-xl font-bold text-gray-900 mb-4">Preferred Candidate Profile</h5>
+              <p className="text-gray-700 leading-relaxed">{description.preferredProfile}</p>
+            </div>
+          )}
+        </motion.div>
+      )}
+    </motion.div>
+  );
+}
 
 export default function LifeAtJebitech() {
   const sections = [
@@ -540,49 +693,214 @@ export default function LifeAtJebitech() {
 
           {/* Open Positions */}
           <AnimatedSection direction="up" delay={0.3}>
-            <div className="max-w-5xl mx-auto">
+            <div className="max-w-5xl mx-auto space-y-6">
               <h3 className="text-3xl font-bold text-gray-900 mb-10 text-center">Open Positions</h3>
               
-              {/* Job Card */}
-              <motion.div 
-                className="bg-white rounded-3xl p-8 md:p-10 shadow-xl border border-gray-100 hover:shadow-2xl transition-all duration-300 mb-10"
-                whileHover={{ y: -5 }}
-              >
-                <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-8">
-                  <div className="flex-1">
-                    <h4 className="text-3xl font-bold text-gray-900 mb-4">Full Stack Developer</h4>
-                    
-                    {/* Tags */}
-                    <div className="flex flex-wrap gap-3 mb-6">
-                      {jobTags.map((tag, idx) => (
-                        <motion.span
-                          key={tag}
-                          className="px-4 py-2 bg-gradient-to-r from-primary-purple/10 to-primary-orange/10 text-primary-purple rounded-full text-sm font-semibold border border-primary-purple/20"
-                          whileHover={{ scale: 1.05 }}
-                        >
-                          {tag}
-                        </motion.span>
-                      ))}
-                    </div>
-                    
-                    <p className="text-gray-600 text-lg leading-relaxed">
-                      Join our engineering team building innovative hospitality technology solutions.
-                    </p>
-                  </div>
+              {/* Job Card 1 - Support Engineer / Customer Success Associate */}
+              <JobCard
+                title="Support Engineer / Customer Success Associate"
+                company="JEBI SOFTECH SERVICES PVT LTD"
+                type="Contract"
+                location="On-site"
+                region="India, Maharashtra"
+                salary="Not Disclosed"
+                experience="0-1 years"
+                skills={["Analytical Skills", "Cloud Services", "Communication Skills", "Documentation", "Product Knowledge", "Ticketing Systems"]}
+                applyLink="https://itslink.net/jDTlJLZh5s"
+                description={{
+                  about: "We are looking for a motivated Support Engineer / Customer Success Associate who will assist customers by resolving technical issues and ensuring smooth product usage. This role is ideal for fresh graduates interested in customer interaction, troubleshooting, and gaining hands-on experience with software products.",
+                  responsibilities: [
+                    {
+                      title: "Customer Support & Issue Resolution",
+                      items: [
+                        "Respond to customer support tickets and assist in resolving issues within defined service timelines.",
+                        "Troubleshoot product-related queries and provide timely resolutions to customers.",
+                        "Ensure issues are properly documented and followed through until closure.",
+                        "Escalate complex issues to the appropriate internal teams when necessary."
+                      ]
+                    },
+                    {
+                      title: "Operational Support",
+                      items: [
+                        "Assist in configuring new projects or system setups as per defined guidelines.",
+                        "Maintain documentation for configurations and common issues for internal reference.",
+                        "Learn product features and workflows to better support customers."
+                      ]
+                    },
+                    {
+                      title: "Communication & Coordination",
+                      items: [
+                        "Participate in Daily Stand-up Meetings (DSM) and provide updates on support tickets and open issues.",
+                        "Collaborate with Engineering and Product teams to resolve customer issues.",
+                        "Communicate clearly and professionally with internal teams and stakeholders."
+                      ]
+                    }
+                  ],
+                  requiredSkills: [
+                    "Basic understanding of software applications and troubleshooting concepts.",
+                    "Strong communication and interpersonal skills.",
+                    "Ability to analyze issues and provide logical solutions.",
+                    "Willingness to learn new technologies and support tools."
+                  ],
+                  preferredProfile: "Candidates from Hotel Management, Hospitality, BBA, MBA, or similar customer-facing backgrounds who are tech-savvy and comfortable working with software systems are encouraged to apply. Strong customer service orientation and problem-solving mindset. Internship or academic exposure to customer service, technical support, will be an advantage."
+                }}
+              />
 
-                  <div className="lg:w-56 flex-shrink-0">
-                    <Link
-                      href="https://live.digisme.in/ATS/JobApplication.aspx?q=MHBlRmp2L0N0a0hFOGNzZlN6SVJpcUFPVVR0dllQektVdlp5djE5emlLRT0="
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="group w-full inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-primary-purple to-purple-700 text-white rounded-full font-bold text-lg hover:from-primary-purple hover:to-purple-800 transition-all duration-300 transform hover:scale-105 shadow-lg"
-                    >
-                      Apply Now
-                      <ArrowRightIcon className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                    </Link>
-                  </div>
-                </div>
-              </motion.div>
+              {/* Job Card 2 - Software QA Engineer */}
+              <JobCard
+                title="Software QA Engineer"
+                company="JEBI SOFTECH SERVICES PVT LTD"
+                type="Full Time"
+                location="On-site"
+                region="India, Maharashtra"
+                salary="Not Disclosed"
+                experience="3-5 years"
+                skills={["Agile Methodologies", "Black Box Testing", "Continuous Integration", "Load Testing", "Performance Testing", "Regression Testing"]}
+                applyLink="https://itslink.net/Gfz7jdyaKg"
+                description={{
+                  about: "We are looking for a detail-oriented Software Quality Assurance Engineer responsible for ensuring the quality, reliability, and performance of software applications. The role involves designing and executing test strategies, identifying defects early in the development cycle, and collaborating with development and product teams to deliver high-quality releases.",
+                  responsibilities: [
+                    {
+                      title: "Quality Assurance & Release Excellence",
+                      items: [
+                        "Ensure high-quality software releases with minimal production defects.",
+                        "Identify critical issues early in the development lifecycle.",
+                        "Monitor and reduce defect leakage through effective testing strategies.",
+                        "Validate fixes and ensure stable releases before deployment."
+                      ]
+                    },
+                    {
+                      title: "Testing & Documentation",
+                      items: [
+                        "Design, create, and execute comprehensive test cases, test plans, and test scenarios.",
+                        "Maintain accurate testing documentation and reports in tools such as Confluence or similar platforms.",
+                        "Participate in requirement analysis and refinement discussions to ensure clear and testable requirements."
+                      ]
+                    },
+                    {
+                      title: "Automation & Process Improvement",
+                      items: [
+                        "Improve test coverage through automation testing and efficient testing strategies.",
+                        "Identify opportunities to optimize testing processes, tools, and frameworks.",
+                        "Work closely with developers to improve application testability and prevent defects early."
+                      ]
+                    },
+                    {
+                      title: "Collaboration & Communication",
+                      items: [
+                        "Collaborate with Developers, Product Managers, and QA teams to ensure shared ownership of product quality.",
+                        "Participate in Daily Stand-up Meetings (DSM) and provide updates on testing progress, risks, and blockers.",
+                        "Support release readiness by ensuring all quality standards are met before deployment."
+                      ]
+                    }
+                  ],
+                  requiredSkills: [
+                    "Strong understanding of software testing principles, SDLC, and STLC.",
+                    "Experience with manual testing and test case design.",
+                    "Familiarity with defect tracking tools such as JIRA or similar platforms.",
+                    "Knowledge of API testing, web application testing, and database validation.",
+                    "Strong analytical, debugging, and problem-solving skills.",
+                    "Good communication and collaboration abilities."
+                  ],
+                  preferredProfile: "Experience with automation testing tools such as Selenium, Cypress, or Playwright. Familiarity with CI/CD pipelines and DevOps practices."
+                }}
+              />
+
+              {/* Job Card 3 - Software Engineer - Trainee */}
+              <JobCard
+                title="Software Engineer - Trainee"
+                company="JEBI SOFTECH SERVICES PVT LTD"
+                type="Full Time"
+                location="On-site"
+                region="India, Maharashtra"
+                salary="Not Disclosed"
+                experience="0-1 years"
+                skills={["React JS", "Next.js", "Node.js", "Git", "Cloud Platforms", "SDLC"]}
+                applyLink="https://itslink.net/g5m9kvLYiP"
+                description={{
+                  about: "We are seeking motivated Software Engineer - Trainee with a keen interest in web development and cloud technologies. This role is ideal for fresh graduates or candidates looking to start their career in software development. You will work under mentorship, gain hands-on experience, and contribute to real-world projects.",
+                  responsibilities: [
+                    {
+                      title: "Development & Learning",
+                      items: [
+                        "Assist in developing and maintaining web applications using frameworks such as React JS, Next.js, Node.js, and related technologies.",
+                        "Collaborate with the team to design and implement software solutions.",
+                        "Gain exposure to DevOps concepts and CI/CD pipelines.",
+                        "Work with Git and follow version control workflows.",
+                        "Learn and work with cloud platforms such as AWS, Azure, or GCP.",
+                        "Participate in code reviews and help troubleshoot issues in existing applications.",
+                        "Continuously learn and adopt best practices in web development and cloud technologies."
+                      ]
+                    }
+                  ],
+                  requiredSkills: [
+                    "Basic understanding of web development frameworks such as React JS, Next.js, Node.js",
+                    "Familiarity with Git and version control workflows.",
+                    "Awareness of cloud platforms (AWS, Azure, or GCP) and their services.",
+                    "Good problem-solving and debugging skills.",
+                    "Strong eagerness to learn and adapt to new technologies."
+                  ],
+                  preferredProfile: "Exposure to frontend and backend development concepts. Academic or personal projects demonstrating web or cloud development skills. Basic understanding of databases and APIs."
+                }}
+              />
+
+              {/* Job Card 4 - Software QA - Trainee */}
+              <JobCard
+                title="Software QA Engineer - Trainee"
+                company="JEBI SOFTECH SERVICES PVT LTD"
+                type="Contract"
+                location="On-site"
+                region="India, Maharashtra"
+                salary="Not Disclosed"
+                experience="0-1 years"
+                skills={["Agile Methodologies", "Black Box Testing", "Functional Testing", "Non-functional Testing", "Performance Testing", "Quality Assurance Processes", "Regression Testing"]}
+                applyLink="https://itslink.net/nZGZPUrppO"
+                description={{
+                  about: "We are looking for a motivated Quality Assurance Trainee who is passionate about software quality and testing. This role is ideal for fresh graduates who want to start their career in software testing and quality engineering. The candidate will work closely with developers and QA engineers to learn testing processes, execute test cases, and ensure high-quality software releases.",
+                  responsibilities: [
+                    {
+                      title: "Quality Assurance & Release Support",
+                      items: [
+                        "Support the QA team in ensuring high-quality product releases.",
+                        "Assist in identifying issues early during testing cycles.",
+                        "Help verify fixes and ensure defects are properly validated before release."
+                      ]
+                    },
+                    {
+                      title: "Testing & Documentation",
+                      items: [
+                        "Assist in creating and executing test cases and test scenarios.",
+                        "Support maintenance of test documentation and reports in tools such as Confluence or similar platforms.",
+                        "Participate in requirement discussions to understand product functionality."
+                      ]
+                    },
+                    {
+                      title: "Automation & Process Learning",
+                      items: [
+                        "Learn basic test automation concepts and tools used within the team.",
+                        "Support efforts to improve testing efficiency and coverage.",
+                        "Work with developers to understand application behavior and improve testing practices."
+                      ]
+                    },
+                    {
+                      title: "Collaboration & Communication",
+                      items: [
+                        "Work closely with developers, QA team members, and product managers.",
+                        "Participate in Daily Stand-up Meetings (DSM) and provide testing updates.",
+                        "Communicate issues clearly and assist in tracking defects."
+                      ]
+                    }
+                  ],
+                  requiredSkills: [
+                    "Basic understanding of software testing concepts (manual testing, SDLC, STLC).",
+                    "Basic knowledge of web applications and APIs.",
+                    "Familiarity with test case writing and defect tracking tools.",
+                    "Strong attention to detail and problem-solving ability.",
+                    "Good communication and willingness to learn."
+                  ],
+                  preferredProfile: "Internship or academic project experience in software testing. Basic exposure to automation testing tools or scripting languages. Understanding of databases and APIs."
+                }}
+              />
 
               {/* Open Application CTA */}
               <motion.div 
@@ -597,9 +915,7 @@ export default function LifeAtJebitech() {
                   We're always excited to connect with talented professionals.
                 </p>
                 <Link
-                  href="https://live.digisme.in/ATS/JobApplication.aspx?q=MHBlRmp2L0N0a0hFOGNzZlN6SVJpcUFPVVR0dllQektVdlp5djE5emlLRT0="
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href="/contact"
                   className="inline-flex items-center gap-2 px-8 py-4 bg-primary-orange text-white rounded-full font-bold text-lg hover:bg-orange-600 transition-all duration-300 transform hover:scale-105 shadow-lg"
                 >
                   Submit Open Application

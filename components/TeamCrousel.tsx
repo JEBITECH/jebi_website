@@ -8,7 +8,6 @@ import teamImage002 from '../app/assets/teamImage002.jpeg'
 import teamImage003 from '../app/assets/teamImage003.jpeg'
 import teamImage004 from '../app/assets/teamImage004.jpeg'
 import teamImage005 from '../app/assets/teamImage005.jpeg'
-import teamImage006 from '../app/assets/teamImage006.jpeg'
 import teamImage007 from '../app/assets/teamImage007.jpeg'
 import teamImage008 from '../app/assets/teamImage 008.jpeg'
 
@@ -46,16 +45,11 @@ export const teamSlides = [
     },
     {
         id: 7,
-        image: teamImage006,
-        text: "Diverse perspectives driving exceptional solutions.",
-    },
-    {
-        id: 8,
         image: teamImage007,
         text: "Passionate professionals committed to excellence.",
     },
     {
-        id: 9,
+        id: 8,
         image: teamImage008,
         text: "United by a shared vision for hospitality innovation.",
     },

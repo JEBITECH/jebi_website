@@ -62,7 +62,6 @@ export function TeamCarousel() {
         const interval = setInterval(() => {
             setActive(prev => {
                 const nextIndex = prev + 1;
-                console.log('Current:', prev, 'Next:', nextIndex, 'Total:', teamSlides.length);
                 return nextIndex >= teamSlides.length ? 0 : nextIndex;
             });
         }, 5000);

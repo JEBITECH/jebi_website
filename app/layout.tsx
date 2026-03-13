@@ -2,7 +2,9 @@ import type { Metadata } from 'next'
 import './globals.css'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
-import ChatWidget from '@/components/chatbot/ChatWidget';
+import ChatWidget from '@/components/chatbot/ChatWidget'
+import EmailPopup from '@/components/EmailPopup'
+import { Analytics } from '@vercel/analytics/react';
 
 export const metadata: Metadata = {
   title: 'JEBITECH – Empowering Hospitality Technology',
@@ -37,9 +39,14 @@ export default function RootLayout({
         <main>{children}
 
           <ChatWidget />
+          <EmailPopup 
+            delaySeconds={8}
+            showOnExitIntent={true}
+          />
 
         </main>
         <Footer />
+        <Analytics />
       </body>
     </html>
   )

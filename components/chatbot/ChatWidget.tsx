@@ -30,7 +30,7 @@ interface Message {
 
 const ChatWidget = () => {
     const pathname = usePathname();
-    const [view, setView] = useState<'hidden' | 'intro' | 'chat'>('hidden');
+    const [view, setView] = useState<'hidden' | 'chat'>('hidden');
     const [currentData, setCurrentData] = useState(pageContent["/"]);
     const [inputValue, setInputValue] = useState("");
     const [messages, setMessages] = useState<Message[]>([]);
@@ -69,11 +69,11 @@ const ChatWidget = () => {
     // Load saved state from localStorage on mount
     useEffect(() => {
         const savedView = localStorage.getItem('chatWidgetView');
-        if (savedView && (savedView === 'hidden' || savedView === 'intro' || savedView === 'chat')) {
-            setView(savedView as 'hidden' | 'intro' | 'chat');
+        if (savedView && (savedView === 'hidden' || savedView === 'chat')) {
+            setView(savedView as 'hidden' | 'chat');
         } else {
-            // First time visitor - show intro after delay
-            const timer = setTimeout(() => setView('intro'), 1000);
+            // First time visitor - show full chat after delay
+            const timer = setTimeout(() => setView('chat'), 1000);
             return () => clearTimeout(timer);
         }
         setIsInitialized(true);
@@ -145,7 +145,7 @@ const ChatWidget = () => {
                 setContextInitialized(true);
             }
 
-            // Don't auto-show intro on page change if user has minimized it
+            // Don't auto-show chat on page change if user has minimized it
             if (isInitialized && contextInitialized) {
                 const savedView = localStorage.getItem('chatWidgetView');
                 if (savedView === 'hidden') {
@@ -165,11 +165,6 @@ const ChatWidget = () => {
     const closeAll = () => {
         setView('hidden');
         localStorage.setItem('chatWidgetView', 'hidden');
-    };
-
-    const showIntro = () => {
-        setView('intro');
-        localStorage.setItem('chatWidgetView', 'intro');
     };
 
     // Smart auto-scroll: only scroll if user is near bottom or when new message arrives
@@ -339,70 +334,7 @@ const ChatWidget = () => {
     return (
         <div className="fixed bottom-6 right-6 z-[999] flex flex-col items-end font-sans">
 
-            {/* STAGE 1: Intro Card (from first_chatbot_UI.png) */}
-            {view === 'intro' && (
-                <div
-                    className="mb-4 w-[320px] bg-white rounded-2xl shadow-2xl border border-gray-100 p-4 animate-bounce-subtle"
-                >
-                    <div className="flex items-center gap-3 mb-3">
-                        <img
-                            src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100"
-                            className="w-10 h-10 rounded-full object-cover border-2 border-primary-orange"
-                            alt="Virtue"
-                        />
-                        <div className="flex-1">
-                            <h3 className="font-bold text-gray-800 text-sm">Virtue</h3>
-                            <p className="text-[10px] text-primary-purple uppercase tracking-wider font-semibold">AI Hospitality Agent</p>
-                        </div>
-                        <button
-                            onClick={closeAll}
-                            className="text-gray-400 hover:text-primary-purple hover:bg-gray-100 p-1.5 rounded-full transition-colors"
-                            aria-label="Minimize chat"
-                        >
-                            <ChevronDown size={20} />
-                        </button>
-                    </div>
-
-                    <div onClick={openChat} className="cursor-pointer">
-                        <p className="text-[13px] text-gray-700 leading-relaxed mb-4">
-                            {currentData.message}
-                        </p>
-
-                        <div className="flex gap-2 mb-4">
-                            {currentData.buttons.map(btn => (
-                                <button 
-                                    key={btn} 
-                                    onClick={(e) => {
-                                        e.stopPropagation();
-                                        openChat();
-                                        setTimeout(() => handleButtonClick(btn), 100);
-                                    }}
-                                    className="px-3 py-1.5 border-2 border-primary-orange text-primary-orange rounded-full text-[11px] font-bold hover:bg-primary-orange hover:text-white transition-colors"
-                                >
-                                    {btn}
-                                </button>
-                            ))}
-                        </div>
-
-                        <div className="relative flex items-center">
-                            <input
-                                readOnly
-                                placeholder="Enter a message"
-                                className="w-full pl-4 pr-10 py-2.5 bg-white border border-gray-200 rounded-xl text-sm cursor-pointer focus:border-primary-purple"
-                            />
-                            <Send size={18} className="absolute right-3 text-primary-orange" />
-                        </div>
-                    </div>
-
-                    <div className="mt-4 pt-3 border-t border-gray-100 text-center">
-                        <p className="text-[10px] text-gray-400">
-                            This chat may be recorded and used in line with our <span className="underline cursor-pointer hover:text-primary-purple">Privacy Policy</span>
-                        </p>
-                    </div>
-                </div>
-            )}
-
-            {/* STAGE 2: Full Chat UI (from second_chat_UI.png) */}
+            {/* Full Chat UI */}
             {view === 'chat' && (
                 <div className="mb-4 w-[360px] h-[500px] bg-white rounded-2xl shadow-2xl border border-gray-100 flex flex-col overflow-hidden animate-in slide-in-from-bottom-5 duration-300">
                     {/* Purple Header */}
@@ -545,7 +477,7 @@ const ChatWidget = () => {
                 )}
                 
                 <button
-                    onClick={() => view === 'chat' ? closeAll() : view === 'hidden' ? showIntro() : openChat()}
+                    onClick={() => view === 'chat' ? closeAll() : openChat()}
                     className="w-14 h-14 rounded-full overflow-hidden shadow-xl border-4 border-primary-purple hover:scale-105 transition-transform relative z-10"
                 >
                     <img

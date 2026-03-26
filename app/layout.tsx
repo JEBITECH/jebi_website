@@ -53,10 +53,10 @@ export default function RootLayout({
         <main>{children}
 
           <ChatWidget />
-          <EmailPopup 
+          {/* <EmailPopup 
             delaySeconds={8}
             showOnExitIntent={true}
-          />
+          /> */}
 
         </main>
         <Footer />

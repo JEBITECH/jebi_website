@@ -1,4 +1,4 @@
-const API_BASE_URL = 'https://ai.virtueinspect.co.in/jb_chatbot';
+const API_BASE_URL = 'https://ai.virtueinspect.com/jb_chatbot';
 
 export interface ChatMessage {
     session_id: string;

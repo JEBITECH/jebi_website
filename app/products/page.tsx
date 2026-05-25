@@ -51,7 +51,7 @@ const platformCapabilities = [
 //     icon: DevicePhoneMobileIcon,
 //     description: 'AI-powered booking engine website builder with CMS for vacation rentals and service apartments that unifies reservations, websites, and operations with seamless PMS and ERP integration—built for scale, performance, and automation.',
 //     capabilities: [
-//       'Multi-PMS integration with platforms like Maxxton, Dharma, Hostaway, Guesty, and Mews',
+//       'Multi-PMS integration',
 //       'Intelligent reservation normalization across multiple PMS providers',
 //       'Real-time availability, pricing, and booking synchronization',
 //       'Built-in CMS for pages, blogs, menus, templates, and themes',
@@ -211,7 +211,7 @@ export const products = [
     description:
       "AI-powered booking engine website builder with CMS for vacation rentals and service apartments that unifies reservations, websites, and operations with seamless PMS and ERP integration—built for scale, performance, and automation.",
     features: [
-      "Multi-PMS integration with platforms like Maxxton, Dharma, Hostaway, Guesty, and Mews",
+      "Multi-PMS integration",
       "Intelligent reservation normalization across multiple PMS providers",
       "Real-time availability, pricing, and booking synchronization",
       "Built-in CMS for pages, blogs, menus, templates, and themes",

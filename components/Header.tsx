@@ -15,6 +15,7 @@ const navigation = [
   { name: "Products", href: "/products" },
   // { name: 'Services', href: '/services' },
   // { name: 'Case Studies', href: '/case-studies' },
+  // { name: "Guesty", href: "/guesty" },
   { name: "Life at jebitech", href: "/careers" },
   { name: "Contact", href: "/contact" },
 ];
@@ -55,7 +56,7 @@ export default function Header() {
   return (
     <>
       <header className={`bg-white shadow-sm fixed top-0 left-0 right-0 z-50 transition-transform duration-300 ease-in-out ${isVisible ? "translate-y-0" : "-translate-y-full"}`}>
-        <nav className="container-custom flex items-center justify-between p-6 lg:px-8" aria-label="Global">
+        <nav className="container-custom flex items-center justify-between px-6 py-3 lg:px-8 lg:py-3.5" aria-label="Global">
           {/* Logo */}
           <div className="flex lg:flex-1">
             <Link href="/" className="-m-1.5 p-1.5 flex items-center  gap-2">

@@ -16,6 +16,14 @@ module.exports = {
           'purple-dark': '#2D0F36',
           'orange-dark': '#E55A2B'
         },
+        stayguide: {
+          blue: '#3939B7',
+          'blue-light': '#4A4ACD',
+          'blue-dark': '#2D2D9A',
+          green: '#00B856',
+          'green-light': '#00D466',
+          'green-dark': '#009A48',
+        },
         secondary: {
           gray: '#F8F9FA',
           'gray-dark': '#6C757D'

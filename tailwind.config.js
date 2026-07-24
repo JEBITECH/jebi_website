@@ -24,6 +24,22 @@ module.exports = {
           'green-light': '#00D466',
           'green-dark': '#009A48',
         },
+        fms: {
+          indigo: '#4338CA',
+          'indigo-light': '#6366F1',
+          'indigo-dark': '#312E81',
+          gold: '#D97706',
+          'gold-light': '#F59E0B',
+          'gold-dark': '#B45309',
+        },
+        ownerhub: {
+          blue: '#2E4BE0',
+          'blue-light': '#5470F0',
+          'blue-dark': '#1E33A8',
+          green: '#0FA968',
+          'green-light': '#22C580',
+          'green-dark': '#0B8654',
+        },
         secondary: {
           gray: '#F8F9FA',
           'gray-dark': '#6C757D'
@@ -69,6 +85,8 @@ module.exports = {
         'glow': 'glow 2s ease-in-out infinite alternate',
         'parallax': 'parallax 20s linear infinite',
         'bounce-subtle': 'bounce-subtle 3s ease-in-out infinite',
+        'marquee-left': 'marquee-left linear infinite',
+        'marquee-right': 'marquee-right linear infinite',
       },
       keyframes: {
         magnetic: {
@@ -136,7 +154,15 @@ module.exports = {
         'bounce-subtle': {
           '0%, 100%': { transform: 'translateY(0)' },
           '50%': { transform: 'translateY(-8px)' },
-        }
+        },
+        'marquee-left': {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(-50%)' },
+        },
+        'marquee-right': {
+          '0%': { transform: 'translateX(-50%)' },
+          '100%': { transform: 'translateX(0)' },
+        },
       },
       backdropBlur: {
         xs: '2px',

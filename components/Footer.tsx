@@ -11,6 +11,12 @@ const navigation = {
     { name: 'Careers', href: '/careers' },
     { name: 'Contact', href: '/contact' },
   ],
+  products: [
+    { name: 'All Products', href: '/products' },
+    { name: 'StayGuide', href: '/stayguide' },
+    { name: 'StayFranchise', href: '/stayfranchise' },
+    { name: 'OwnerHub', href: '/owner-hub' },
+  ],
   social: [
     {
       name: 'LinkedIn',
@@ -53,9 +59,9 @@ export default function Footer() {
       <div className="absolute bottom-0 left-0 w-96 h-96 bg-purple-700/20 rounded-full blur-3xl"></div>
 
       <div className="container-custom section-padding relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-12">
           {/* Brand column */}
-          <div className="lg:col-span-1 space-y-5">
+          <div className="md:col-span-2 lg:col-span-1 space-y-5">
             <div>
               <span className="text-3xl font-heading font-bold">
                 <span className="text-white">JEBI</span>
@@ -97,12 +103,25 @@ export default function Footer() {
             </ul>
           </div>
 
+          {/* Products */}
+          <div>
+            <h3 className="text-sm font-bold leading-6 text-white mb-5 uppercase tracking-wider">Products</h3>
+            <ul role="list" className="space-y-2.5">
+              {navigation.products.map((item) => (
+                <li key={item.name}>
+                  <Link href={item.href} className="text-sm text-white/70 hover:text-primary-orange transition-colors">
+                    {item.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
           {/* Services */}
           <div>
             <h3 className="text-sm font-bold leading-6 text-white mb-5 uppercase tracking-wider">Services</h3>
             <ul role="list" className="space-y-2.5">
               <li><Link href="/guesty" className="text-sm text-white/70 hover:text-primary-orange transition-colors">Guesty Integration</Link></li>
-              <li><Link href="/products" className="text-sm text-white/70 hover:text-primary-orange transition-colors">Products</Link></li>
               <li><Link href="/contact" className="text-sm text-white/70 hover:text-primary-orange transition-colors">Custom Development</Link></li>
               <li><Link href="/contact" className="text-sm text-white/70 hover:text-primary-orange transition-colors">Dedicated Teams</Link></li>
               <li><Link href="/contact" className="text-sm text-white/70 hover:text-primary-orange transition-colors">Implementation</Link></li>

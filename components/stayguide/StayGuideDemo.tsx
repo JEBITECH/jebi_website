@@ -7,7 +7,7 @@ import Image from 'next/image'
 
 export default function StayGuideDemo() {
   return (
-    <section id="demo" className="py-20 md:py-28 bg-gray-50/50">
+    <section id="demo" className="py-20 md:py-28 bg-white">
       <div className="container-custom px-4 sm:px-6">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">

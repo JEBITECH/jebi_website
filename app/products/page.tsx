@@ -45,7 +45,7 @@ const platformCapabilities = [
 // const products = [
 //   {
 //     id: 'booking-engine',
-//     name: 'Booking Engine CMS',
+//     name: 'Booking Engine',
 //     tagline: 'Direct bookings made simple',
 //     outcome: 'Increase direct bookings by 40%',
 //     icon: DevicePhoneMobileIcon,
@@ -202,7 +202,7 @@ const platformCapabilities = [
 export const products = [
   {
     id: "booking-engine",
-    name: "Booking Engine CMS",
+    name: "Booking Engine",
     tagline: "Direct bookings made simple",
     outcome: "Increase direct bookings by 40%",
     icon: DevicePhoneMobileIcon,

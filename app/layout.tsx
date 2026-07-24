@@ -4,6 +4,7 @@ import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import ChatWidget from '@/components/chatbot/ChatWidget'
 import EmailPopup from '@/components/EmailPopup'
+import AnnouncementBar from '@/components/AnnouncementBar'
 import { Analytics } from '@vercel/analytics/react';
 
 export const metadata: Metadata = {
@@ -49,6 +50,7 @@ export default function RootLayout({
         />
       </head>
       <body>
+        <AnnouncementBar />
         <Header />
         <main>{children}
 

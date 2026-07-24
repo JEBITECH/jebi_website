@@ -14,7 +14,6 @@ import StayGuideWhy from "@/components/stayguide/StayGuideWhy";
 import StayGuideIntegrations from "@/components/stayguide/StayGuideIntegrations";
 import StayGuideCTA from "@/components/stayguide/StayGuideCTA";
 import StayGuideContact from "@/components/stayguide/StayGuideContact";
-import StayGuideFooter from "@/components/stayguide/StayGuideFooter";
 
 const sections = [
   { id: "hero", label: "Home" },
@@ -40,7 +39,6 @@ function StayGuidePageContent() {
       <StayGuideIntegrations />
       <StayGuideCTA />
       <StayGuideContact />
-      <StayGuideFooter />
     </div>
   );
 }

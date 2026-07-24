@@ -14,6 +14,9 @@ import AnimatedHeroHeadline from "@/components/AnimatedHeroHeadline";
 import TechnologyTeamSection from "@/components/TechnologyTeamSection";
 import ProductShowcase from "@/components/ProductShowcase";
 import FloatingSidebar from "@/components/FloatingSidebar";
+import VRMAEventBanner from "@/components/VRMAEventBanner";
+import Link from "next/link";
+import { Home as HomeIcon, GitBranch, ArrowRight } from "lucide-react";
 
 // Rolling Options Data
 const rollingOptions = [
@@ -111,6 +114,34 @@ const socialProof = {
   uptime: "99.9%",
 };
 
+// Dedicated product pages — each with its own deep-dive landing page beyond /products
+const featuredProducts = [
+  {
+    name: "StayGuide",
+    tagline: "AI-powered digital guest handbook",
+    description: "A mobile-first guest assistant with instant AI answers, check-in details, and local guides.",
+    href: "/stayguide",
+    icon: HomeIcon,
+    color: "bg-stayguide-blue",
+  },
+  {
+    name: "StayFranchise",
+    tagline: "One platform, every franchise",
+    description: "Centralized franchisor/franchisee operations, automated settlements, and real-time insights.",
+    href: "/stayfranchise",
+    icon: GitBranch,
+    color: "bg-stayguide-blue",
+  },
+  {
+    name: "OwnerHub",
+    tagline: "Transparent owner settlements",
+    description: "Configurable revenue-split formulas, auditable settlements, and self-service owner statements.",
+    href: "/owner-hub",
+    icon: Building2,
+    color: "bg-stayguide-blue",
+  },
+];
+
 export default function Home() {
   const router = useRouter();
   
@@ -201,6 +232,10 @@ export default function Home() {
           </div>
         </div>
       </div>
+
+      {/* VRMA Event Announcement */}
+      <VRMAEventBanner />
+
       {/* SaaS Products Section */}
       <div id="products" className="bg-white py-2">
         <div className="container-custom px-4 sm:px-6">
@@ -223,6 +258,48 @@ export default function Home() {
       </div>
 
       <ProductShowcase showHeader={false} autoRotate={true} rotationInterval={8000} />
+
+      {/* Featured Product Deep-Dives */}
+      <div className="bg-secondary-gray section-padding">
+        <div className="container-custom px-4 sm:px-6">
+          <AnimatedSection direction="up">
+            <div className="mx-auto max-w-3xl text-center mb-10 sm:mb-12">
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-white rounded-full border border-gray-200 mb-4 shadow-sm">
+                <Package className="w-4 h-4 text-primary-purple" />
+                <span className="text-primary-purple text-sm font-semibold">Explore Our Products</span>
+              </div>
+              <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-gray-900 font-heading mb-4">
+                Dive Deeper Into Each Product
+              </h2>
+              <p className="text-base sm:text-lg leading-7 text-gray-600">
+                Dedicated pages with the full feature breakdown for each of our flagship products.
+              </p>
+            </div>
+          </AnimatedSection>
+
+          <StaggeredList className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {featuredProducts.map((product) => (
+              <Link
+                key={product.name}
+                href={product.href}
+                className="group bg-white rounded-2xl border border-gray-100 shadow-sm p-6 hover:shadow-lg transition-all duration-300 flex flex-col h-full"
+              >
+                <div className={`w-12 h-12 ${product.color} rounded-xl flex items-center justify-center mb-4`}>
+                  <product.icon className="w-6 h-6 text-white" />
+                </div>
+                <h3 className="text-lg font-bold text-gray-900 mb-1">{product.name}</h3>
+                <p className="text-sm text-primary-orange font-semibold mb-3">{product.tagline}</p>
+                <p className="text-sm text-gray-600 leading-6 mb-4 flex-1">{product.description}</p>
+                <div className="flex items-center gap-1.5 text-sm font-semibold text-primary-purple pt-4 border-t border-gray-100">
+                  Learn more
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </div>
+              </Link>
+            ))}
+          </StaggeredList>
+        </div>
+      </div>
+
       {/* 2. Rolling Options Section */}
       <div id="services" className="bg-white section-padding">
         <div className="container-custom px-4 sm:px-6">

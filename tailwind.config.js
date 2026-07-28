@@ -87,6 +87,7 @@ module.exports = {
         'bounce-subtle': 'bounce-subtle 3s ease-in-out infinite',
         'marquee-left': 'marquee-left linear infinite',
         'marquee-right': 'marquee-right linear infinite',
+        'marquee': 'marquee 20s linear infinite',
       },
       keyframes: {
         magnetic: {
@@ -162,6 +163,10 @@ module.exports = {
         'marquee-right': {
           '0%': { transform: 'translateX(-50%)' },
           '100%': { transform: 'translateX(0)' },
+        },
+        'marquee': {
+          '0%': { transform: 'translateX(0%)' },
+          '100%': { transform: 'translateX(-50%)' },
         },
       },
       backdropBlur: {

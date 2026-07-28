@@ -55,7 +55,7 @@ const eventDetails = [
   { icon: Calendar, label: "When", value: "Oct 4–6, 2026" },
   { icon: MapPin, label: "Where", value: "Nashville, TN" },
   { icon: Building2, label: "Venue", value: "Music City Center" },
-  { icon: Ticket, label: "Booth", value: "XXX" },
+  { icon: Ticket, label: "Booth", value: "740" },
 ];
 
 // What VRMA offers its member community — grounded in VRMA's own stated mission
@@ -648,7 +648,7 @@ export default function VRMAPage() {
               <AnimatedSection direction="left" className="lg:col-span-7">
                 <SectionBadge icon={Ticket} tone="dark">Visit Our Booth</SectionBadge>
                 <h2 className="text-3xl sm:text-4xl md:text-[2.75rem] font-bold tracking-tight text-white font-heading mb-6 leading-[1.1]">
-                  What to Expect at Booth <span className="text-primary-orange">XXX</span>
+                  What to Expect at Booth <span className="text-primary-orange">740</span>
                 </h2>
                 <p className="text-lg leading-8 text-white/75 mb-9 max-w-lg">
                   Bring your toughest operational questions. Our team will be on the floor
@@ -701,7 +701,7 @@ export default function VRMAPage() {
                     <div className="flex items-center justify-between mb-4">
                       <div>
                         <div className="text-[10px] text-gray-400 uppercase tracking-wider font-semibold">Booth Number</div>
-                        <div className="text-3xl font-bold text-primary-purple font-heading">XXX</div>
+                        <div className="text-3xl font-bold text-primary-purple font-heading">740</div>
                       </div>
                       <div className="text-right">
                         <div className="text-[10px] text-gray-400 uppercase tracking-wider font-semibold">Exhibitor</div>

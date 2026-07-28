@@ -27,6 +27,7 @@ const timeline = [
   { icon: Calendar, label: 'When', value: 'Oct 4–6, 2026' },
   { icon: MapPin, label: 'Where', value: 'Nashville, TN' },
   { icon: Building2, label: 'Venue', value: 'Music City Ctr' },
+  { icon: BadgeCheck, label: 'Booth', value: '#740' },
 ]
 
 // 3.png is the permanent "Proud Member" badge — pinned on the right side, not part of the rotation.
@@ -145,13 +146,13 @@ export default function VRMAEventBanner() {
             {/* Event timeline — horizontal connected strip instead of plain boxes */}
             <motion.div
               variants={{ hidden: { opacity: 0, y: 14 }, visible: { opacity: 1, y: 0, transition: { duration: 0.45 } } }}
-              className="relative flex items-stretch mb-9 max-w-lg"
+              className="relative flex items-stretch mb-9 max-w-2xl"
             >
               {/* Connecting line */}
               <div className="absolute top-[22px] left-[22px] right-[22px] h-px bg-white/15 -z-0" />
 
               {timeline.map((t) => (
-                <div key={t.label} className="relative flex-1 flex flex-col items-start pr-4">
+                <div key={t.label} className="relative flex-1 flex flex-col items-start pr-8">
                   <div className="w-11 h-11 rounded-full bg-primary-orange/15 border border-primary-orange/40 flex items-center justify-center mb-3 relative z-10 flex-shrink-0">
                     <t.icon className="w-4.5 h-4.5 text-primary-orange" />
                   </div>

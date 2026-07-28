@@ -97,7 +97,7 @@ function GuestyPageContent() {
       <GuestyGoalTable />
       <GuestyCaseStudies />
       {/* <GuestyTestimonials /> */}
-      <GuestyFAQ />
+      {/* <GuestyFAQ /> */}
       <GuestyCTABanner />
       <GuestyContact tracking={tracking} />
     </div>

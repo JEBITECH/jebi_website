@@ -160,7 +160,7 @@ export default function Home() {
       <FloatingSidebar sections={sections} />
       
       {/* 1. Hero Section - Guesty Style */}
-      <div id="hero" className="relative isolate lg:px-8 pt-24 pb-12 md:pt-28 md:pb-16 lg:pt-32 lg:pb-20 flex items-center">
+      <div id="hero" className="relative isolate lg:px-8 pt-14 pb-12 md:pt-16 md:pb-16 lg:pt-20 lg:pb-20 flex items-center">
         <FloatingElements />
 
         <div className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80">

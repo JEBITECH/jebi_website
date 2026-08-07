@@ -164,6 +164,11 @@ module.exports = {
           '0%': { transform: 'translateX(-50%)' },
           '100%': { transform: 'translateX(0)' },
         },
+        'booth-glow': {
+          '0%, 100%': { backgroundColor: '#FF6B35', boxShadow: '0 0 8px #FF6B35, 0 0 16px #FF6B35, 0 0 24px rgba(255,107,53,0.4)', color: '#ffffff' },
+          '33%': { backgroundColor: '#22D3EE', boxShadow: '0 0 8px #22D3EE, 0 0 16px #22D3EE, 0 0 24px rgba(34,211,238,0.4)', color: '#000000' },
+          '66%': { backgroundColor: '#A855F7', boxShadow: '0 0 8px #A855F7, 0 0 16px #A855F7, 0 0 24px rgba(168,85,247,0.4)', color: '#ffffff' },
+        },
         'marquee': {
           '0%': { transform: 'translateX(0%)' },
           '100%': { transform: 'translateX(-50%)' },

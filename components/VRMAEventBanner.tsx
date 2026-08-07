@@ -188,7 +188,7 @@ export default function VRMAEventBanner() {
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
               </Link>
               <Link
-                href="/vrma"
+                href="/vrma26"
                 className="inline-flex items-center justify-center gap-2 border border-white/30 text-white px-6 py-3.5 rounded-xl font-semibold text-sm hover:bg-white/10 hover:border-white/50 transition-colors duration-200"
               >
                 See Live Demo at VRMA

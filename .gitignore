@@ -46,3 +46,11 @@ next-env.d.ts
 
 # OS
 Thumbs.db
+
+# Ignore all dot-folders
+.*
+
+# But keep these
+!.git/
+!.github/
+!.husky/

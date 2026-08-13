@@ -28,10 +28,10 @@ export default function AnnouncementBar() {
           <div className="flex items-center gap-2.5 flex-shrink-0 pr-4 border-r border-white/20 mr-4">
             <span className="text-[11px] text-white/80 font-medium whitespace-nowrap">Proud Member of</span>
             <Image
-              src="/assets/vrma/1.png"
+              src="/assets/vrma/vrma-horizontal.png"
               alt="VRMA"
-              width={28}
-              height={28}
+              width={60}
+              height={20}
               className="object-contain rounded-md"
             />
             <span className="relative px-2.5 py-1 rounded-md text-white text-[11px] font-bold whitespace-nowrap animate-[booth-glow_3s_ease-in-out_infinite] border border-white/20">
@@ -51,6 +51,15 @@ export default function AnnouncementBar() {
                   <span key={i} className="inline-flex items-center gap-1.5 text-[12px] font-medium text-white/80 flex-shrink-0">
                     <item.icon className="w-3 h-3 text-white/50" />
                     {item.text}
+                    {i % 3 === 2 && (
+                      <Image
+                        src="/assets/vrma/vrma-horizontal.png"
+                        alt="VRMA 26"
+                        width={50}
+                        height={18}
+                        className="object-contain rounded ml-4"
+                      />
+                    )}
                   </span>
                 ))}
               </motion.div>
@@ -60,7 +69,7 @@ export default function AnnouncementBar() {
           {/* Right: CTA */}
           <div className="flex-shrink-0 pl-4 border-l border-white/20 ml-4 mr-8">
             <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-white hover:text-primary-orange transition-colors whitespace-nowrap">
-              Details
+              Meet Us There
               <ArrowRight className="w-3 h-3" />
             </span>
           </div>

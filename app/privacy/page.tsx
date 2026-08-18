@@ -260,7 +260,65 @@ export default function PrivacyPolicy() {
             {/* Section 11 */}
             <AnimatedSection direction="up" delay={0.15}>
               <section className="mb-12">
-                <h2 className="text-2xl md:text-3xl font-bold text-gray-900 font-heading mb-4">11. Privacy Enquiries and Complaints</h2>
+                <h2 className="text-2xl md:text-3xl font-bold text-gray-900 font-heading mb-4">11. SMS and Text Messaging</h2>
+
+                <h3 className="text-xl font-semibold text-gray-900 mb-3 mt-6">Opt-In and Consent</h3>
+                <p className="text-gray-700 leading-relaxed mb-4">
+                  JEBI Tech and its product VirtueInspect (virtueinspect.com) may send SMS/text notifications to end users who have provided explicit consent. Users opt-in to receive SMS messages through one of the following methods:
+                </p>
+                <ul className="list-disc list-inside space-y-2 text-gray-700 mb-4 pl-4">
+                  <li>Creating an account on jebitech.com and providing their phone number during signup or in account settings, and checking a box agreeing to receive SMS notifications from VirtueInspect regarding task assignments, updates, and reminders;</li>
+                  <li>Being added to a workspace by an administrator, at which point the user receives an initial SMS asking them to confirm opt-in by replying &ldquo;YES.&rdquo;</li>
+                </ul>
+
+                <h3 className="text-xl font-semibold text-gray-900 mb-3 mt-6">Types of Messages</h3>
+                <p className="text-gray-700 leading-relaxed mb-4">
+                  SMS messages sent through our Services are limited to:
+                </p>
+                <ul className="list-disc list-inside space-y-2 text-gray-700 mb-4 pl-4">
+                  <li>Task assignment notifications;</li>
+                  <li>Task status updates;</li>
+                  <li>Schedule and deadline reminders;</li>
+                  <li>Account verification and security codes.</li>
+                </ul>
+
+                <h3 className="text-xl font-semibold text-gray-900 mb-3 mt-6">Message Frequency</h3>
+                <p className="text-gray-700 leading-relaxed mb-4">
+                  Message frequency varies based on your activity and task assignments. You may receive multiple messages per day when tasks are assigned or updated.
+                </p>
+
+                <h3 className="text-xl font-semibold text-gray-900 mb-3 mt-6">Opt-Out</h3>
+                <p className="text-gray-700 leading-relaxed mb-4">
+                  You may opt out of SMS notifications at any time by:
+                </p>
+                <ul className="list-disc list-inside space-y-2 text-gray-700 mb-4 pl-4">
+                  <li>Replying &ldquo;STOP&rdquo; to any SMS message received from VirtueInspect;</li>
+                  <li>Disabling SMS notifications in your account settings on jebitech.com;</li>
+                  <li>Contacting us at <a href="mailto:DPO@Jebitech.com" className="text-primary-purple hover:text-primary-orange transition-colors font-medium">DPO@Jebitech.com</a>.</li>
+                </ul>
+                <p className="text-gray-700 leading-relaxed mb-4">
+                  After opting out, you will receive a single confirmation message. You will not receive further SMS messages unless you re-opt-in.
+                </p>
+
+                <h3 className="text-xl font-semibold text-gray-900 mb-3 mt-6">Costs and Carriers</h3>
+                <p className="text-gray-700 leading-relaxed mb-4">
+                  Message and data rates may apply depending on your mobile carrier and plan. JEBI Tech is not responsible for any charges imposed by your carrier.
+                </p>
+
+                <h3 className="text-xl font-semibold text-gray-900 mb-3 mt-6">Phone Number Data</h3>
+                <p className="text-gray-700 leading-relaxed mb-4">
+                  Phone numbers collected for SMS notifications are used solely for delivering the messages described above. We do not sell, rent, or share your phone number with third parties for marketing purposes. Phone numbers may be shared with our SMS service provider solely for the purpose of delivering messages on our behalf, subject to appropriate data protection agreements.
+                </p>
+                <p className="text-gray-700 leading-relaxed">
+                  For help, reply &ldquo;HELP&rdquo; to any message or contact <a href="mailto:DPO@Jebitech.com" className="text-primary-purple hover:text-primary-orange transition-colors font-medium">DPO@Jebitech.com</a>.
+                </p>
+              </section>
+            </AnimatedSection>
+
+            {/* Section 12 */}
+            <AnimatedSection direction="up" delay={0.15}>
+              <section className="mb-12">
+                <h2 className="text-2xl md:text-3xl font-bold text-gray-900 font-heading mb-4">12. Privacy Enquiries and Complaints</h2>
                 <p className="text-gray-700 leading-relaxed mb-4">
                   Data subjects, customers and other concerned parties may raise a privacy-related concern or data-subject request by contacting:
                 </p>

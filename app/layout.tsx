@@ -5,12 +5,52 @@ import Footer from '@/components/Footer'
 import ChatWidget from '@/components/chatbot/ChatWidget'
 import EmailPopup from '@/components/EmailPopup'
 import AnnouncementBar from '@/components/AnnouncementBar'
-import { Analytics } from '@vercel/analytics/react';
+import { Analytics } from '@vercel/analytics/react'
+import OrganizationSchema from '@/components/seo/OrganizationSchema'
+import LocalBusinessSchema from '@/components/seo/LocalBusinessSchema'
 
 export const metadata: Metadata = {
-  title: 'JEBITECH – Empowering Hospitality Technology',
-  description: 'Drive growth and success in the hospitality industry with Jebitech. As your strategic partner, we offer comprehensive technology solutions and consultancy services tailored to hotels, vacation rentals, serviced apartments, and technology companies. Our expertise in revenue optimization, cost reduction, and operational efficiency empowers you to streamline operations, optimize business processes, and maximize profitability.',
-  keywords: 'hospitality technology solutions, revenue optimization consultancy, cost reduction strategies for hotels, operational efficiency solutions for vacation rentals, process optimization in hospitality industry, expertise hire for hospitality companies, technology consultancy for hotels, technology consultancy for vacation rentals, technology solutions for serviced apartments, business process optimization in hospitality',
+  metadataBase: new URL('https://jebitech.com'),
+  title: {
+    default: 'jebitech - hospitality technology company',
+    template: '%s',
+  },
+  description: 'JebiTech Solutions builds hospitality technology products including property management, guest experience, and franchise operations software tools.',
+  keywords: [
+    'jebitech',
+    'jebi softech services',
+    'hospitality technology company',
+    'hospitality tech partner',
+    'vacation rental technology',
+    'property management software solutions',
+    'hospitality SaaS platform',
+    'proptech solutions',
+    'short-term rental technology',
+    'hospitality technology company Pune India',
+  ],
+  alternates: {
+    canonical: 'https://jebitech.com/',
+  },
+  openGraph: {
+    title: 'jebitech - hospitality technology company',
+    description: 'JebiTech Solutions builds hospitality technology products including property management, guest experience, and franchise operations software tools.',
+    url: 'https://jebitech.com/',
+    siteName: 'JebiTech',
+    locale: 'en_US',
+    type: 'website',
+    images: [{
+      url: 'https://jebitech.com/images/og-default.jpg',
+      width: 1200,
+      height: 630,
+      alt: 'JebiTech Solutions - Hospitality Technology Company',
+    }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'jebitech - hospitality technology company',
+    description: 'JebiTech Solutions builds hospitality technology products including property management, guest experience, and franchise operations software tools.',
+    images: ['https://jebitech.com/images/og-default.jpg'],
+  },
   manifest: '/site.webmanifest',
   icons: {
     icon: [
@@ -26,6 +66,9 @@ export const metadata: Metadata = {
       { url: '/android-chrome-512x512.png', sizes: '512x512', type: 'image/png' },
     ],
   },
+  ...(process.env.BING_VERIFICATION_CODE
+    ? { verification: { other: { 'msvalidate.01': process.env.BING_VERIFICATION_CODE } } }
+    : {}),
 }
 
 export default function RootLayout({
@@ -50,6 +93,8 @@ export default function RootLayout({
         />
       </head>
       <body>
+        <OrganizationSchema />
+        <LocalBusinessSchema />
         <AnnouncementBar />
         <Header />
         <main>{children}

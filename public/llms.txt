@@ -1,0 +1,47 @@
+# JebiTech Solutions Pvt. Ltd.
+
+> Hospitality technology company building software products for vacation rental operators, hotels, and serviced apartments.
+
+## Products
+
+- **StayGuide**: Digital guest experience platform with local recommendations and self-service check-in tools.
+- **StayFranchise**: Franchise management software for multi-location vacation rental operators.
+- **OwnerHub**: Property owner portal for tracking bookings, revenue, and maintenance updates.
+- **Booking Engine**: Direct booking engine to increase reservations and reduce OTA dependency.
+- **VirtueInspect**: Property inspection and maintenance management for quality assurance.
+- **Virtue Connect**: Channel management and connectivity for multi-platform distribution.
+- **Virtue Finance**: Financial management and accounting automation for hospitality businesses.
+
+## Services
+
+- **Custom Development**: End-to-end software development tailored to hospitality needs.
+- **Dedicated Teams**: Embedded engineering teams for ongoing hospitality technology projects.
+- **Implementation & Integration**: System implementation, API integration, and platform migration.
+
+## Public Routes
+
+- https://jebitech.com/ — Homepage with company overview and product showcase
+- https://jebitech.com/about/ — Company mission, team, and history
+- https://jebitech.com/products/ — Full product suite for hospitality operators
+- https://jebitech.com/services/ — Custom development and consulting services
+- https://jebitech.com/contact/ — Inquiry form and contact information
+- https://jebitech.com/stayguide/ — Digital guest experience platform details
+- https://jebitech.com/stayfranchise/ — Franchise management software details
+- https://jebitech.com/owner-hub/ — Property owner portal details
+- https://jebitech.com/careers/ — Job openings and company culture
+- https://jebitech.com/guesty/ — Guesty integration and expert services
+- https://jebitech.com/vrma/ — VRMA partnership and industry engagement
+- https://jebitech.com/case-studies/ — Client success stories and results
+- https://jebitech.com/privacy/ — Privacy policy and data protection
+- https://jebitech.com/terms/ — Terms of service and legal agreement
+
+## Keywords
+
+jebitech, jebi softech services, hospitality technology company, hospitality tech partner, booking engine for vacation rentals, direct booking website builder, vacation rental booking engine, AI-powered booking engine, multi-PMS booking platform, digital guest handbook, guest communication platform, digital guidebook for vacation rentals, contactless check-in app, guest experience platform, AI guest support chatbot, AI property inspection software, vacation rental inspection tool, automated property inspection, damage detection AI, PMS integration platform, property management data normalization, multi-PMS connector, hospitality ERP system, hospitality accounting software, vacation rental accounting platform, automated owner settlement, trust accounting for property managers, custom hospitality software development, dedicated development team for hospitality, PMS integration services, Guesty integration partner, channel manager integration, PMS data migration services, API integration for property management, vacation rental technology, property management software solutions, hotel technology solutions, serviced apartment software, proptech solutions, hospitality SaaS platform, short-term rental technology, holiday home management software, Guesty development partner, Guesty custom integration, Hostaway integration, reduce OTA commission dependency, increase direct bookings vacation rental, property management automation, scale vacation rental operations, React Next.js development team, Node.js hospitality developers, TypeScript development services, hospitality technology company Pune India
+
+## Contact
+
+- Email: sales@jebitech.com
+- Address: 12, Sweet Watervilla, Amanora, Pune, India
+- LinkedIn: https://www.linkedin.com/company/jebi-softech-services/
+- Website: https://jebitech.com

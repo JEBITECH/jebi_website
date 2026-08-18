@@ -160,7 +160,54 @@ export default function TermsOfService() {
             {/* Section 7 */}
             <AnimatedSection direction="up" delay={0.15}>
               <section className="mb-12">
-                <h2 className="text-2xl md:text-3xl font-bold text-gray-900 font-heading mb-4">7. Service Availability and Support</h2>
+                <h2 className="text-2xl md:text-3xl font-bold text-gray-900 font-heading mb-4">7. SMS and Text Messaging Terms</h2>
+                <p className="text-gray-700 leading-relaxed mb-4">
+                  By opting in to receive SMS notifications from JEBI Tech or VirtueInspect (virtueinspect.com), you agree to the following terms:
+                </p>
+
+                <h3 className="text-xl font-semibold text-gray-900 mb-3 mt-6">Consent</h3>
+                <p className="text-gray-700 leading-relaxed mb-4">
+                  You consent to receive SMS/text messages from VirtueInspect by:
+                </p>
+                <ul className="list-disc list-inside space-y-2 text-gray-700 mb-4 pl-4">
+                  <li>Creating an account on jebitech.com and providing your phone number during signup or in account settings, and checking the box agreeing to receive SMS notifications regarding task assignments, updates, and reminders; or</li>
+                  <li>Confirming opt-in by replying &ldquo;YES&rdquo; to an initial message sent when an administrator adds you to a workspace.</li>
+                </ul>
+                <p className="text-gray-700 leading-relaxed mb-4">
+                  Consent is not a condition of purchase or use of the Services. You may use the Services without opting in to SMS notifications.
+                </p>
+
+                <h3 className="text-xl font-semibold text-gray-900 mb-3 mt-6">Message Types and Frequency</h3>
+                <p className="text-gray-700 leading-relaxed mb-4">
+                  Messages include task assignment notifications, task status updates, schedule reminders, and account verification codes. Message frequency varies based on your activity and task assignments. You may receive multiple messages per day.
+                </p>
+
+                <h3 className="text-xl font-semibold text-gray-900 mb-3 mt-6">Opt-Out</h3>
+                <p className="text-gray-700 leading-relaxed mb-4">
+                  You may opt out at any time by replying &ldquo;STOP&rdquo; to any message, disabling SMS notifications in your account settings, or contacting <a href="mailto:DPO@Jebitech.com" className="text-primary-purple hover:text-primary-orange transition-colors font-medium">DPO@Jebitech.com</a>. After opting out, you will receive one final confirmation message and no further SMS messages unless you re-opt-in.
+                </p>
+
+                <h3 className="text-xl font-semibold text-gray-900 mb-3 mt-6">Help</h3>
+                <p className="text-gray-700 leading-relaxed mb-4">
+                  For assistance, reply &ldquo;HELP&rdquo; to any message or contact <a href="mailto:DPO@Jebitech.com" className="text-primary-purple hover:text-primary-orange transition-colors font-medium">DPO@Jebitech.com</a>.
+                </p>
+
+                <h3 className="text-xl font-semibold text-gray-900 mb-3 mt-6">Costs</h3>
+                <p className="text-gray-700 leading-relaxed mb-4">
+                  Message and data rates may apply. JEBI Tech is not responsible for charges imposed by your mobile carrier. Check with your carrier for details about your text messaging plan.
+                </p>
+
+                <h3 className="text-xl font-semibold text-gray-900 mb-3 mt-6">Privacy</h3>
+                <p className="text-gray-700 leading-relaxed">
+                  Your phone number and SMS consent data are handled in accordance with our <a href="/privacy" className="text-primary-purple hover:text-primary-orange transition-colors font-medium">Privacy Policy</a>. We do not sell, rent, or share your phone number or opt-in data with third parties for marketing or promotional purposes.
+                </p>
+              </section>
+            </AnimatedSection>
+
+            {/* Section 8 */}
+            <AnimatedSection direction="up" delay={0.15}>
+              <section className="mb-12">
+                <h2 className="text-2xl md:text-3xl font-bold text-gray-900 font-heading mb-4">8. Service Availability and Support</h2>
                 <p className="text-gray-700 leading-relaxed mb-4">
                   JEBI Tech strives to maintain high availability of its Services. However, the Services may be subject to scheduled maintenance, upgrades or unforeseen outages. JEBI Tech will use commercially reasonable efforts to:
                 </p>
@@ -178,7 +225,7 @@ export default function TermsOfService() {
             {/* Section 8 */}
             <AnimatedSection direction="up" delay={0.15}>
               <section className="mb-12">
-                <h2 className="text-2xl md:text-3xl font-bold text-gray-900 font-heading mb-4">8. Payment Terms</h2>
+                <h2 className="text-2xl md:text-3xl font-bold text-gray-900 font-heading mb-4">9. Payment Terms</h2>
                 <p className="text-gray-700 leading-relaxed mb-4">
                   Where Services are provided under a paid arrangement, payment terms are governed by the applicable service agreement or statement of work. General payment conditions include:
                 </p>
@@ -197,7 +244,7 @@ export default function TermsOfService() {
             {/* Section 9 */}
             <AnimatedSection direction="up" delay={0.15}>
               <section className="mb-12">
-                <h2 className="text-2xl md:text-3xl font-bold text-gray-900 font-heading mb-4">9. Confidentiality</h2>
+                <h2 className="text-2xl md:text-3xl font-bold text-gray-900 font-heading mb-4">10. Confidentiality</h2>
                 <p className="text-gray-700 leading-relaxed mb-4">
                   Each party agrees to maintain the confidentiality of any proprietary or confidential information disclosed by the other party in connection with the Services. Confidential information includes but is not limited to:
                 </p>
@@ -216,7 +263,7 @@ export default function TermsOfService() {
             {/* Section 10 */}
             <AnimatedSection direction="up" delay={0.15}>
               <section className="mb-12">
-                <h2 className="text-2xl md:text-3xl font-bold text-gray-900 font-heading mb-4">10. Limitation of Liability</h2>
+                <h2 className="text-2xl md:text-3xl font-bold text-gray-900 font-heading mb-4">11. Limitation of Liability</h2>
                 <p className="text-gray-700 leading-relaxed mb-4">
                   To the maximum extent permitted by applicable law:
                 </p>
@@ -234,7 +281,7 @@ export default function TermsOfService() {
             {/* Section 11 */}
             <AnimatedSection direction="up" delay={0.15}>
               <section className="mb-12">
-                <h2 className="text-2xl md:text-3xl font-bold text-gray-900 font-heading mb-4">11. Disclaimer of Warranties</h2>
+                <h2 className="text-2xl md:text-3xl font-bold text-gray-900 font-heading mb-4">12. Disclaimer of Warranties</h2>
                 <p className="text-gray-700 leading-relaxed mb-4">
                   The Services are provided on an &ldquo;as is&rdquo; and &ldquo;as available&rdquo; basis. To the fullest extent permitted by law, JEBI Tech disclaims all warranties, whether express, implied or statutory, including but not limited to implied warranties of merchantability, fitness for a particular purpose and non-infringement.
                 </p>
@@ -247,7 +294,7 @@ export default function TermsOfService() {
             {/* Section 12 */}
             <AnimatedSection direction="up" delay={0.15}>
               <section className="mb-12">
-                <h2 className="text-2xl md:text-3xl font-bold text-gray-900 font-heading mb-4">12. Indemnification</h2>
+                <h2 className="text-2xl md:text-3xl font-bold text-gray-900 font-heading mb-4">13. Indemnification</h2>
                 <p className="text-gray-700 leading-relaxed mb-4">
                   You agree to indemnify, defend and hold harmless JEBI Tech, its officers, directors, employees and agents from and against any claims, damages, losses, liabilities and expenses (including reasonable legal fees) arising out of or related to:
                 </p>
@@ -263,7 +310,7 @@ export default function TermsOfService() {
             {/* Section 13 */}
             <AnimatedSection direction="up" delay={0.15}>
               <section className="mb-12">
-                <h2 className="text-2xl md:text-3xl font-bold text-gray-900 font-heading mb-4">13. Termination</h2>
+                <h2 className="text-2xl md:text-3xl font-bold text-gray-900 font-heading mb-4">14. Termination</h2>
                 <p className="text-gray-700 leading-relaxed mb-4">
                   Either party may terminate the use of Services in accordance with the applicable service agreement. JEBI Tech may also terminate or suspend your access to the Services immediately and without notice if:
                 </p>
@@ -282,7 +329,7 @@ export default function TermsOfService() {
             {/* Section 14 */}
             <AnimatedSection direction="up" delay={0.15}>
               <section className="mb-12">
-                <h2 className="text-2xl md:text-3xl font-bold text-gray-900 font-heading mb-4">14. Modifications to Terms</h2>
+                <h2 className="text-2xl md:text-3xl font-bold text-gray-900 font-heading mb-4">15. Modifications to Terms</h2>
                 <p className="text-gray-700 leading-relaxed mb-4">
                   JEBI Tech reserves the right to modify these Terms at any time. Material changes will be communicated by updating the &ldquo;Last Updated&rdquo; date at the top of this page and, where appropriate, by providing notice through the Services or by email.
                 </p>
@@ -295,7 +342,7 @@ export default function TermsOfService() {
             {/* Section 15 */}
             <AnimatedSection direction="up" delay={0.15}>
               <section className="mb-12">
-                <h2 className="text-2xl md:text-3xl font-bold text-gray-900 font-heading mb-4">15. Governing Law and Dispute Resolution</h2>
+                <h2 className="text-2xl md:text-3xl font-bold text-gray-900 font-heading mb-4">16. Governing Law and Dispute Resolution</h2>
                 <p className="text-gray-700 leading-relaxed mb-4">
                   These Terms shall be governed by and construed in accordance with the laws of India, without regard to its conflict of law provisions.
                 </p>
@@ -311,7 +358,7 @@ export default function TermsOfService() {
             {/* Section 16 */}
             <AnimatedSection direction="up" delay={0.15}>
               <section className="mb-12">
-                <h2 className="text-2xl md:text-3xl font-bold text-gray-900 font-heading mb-4">16. General Provisions</h2>
+                <h2 className="text-2xl md:text-3xl font-bold text-gray-900 font-heading mb-4">17. General Provisions</h2>
                 <ul className="space-y-4 text-gray-700">
                   <li>
                     <span className="font-semibold text-gray-900">Entire Agreement:</span> These Terms, together with any applicable service agreements and Data Processing Agreements, constitute the entire agreement between the parties regarding the subject matter herein.
@@ -335,7 +382,7 @@ export default function TermsOfService() {
             {/* Section 17 */}
             <AnimatedSection direction="up" delay={0.15}>
               <section className="mb-12">
-                <h2 className="text-2xl md:text-3xl font-bold text-gray-900 font-heading mb-4">17. Contact Information</h2>
+                <h2 className="text-2xl md:text-3xl font-bold text-gray-900 font-heading mb-4">18. Contact Information</h2>
                 <p className="text-gray-700 leading-relaxed mb-4">
                   For questions, concerns or notices relating to these Terms of Service, please contact:
                 </p>

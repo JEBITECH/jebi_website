@@ -316,7 +316,7 @@ export default function VRMAPage() {
 
               <AnimatedSection direction="up" delay={0.3}>
                 <div className="flex flex-col sm:flex-row gap-4">
-                  <MagneticButton href="#contact" intensity={0.1} className="btn-primary text-base px-7 py-3.5 w-full sm:w-auto text-center">
+                  <MagneticButton href="#cta" intensity={0.1} className="btn-primary text-base px-7 py-3.5 w-full sm:w-auto text-center">
                     Schedule a Meeting
                   </MagneticButton>
                   <MagneticButton
@@ -666,7 +666,7 @@ export default function VRMAPage() {
                   ))}
                 </div>
 
-                <MagneticButton href="#contact" intensity={0.1} className="btn-primary text-base px-7 py-3.5 inline-block">
+                <MagneticButton href="#cta" intensity={0.1} className="btn-primary text-base px-7 py-3.5 inline-block">
                   Reserve a Meeting Slot
                 </MagneticButton>
               </AnimatedSection>

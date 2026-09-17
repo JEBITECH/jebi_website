@@ -9,17 +9,23 @@ import MagneticButton from "./MagneticButton";
 import Image from "next/image";
 import Jebitech1 from "../app/assets/Jebitech1.jpg";
 
-const productLinks = [
-  { name: "All Products", href: "/products", description: "Our full technology suite" },
-  { name: "StayGuide", href: "/stayguide", description: "AI guest handbook & concierge" },
-  { name: "StayFranchise", href: "/stayfranchise", description: "Multi-franchise operations platform" },
-  { name: "OwnerHub", href: "/owner-hub", description: "Owner settlements & statements" },
-];
+// Product dropdown items are commented out: the Products nav item now links
+// straight out to the VIRTUENXT site instead of opening a sub-menu.
+// const productLinks = [
+//   { name: "All Products", href: "/products", description: "Our full technology suite" },
+//   { name: "StayGuide", href: "/stayguide", description: "AI guest handbook & concierge" },
+//   { name: "StayFranchise", href: "/stayfranchise", description: "Multi-franchise operations platform" },
+//   { name: "OwnerHub", href: "/owner-hub", description: "Owner settlements & statements" },
+// ];
+
+// External home for the VIRTUENXT product site.
+const VIRTUENXT_URL = "https://www.virtuenxt.com";
 
 const navigation = [
   { name: "Home", href: "/" },
   { name: "About Us", href: "/about" },
-  { name: "Products", href: "/products", children: productLinks },
+  // Products now points to the VIRTUENXT site (external). Dropdown removed.
+  { name: "Products", href: VIRTUENXT_URL, external: true },
   // { name: 'Services', href: '/services' },
   // { name: 'Case Studies', href: '/case-studies' },
   // { name: "Guesty", href: "/guesty" },
@@ -98,6 +104,19 @@ export default function Header() {
                 );
               }
 
+              // External links (e.g. Products -> VIRTUENXT) render as a plain anchor.
+              if (item.external) {
+                return (
+                  <a
+                    key={item.name}
+                    href={item.href}
+                    className="text-sm font-semibold leading-6 text-gray-900 hover:text-primary-orange transition-colors relative"
+                  >
+                    {item.name}
+                  </a>
+                );
+              }
+
               return (
                 <Link
                   key={item.name}
@@ -144,15 +163,25 @@ export default function Header() {
                   const isActive = pathname === item.href || pathname === `${item.href}/`;
                   return (
                     <div key={item.name}>
-                      <Link
-                        href={item.href}
-                        className={`-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 transition-colors ${
-                          isActive ? "text-primary-orange bg-orange-50" : "text-gray-900 hover:bg-gray-50"
-                        }`}
-                        onClick={() => setMobileMenuOpen(false)}
-                      >
-                        {item.name}
-                      </Link>
+                      {item.external ? (
+                        <a
+                          href={item.href}
+                          className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50 transition-colors"
+                          onClick={() => setMobileMenuOpen(false)}
+                        >
+                          {item.name}
+                        </a>
+                      ) : (
+                        <Link
+                          href={item.href}
+                          className={`-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 transition-colors ${
+                            isActive ? "text-primary-orange bg-orange-50" : "text-gray-900 hover:bg-gray-50"
+                          }`}
+                          onClick={() => setMobileMenuOpen(false)}
+                        >
+                          {item.name}
+                        </Link>
+                      )}
                       {item.children && (
                         <div className="ml-3 mt-1 space-y-1 border-l border-gray-100 pl-3">
                           {item.children.map((child) => {

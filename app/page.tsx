@@ -196,7 +196,7 @@ export default function Home() {
                   <MagneticButton href="/contact" intensity={0.1} className="btn-primary text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4 w-full sm:w-auto text-center">
                     Request Demo
                   </MagneticButton>
-                  <MagneticButton href="/products" intensity={0.1} className="btn-secondary text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4 w-full sm:w-auto text-center">
+                  <MagneticButton href="https://www.virtuenxt.com" intensity={0.1} className="btn-secondary text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4 w-full sm:w-auto text-center">
                     Explore Products
                   </MagneticButton>
                 </div>
@@ -236,38 +236,44 @@ export default function Home() {
       {/* VRMA Event Announcement */}
       <VRMAEventBanner />
 
-      {/* SaaS Products Section */}
-      <div id="products" className="bg-white py-2">
-        <div className="container-custom px-4 sm:px-6">
-          <AnimatedSection direction="up">
-            <div className="mx-auto max-w-3xl text-center mb-3">
-              {/* Badge */}
-              <div className="inline-flex items-center gap-2 px-6 py-3 bg-gray-100 rounded-full mb-3 border border-gray-200">
-                <Package className="w-4 h-4 text-primary-purple" />
-                <span className="text-primary-purple text-sm font-semibold">SaaS Products</span>
-              </div>
+      {/* SaaS Products Section — commented out; products now live on the VIRTUENXT site. */}
+      {false && (
+        <>
+          <div id="products" className="bg-white py-2">
+            <div className="container-custom px-4 sm:px-6">
+              <AnimatedSection direction="up">
+                <div className="mx-auto max-w-3xl text-center mb-3">
+                  {/* Badge */}
+                  <div className="inline-flex items-center gap-2 px-6 py-3 bg-gray-100 rounded-full mb-3 border border-gray-200">
+                    <Package className="w-4 h-4 text-primary-purple" />
+                    <span className="text-primary-purple text-sm font-semibold">SaaS Products</span>
+                  </div>
 
-              {/* Main Heading */}
-              <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-gray-900 font-heading mb-2">Ready-to-Deploy Hospitality Solutions</h2>
+                  {/* Main Heading */}
+                  <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-gray-900 font-heading mb-2">Ready-to-Deploy Hospitality Solutions</h2>
 
-              {/* Subheading */}
-              <p className="text-base leading-6 text-gray-600">Enterprise-grade products for vacation rentals and property management operations</p>
+                  {/* Subheading */}
+                  <p className="text-base leading-6 text-gray-600">Enterprise-grade products for vacation rentals and property management operations</p>
+                </div>
+              </AnimatedSection>
             </div>
-          </AnimatedSection>
-        </div>
-      </div>
+          </div>
 
-      <ProductShowcase showHeader={false} autoRotate={true} rotationInterval={8000} />
+          <ProductShowcase showHeader={false} autoRotate={true} rotationInterval={8000} />
+        </>
+      )}
 
       {/* Featured Product Deep-Dives */}
       <div className="bg-secondary-gray section-padding">
         <div className="container-custom px-4 sm:px-6">
           <AnimatedSection direction="up">
             <div className="mx-auto max-w-3xl text-center mb-10 sm:mb-12">
+              {/* "Explore Our Products" badge commented out per product move to VIRTUENXT.
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-white rounded-full border border-gray-200 mb-4 shadow-sm">
                 <Package className="w-4 h-4 text-primary-purple" />
                 <span className="text-primary-purple text-sm font-semibold">Explore Our Products</span>
               </div>
+              */}
               <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-gray-900 font-heading mb-4">
                 Dive Deeper Into Each Product
               </h2>
